@@ -1,6 +1,6 @@
 # TutorLink
 
-TutorLink is a command-line submission management assistant for students and teaching staff alike! 
+TutorLink is a command-line submission management assistant for students and teaching staff alike.
 
 ## Setting up in Intellij
 
