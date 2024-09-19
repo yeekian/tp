@@ -1,6 +1,6 @@
-# Duke project template
+# TutorLink
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+TutorLink is a command-line submission management assistant for students and teaching staff alike! 
 
 ## Setting up in Intellij
 
