@@ -1,1 +1,5 @@
+# About us
+
+Display | Name | Github Profile | Portfolio 
+--------|:----:|:--------------:|:---------:
 ![](https://avatars.githubusercontent.com/u/142168995?v=4) | Thien Duc | [Github](https://github.com/ThienDuc3112) | [Portfolio](docs/team/thienduc.md)
