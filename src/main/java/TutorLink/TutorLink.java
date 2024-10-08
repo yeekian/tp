@@ -1,17 +1,21 @@
-package seedu.duke;
+package TutorLink;
 
 import java.util.Scanner;
 
+/**
+ * Represents the main class containing the entry point for the TutorLink application
+ */
 public class TutorLink {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo =   "___________      __               .____    .__        __    \n"
+                +       "\\__    ___/_ ___/  |_  ___________|    |   |__| ____ |  | __\n"
+                +       "  |    | |  |  \\   __\\/  _ \\_  __ \\    |   |  |/    \\|  |/ /\n"
+                +       "  |    | |  |  /|  | (  <_> )  | \\/    |___|  |   |  \\    < \n"
+                +       "  |____| |____/ |__|  \\____/|__|  |_______ \\__|___|  /__|_ \\\n"
+                +       "                                          \\/       \\/     \\/\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
 
