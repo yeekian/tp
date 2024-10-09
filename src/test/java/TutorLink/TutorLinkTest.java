@@ -1,10 +1,10 @@
-package seedu.duke;
+package tutorlink;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-class DukeTest {
+class TutorLinkTest {
     @Test
     public void sampleTest() {
         assertTrue(true);
