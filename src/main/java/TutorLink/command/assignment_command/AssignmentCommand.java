@@ -5,7 +5,7 @@ import tutorlink.command.Command;
 
 import java.util.ArrayList;
 
-abstract public class AssignmentCommand extends Command {
+public abstract class AssignmentCommand extends Command {
     private Assignment assignment;
 
     public AssignmentCommand(Assignment assignment) {

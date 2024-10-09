@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * single user-issued command from the terminal.
  */
 
-abstract public class Command {
+public abstract class Command {
     /**
      * Executes the required operations to perform the command issued by the user.
      */

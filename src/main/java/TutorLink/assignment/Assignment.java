@@ -21,8 +21,12 @@ public class Assignment {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()){
+            return false;
+        }
         Assignment that = (Assignment) obj;
         return Objects.equals(assginmentDescription, that.assginmentDescription);
     }

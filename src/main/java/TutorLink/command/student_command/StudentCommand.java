@@ -3,7 +3,7 @@ package tutorlink.command.student_command;
 import tutorlink.command.Command;
 import tutorlink.student.Student;
 
-abstract public class StudentCommand extends Command {
+public abstract class StudentCommand extends Command {
     private Student student;
     public StudentCommand(Student student) {
         this.student = student;
