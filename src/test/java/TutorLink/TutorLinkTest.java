@@ -1,4 +1,4 @@
-package TutorLink;
+package tutorlink;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
