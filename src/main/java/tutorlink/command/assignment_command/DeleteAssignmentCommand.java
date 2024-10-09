@@ -10,6 +10,6 @@ public class DeleteAssignmentCommand extends AssignmentCommand{
     }
 
     public void execute(ArrayList assignmentList) {
-
+        assignmentList.remove(assignment);
     }
 }

@@ -11,11 +11,6 @@ public class AddAssignmentCommand extends AssignmentCommand {
 
     @Override
     public void execute(ArrayList assignmentList) {
-
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
+        assignmentList.add(assignment);
     }
 }
