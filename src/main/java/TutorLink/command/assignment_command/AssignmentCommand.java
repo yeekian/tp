@@ -1,7 +1,7 @@
-package TutorLink.command.assignment_command;
+package tutorlink.command.assignment_command;
 
-import TutorLink.assignment.Assignment;
-import TutorLink.command.Command;
+import tutorlink.assignment.Assignment;
+import tutorlink.command.Command;
 
 import java.util.ArrayList;
 

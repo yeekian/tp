@@ -1,4 +1,4 @@
-package TutorLink.parser;
+package tutorlink.parser;
 
 public class Parser {
 }

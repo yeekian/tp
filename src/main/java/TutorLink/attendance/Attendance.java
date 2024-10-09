@@ -1,4 +1,4 @@
-package TutorLink.attendance;
+package tutorlink.attendance;
 
 public class Attendance {
     private String attendanceVenue;

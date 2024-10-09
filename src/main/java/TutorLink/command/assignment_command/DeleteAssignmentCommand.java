@@ -1,6 +1,6 @@
-package TutorLink.command.assignment_command;
+package tutorlink.command.assignment_command;
 
-import TutorLink.assignment.Assignment;
+import tutorlink.assignment.Assignment;
 
 import java.util.ArrayList;
 

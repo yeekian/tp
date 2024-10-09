@@ -1,4 +1,4 @@
-package TutorLink.assignment;
+package tutorlink.assignment;
 
 public class Assignment {
     private String assginmentDescription;

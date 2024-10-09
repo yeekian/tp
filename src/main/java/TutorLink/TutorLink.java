@@ -1,4 +1,4 @@
-package TutorLink;
+package tutorlink;
 
 import java.util.Scanner;
 

@@ -1,6 +1,6 @@
-package TutorLink.command.student_command;
+package tutorlink.command.student_command;
 
-import TutorLink.student.Student;
+import tutorlink.student.Student;
 
 import java.util.ArrayList;
 

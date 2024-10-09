@@ -1,4 +1,4 @@
-package TutorLink.command;
+package tutorlink.command;
 
 import java.util.ArrayList;
 

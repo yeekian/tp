@@ -1,7 +1,6 @@
-package TutorLink.command.attendance_command;
+package tutorlink.command.attendance_command;
 
-import TutorLink.attendance.Attendance;
-import TutorLink.command.assignment_command.AddAssignmentCommand;
+import tutorlink.attendance.Attendance;
 
 import java.util.ArrayList;
 
