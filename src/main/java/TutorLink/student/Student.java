@@ -1,4 +1,4 @@
-package TutorLink.student;
+package tutorlink.student;
 
 public class Student {
     private String matricNumber;
@@ -6,7 +6,7 @@ public class Student {
 
     public Student(String matricNumber, double GPA) {
         this.matricNumber = matricNumber;
-        this.GPA = GPA;
+        this.GPA = 5.0;
     }
 
     public String getMatricNumber() {
@@ -15,5 +15,9 @@ public class Student {
 
     public double getGPA() {
         return GPA;
+    }
+
+    public void setGPA(double GPA) {
+        this.GPA = GPA;
     }
 }
