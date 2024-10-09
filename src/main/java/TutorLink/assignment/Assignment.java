@@ -1,5 +1,7 @@
 package tutorlink.assignment;
 
+import java.util.Objects;
+
 public class Assignment {
     private String assginmentDescription;
     private double receivedScore;
@@ -15,5 +17,13 @@ public class Assignment {
 
     public double getWeightedScore() {
         return (receivedScore / totalScore) * weighting;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Assignment that = (Assignment) obj;
+        return Objects.equals(assginmentDescription, that.assginmentDescription);
     }
 }
