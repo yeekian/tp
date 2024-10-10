@@ -1,7 +1,7 @@
-package TutorLink.commandpackage.AssignmentCommand;
+package tutorlink.commandpackage.assignmentcommand;
 
-import TutorLink.listpackage.ItemList;
-import tutorlink.assignment.Assignment;
+import tutorlink.listpackage.ItemList;
+import tutorlink.assignmentpackage.Assignment;
 
 public class DeleteAssignmentCommand extends AssignmentCommand{
     public DeleteAssignmentCommand(Assignment assignment) {

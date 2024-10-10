@@ -1,4 +1,4 @@
-package tutorlink.course;
+package tutorlink.coursepackage;
 
 public enum LetterGrade {
     A_plus,A,A_minus,

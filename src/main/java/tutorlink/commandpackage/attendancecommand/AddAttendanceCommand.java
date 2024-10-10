@@ -1,7 +1,7 @@
-package TutorLink.commandpackage.AttendanceCommand;
+package tutorlink.commandpackage.attendancecommand;
 
-import TutorLink.listpackage.ItemList;
-import tutorlink.attendance.Attendance;
+import tutorlink.listpackage.ItemList;
+import tutorlink.attendancepackage.Attendance;
 
 public class AddAttendanceCommand extends AttendanceCommand{
 

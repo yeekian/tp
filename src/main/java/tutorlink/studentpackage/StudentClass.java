@@ -1,4 +1,4 @@
-package TutorLink.studentpackage;
+package tutorlink.studentpackage;
 
 public class StudentClass {
     private String matricNumber;

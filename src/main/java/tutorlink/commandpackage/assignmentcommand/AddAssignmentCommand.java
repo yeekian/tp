@@ -1,14 +1,13 @@
-package TutorLink.commandpackage.AssignmentCommand;
+package tutorlink.commandpackage.assignmentcommand;
 
-import tutorlink.assignment.Assignment;
-import TutorLink.listpackage.ItemList;
+import tutorlink.assignmentpackage.Assignment;
+import tutorlink.listpackage.ItemList;
 
 public class AddAssignmentCommand extends AssignmentCommand {
     public AddAssignmentCommand(Assignment assignment) {
         super(assignment);
     }
 
-    @Override
     public void execute(ItemList list) {
 
     }

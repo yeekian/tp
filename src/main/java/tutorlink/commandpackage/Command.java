@@ -1,6 +1,6 @@
-package TutorLink.commandpackage;
+package tutorlink.commandpackage;
 
-import TutorLink.listpackage.ItemList;
+import tutorlink.listpackage.ItemList;
 
 /**
  * Represents an interpreted Command from the user. A <code>Command</code> object corresponds to a

@@ -1,9 +1,9 @@
-package TutorLink.parserpackage;
+package tutorlink.parserpackage;
 
-import TutorLink.commandpackage.StudentCommand.AddStudentCommand;
-import TutorLink.commandpackage.StudentCommand.DeleteStudentCommand;
-import TutorLink.listpackage.StudentList;
-import TutorLink.studentpackage.StudentClass;
+import tutorlink.commandpackage.studentcommand.AddStudentCommand;
+import tutorlink.commandpackage.studentcommand.DeleteStudentCommand;
+import tutorlink.listpackage.StudentList;
+import tutorlink.studentpackage.StudentClass;
 import exception.StudentNotFoundException;
 
 public class Parser {

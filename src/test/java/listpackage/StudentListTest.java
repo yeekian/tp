@@ -1,8 +1,8 @@
 package tutorlink.list;
-import TutorLink.listpackage.StudentList;
+import tutorlink.listpackage.StudentList;
 import tutorlink.parser.Parser;
-import TutorLink.commandpackage.StudentCommand.AddStudentCommand;
-import TutorLink.commandpackage.StudentCommand.DeleteStudentCommand;
+import tutorlink.commandpackage.studentcommand.AddStudentCommand;
+import tutorlink.commandpackage.studentcommand.DeleteStudentCommand;
 
 import org.junit.jupiter.api.Test;
 

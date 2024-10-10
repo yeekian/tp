@@ -1,6 +1,6 @@
-package TutorLink.listpackage;
+package tutorlink.listpackage;
 
-import tutorlink.attendance.Attendance;
+import tutorlink.attendancepackage.Attendance;
 
 import java.util.ArrayList;
 

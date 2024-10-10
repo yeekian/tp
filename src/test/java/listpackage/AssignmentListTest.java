@@ -1,8 +1,9 @@
-package TutorLink.listpackage;
+package listpackage;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tutorlink.assignment.Assignment;
+import tutorlink.assignmentpackage.Assignment;
+import tutorlink.listpackage.AssignmentList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;

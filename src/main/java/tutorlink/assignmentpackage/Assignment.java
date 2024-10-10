@@ -1,4 +1,4 @@
-package tutorlink.assignment;
+package tutorlink.assignmentpackage;
 
 import java.util.Objects;
 

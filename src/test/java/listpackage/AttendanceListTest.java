@@ -1,4 +1,4 @@
-package TutorLink.listpackage;
+package listpackage;
 
 public class AttendanceListTest {
 }

@@ -1,7 +1,7 @@
-package TutorLink.commandpackage.StudentCommand;
+package tutorlink.commandpackage.studentcommand;
 
-import TutorLink.commandpackage.Command;
-import TutorLink.studentpackage.StudentClass;
+import tutorlink.commandpackage.Command;
+import tutorlink.studentpackage.StudentClass;
 
 public abstract class StudentCommand extends Command {
     protected StudentClass student;

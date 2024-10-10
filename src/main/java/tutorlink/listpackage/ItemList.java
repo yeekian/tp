@@ -1,4 +1,4 @@
-package TutorLink.listpackage;
+package tutorlink.listpackage;
 
 public class ItemList {
 }

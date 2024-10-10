@@ -1,6 +1,6 @@
-package TutorLink.listpackage;
+package tutorlink.listpackage;
 
-import TutorLink.studentpackage.StudentClass;
+import tutorlink.studentpackage.StudentClass;
 
 import java.util.ArrayList;
 

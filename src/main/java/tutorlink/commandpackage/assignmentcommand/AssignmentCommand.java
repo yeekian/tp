@@ -1,7 +1,7 @@
-package TutorLink.commandpackage.AssignmentCommand;
+package tutorlink.commandpackage.assignmentcommand;
 
-import TutorLink.commandpackage.Command;
-import tutorlink.assignment.Assignment;
+import tutorlink.commandpackage.Command;
+import tutorlink.assignmentpackage.Assignment;
 
 public abstract class AssignmentCommand extends Command {
     private Assignment assignment;

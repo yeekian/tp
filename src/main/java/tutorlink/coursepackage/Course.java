@@ -1,16 +1,15 @@
-package TutorLink.coursepackage;
+package tutorlink.coursepackage;
 
-import TutorLink.listpackage.AssignmentList;
-import TutorLink.listpackage.AttendanceList;
-import tutorlink.assignment.Assignment;
-import tutorlink.course.LetterGrade;
+import tutorlink.listpackage.AssignmentList;
+import tutorlink.listpackage.AttendanceList;
+import tutorlink.assignmentpackage.Assignment;
 
 public class Course {
     private String courseID;
     private int courseMCs;
     private LetterGrade grade;
-    AssignmentList assignments;
-    AttendanceList attendances;
+    private AssignmentList assignments;
+    private AttendanceList attendances;
 
 
     public Course(String courseID, int courseMCs) {

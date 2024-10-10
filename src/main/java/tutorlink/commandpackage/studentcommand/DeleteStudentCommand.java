@@ -1,8 +1,8 @@
-package TutorLink.commandpackage.StudentCommand;
+package tutorlink.commandpackage.studentcommand;
 
-import TutorLink.listpackage.ItemList;
-import TutorLink.listpackage.StudentList;
-import TutorLink.studentpackage.StudentClass;
+import tutorlink.listpackage.ItemList;
+import tutorlink.listpackage.StudentList;
+import tutorlink.studentpackage.StudentClass;
 
 
 public class DeleteStudentCommand extends StudentCommand {

@@ -1,5 +1,3 @@
-package tutorlink;
-
 import java.util.Scanner;
 
 /**
