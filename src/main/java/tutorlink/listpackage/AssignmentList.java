@@ -20,4 +20,8 @@ public class AssignmentList extends ItemList {
     public void addAssignment(Assignment assignment){
         assignmentArrayList.add(assignment);
     }
+
+    public ArrayList<Assignment> getAssignmentArrayList() {
+        return assignmentArrayList;
+    }
 }
