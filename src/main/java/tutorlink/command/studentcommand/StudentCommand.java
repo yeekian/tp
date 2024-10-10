@@ -1,4 +1,4 @@
-package tutorlink.command.student_command;
+package tutorlink.command.studentcommand;
 
 import tutorlink.command.Command;
 import tutorlink.student.Student;

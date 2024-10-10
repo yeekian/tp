@@ -1,4 +1,4 @@
-package tutorlink.command.assignment_command;
+package tutorlink.command.assignmentcommand;
 
 import tutorlink.assignment.Assignment;
 import tutorlink.command.Command;
@@ -6,7 +6,7 @@ import tutorlink.command.Command;
 import java.util.ArrayList;
 
 public abstract class AssignmentCommand extends Command {
-    private Assignment assignment;
+    protected Assignment assignment;
 
     public AssignmentCommand(Assignment assignment) {
         this.assignment = assignment;

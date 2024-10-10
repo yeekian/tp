@@ -1,4 +1,4 @@
-package tutorlink.command.attendance_command;
+package tutorlink.command.attendancecommand;
 
 import tutorlink.attendance.Attendance;
 import tutorlink.command.Command;

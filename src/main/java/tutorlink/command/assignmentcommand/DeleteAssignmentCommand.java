@@ -1,4 +1,4 @@
-package tutorlink.command.assignment_command;
+package tutorlink.command.assignmentcommand;
 
 import tutorlink.assignment.Assignment;
 
@@ -10,6 +10,6 @@ public class DeleteAssignmentCommand extends AssignmentCommand{
     }
 
     public void execute(ArrayList assignmentList) {
-
+        assignmentList.remove(assignment);
     }
 }
