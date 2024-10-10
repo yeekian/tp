@@ -4,7 +4,7 @@ import tutorlink.commandpackage.Command;
 import tutorlink.assignmentpackage.Assignment;
 
 public abstract class AssignmentCommand extends Command {
-    private Assignment assignment;
+    protected Assignment assignment;
 
     public AssignmentCommand(Assignment assignment) {
         this.assignment = assignment;
