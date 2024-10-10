@@ -4,9 +4,14 @@ public class Student {
     private String matricNumber;
     private double GPA;
 
+    public Student(String matricNumber) {
+        this.matricNumber = matricNumber;
+        this.GPA = 5.0; // Default GPA value if not given
+    }
+
     public Student(String matricNumber, double GPA) {
         this.matricNumber = matricNumber;
-        this.GPA = 5.0;
+        this.GPA = GPA;
     }
 
     public String getMatricNumber() {

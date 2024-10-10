@@ -1,23 +1,29 @@
-package tutorlink.list;
+package TutorLink.list;
 
+import TutorLink.list.List;
 import tutorlink.student.Student;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class StudentList {
-    private Integer numberOfStudents;
-    private Student[] studentList = new Student[0];
-    ArrayList<Student> studentArrayList = new ArrayList<>(Arrays.asList(studentList));
+public class StudentList extends List {
+    private ArrayList<Student> studentArrayList;
 
     public StudentList() {
-        this.numberOfStudents = 0;
+        this.studentArrayList = new ArrayList<>();
     }
 
-    public void deleteStudent(Student student){
+    public void deleteStudent(Student student) {
         studentArrayList.remove(student);
     }
 
-    public void addStudent(Student student){
+    public void addStudent(Student student) {
         studentArrayList.add(student);
+    }
+
+    public int getNumberOfStudents() {
+        return studentArrayList.size();
+    }
+
+    public ArrayList<Student> getStudentArrayList() {
+        return studentArrayList;
     }
 }

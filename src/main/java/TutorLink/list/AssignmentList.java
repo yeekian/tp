@@ -1,11 +1,12 @@
-package tutorlink.list;
+package TutorLink.list;
 
+import TutorLink.list.List;
 import tutorlink.assignment.Assignment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class AssignmentList {
+public class AssignmentList extends List {
     private int numberOfAssignments;
     ArrayList<Assignment> assignmentArrayList;
 

@@ -1,7 +1,7 @@
-package tutorlink.command.attendance_command;
+package TutorLink.command.attendance_command;
 
+import TutorLink.command.Command;
 import tutorlink.attendance.Attendance;
-import tutorlink.command.Command;
 
 public abstract class AttendanceCommand extends Command {
     private Attendance attendance;
