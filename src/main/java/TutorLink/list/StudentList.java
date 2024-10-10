@@ -1,3 +1,6 @@
+package tutorlink.list;
+
+import tutorlink.student.Student;
 import java.util.ArrayList;
 import java.util.Arrays;
 
