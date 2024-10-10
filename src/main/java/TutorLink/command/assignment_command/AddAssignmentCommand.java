@@ -1,6 +1,5 @@
-package TutorLink.command.assignment_command;
+package tutorlink.command.assignment_command;
 
-import TutorLink.list.List;
 import tutorlink.assignment.Assignment;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class AddAssignmentCommand extends AssignmentCommand {
     }
 
     @Override
-    public void execute(List list) {
+    public void execute(ArrayList assignmentList) {
 
     }
 

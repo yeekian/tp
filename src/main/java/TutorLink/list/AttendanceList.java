@@ -1,11 +1,10 @@
-package TutorLink.list;
+package tutorlink.list;
 
-import TutorLink.list.List;
 import tutorlink.attendance.Attendance;
 
 import java.util.ArrayList;
 
-public class AttendanceList extends List {
+public class AttendanceList {
     private ArrayList<Attendance> attendanceArrayList;
     private int numberOfAttendance;
 

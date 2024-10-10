@@ -1,6 +1,5 @@
-package TutorLink.list;
+package tutorlink.list;
 
-import TutorLink.list.AssignmentList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.assignment.Assignment;

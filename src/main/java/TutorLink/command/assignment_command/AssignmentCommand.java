@@ -1,7 +1,7 @@
-package TutorLink.command.assignment_command;
+package tutorlink.command.assignment_command;
 
-import TutorLink.command.Command;
 import tutorlink.assignment.Assignment;
+import tutorlink.command.Command;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,8 @@ public abstract class AssignmentCommand extends Command {
     public AssignmentCommand(Assignment assignment) {
         this.assignment = assignment;
     }
+
+    public abstract void execute(ArrayList assignmentList);
 
     public boolean isExit() {
         return false;

@@ -1,9 +1,8 @@
-package TutorLink.course;
+package tutorlink.course;
 
-import TutorLink.list.AssignmentList;
-import TutorLink.list.AttendanceList;
 import tutorlink.assignment.Assignment;
-import tutorlink.course.LetterGrade;
+import tutorlink.list.AssignmentList;
+import tutorlink.list.AttendanceList;
 
 public class Course {
     private String courseID;

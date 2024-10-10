@@ -1,11 +1,10 @@
-package TutorLink.list;
+package tutorlink.list;
 
-
-import TutorLink.course.Course;
+import tutorlink.course.Course;
 
 import java.util.ArrayList;
 
-public class CourseList extends List {
+public class CourseList {
     private int numberOfCourses;
     ArrayList<Course> courseArrayList;
 
