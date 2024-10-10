@@ -1,4 +1,4 @@
-package tutorlink.command.assignment_command;
+package tutorlink.command.assignmentcommand;
 
 import tutorlink.assignment.Assignment;
 import tutorlink.command.Command;
