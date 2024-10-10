@@ -1,15 +1,12 @@
 package tutorlink.list;
 import tutorlink.listpackage.StudentList;
-import tutorlink.parser.Parser;
 import tutorlink.commandpackage.studentcommand.AddStudentCommand;
 import tutorlink.commandpackage.studentcommand.DeleteStudentCommand;
 
 import org.junit.jupiter.api.Test;
+import tutorlink.parserpackage.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-
 
 public class StudentListTest {
 

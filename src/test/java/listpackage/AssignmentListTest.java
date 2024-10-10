@@ -25,39 +25,39 @@ public class AssignmentListTest {
     @Test
     void testAddAssignment() {
         // Initially, the list should be empty
-        assertTrue(assignmentList.assignmentArrayList.isEmpty());
+        assertTrue(assignmentList.getAssignmentArrayList().isEmpty());
 
         // Add an assignment
         assignmentList.addAssignment(assignment1);
 
         // Check that the assignment was added
-        assertFalse(assignmentList.assignmentArrayList.isEmpty());
-        assertEquals(1, assignmentList.assignmentArrayList.size());
-        assertEquals(assignment1, assignmentList.assignmentArrayList.get(0));
+        assertFalse(assignmentList.getAssignmentArrayList().isEmpty());
+        assertEquals(1, assignmentList.getAssignmentArrayList().size());
+        assertEquals(assignment1, assignmentList.getAssignmentArrayList().get(0));
     }
 
     @Test
     void testDeleteAssignment() {
         // Add an assignment first
         assignmentList.addAssignment(assignment1);
-        assertEquals(1, assignmentList.assignmentArrayList.size());
+        assertEquals(1, assignmentList.getAssignmentArrayList().size());
 
         // Now delete the assignment
         assignmentList.deleteAssignment(assignment1);
 
         // Check that the assignment was removed
-        assertEquals(0, assignmentList.assignmentArrayList.size());
+        assertEquals(0, assignmentList.getAssignmentArrayList().size());
     }
 
     @Test
     void testDeleteNonExistentAssignment() {
         // Initially, the list should be empty
-        assertTrue(assignmentList.assignmentArrayList.isEmpty());
+        assertTrue(assignmentList.getAssignmentArrayList().isEmpty());
 
         // Attempt to delete a non-existent assignment
         assignmentList.deleteAssignment(assignment1);
 
         // The size should still be zero
-        assertEquals(0, assignmentList.assignmentArrayList.size());
+        assertEquals(0, assignmentList.getAssignmentArrayList().size());
     }
 }
