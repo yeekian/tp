@@ -1,8 +1,7 @@
-package tutorlink.command.attendance_command;
+package tutorlink.commandpackage.attendancecommand;
 
-import tutorlink.attendance.Attendance;
-
-import java.util.ArrayList;
+import tutorlink.listpackage.ItemList;
+import tutorlink.attendancepackage.Attendance;
 
 public class DeleteAttendanceCommand extends AttendanceCommand{
 
@@ -11,7 +10,7 @@ public class DeleteAttendanceCommand extends AttendanceCommand{
     }
 
     @Override
-    public void execute(ArrayList list) {
+    public void execute(ItemList list) {
 
     }
 }
