@@ -5,7 +5,8 @@ import tutorlink.assignment.Assignment;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class AddAssignmentCommandTest {
     @Test
