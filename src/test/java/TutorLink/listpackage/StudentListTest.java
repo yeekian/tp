@@ -1,5 +1,4 @@
-package tutorlink.list;
-import tutorlink.listpackage.StudentList;
+package tutorlink.listpackage;
 import tutorlink.commandpackage.studentcommand.AddStudentCommand;
 import tutorlink.commandpackage.studentcommand.DeleteStudentCommand;
 

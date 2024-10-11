@@ -1,4 +1,4 @@
-package listpackage;
+package tutorlink.listpackage;
 
 public class CourseListTest {
 }
