@@ -13,7 +13,7 @@ class DeleteAssignmentCommandTest {
     void execute_deleteOne_expectZero() {
         // setup
         AssignmentList assignmentList = new AssignmentList();
-        Assignment assignment1 = new Assignment("Test_1",100,100,0.2);
+        Assignment assignment1 = new Assignment("Test 1",100,100,0.2);
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(assignment1);
         addAssignmentCommand.execute(assignmentList);
 

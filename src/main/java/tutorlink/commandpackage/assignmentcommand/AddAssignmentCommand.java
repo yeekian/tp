@@ -13,7 +13,7 @@ public class AddAssignmentCommand extends AssignmentCommand {
         if (list instanceof AssignmentList) {
             ((AssignmentList) list).addAssignment(assignment);
         } else {
-            throw new IllegalArgumentException("Invalid list type. Expected StudentList.");
+            throw new IllegalArgumentException("Invalid list type. Expected AssignmentList.");
         }
     }
 
