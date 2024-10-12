@@ -52,6 +52,7 @@ public class Parser {
         Matcher matcher = pattern.matcher(line);
         if(!matcher.matches()) {
             return new InvalidCommand(FindStudentCommand.FORMAT_ERROR_MESSAGE);
+        }
         String name = matcher.group(1);
         String matricNumber = matcher.group(2);
         return new FindStudentCommand(name, matricNumber);
