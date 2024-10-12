@@ -5,8 +5,8 @@ import tutorlink.resultpackage.CommandResult;
 
 public class FindStudentCommand extends Command{
 
-    private String name;
-    private String matricNumber;
+    protected String name;
+    protected String matricNumber;
 
     public static final String COMMAND_WORD = "findstudent";
     public static final String FORMAT_ERROR_MESSAGE = "Error, expected format: " + COMMAND_WORD
@@ -25,7 +25,9 @@ public class FindStudentCommand extends Command{
         if(filteredList.getNumberOfStudents() > 0) {
             return new CommandResult(SUCCESS_MESSAGE, filteredList);
         } else {
-            return new CommandResult(ERROR_MESSAGE);
+            String identifier = (this.name != null ? this.name : "") + ", "
+                    + (this.name != null ? this.name : "");
+            return new CommandResult(String.format(ERROR_MESSAGE, identifier), filteredList);
         }
     }
 }
