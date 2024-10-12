@@ -1,41 +1,77 @@
 package tutorlink.parserpackage;
 
-import tutorlink.commandpackage.studentcommand.AddStudentCommand;
-import tutorlink.commandpackage.studentcommand.DeleteStudentCommand;
+import tutorlink.commandpackage.*;
 import tutorlink.listpackage.StudentList;
 import tutorlink.studentpackage.StudentClass;
 import exception.StudentNotFoundException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
+    private final String EMPTY_INPUT_ERROR_MESSAGE = "Error: Input cannot be empty";
 
-    /**
-     * Finds a student in the provided student list by matriculation number.
-     *
-     * @param matricNumber the matriculation number of the student to find
-     * @param studentList the list of students to search in
-     * @return the Student object with the given matriculation number
-     * @throws StudentNotFoundException if no student with the given matriculation number is found
-     */
-    private StudentClass findStudent(String matricNumber, StudentList studentList) throws StudentNotFoundException {
-        for (StudentClass a : studentList.getStudentArrayList()) {
-            if (a.getMatricNumber().equals(matricNumber)) {
-                return a;
-            }
+    public Command parse(String line) {
+        if(line.trim().isEmpty()){
+            return new InvalidCommand(EMPTY_INPUT_ERROR_MESSAGE);
         }
-        throw new StudentNotFoundException();
+        String commandWord = extractCommandWord(line);
+        switch(commandWord){
+        case AddStudentCommand.COMMAND_WORD:
+            return addStudentCommand(line);
+            break;
+        case DeleteStudentCommand.COMMAND_WORD:
+            return addStudentCommand(line);
+            break;
+        case ListStudentCommand.COMMAND_WORD:
+            break;
+//        case FindStudentCommand.COMMAND_WORD:
+//            break;
+        case AddCourseCommand.COMMAND_WORD:
+            break;
+        case DeleteCourseCommand.COMMAND_WORD:
+            break;
+        case ListCourseCommand.COMMAND_WORD:
+            break;
+        case AddAssignmentCommand.COMMAND_WORD:
+            break;
+        case DeleteAssignmentCommand.COMMAND_WORD:
+            break;
+        case ListAssignmentCommand.COMMAND_WORD:
+            break;
+
+        }
+    }
+
+    private String extractCommandWord(String input) {
+        String words[] = input.split("\\s+");
+        return words[0]; //return the first word
+    }
+
+    public Command findStudentCommand(String line) {
+        Pattern pattern = Pattern.compile(FindStudentCommand.REGEX);
+        Matcher matcher = pattern.matcher(line);
+        if(!matcher.matches()) {
+            return new InvalidCommand(FindStudentCommand.FORMAT_ERROR_MESSAGE);
+        String name = matcher.group(1);
+        String matricNumber = matcher.group(2);
+        return new FindStudentCommand(name, matricNumber);
     }
 
     /**
      * Creates an AddStudentCommand for adding a new student.
      *
-     * @param matricNumber the matriculation number of the new student
-     * @param gpa the gpa of the new student
+     * @param line input line from the user
      * @return an AddStudentCommand object to add the new student
      */
-    public AddStudentCommand addStudentCommand(String matricNumber, double gpa) {
-        StudentClass newStudent = new StudentClass(matricNumber, gpa);
-        AddStudentCommand addStudentCommand = new AddStudentCommand(newStudent);
-        return addStudentCommand;
+    public Command addStudentCommand(String line) {
+        Pattern pattern = Pattern.compile(AddStudentCommand.REGEX);
+        Matcher matcher = pattern.matcher(line);
+        if(!matcher.find()) {
+            return new InvalidCommand(AddStudentCommand.FORMAT_ERROR_MESSAGE);
+        }
+        String name = matcher.group(1);
+        String matricNumber = matcher.group(2);
+        return new AddStudentCommand(name, matricNumber);
     }
 
     /**
@@ -46,14 +82,8 @@ public class Parser {
      * @return a DeleteStudentCommand object to delete the student
      */
     public DeleteStudentCommand deleteStudentCommand(String matricNumber, StudentList studentList) {
-        try {
-            StudentClass selectedStudent = findStudent(matricNumber, studentList);
-            DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(selectedStudent);
-            return deleteStudentCommand;
-        } catch (StudentNotFoundException e) {
-            System.out.println("Student Not Found.");
-        }
-        return null; // Return null if the student is not found
+        DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(matricNumber);
+        return deleteStudentCommand;
     }
 
 }
