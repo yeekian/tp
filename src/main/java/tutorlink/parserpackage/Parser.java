@@ -50,8 +50,18 @@ public class Parser {
         if(!matcher.matches()) {
             return new InvalidCommand(FindStudentCommand.FORMAT_ERROR_MESSAGE);
         }
-        String name = matcher.group(1);
-        String matricNumber = matcher.group(2);
+        int nameIndexStart = line.indexOf("n/") + FindStudentCommand.PREFIX_INDEX;
+        int matricIndexStart = line.indexOf("i/") + FindStudentCommand.PREFIX_INDEX;
+        String name = null;
+        String matricNumber = null;
+        if (nameIndexStart < FindStudentCommand.PREFIX_INDEX) {
+            matricNumber = line.substring(matricIndexStart).trim();
+        } else if (matricIndexStart < FindStudentCommand.PREFIX_INDEX) {
+            name = line.substring(nameIndexStart).trim();
+        } else {
+            name = line.substring(nameIndexStart, matricIndexStart - FindStudentCommand.PREFIX_INDEX).trim();
+            matricNumber = line.substring(matricIndexStart).trim();
+        }
         return new FindStudentCommand(name, matricNumber);
     }
 
