@@ -34,6 +34,6 @@ public class StudentClass {
 
     @Override
     public String toString() {
-        return this.name + " (" + this.matricNumber + ", " + this.gpa + ")";
+        return this.name + ", matric no: " + this.matricNumber + ", GPA: " + this.gpa;
     }
 }
