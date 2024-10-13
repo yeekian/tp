@@ -8,7 +8,7 @@ public class FindStudentCommand extends Command{
     protected String name;
     protected String matricNumber;
 
-    public static final String COMMAND_WORD = "findstudent";
+    public static final String COMMAND_WORD = "find_student";
     public static final String FORMAT_ERROR_MESSAGE = "Error, expected format: " + COMMAND_WORD
             + " n/NAME AND/OR" + "i/MATRIC NUMBER";
     public final static String REGEX = "^findstudent(?:\\s+n/([^\\\\s]+))?(?:\\s+i/(\\d{7}[a-zA-Z]?))?$";
@@ -27,7 +27,7 @@ public class FindStudentCommand extends Command{
         } else {
             String identifier = (this.name != null ? this.name : "") + ", "
                     + (this.name != null ? this.name : "");
-            return new CommandResult(String.format(ERROR_MESSAGE, identifier), filteredList);
+            return new CommandResult(String.format(ERROR_MESSAGE, identifier));
         }
     }
 }

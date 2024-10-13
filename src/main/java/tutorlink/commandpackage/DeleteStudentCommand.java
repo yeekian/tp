@@ -13,7 +13,7 @@ public class DeleteStudentCommand extends FindStudentCommand{
     private final String ERROR_MESSAGE = "Student %s not found";
     private final String SUCCESS_MESSAGE = "Student %s successfully deleted";
 
-    public static final String COMMAND_WORD = "deletestudent";
+    public static final String COMMAND_WORD = "delete_student";
 
     public DeleteStudentCommand(String name, String matricNumber) {
         super(name, matricNumber);

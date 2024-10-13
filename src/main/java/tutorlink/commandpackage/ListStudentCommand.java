@@ -1,10 +1,10 @@
 package tutorlink.commandpackage;
 
-import tutorlink.listpackage.StudentList;
 import tutorlink.resultpackage.CommandResult;
 
 public class ListStudentCommand extends Command {
 
+    public static final String COMMAND_WORD = "list_student";
     private final String SUCCESS_MESSAGE = "Here are your students:";
 
     @Override
