@@ -5,8 +5,11 @@ import tutorlink.resultpackage.CommandResult;
 
 public class FindStudentCommand extends Command{
 
+    private final String SUCCESS_MESSAGE = "Found the following students:";
+
     protected String name;
     protected String matricNumber;
+    protected final String ERROR_MESSAGE = "Student (%s) not found in Student List";
 
     public static final String COMMAND_WORD = "find_student";
     public static final String FORMAT_ERROR_MESSAGE = "Error, expected format: " + COMMAND_WORD
@@ -14,8 +17,7 @@ public class FindStudentCommand extends Command{
     public static final int PREFIX_INDEX = 2;
     public final static String REGEX = "^find_student (i/(A\\d{7}[A-Z])?( n/[\\w\\d]+)?|n/[\\w\\d]" +
             "+( i/(A\\d{7}[A-Z])?)?)( )?$";
-    private final String SUCCESS_MESSAGE = "Found the following students:";
-    private final String ERROR_MESSAGE = "Student (%s) not found in Student List";
+
     public FindStudentCommand(String name, String matricNumber) {
         this.name = name;
         this.matricNumber = matricNumber;
