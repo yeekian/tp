@@ -31,4 +31,9 @@ public class StudentClass {
     public void setGPA(double gpa) {
         this.gpa = gpa;
     }
+
+    @Override
+    public String toString() {
+        return this.name + " (" + this.matricNumber + ", " + this.gpa + ")";
+    }
 }
