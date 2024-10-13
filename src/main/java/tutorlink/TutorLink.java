@@ -23,7 +23,9 @@ public class TutorLink {
                 Command command = parser.parse(line);
                 CommandResult commandResult = command.execute();
                 Console.displayCommandResult(commandResult);
-
+                if(command.isExit()) {
+                    break;
+                }
             } catch (MissingNextLineException e) {
                 Console.printMessage(e.getMessage());
             }

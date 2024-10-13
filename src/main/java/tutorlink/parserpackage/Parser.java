@@ -1,12 +1,14 @@
 package tutorlink.parserpackage;
 
-import tutorlink.commandpackage.Command;
-import tutorlink.commandpackage.InvalidCommand;
 import tutorlink.commandpackage.AddCourseCommand;
 import tutorlink.commandpackage.AddStudentCommand;
-import tutorlink.commandpackage.FindStudentCommand;
+import tutorlink.commandpackage.Command;
 import tutorlink.commandpackage.DeleteStudentCommand;
+import tutorlink.commandpackage.ExitCommand;
+import tutorlink.commandpackage.FindStudentCommand;
+import tutorlink.commandpackage.InvalidCommand;
 import tutorlink.commandpackage.ListStudentCommand;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +44,8 @@ public class Parser {
         case ListAssignmentCommand.COMMAND_WORD:
             break;
              */
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
         default:
             return new InvalidCommand(UNKNOWN_COMMAND_ERROR_MESSAGE);
         }
