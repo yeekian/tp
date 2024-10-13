@@ -89,13 +89,23 @@ public class Parser {
      * @return a DeleteStudentCommand object to delete the student
      */
     public Command deleteStudentCommand(String line) {
-        Pattern pattern = Pattern.compile(FindStudentCommand.REGEX);
+        Pattern pattern = Pattern.compile(DeleteStudentCommand.REGEX);
         Matcher matcher = pattern.matcher(line);
         if(!matcher.matches()) {
             return new InvalidCommand(FindStudentCommand.FORMAT_ERROR_MESSAGE);
         }
-        String name = matcher.group(1);
-        String matricNumber = matcher.group(2);
+        int nameIndexStart = line.indexOf("n/") + FindStudentCommand.PREFIX_INDEX;
+        int matricIndexStart = line.indexOf("i/") + FindStudentCommand.PREFIX_INDEX;
+        String name = null;
+        String matricNumber = null;
+        if (nameIndexStart < FindStudentCommand.PREFIX_INDEX) {
+            matricNumber = line.substring(matricIndexStart).trim();
+        } else if (matricIndexStart < FindStudentCommand.PREFIX_INDEX) {
+            name = line.substring(nameIndexStart).trim();
+        } else {
+            name = line.substring(nameIndexStart, matricIndexStart - FindStudentCommand.PREFIX_INDEX).trim();
+            matricNumber = line.substring(matricIndexStart).trim();
+        }
         return new DeleteStudentCommand(name, matricNumber);
     }
 
