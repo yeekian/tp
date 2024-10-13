@@ -2,7 +2,6 @@ package tutorlink.listpackage;
 
 import tutorlink.exceptionspackage.ItemNotFoundException;
 import tutorlink.studentpackage.StudentClass;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -48,5 +47,15 @@ public class StudentList extends ItemList {
                 })
                 .collect(Collectors.toCollection(ArrayList::new));
         return filteredList;
+    }
+
+    public StudentClass getStudent(String matricNumber) {
+        for (StudentClass student : studentArrayList) {
+            if (student.getMatricNumber().equals(matricNumber)) {
+                return student;
+            }
+        }
+        throw new ItemNotFoundException(String.format("Student with Matric Number: %s not found",
+                matricNumber));
     }
 }
