@@ -34,7 +34,7 @@ public class StudentList extends ItemList {
     public String toString() {
         return IntStream.range(0, studentArrayList.size())
                 .mapToObj(i -> (i + 1) + ": " + studentArrayList.get(i)) // 1-based index
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining("\n\t"));
     }
 
     public StudentList filterList(String name, String matricNumber){
