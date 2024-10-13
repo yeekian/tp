@@ -5,6 +5,7 @@ import tutorlink.studentpackage.StudentClass;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class StudentList extends ItemList {
     private ArrayList<StudentClass> studentArrayList;
@@ -27,6 +28,13 @@ public class StudentList extends ItemList {
 
     public ArrayList<StudentClass> getStudentArrayList() {
         return studentArrayList;
+    }
+
+    @Override
+    public String toString() {
+        return IntStream.range(0, studentArrayList.size())
+                .mapToObj(i -> (i + 1) + ": " + studentArrayList.get(i)) // 1-based index
+                .collect(Collectors.joining("\n"));
     }
 
     public StudentList filterList(String name, String matricNumber){
