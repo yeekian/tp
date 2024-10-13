@@ -22,8 +22,8 @@ public class Parser {
             return new ListStudentCommand();
         case FindStudentCommand.COMMAND_WORD:
             return findStudentCommand(line);
-//        case AddCourseCommand.COMMAND_WORD:
-//            break;
+        case AddCourseCommand.COMMAND_WORD:
+            return addCourseCommand(line);
 //        case DeleteCourseCommand.COMMAND_WORD:
 //            break;
 //        case ListCourseCommand.COMMAND_WORD:
@@ -37,6 +37,18 @@ public class Parser {
         default:
             return new InvalidCommand(UNKNOWN_COMMAND_ERROR_MESSAGE);
         }
+    }
+
+    private Command addCourseCommand(String line) {
+        Pattern pattern = Pattern.compile(AddCourseCommand.REGEX);
+        Matcher matcher = pattern.matcher(line);
+        if(!matcher.find()) {
+            return new InvalidCommand(AddCourseCommand.FORMAT_ERROR_MESSAGE);
+        }
+        String matricNumber = matcher.group(1);
+        String courseID = matcher.group(2);
+        int courseMCs = Integer.parseInt(matcher.group(3));
+        return new AddCourseCommand(matricNumber, courseID, courseMCs);
     }
 
     private String extractCommandWord(String input) {
