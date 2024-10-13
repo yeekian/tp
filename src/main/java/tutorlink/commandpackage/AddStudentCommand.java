@@ -4,15 +4,12 @@ import tutorlink.exceptionspackage.IllegalValueException;
 import tutorlink.resultpackage.CommandResult;
 import tutorlink.studentpackage.StudentClass;
 
-import java.util.regex.Pattern;
-
 public class AddStudentCommand extends Command {
 
     private String matricNumber;
     private String name;
 
     private final String SUCCESSFUL_MESSAGE = "Student (%s) added successfully";
-    private final String ERROR_MESSAGE = "Error! ";
 
     public static final String COMMAND_WORD = "add_student";
     public static final String FORMAT_ERROR_MESSAGE = "Error, expected format: " + COMMAND_WORD + " n/NAME " +
