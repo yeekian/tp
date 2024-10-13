@@ -10,24 +10,26 @@ import java.util.regex.Pattern;
 
 public class DeleteStudentCommand extends FindStudentCommand{
 
-    private final String ERROR_MESSAGE = "Student %s not found";
     private final String SUCCESS_MESSAGE = "Student %s successfully deleted";
 
     public static final String COMMAND_WORD = "delete_student";
-
+    public final static String REGEX = "^delete_student (i/(A\\d{7}[A-Z])?( n/[\\w\\d]+)?|n/[\\w\\d]" +
+            "+( i/(A\\d{7}[A-Z])?)?)( )?$";
     public DeleteStudentCommand(String name, String matricNumber) {
         super(name, matricNumber);
     }
 
+    @Override
     public CommandResult execute() {
-        StudentList filteredList = students.filterList(this.name, this.matricNumber);
-        if(filteredList.getNumberOfStudents() > 0) {
-            filteredList.getStudentArrayList().remove(0); //remove the first match
-            return new CommandResult(SUCCESS_MESSAGE, filteredList);
-        } else {
-            String identifier = (this.name != null ? this.name : "") + ", "
-                    + (this.name != null ? this.name : "");
-            return new CommandResult(String.format(ERROR_MESSAGE, identifier), filteredList);
-        }
+        StudentList result = new StudentList();
+        students.getStudentArrayList().removeIf(student -> {
+            boolean matches = student.getName().equalsIgnoreCase(this.name) ||
+                    student.getMatricNumber().equals(this.matricNumber);
+            if (matches) {
+                result.getStudentArrayList().add(student); // Add to the removed list
+            }
+            return matches; // Remove from the original list
+        });
+        return new CommandResult(SUCCESS_MESSAGE, result);
     }
 }
