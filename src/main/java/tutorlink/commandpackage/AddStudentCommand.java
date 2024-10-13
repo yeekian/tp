@@ -6,15 +6,14 @@ import tutorlink.studentpackage.StudentClass;
 
 public class AddStudentCommand extends Command {
 
-    private String matricNumber;
-    private String name;
-
-    private final String SUCCESSFUL_MESSAGE = "Student (%s) added successfully";
-
     public static final String COMMAND_WORD = "add_student";
     public static final String FORMAT_ERROR_MESSAGE = "Error, expected format: " + COMMAND_WORD + " n/NAME " +
             "i/MATRIC NUMBER";
     public static final String REGEX = "^add_student\\s+n/(.+?)\\s+i/(A\\d{7}[a-zA-Z])$";
+
+    private static final String SUCCESSFUL_MESSAGE = "Student (%s) added successfully";
+    private String matricNumber;
+    private String name;
 
     public AddStudentCommand(String name, String matricNumber) {
         this.name = name;

@@ -1,6 +1,7 @@
 package tutorlink.commandpackage;
 
 import tutorlink.listpackage.StudentList;
+import tutorlink.listpackage.StudentList;
 import tutorlink.resultpackage.CommandResult;
 
 /**
@@ -20,6 +21,10 @@ public abstract class Command {
      */
     public boolean isExit(){
         return false;
+    }
+
+    public static StudentList getStudentList(){
+        return students;
     }
 }
 

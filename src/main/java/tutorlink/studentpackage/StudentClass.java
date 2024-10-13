@@ -3,11 +3,11 @@ package tutorlink.studentpackage;
 import tutorlink.listpackage.CourseList;
 
 public class StudentClass {
+    public CourseList courses;
+
     private String matricNumber;
     private String name;
     private double gpa;
-
-    public CourseList courses;
 
     public StudentClass(String name, String matricNumber) {
         this.name = name;

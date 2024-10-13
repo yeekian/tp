@@ -30,18 +30,18 @@ public enum LetterGrade {
     @Override
     public String toString() {
         return switch (this) {
-            case A_plus -> "A+";
-            case A -> "A";
-            case A_minus -> "A-";
-            case B_plus -> "B+";
-            case B -> "B";
-            case B_minus -> "B-";
-            case C_plus -> "C+";
-            case C -> "C";
-            case D_plus -> "D+";
-            case D -> "D";
-            case F -> "F";
-            case IP -> "In-Progress";
+        case A_plus -> "A+";
+        case A -> "A";
+        case A_minus -> "A-";
+        case B_plus -> "B+";
+        case B -> "B";
+        case B_minus -> "B-";
+        case C_plus -> "C+";
+        case C -> "C";
+        case D_plus -> "D+";
+        case D -> "D";
+        case F -> "F";
+        case IP -> "In-Progress";
         };
     }
 }

@@ -1,12 +1,18 @@
 package tutorlink.parserpackage;
 
-import tutorlink.commandpackage.*;
+import tutorlink.commandpackage.Command;
+import tutorlink.commandpackage.InvalidCommand;
+import tutorlink.commandpackage.AddCourseCommand;
+import tutorlink.commandpackage.AddStudentCommand;
+import tutorlink.commandpackage.FindStudentCommand;
+import tutorlink.commandpackage.DeleteStudentCommand;
+import tutorlink.commandpackage.ListStudentCommand;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private final String EMPTY_INPUT_ERROR_MESSAGE = "Error: Input cannot be empty";
-    private final String UNKNOWN_COMMAND_ERROR_MESSAGE = "Error: Unknown command";
+    private static final String EMPTY_INPUT_ERROR_MESSAGE = "Error: Input cannot be empty";
+    private static final String UNKNOWN_COMMAND_ERROR_MESSAGE = "Error: Unknown command";
 
     public Command parse(String line) {
         if(line.trim().isEmpty()){
@@ -24,16 +30,18 @@ public class Parser {
             return findStudentCommand(line);
         case AddCourseCommand.COMMAND_WORD:
             return addCourseCommand(line);
-//        case DeleteCourseCommand.COMMAND_WORD:
-//            break;
-//        case ListCourseCommand.COMMAND_WORD:
-//            break;
-//        case AddAssignmentCommand.COMMAND_WORD:
-//            break;
-//        case DeleteAssignmentCommand.COMMAND_WORD:
-//            break;
-//        case ListAssignmentCommand.COMMAND_WORD:
-//            break;
+            /*
+        case DeleteCourseCommand.COMMAND_WORD:
+            break;
+        case ListCourseCommand.COMMAND_WORD:
+            break;
+        case AddAssignmentCommand.COMMAND_WORD:
+            break;
+        case DeleteAssignmentCommand.COMMAND_WORD:
+            break;
+        case ListAssignmentCommand.COMMAND_WORD:
+            break;
+             */
         default:
             return new InvalidCommand(UNKNOWN_COMMAND_ERROR_MESSAGE);
         }
@@ -52,7 +60,7 @@ public class Parser {
     }
 
     private String extractCommandWord(String input) {
-        String words[] = input.split("\\s+");
+        String[] words = input.split("\\s+");
         return words[0]; //return the first word
     }
 

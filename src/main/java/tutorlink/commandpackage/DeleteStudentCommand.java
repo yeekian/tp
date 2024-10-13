@@ -1,20 +1,16 @@
 package tutorlink.commandpackage;
 
-import tutorlink.exceptionspackage.IllegalValueException;
-import tutorlink.exceptionspackage.ItemNotFoundException;
 import tutorlink.listpackage.StudentList;
 import tutorlink.resultpackage.CommandResult;
-import tutorlink.studentpackage.StudentClass;
-
-import java.util.regex.Pattern;
 
 public class DeleteStudentCommand extends FindStudentCommand{
 
-    private final String SUCCESS_MESSAGE = "Student %s successfully deleted";
-
     public static final String COMMAND_WORD = "delete_student";
-    public final static String REGEX = "^delete_student (i/(A\\d{7}[A-Z])?( n/[\\w\\d]+)?|n/[\\w\\d]" +
+    public static final String REGEX = "^delete_student (i/(A\\d{7}[A-Z])?( n/[\\w\\d]+)?|n/[\\w\\d]" +
             "+( i/(A\\d{7}[A-Z])?)?)( )?$";
+
+    private static final String SUCCESS_MESSAGE = "Student %s successfully deleted";
+
     public DeleteStudentCommand(String name, String matricNumber) {
         super(name, matricNumber);
     }

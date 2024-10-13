@@ -5,7 +5,7 @@ import tutorlink.resultpackage.CommandResult;
 public class ListStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "list_student";
-    private final String SUCCESS_MESSAGE = "Here are your students:";
+    private static final String SUCCESS_MESSAGE = "Here are your students:";
 
     @Override
     public CommandResult execute() {
