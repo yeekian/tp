@@ -15,8 +15,14 @@ public class Course {
     public Course(String courseID, int courseMCs) {
         this.courseID = courseID;
         this.courseMCs = courseMCs;
+        this.grade = LetterGrade.IP;
         assignments = new AssignmentList();
         attendances = new AttendanceList();
+    }
+
+    @Override
+    public String toString() {
+        return this.courseID + ", MCs: " + this.courseMCs + ", Grade: " + this.grade;
     }
 
     public void addAssignment(Assignment assignment) {
