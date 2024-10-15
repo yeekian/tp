@@ -6,11 +6,9 @@ import tutorlink.coursepackage.Course;
 import java.util.ArrayList;
 
 public class CourseList extends ItemList {
-    private int numberOfCourses;
     private ArrayList<Course> courseArrayList;
 
     public CourseList() {
-        this.numberOfCourses = 0;
         this.courseArrayList = new ArrayList<>();
     }
 
