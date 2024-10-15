@@ -6,6 +6,7 @@ import tutorlink.commandpackage.AddCourseCommand;
 import tutorlink.commandpackage.AddStudentCommand;
 import tutorlink.commandpackage.DeleteStudentCommand;
 import tutorlink.commandpackage.InvalidCommand;
+import tutorlink.commandpackage.ListAssignmentCommand;
 import tutorlink.commandpackage.ListStudentCommand;
 import tutorlink.commandpackage.DeleteCourseCommand;
 import tutorlink.commandpackage.ExitCommand;
@@ -38,9 +39,9 @@ public class Parser {
             return deleteCourseCommand(line);
         case AddAssignmentCommand.COMMAND_WORD:
             return addAssignmentCommand(line);
+        case ListAssignmentCommand.COMMAND_WORD:
+            return listAssignmentCommand(line);
             /*
-        case AddAssignmentCommand.COMMAND_WORD:
-            break;
         case DeleteAssignmentCommand.COMMAND_WORD:
             break;
         case ListAssignmentCommand.COMMAND_WORD:
@@ -53,6 +54,17 @@ public class Parser {
         }
     }
 
+    private Command listAssignmentCommand(String line) {
+        Pattern pattern = Pattern.compile(ListAssignmentCommand.REGEX);
+        Matcher matcher = pattern.matcher(line);
+        if(matcher.find()){
+            String matricNumber = matcher.group(1);
+            String courseID = matcher.group(2);
+            return new ListAssignmentCommand(matricNumber, courseID);
+        } else {
+            return new InvalidCommand(ListAssignmentCommand.FORMAT_ERROR_MESSAGE);
+        }
+    }
     private Command deleteCourseCommand(String line) {
         Pattern pattern = Pattern.compile(DeleteCourseCommand.REGEX);
         Matcher matcher = pattern.matcher(line);
