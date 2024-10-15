@@ -1,6 +1,8 @@
 package tutorlink.listpackage;
 
 import tutorlink.coursepackage.Course;
+import tutorlink.exceptionspackage.ItemNotFoundException;
+
 import java.util.ArrayList;
 
 public class CourseList extends ItemList {
@@ -28,5 +30,15 @@ public class CourseList extends ItemList {
 
     public ArrayList<Course> getCourseArrayList() {
         return courseArrayList;
+    }
+
+    public Course getCourse(String courseID) throws ItemNotFoundException{
+        for (Course course : this.courseArrayList) {
+            if (course.getCourseID().equals(courseID)) {
+                return course;
+            }
+        }
+        throw new ItemNotFoundException(String.format("Course %s not found for student",
+                courseID));
     }
 }
