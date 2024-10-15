@@ -39,10 +39,6 @@ public class Parser {
             return deleteCourseCommand(line);
         case AddAssignmentCommand.COMMAND_WORD:
             return addAssignmentCommand(line);
-            /*
-        case AddAssignmentCommand.COMMAND_WORD:
-            break;
-            */
         case DeleteAssignmentCommand.COMMAND_WORD:
             return deleteAssignmentCommand(line);
             /*
@@ -170,8 +166,8 @@ public class Parser {
     private Command deleteAssignmentCommand(String line) {
         Pattern pattern = Pattern.compile(DeleteAssignmentCommand.REGEX);
         Matcher matcher = pattern.matcher(line);
-        if(!matcher.find()) {
-            return new InvalidCommand("test");
+        if (!matcher.find()) {
+            return new InvalidCommand(DeleteAssignmentCommand.FORMAT_ERROR_MESSAGE);
         }
         String matricNumber = matcher.group(1);
         String courseID = matcher.group(2);

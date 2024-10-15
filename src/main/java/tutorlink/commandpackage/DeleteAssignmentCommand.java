@@ -13,6 +13,9 @@ public class DeleteAssignmentCommand extends Command {
     private static final String SUCCESS_MESSAGE = "Assignment %s successfully deleted from student "
             + "(Matric Number: %s), course: %s";
 
+    public static final String FORMAT_ERROR_MESSAGE = "Error, expected format: "
+            + COMMAND_WORD + " i/MATRIC_NUMBER" + " c/COURSE_ID" + " n/ASSIGNMENT_DESCRIPTION";
+
     private String matricNumber;
     private String courseID;
     private String assignmentDesc;
