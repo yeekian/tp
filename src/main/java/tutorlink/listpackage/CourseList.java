@@ -38,7 +38,7 @@ public class CourseList extends ItemList {
                 return course;
             }
         }
-        throw new ItemNotFoundException(String.format("Course %s not found for student",
+        throw new ItemNotFoundException(String.format("Course %s not found",
                 courseID));
     }
 }
