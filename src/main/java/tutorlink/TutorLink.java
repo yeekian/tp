@@ -8,8 +8,11 @@ import tutorlink.uipackage.Ui;
 import tutorlink.parserpackage.Parser;
 
 import java.io.IOException;
-import java.util.logging.*;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.logging.FileHandler;
 
 /**
  * Represents the main class containing the entry point for the TutorLink application
@@ -18,7 +21,7 @@ public class TutorLink {
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
 
-    private final static Logger LOGGER = Logger.getLogger(TutorLink.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TutorLink.class.getName());
 
 
     /** Main entry-point for TutorLink */
