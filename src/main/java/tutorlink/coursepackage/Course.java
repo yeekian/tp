@@ -35,6 +35,10 @@ public class Course {
         assignments.deleteAssignment(assignment);
     }
 
+    public AssignmentList getAssignments() {
+        return assignments;
+    }
+
     public String getCourseID() {
         return courseID;
     }
@@ -111,5 +115,9 @@ public class Course {
             System.out.println("Invalid weighting detected, check that sum of all weightages are between 0 and 100%");
         }
         return null;
+    }
+
+    public AssignmentList getAssignmentList() {
+        return assignments;
     }
 }

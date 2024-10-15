@@ -6,8 +6,10 @@ import tutorlink.commandpackage.AddCourseCommand;
 import tutorlink.commandpackage.AddStudentCommand;
 import tutorlink.commandpackage.DeleteStudentCommand;
 import tutorlink.commandpackage.InvalidCommand;
+import tutorlink.commandpackage.ListAssignmentCommand;
 import tutorlink.commandpackage.ListStudentCommand;
 import tutorlink.commandpackage.DeleteCourseCommand;
+import tutorlink.commandpackage.DeleteAssignmentCommand;
 import tutorlink.commandpackage.ExitCommand;
 import tutorlink.commandpackage.Command;
 
@@ -38,14 +40,10 @@ public class Parser {
             return deleteCourseCommand(line);
         case AddAssignmentCommand.COMMAND_WORD:
             return addAssignmentCommand(line);
-            /*
-        case AddAssignmentCommand.COMMAND_WORD:
-            break;
-        case DeleteAssignmentCommand.COMMAND_WORD:
-            break;
         case ListAssignmentCommand.COMMAND_WORD:
-            break;
-             */
+            return listAssignmentCommand(line);
+        case DeleteAssignmentCommand.COMMAND_WORD:
+            return deleteAssignmentCommand(line);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         default:
@@ -53,6 +51,17 @@ public class Parser {
         }
     }
 
+    private Command listAssignmentCommand(String line) {
+        Pattern pattern = Pattern.compile(ListAssignmentCommand.REGEX);
+        Matcher matcher = pattern.matcher(line);
+        if(matcher.find()){
+            String matricNumber = matcher.group(1);
+            String courseID = matcher.group(2);
+            return new ListAssignmentCommand(matricNumber, courseID);
+        } else {
+            return new InvalidCommand(ListAssignmentCommand.FORMAT_ERROR_MESSAGE);
+        }
+    }
     private Command deleteCourseCommand(String line) {
         Pattern pattern = Pattern.compile(DeleteCourseCommand.REGEX);
         Matcher matcher = pattern.matcher(line);
@@ -162,6 +171,18 @@ public class Parser {
             matricNumber = line.substring(matricIndexStart).trim();
         }
         return new DeleteStudentCommand(name, matricNumber);
+    }
+
+    private Command deleteAssignmentCommand(String line) {
+        Pattern pattern = Pattern.compile(DeleteAssignmentCommand.REGEX);
+        Matcher matcher = pattern.matcher(line);
+        if (!matcher.find()) {
+            return new InvalidCommand(DeleteAssignmentCommand.FORMAT_ERROR_MESSAGE);
+        }
+        String matricNumber = matcher.group(1);
+        String courseID = matcher.group(2);
+        String assignmentDesc = matcher.group(3);
+        return new DeleteAssignmentCommand(matricNumber, courseID, assignmentDesc);
     }
 
 }

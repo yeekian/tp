@@ -16,6 +16,4 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 myLogger.log
-myLogger.log.1
-myLogger.log.1.lck
 myLogger.log.lck
