@@ -32,13 +32,13 @@ public class CourseList extends ItemList {
         return courseArrayList;
     }
 
-    public Course getCourseByID(String courseID) {
-        for (Course course : courseArrayList) {
+    public Course getCourseByID(String courseID) throws ItemNotFoundException {
+        for (Course course : this.courseArrayList) {
             if (course.getCourseID().equals(courseID)) {
                 return course;
             }
         }
-        throw new ItemNotFoundException(String.format("Course with course ID: %s not found",
+        throw new ItemNotFoundException(String.format("Course %s not found for student",
                 courseID));
     }
 }
