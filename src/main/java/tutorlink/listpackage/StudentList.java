@@ -41,7 +41,7 @@ public class StudentList extends ItemList {
         filteredList.studentArrayList = studentArrayList
                 .stream()
                 .filter(student -> {
-                    boolean matchesName = (name == null || student.getName().equalsIgnoreCase(name));
+                    boolean matchesName = (name == null || student.getName().contains(name));
                     boolean matchesMatricNumber = (matricNumber == null || student.getMatricNumber()
                             .equals(matricNumber));
                     return matchesName && matchesMatricNumber;
