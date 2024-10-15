@@ -20,6 +20,8 @@ import tutorlink.resultpackage.CommandResult;
 
         @Override
         public CommandResult execute() {
+            assert matricNumber != null;
+            assert courseID != null;
             Course course = students.getStudent(this.matricNumber).courses.getCourse(this.courseID);
             return new CommandResult(SUCCESS_MESSAGE,course.getAssignments());
         }
