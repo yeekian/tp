@@ -1,6 +1,7 @@
 package tutorlink.commandpackage;
 
 import tutorlink.coursepackage.Course;
+import tutorlink.exceptionspackage.ItemNotFoundException;
 import tutorlink.resultpackage.CommandResult;
 
 public class ListAssignmentCommand extends Command{
@@ -22,7 +23,12 @@ public class ListAssignmentCommand extends Command{
     public CommandResult execute() {
         assert matricNumber != null;
         assert courseID != null;
-        Course course = students.getStudent(this.matricNumber).courses.getCourseByID(this.courseID);
-        return new CommandResult(SUCCESS_MESSAGE,course.getAssignments());
+        try {
+            Course course = students.getStudent(this.matricNumber).courses.getCourseByID(this.courseID);
+            return new CommandResult(SUCCESS_MESSAGE,course.getAssignments());
+        } catch (ItemNotFoundException e) {
+            return new CommandResult(e.getMessage());
+        }
+
     }
 }
