@@ -1,5 +1,6 @@
 package tutorlink.parserpackage;
 
+import tutorlink.commandpackage.AddAssignmentCommand;
 import tutorlink.commandpackage.FindStudentCommand;
 import tutorlink.commandpackage.AddCourseCommand;
 import tutorlink.commandpackage.AddStudentCommand;
@@ -35,9 +36,9 @@ public class Parser {
             return addCourseCommand(line);
         case DeleteCourseCommand.COMMAND_WORD:
             return deleteCourseCommand(line);
+        case AddAssignmentCommand.COMMAND_WORD:
+            return addAssignmentCommand(line);
             /*
-        case ListCourseCommand.COMMAND_WORD:
-            break;
         case AddAssignmentCommand.COMMAND_WORD:
             break;
         case DeleteAssignmentCommand.COMMAND_WORD:
@@ -78,6 +79,24 @@ public class Parser {
     private String extractCommandWord(String input) {
         String[] words = input.split("\\s+");
         return words[0]; //return the first word
+    }
+
+    public Command addAssignmentCommand(String line) {
+        Pattern pattern = Pattern.compile(AddAssignmentCommand.REGEX);
+        Matcher matcher = pattern.matcher(line);
+        if(!matcher.matches()) {
+            return new InvalidCommand(AddAssignmentCommand.FORMAT_ERROR_MESSAGE);
+        }
+        String matricNumber = matcher.group(1);
+        String courseID = matcher.group(2);
+        String assignmentID = matcher.group(3);
+        double receivedScore = Double.parseDouble(matcher.group(4));
+        double totalScore = Double.parseDouble(matcher.group(6));
+        double weighting = Double.parseDouble(matcher.group(8));
+        if(weighting > 1.0) {
+            return new InvalidCommand(AddAssignmentCommand.INVALID_WEIGHTING_MESSAGE);
+        }
+        return new AddAssignmentCommand(matricNumber, courseID, assignmentID, receivedScore, totalScore, weighting);
     }
 
     public Command findStudentCommand(String line) {

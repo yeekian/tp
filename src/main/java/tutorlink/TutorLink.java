@@ -35,6 +35,7 @@ public class TutorLink {
             try {
                 String line = ui.collectUserInput();
                 Command command = parser.parse(line);
+                LOGGER.log(Level.INFO, "Parser created");
                 CommandResult commandResult = command.execute();
                 Console.displayCommandResult(commandResult);
                 if(command.isExit()) {
