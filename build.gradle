@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClass.set("TutorLink.TutorLink")
+    mainClass.set("tutorlink.TutorLink")
 }
 
 shadowJar {
-    archiveBaseName.set("duke")
+    archiveBaseName.set("tutorlink")
     archiveClassifier.set("")
 }
 
