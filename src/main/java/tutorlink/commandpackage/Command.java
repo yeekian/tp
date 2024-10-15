@@ -1,7 +1,9 @@
 package tutorlink.commandpackage;
 
+import tutorlink.exceptionspackage.StudentNotFoundException;
 import tutorlink.listpackage.StudentList;
 import tutorlink.resultpackage.CommandResult;
+import tutorlink.studentpackage.StudentClass;
 
 /**
  * Represents an interpreted Command from the user. A <code>Command</code> object corresponds to a
