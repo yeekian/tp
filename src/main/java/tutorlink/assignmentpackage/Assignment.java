@@ -40,6 +40,11 @@ public class Assignment {
         Assignment that = (Assignment) obj;
         return Objects.equals(assignmentDescription, that.assignmentDescription);
     }
+    @Override
+    public String toString() {
+        return this.assignmentDescription + ", score: " + this.receivedScore + "/" + this.totalScore
+                + ", weighting: " + this.weighting;
+    }
 
     public double getWeighting() {
         return weighting;

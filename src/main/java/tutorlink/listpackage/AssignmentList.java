@@ -3,6 +3,8 @@ package tutorlink.listpackage;
 import tutorlink.assignmentpackage.Assignment;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AssignmentList extends ItemList {
     private ArrayList<Assignment> assignmentArrayList;
@@ -33,5 +35,12 @@ public class AssignmentList extends ItemList {
 
     public ArrayList<Assignment> getAssignmentArrayList() {
         return assignmentArrayList;
+    }
+
+    @Override
+    public String toString() {
+        return IntStream.range(0, assignmentArrayList.size())
+                .mapToObj(i -> (i + 1) + ": " + assignmentArrayList.get(i)) // 1-based index
+                .collect(Collectors.joining("\n\t"));
     }
 }

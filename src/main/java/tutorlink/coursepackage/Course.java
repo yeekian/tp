@@ -35,6 +35,10 @@ public class Course {
         assignments.deleteAssignment(assignment);
     }
 
+    public AssignmentList getAssignments() {
+        return assignments;
+    }
+
     public String getCourseID() {
         return courseID;
     }
