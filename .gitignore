@@ -17,3 +17,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 myLogger.log
 myLogger.log.lck
+META-INF/MANIFEST.MF
