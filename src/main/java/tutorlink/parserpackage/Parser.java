@@ -9,6 +9,7 @@ import tutorlink.commandpackage.InvalidCommand;
 import tutorlink.commandpackage.ListAssignmentCommand;
 import tutorlink.commandpackage.ListStudentCommand;
 import tutorlink.commandpackage.DeleteCourseCommand;
+import tutorlink.commandpackage.DeleteAssignmentCommand;
 import tutorlink.commandpackage.ExitCommand;
 import tutorlink.commandpackage.Command;
 
@@ -41,12 +42,8 @@ public class Parser {
             return addAssignmentCommand(line);
         case ListAssignmentCommand.COMMAND_WORD:
             return listAssignmentCommand(line);
-            /*
         case DeleteAssignmentCommand.COMMAND_WORD:
-            break;
-        case ListAssignmentCommand.COMMAND_WORD:
-            break;
-             */
+            return deleteAssignmentCommand(line);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         default:
@@ -174,6 +171,18 @@ public class Parser {
             matricNumber = line.substring(matricIndexStart).trim();
         }
         return new DeleteStudentCommand(name, matricNumber);
+    }
+
+    private Command deleteAssignmentCommand(String line) {
+        Pattern pattern = Pattern.compile(DeleteAssignmentCommand.REGEX);
+        Matcher matcher = pattern.matcher(line);
+        if (!matcher.find()) {
+            return new InvalidCommand(DeleteAssignmentCommand.FORMAT_ERROR_MESSAGE);
+        }
+        String matricNumber = matcher.group(1);
+        String courseID = matcher.group(2);
+        String assignmentDesc = matcher.group(3);
+        return new DeleteAssignmentCommand(matricNumber, courseID, assignmentDesc);
     }
 
 }

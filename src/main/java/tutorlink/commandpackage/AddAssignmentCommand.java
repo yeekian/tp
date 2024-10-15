@@ -36,12 +36,12 @@ public class AddAssignmentCommand extends Command{
     @Override
     public CommandResult execute() {
         try{
-            Assignment assignment = new Assignment(this.assignmentDescription, this.receivedScore, this.totalScore,
-                    this.weighting);
-            Course course = students.getStudent(this.matricNumber).courses.getCourse(this.courseID);
+            Assignment assignment = new Assignment(this.assignmentDescription,
+                    this.receivedScore, this.totalScore, this.weighting);
+            Course course = students.getStudent(this.matricNumber).courses.getCourseByID(this.courseID);
             course.addAssignment(assignment);
-            return new CommandResult(String.format(SUCCESSFUL_MESSAGE, this.assignmentDescription, this.receivedScore,
-                    this.totalScore, this.courseID, this.matricNumber));
+            return new CommandResult(String.format(SUCCESSFUL_MESSAGE, this.assignmentDescription,
+                    this.receivedScore, this.totalScore, this.courseID, this.matricNumber));
         } catch (ItemNotFoundException e) {
             return new CommandResult(e.getMessage());
         }

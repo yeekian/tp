@@ -116,4 +116,8 @@ public class Course {
         }
         return null;
     }
+
+    public AssignmentList getAssignmentList() {
+        return assignments;
+    }
 }

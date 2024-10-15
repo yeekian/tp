@@ -22,7 +22,7 @@ public class ListAssignmentCommand extends Command{
     public CommandResult execute() {
         assert matricNumber != null;
         assert courseID != null;
-        Course course = students.getStudent(this.matricNumber).courses.getCourse(this.courseID);
+        Course course = students.getStudent(this.matricNumber).courses.getCourseByID(this.courseID);
         return new CommandResult(SUCCESS_MESSAGE,course.getAssignments());
     }
 }
