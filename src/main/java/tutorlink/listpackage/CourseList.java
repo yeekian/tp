@@ -1,8 +1,6 @@
 package tutorlink.listpackage;
 
-
 import tutorlink.coursepackage.Course;
-
 import java.util.ArrayList;
 
 public class CourseList extends ItemList {
@@ -12,8 +10,16 @@ public class CourseList extends ItemList {
         this.courseArrayList = new ArrayList<>();
     }
 
-    public void dropCourse(Course course) {
-        this.courseArrayList.remove(course);
+    public void dropCourse(String courseID) {
+        Course courseToRemove = null;
+        for (Course course : this.courseArrayList) {
+            if (course.getCourseID().equals(courseID)) {
+                courseToRemove = course;
+            }
+        }
+        if(courseToRemove != null) {
+            courseArrayList.remove(courseToRemove);
+        }
     }
 
     public void addCourse(Course course) {
