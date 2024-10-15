@@ -32,4 +32,8 @@ public class Course {
     public void deleteAssignment(Assignment assignment) {
         assignments.deleteAssignment(assignment);
     }
+
+    public String getCourseID() {
+        return courseID;
+    }
 }

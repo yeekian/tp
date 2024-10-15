@@ -1,5 +1,6 @@
 package tutorlink.studentpackage;
 
+import tutorlink.coursepackage.Course;
 import tutorlink.listpackage.CourseList;
 
 public class StudentClass {
