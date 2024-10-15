@@ -41,4 +41,8 @@ public class StudentClass {
     public String toString() {
         return this.name + ", matric no: " + this.matricNumber + ", GPA: " + this.gpa;
     }
+
+    public CourseList getCourses() {
+        return courses;
+    }
 }

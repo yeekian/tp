@@ -19,4 +19,8 @@ public class CourseList extends ItemList {
     public void addCourse(Course course) {
         this.courseArrayList.add(course);
     }
+
+    public ArrayList<Course> getCourseArrayList() {
+        return courseArrayList;
+    }
 }
