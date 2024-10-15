@@ -29,10 +29,14 @@ public class FindStudentCommand extends Command{
         if(filteredList.getNumberOfStudents() > 0) {
             return new CommandResult(SUCCESS_MESSAGE, filteredList);
         } else {
-            String identifier = (this.name != null ? this.name : "")
-                    + (this.matricNumber != null && this.name != null ? ", " : "")
-                    + (this.matricNumber != null ? "Matric no: " + this.matricNumber : "");
-            return new CommandResult(String.format(ERROR_MESSAGE, identifier));
+
+            return new CommandResult(String.format(ERROR_MESSAGE, getIdentifier()));
         }
+    }
+
+    protected String getIdentifier() {
+        return (this.name != null ? this.name : "")
+                + (this.matricNumber != null && this.name != null ? ", " : "")
+                + (this.matricNumber != null ? "Matric no: " + this.matricNumber : "");
     }
 }
