@@ -1,6 +1,6 @@
 package tutorlink.coursepackage;
 
-import tutorlink.exceptionspackage.invalidWeightingException;
+import tutorlink.exceptionspackage.InvalidWeightingException;
 import tutorlink.listpackage.AssignmentList;
 import tutorlink.listpackage.AttendanceList;
 import tutorlink.assignmentpackage.Assignment;
@@ -35,16 +35,20 @@ public class Course {
         assignments.deleteAssignment(assignment);
     }
 
+    public String getCourseID() {
+        return courseID;
+    }
+
     /**
      * Determines if the course is completed by checking if the total weight of all assignments
      * sums up to approximately 100%. The method uses a margin of error for floating-point precision.
      *
      * @return {@code true} if the total assignment weight is within the acceptable range of 100%,
      *         {@code false} otherwise.
-     * @throws invalidWeightingException if the total assignment weight exceeds 100% plus the
+     * @throws InvalidWeightingException if the total assignment weight exceeds 100% plus the
      *         defined margin of error.
      */
-    public Boolean isCompletedCourse() throws invalidWeightingException {
+    public Boolean isCompletedCourse() throws InvalidWeightingException {
         double totalCompletedWeighting = 0;
         for (Assignment a : assignments.getAssignmentArrayList()) {
             totalCompletedWeighting += a.getWeighting();
@@ -52,7 +56,7 @@ public class Course {
 
         // If the total weight exceeds 100% + margin, throw an exception
         if (totalCompletedWeighting > (100 + PERCENTAGE_MARGIN_OF_ERROR_DOUBLE)) {
-            throw new invalidWeightingException();
+            throw new InvalidWeightingException();
         }
 
         // Check if the total weightage is close to 100% within a margin of error (0.5%)
@@ -60,7 +64,7 @@ public class Course {
     }
 
 
-    public LetterGrade getLetterGrade() throws invalidWeightingException {
+    public LetterGrade getLetterGrade() throws InvalidWeightingException {
         try {
             LetterGrade finalGrade;
             if (!isCompletedCourse()) {
@@ -103,8 +107,8 @@ public class Course {
 
             this.grade = finalGrade;
             return finalGrade;
-        } catch (invalidWeightingException e) {
-            System.out.println("Invalid weighting detected, check that the sum of all your weightages are between 0 and 100%");
+        } catch (InvalidWeightingException e) {
+            System.out.println("Invalid weighting detected, check that sum of all weightages are between 0 and 100%");
         }
         return null;
     }

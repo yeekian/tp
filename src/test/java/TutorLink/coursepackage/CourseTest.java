@@ -2,7 +2,7 @@ package tutorlink.coursepackage;
 
 import org.junit.jupiter.api.Test;
 import tutorlink.assignmentpackage.Assignment;
-import tutorlink.exceptionspackage.invalidWeightingException;
+import tutorlink.exceptionspackage.InvalidWeightingException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -10,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CourseTest {
 
     @Test
-    public void isCompletedCourse_totalWeightingEmpty_fail() throws invalidWeightingException {
+    public void isCompletedCourse_totalWeightingEmpty_fail() throws InvalidWeightingException {
         Course course = new Course("CS2113", 4);
 
         assertEquals(false, course.isCompletedCourse());
     }
 
     @Test
-    public void isCompletedCourse_totalWeightingFilled_success() throws invalidWeightingException {
+    public void isCompletedCourse_totalWeightingFilled_success() throws InvalidWeightingException {
         Course course = new Course("CS2113", 4);
 
         assertEquals(false, course.isCompletedCourse());
@@ -36,7 +36,7 @@ public class CourseTest {
     }
 
     @Test
-    public void isCompletedCourse_totalWeightingExceed_exceptionThrown() throws invalidWeightingException {
+    public void isCompletedCourse_totalWeightingExceed_exceptionThrown() throws InvalidWeightingException {
         Course course = new Course("CS2113", 4);
 
         assertEquals(false, course.isCompletedCourse());
@@ -56,7 +56,7 @@ public class CourseTest {
         Assignment assignment4 = new Assignment("Assignment4", 60, 75, 30);
         course.addAssignment(assignment4);
 
-        assertThrows(invalidWeightingException.class, course::isCompletedCourse);
+        assertThrows(InvalidWeightingException.class, course::isCompletedCourse);
     }
 
 }

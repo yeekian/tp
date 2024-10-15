@@ -11,7 +11,8 @@ public class Assignment {
     private double weighting;
 
     public Assignment(String assginmentDescription, double receivedScore, double totalScore, double weighting) {
-        assert (weighting >= (0 - PERCENTAGE_MARGIN_OF_ERROR_DOUBLE) && weighting <= (100 + PERCENTAGE_MARGIN_OF_ERROR_DOUBLE))
+        assert (weighting >= (0 - PERCENTAGE_MARGIN_OF_ERROR_DOUBLE)
+                && weighting <= (100 + PERCENTAGE_MARGIN_OF_ERROR_DOUBLE))
                 : "Assignment weighting out of range (0 - 100%)";
 
         this.assginmentDescription = assginmentDescription;

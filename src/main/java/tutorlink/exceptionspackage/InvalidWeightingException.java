@@ -1,5 +1,5 @@
 package tutorlink.exceptionspackage;
 
-public class invalidWeightingException extends Exception {
+public class InvalidWeightingException extends Exception {
     //no other code needed
 }
