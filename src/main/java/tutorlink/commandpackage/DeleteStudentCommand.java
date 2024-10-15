@@ -1,6 +1,5 @@
 package tutorlink.commandpackage;
 
-import tutorlink.listpackage.StudentList;
 import tutorlink.resultpackage.CommandResult;
 import tutorlink.studentpackage.StudentClass;
 
