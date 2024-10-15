@@ -13,7 +13,8 @@ public class AddCourseCommand extends Command{
     public static final String REGEX = "^add_course i/(A\\d{7}[A-Z]) " +
             "c/([A-Z]{2,3}\\d{4}) m/(\\d*[2468])$";
 
-    private static final String SUCCESSFUL_MESSAGE = "Course (%s) added successfully";
+    private static final String SUCCESSFUL_MESSAGE = "Course (%s) added successfully to student " +
+            "(Matric Number: %s)";
     private String matricNumber;
     private String courseID;
     private int courseMCs;
@@ -30,7 +31,7 @@ public class AddCourseCommand extends Command{
             Course course = new Course(this.courseID, this.courseMCs);
             CourseList courseList = students.getStudent(this.matricNumber).courses;
             courseList.addCourse(course);
-            return new CommandResult(String.format(SUCCESSFUL_MESSAGE,course));
+            return new CommandResult(String.format(SUCCESSFUL_MESSAGE,course,this.matricNumber));
         } catch (ItemNotFoundException e) {
             return new CommandResult(e.getMessage());
         }
