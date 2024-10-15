@@ -2,6 +2,7 @@ package tutorlink.commandpackage;
 
 import tutorlink.listpackage.StudentList;
 import tutorlink.resultpackage.CommandResult;
+import tutorlink.studentpackage.StudentClass;
 
 public class DeleteStudentCommand extends FindStudentCommand{
 
@@ -17,15 +18,18 @@ public class DeleteStudentCommand extends FindStudentCommand{
 
     @Override
     public CommandResult execute() {
-        StudentList result = new StudentList();
-        students.getStudentArrayList().removeIf(student -> {
-            boolean matches = student.getName().equalsIgnoreCase(this.name) ||
-                    student.getMatricNumber().equals(this.matricNumber);
-            if (matches) {
-                result.getStudentArrayList().add(student); // Add to the removed list
+        StudentClass studentToRemove = null;
+        for (StudentClass student : students.getStudentArrayList()){
+            boolean match = student.getName().equalsIgnoreCase(this.name)
+                    || student.getMatricNumber().equals(this.matricNumber);
+            if(match) {
+                studentToRemove = student;
             }
-            return matches; // Remove from the original list
-        });
-        return new CommandResult(SUCCESS_MESSAGE, result);
+        }
+        if(studentToRemove != null) {
+            students.deleteStudent(studentToRemove);
+            return new CommandResult(String.format(SUCCESS_MESSAGE, studentToRemove));
+        }
+        return new CommandResult(String.format(ERROR_MESSAGE, getIdentifier()));
     }
 }
