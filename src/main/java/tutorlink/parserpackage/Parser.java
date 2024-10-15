@@ -1,6 +1,14 @@
 package tutorlink.parserpackage;
 
-import tutorlink.commandpackage.*;
+import tutorlink.commandpackage.FindStudentCommand;
+import tutorlink.commandpackage.AddCourseCommand;
+import tutorlink.commandpackage.AddStudentCommand;
+import tutorlink.commandpackage.DeleteStudentCommand;
+import tutorlink.commandpackage.InvalidCommand;
+import tutorlink.commandpackage.ListStudentCommand;
+import tutorlink.commandpackage.DeleteCourseCommand;
+import tutorlink.commandpackage.ExitCommand;
+import tutorlink.commandpackage.Command;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

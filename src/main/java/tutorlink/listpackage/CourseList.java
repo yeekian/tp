@@ -1,9 +1,6 @@
 package tutorlink.listpackage;
 
-
 import tutorlink.coursepackage.Course;
-import tutorlink.exceptionspackage.ItemNotFoundException;
-
 import java.util.ArrayList;
 
 public class CourseList extends ItemList {
