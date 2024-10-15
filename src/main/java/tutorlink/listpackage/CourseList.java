@@ -29,12 +29,7 @@ public class CourseList extends ItemList {
         this.courseArrayList.add(course);
     }
 
-    public Course findCourse(String courseID) throws ItemNotFoundException {
-        for (Course course : this.courseArrayList) {
-            if (course.getCourseID().equals(courseID)) {
-                return course;
-            }
-        }
-        throw new ItemNotFoundException(String.format("Course with ID %s not found", courseID));
+    public ArrayList<Course> getCourseArrayList() {
+        return courseArrayList;
     }
 }
