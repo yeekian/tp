@@ -93,7 +93,9 @@ public class Parser {
         double receivedScore = Double.parseDouble(matcher.group(4));
         double totalScore = Double.parseDouble(matcher.group(6));
         double weighting = Double.parseDouble(matcher.group(8));
-        if(weighting > 1.0) return new InvalidCommand(AddAssignmentCommand.INVALID_WEIGHTING_MESSAGE);
+        if(weighting > 1.0) {
+            return new InvalidCommand(AddAssignmentCommand.INVALID_WEIGHTING_MESSAGE);
+        }
         return new AddAssignmentCommand(matricNumber, courseID, assignmentID, receivedScore, totalScore, weighting);
     }
 

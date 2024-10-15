@@ -3,7 +3,6 @@ package tutorlink.commandpackage;
 import tutorlink.assignmentpackage.Assignment;
 import tutorlink.coursepackage.Course;
 import tutorlink.exceptionspackage.ItemNotFoundException;
-import tutorlink.listpackage.CourseList;
 import tutorlink.resultpackage.CommandResult;
 
 public class AddAssignmentCommand extends Command{
