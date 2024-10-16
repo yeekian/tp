@@ -39,7 +39,9 @@ public class AssignmentList extends ItemList {
 
     @Override
     public String toString() {
-        return IntStream.range(0, assignmentArrayList.size()).mapToObj(i -> (i + 1) + ": " + assignmentArrayList.get(i)) // 1-based index
+        return IntStream
+                .range(0, assignmentArrayList.size())
+                .mapToObj(i -> (i + 1) + ": " + assignmentArrayList.get(i)) // 1-based index
                 .collect(Collectors.joining("\n\t"));
     }
 }

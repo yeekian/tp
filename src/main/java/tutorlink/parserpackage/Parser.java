@@ -24,24 +24,24 @@ public class Parser {
         }
         String commandWord = extractCommandWord(line);
         switch (commandWord) {
-            case AddStudentCommand.COMMAND_WORD:
-                return addStudentCommand(line);
-            case DeleteStudentCommand.COMMAND_WORD:
-                return deleteStudentCommand(line);
-            case ListStudentCommand.COMMAND_WORD:
-                return new ListStudentCommand();
-            case FindStudentCommand.COMMAND_WORD:
-                return findStudentCommand(line);
-            case AddAssignmentCommand.COMMAND_WORD:
-                return addAssignmentCommand(line);
-            case ListAssignmentCommand.COMMAND_WORD:
-                return listAssignmentCommand(line);
-            case DeleteAssignmentCommand.COMMAND_WORD:
-                return deleteAssignmentCommand(line);
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
-            default:
-                return new InvalidCommand(UNKNOWN_COMMAND_ERROR_MESSAGE);
+        case AddStudentCommand.COMMAND_WORD:
+            return addStudentCommand(line);
+        case DeleteStudentCommand.COMMAND_WORD:
+            return deleteStudentCommand(line);
+        case ListStudentCommand.COMMAND_WORD:
+            return new ListStudentCommand();
+        case FindStudentCommand.COMMAND_WORD:
+            return findStudentCommand(line);
+        case AddAssignmentCommand.COMMAND_WORD:
+            return addAssignmentCommand(line);
+        case ListAssignmentCommand.COMMAND_WORD:
+            return listAssignmentCommand(line);
+        case DeleteAssignmentCommand.COMMAND_WORD:
+            return deleteAssignmentCommand(line);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        default:
+            return new InvalidCommand(UNKNOWN_COMMAND_ERROR_MESSAGE);
         }
     }
 
