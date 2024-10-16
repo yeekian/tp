@@ -55,8 +55,6 @@ Class Student{
 }
 
 Class Association{
-    -grade:Grade
-    -student:Student
     -score:double
     +Association(grade:Grade,student:Student,score:double)
 }
