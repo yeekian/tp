@@ -1,84 +1,103 @@
-@startuml
+@startuml App Diagram
+
 'https://plantuml.com/class-diagram
-!include Style.puml
+' !include Style.puml
 skinparam classAttributeIconSize 0
 skinparam classMethodIconSize 0
 skinparam linetype ortho
 
-package Assets <<Rectangle>>{
-Class "{abstract}\nCommand" as Command{
-    +execute():void {abstract}
-}
-Class AddGradeCommand{
-    +execute()
-}
+package TutorLink <<Rectangle>>{
 
-Class AddStudentCommand{
-    +execute()
+class CommandResult {
+    + CommandResult(msg: String)
+    + toString(): String
 }
 
-Class AddAssociationCommand{
-    +execute()
+class Ui
+
+abstract class Command {
+    + Command() {abstract}
+    + {abstract}{static} getCommandWord() : String
+    + {abstract}{static} getArguments() : String[]
+    + execute(state: AppState, arguments: HashMap<String, String>): CommandResult {abstract}
 }
 
-Class AssociateAllStudentsCommand{
-    +execute()
+Command ..right.. CommandResult
+
+
+class Component {
+    -name: String
+    -maxScore: double
+    -weight: double
+    +getName(): String
+    +getMaxScore(): double
+    +getWeight(): double
+    +equals(Object obj):boolean
+}
+class Exam
+class ClassParticipation
+class Assignment
+
+Exam --|> Component
+ClassParticipation --|> Component
+Assignment --|> Component
+
+
+class Student{
+    -name: String
+    -matricNumber: String
+    +getName(): String
+    +getMatricNumber(): String
+    +equals(Object obj): boolean
 }
 
-Command-up-|>AddGradeCommand
-Command-down-|>AddStudentCommand
-Command-left-|>AddAssociationCommand
-Command-left-|>AssociateAllStudentsCommand
-Command -right-> "1" GradeList
-Command -up-> "1" StudentList
 
-Class Grade {
-    -description:String
-    -totalScore:double
-    +getDescription():String
-    +getScore():double
-    }
-Class Exam
-Class ClassParticipation
-Class Assignment
-Class GradeList
-Class ItemList{
-    <u>+size:int
-    +toString():String
-}
-Class StudentList
-Class Student{
-    -name:String
-    -matricNumber:String
-    +getName():String
-    +getMatricNumber():String
+class Grade{
+    -score: double
+    -component: Component
+    -student: Student
+    +Grade(component: Component, student: Student, score: double)
+    +equals(Object obj):boolean
 }
 
-Class Association{
-    -score:double
-    +Association(grade:Grade,student:Student,score:double)
+
+class AppState
+class GradeList{
+    + findGrade(student: Student, component: Component): Grade
+    + addGrade(grade: Grade): void
+    + deleteGrade(grade: Grade): void
 }
-Class AssociationList{
+class StudentList {
+    + findStudentById(id: String): Student
+    + findStudentByName(name: String): Student
+    + addStudent(student: Student): void
+    + deleteGrade(student: Student): void
+    + toString(): String
 }
+class ComponentList {
+    + findComponent(id: String): Student
+    + findStudentByName(name: String): Student
+    + addStudent(student: Student): void
+    + deleteGrade(student: Student): void
 }
 
-Assignment -up-|> Grade
-Exam -up-|> Grade
-ClassParticipation -up-|> Grade
+AppState -> "1" GradeList
+AppState --> "1" StudentList
+AppState -> "1" ComponentList
 
+GradeList -> "*" Grade
+ComponentList -> "*" Component
+StudentList -> "*" Student
 
-GradeList -right-> "*" Grade
+Command .. AppState
 
-StudentList -right-> "*" Student
+class Parser {
+    + getArguments(argumentList: String[], line: String): HashMap<String, String>
+    + getCommand(line: String) : Command
+}
 
-AssociationList -right-> "*" Association
-Association -down-> "1" Grade
-Association -up-> "1" Student
+Parser .. Command
 
-ItemList-right-|>StudentList
-ItemList-right-|>GradeList
-ItemList-right-|>AssociationList
-
-
+}
 
 @enduml
