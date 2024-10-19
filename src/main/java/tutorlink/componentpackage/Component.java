@@ -10,13 +10,30 @@ public abstract class Component {
         this.maxScore = maxScore;
         this.weight = weight;
     }
+
     public String getName() {
         return name;
     }
+
     public double getMaxScore() {
         return maxScore;
     }
+
     public double getWeight() {
         return weight;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Component) {
+            Component comp = (Component) obj;
+            return comp.getName().equals(this.getName()) && comp.getMaxScore() == this.getMaxScore() && comp.getWeight() == this.getWeight();
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "[name=" + name + ", maxScore=" + maxScore + ", weight=" + weight + "]";
     }
 }
