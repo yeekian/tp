@@ -1,8 +1,7 @@
 package tutorlink;
 
 import tutorlink.commandpackage.Command;
-import tutorlink.consolepackage.Console;
-import tutorlink.exceptionspackage.MissingNextLineException;
+import tutorlink.exceptionspackage.TutorLinkException;
 import tutorlink.resultpackage.CommandResult;
 import tutorlink.uipackage.Ui;
 import tutorlink.parserpackage.Parser;
@@ -32,19 +31,19 @@ public class TutorLink {
         setUpLogger();
         LOGGER.log(Level.INFO, "Test log message successful");
 
-        Console.printWelcomeMessage();
+        ui.displayWelcomeMessage();
         while (true) {
             try {
-                String line = ui.collectUserInput();
+                String line = ui.getUserInput();
                 Command command = parser.parse(line);
                 LOGGER.log(Level.INFO, "Parser created");
                 CommandResult commandResult = command.execute();
-                Console.displayCommandResult(commandResult);
+                ui.displayResult(commandResult);
                 if (command.isExit()) {
                     break;
                 }
-            } catch (MissingNextLineException e) {
-                Console.printMessage(e.getMessage());
+            } catch (TutorLinkException e) {
+                ui.displayException(e);
             }
         }
     }

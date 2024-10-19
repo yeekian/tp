@@ -1,5 +1,6 @@
 package tutorlink.commandpackage;
 
+import tutorlink.exceptionspackage.TutorLinkException;
 import tutorlink.listpackage.AssignmentList;
 import tutorlink.listpackage.StudentList;
 import tutorlink.resultpackage.CommandResult;
@@ -16,7 +17,7 @@ public abstract class Command {
     /**
      * Executes the required operations to perform the command issued by the user.
      */
-    public abstract CommandResult execute();
+    public abstract CommandResult execute() throws TutorLinkException;
 
     /**
      * Checks if the command is an exit command.
