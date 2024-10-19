@@ -13,7 +13,18 @@ class CommandResult {
     + toString(): String
 }
 
-class Ui
+class Ui {
+    + displayResult(result: CommandResult)
+    + displayException(error: TutorLinkException)
+    + displayWelcomeMessage()
+    + getUserInput(): String
+}
+
+Ui .. CommandResult
+
+Ui .. TutorLinkException
+
+abstract class TutorLinkException
 
 abstract class Command {
     + Command() {abstract}
