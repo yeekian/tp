@@ -1,6 +1,6 @@
 package tutorlink.componentpackage;
 
-public class Component {
+public abstract class Component {
     private String name;
     private double maxScore;
     private double weight;
