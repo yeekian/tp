@@ -27,6 +27,9 @@ public class DeleteAssignmentCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        assert matricNumber != null;
+        assert courseID != null;
+        assert assignmentDesc != null;
         try {
             AssignmentList assignmentList = Command.getAssignmentList();
             assignmentList.dropAssignmentByDesc(this.assignmentDesc);

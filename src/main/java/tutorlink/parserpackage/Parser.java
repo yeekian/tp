@@ -11,10 +11,14 @@ import tutorlink.commandpackage.DeleteAssignmentCommand;
 import tutorlink.commandpackage.ExitCommand;
 import tutorlink.commandpackage.Command;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+    private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
+
     private static final String EMPTY_INPUT_ERROR_MESSAGE = "Error: Input cannot be empty";
     private static final String UNKNOWN_COMMAND_ERROR_MESSAGE = "Error: Unknown command";
 
@@ -23,7 +27,7 @@ public class Parser {
             return new InvalidCommand(EMPTY_INPUT_ERROR_MESSAGE);
         }
         String commandWord = extractCommandWord(line);
-        switch (commandWord) {
+        switch(commandWord){
         case AddStudentCommand.COMMAND_WORD:
             return addStudentCommand(line);
         case DeleteStudentCommand.COMMAND_WORD:

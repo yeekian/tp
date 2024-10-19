@@ -51,18 +51,19 @@ public class TutorLink {
 
     private static void setUpLogger() {
         LogManager.getLogManager().reset();
-        LOGGER.setLevel(Level.WARNING);
+        Logger rootLogger = Logger.getLogger("");
+        rootLogger.setLevel(Level.WARNING);
         ConsoleHandler ch = new ConsoleHandler();
         ch.setLevel(Level.INFO);
-        LOGGER.addHandler(ch);
+        rootLogger.addHandler(ch);
 
         try {
             FileHandler fh = new FileHandler("myLogger.log");
             fh.setLevel(Level.FINE);
-            LOGGER.addHandler(fh);
+            rootLogger.addHandler(fh);
         } catch (IOException e) {
             //ignore
-            LOGGER.log(Level.SEVERE, "File logger not working", e);
+            rootLogger.log(Level.SEVERE, "File logger not working", e);
         }
     }
 }
