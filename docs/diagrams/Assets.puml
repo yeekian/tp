@@ -27,10 +27,17 @@ Ui .. TutorLinkException
 abstract class TutorLinkException
 
 abstract class Command {
+    + commandWord: String
+    + argumentPrefixes: String[]
     + Command() {abstract}
-    + {abstract}{static} getCommandWord() : String
-    + {abstract}{static} getArguments() : String[]
     + execute(state: AppState, arguments: HashMap<String, String>): CommandResult {abstract}
+    + isExit(): boolean
+}
+
+class AddStudentCommand{
+    +commandWord: String
+    +argumentPrefixes: String[]
+    +execute(state: AppState, arguments: HashMap<String, String>): CommandResult
 }
 
 Command ..right.. CommandResult
@@ -60,8 +67,8 @@ class Student{
     +getName(): String
     +getMatricNumber(): String
     +equals(Object obj): boolean
+    +toString():String
 }
-
 
 class Grade{
     -score: double
@@ -79,10 +86,10 @@ class GradeList{
     + deleteGrade(grade: Grade): void
 }
 class StudentList {
-    + findStudentById(id: String): Student
+    + findStudentByMatricNumber(matricNumber: String): Student
     + findStudentByName(name: String): Student
-    + addStudent(student: Student): void
-    + deleteGrade(student: Student): void
+    + addStudent(matricNumber: String, name: String) void
+    + deleteStudent(matricNumber: String, name: String): boolean
     + toString(): String
 }
 class ComponentList {
