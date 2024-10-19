@@ -11,7 +11,6 @@ import tutorlink.commandpackage.DeleteAssignmentCommand;
 import tutorlink.commandpackage.ExitCommand;
 import tutorlink.commandpackage.Command;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
