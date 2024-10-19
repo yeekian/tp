@@ -1,7 +1,7 @@
 package tutorlink.commandpackage;
 
 import tutorlink.resultpackage.CommandResult;
-import tutorlink.studentpackage.StudentClass;
+import tutorlink.studentpackage.Student;
 
 public class DeleteStudentCommand extends FindStudentCommand {
 
@@ -17,8 +17,8 @@ public class DeleteStudentCommand extends FindStudentCommand {
 
     @Override
     public CommandResult execute() {
-        StudentClass studentToRemove = null;
-        for (StudentClass student : students.getStudentArrayList()) {
+        Student studentToRemove = null;
+        for (Student student : students.getStudentArrayList()) {
             boolean match = student.getName().equalsIgnoreCase(this.name)
                     || student.getMatricNumber().equals(this.matricNumber);
             if (match) {
