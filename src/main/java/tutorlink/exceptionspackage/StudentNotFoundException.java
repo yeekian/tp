@@ -1,7 +1,7 @@
 package tutorlink.exceptionspackage;
 
-public class StudentNotFoundException extends Exception {
-    public StudentNotFoundException() {
-        super();
+public class StudentNotFoundException extends TutorLinkException {
+    public StudentNotFoundException(String message) {
+        super(message);
     }
 }
