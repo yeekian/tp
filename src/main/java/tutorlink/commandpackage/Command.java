@@ -1,10 +1,7 @@
 package tutorlink.commandpackage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import tutorlink.appstatepackage.AppState;
-import tutorlink.listpackage.AssignmentList;
-import tutorlink.listpackage.StudentList;
 import tutorlink.resultpackage.CommandResult;
 
 /**
@@ -12,8 +9,6 @@ import tutorlink.resultpackage.CommandResult;
  * single user-issued command from the terminal.
  */
 public abstract class Command {
-    public ArrayList<String> ARGUMENT_PREFIXES;
-    public String COMMAND_WORD;
     /**
      * Executes the required operations to perform the command issued by the user.
      */

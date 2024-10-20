@@ -11,17 +11,21 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StudentList extends ItemList {
-    private ArrayList<Student> studentArrayList;
-    private final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number %s already"
+    private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number %s already"
             + "exists in the list!";
+    private ArrayList<Student> studentArrayList;
 
     public StudentList() {
         this.studentArrayList = new ArrayList<>();
     }
 
-    public boolean deleteStudent(String matricNumber, String name) {
-        Student student = new Student(matricNumber, name);
-        return studentArrayList.remove(student);
+    public boolean deleteStudent(String matricNumber) {
+        for(Student student : studentArrayList) {
+            if(student.getMatricNumber().equals(matricNumber)) {
+                return studentArrayList.remove(student);
+            }
+        }
+        return false;
     }
 
     public void addStudent(String matricNumber, String name) throws DuplicateMatricNumberException {
