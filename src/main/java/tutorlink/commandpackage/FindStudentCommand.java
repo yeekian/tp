@@ -1,7 +1,6 @@
 package tutorlink.commandpackage;
 
 import java.util.HashMap;
-import tutorlink.exceptionspackage.DuplicateMatricNumberException;
 import tutorlink.exceptionspackage.IllegalValueException;
 import tutorlink.exceptionspackage.TutorLinkException;
 import tutorlink.listpackage.StudentList;
