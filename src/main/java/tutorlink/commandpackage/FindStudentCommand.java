@@ -26,12 +26,10 @@ public class FindStudentCommand extends Command {
         }
         if(hashmap.containsKey(ARGUMENT_PREFIXES[0])) {
             students = appstate.students.findStudentByMatricNumber(matricNumber);
-            if(students.getStudentArrayList().size() > 1) {
-                throw new DuplicateMatricNumberException(DUPLICATE_MATRIC_NUMBER);
-            }
         } else {
             students = appstate.students.findStudentByName(name);
         }
+        assert students.getStudentArrayList().size() <= 1;
         return new CommandResult(students.toString());
     }
 }
