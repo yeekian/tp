@@ -22,4 +22,13 @@ public class Student {
     public String toString() {
         return this.name + ", matric no: " + this.matricNumber;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Student)) {
+            return false;
+        }
+        Student s = (Student) obj;
+        return this.matricNumber.equals(s.getMatricNumber());
+    }
 }
