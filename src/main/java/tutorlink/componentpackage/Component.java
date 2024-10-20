@@ -26,7 +26,9 @@ public abstract class Component {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Component comp) {
-            return comp.getName().equals(this.getName()) && comp.getMaxScore() == this.getMaxScore() && comp.getWeight() == this.getWeight();
+            return comp.getName().equals(this.getName())
+                    && comp.getMaxScore() == this.getMaxScore()
+                    && comp.getWeight() == this.getWeight();
         }
         return false;
     }
