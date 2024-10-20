@@ -7,7 +7,9 @@ import tutorlink.commandpackage.AddStudentCommand;
 import tutorlink.exceptionspackage.IllegalValueException;
 import tutorlink.resultpackage.CommandResult;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class AddStudentCommandTest {
@@ -22,10 +24,9 @@ public class AddStudentCommandTest {
         arguments.put("n/", "John");
         AddStudentCommand command = new AddStudentCommand();
         CommandResult result = command.execute(appState, arguments);
-
         assertNotNull(result);
         assertEquals(result.toString(), "Student John (A1234567X) added successfully!");
-            assertEquals(appState.students.getStudentArrayList().size(), 1);
+        assertEquals(appState.students.getStudentArrayList().size(), 1);
     }
 
     @Test
