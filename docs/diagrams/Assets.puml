@@ -37,13 +37,14 @@ Command ..right.. CommandResult
 
 
 abstract class Component {
-    -name: String
-    -maxScore: double
-    -weight: double
-    +getName(): String
-    +getMaxScore(): double
-    +getWeight(): double
-    +equals(Object obj):boolean
+    - name: String
+    - maxScore: double
+    - weight: double
+    + getName(): String
+    + getMaxScore(): double
+    + getWeight(): double
+    + equals(Object obj):boolean
+    + toString(): String
 }
 class Exam
 class ClassParticipation
@@ -55,20 +56,22 @@ Assignment --|> Component
 
 
 class Student{
-    -name: String
-    -matricNumber: String
-    +getName(): String
-    +getMatricNumber(): String
-    +equals(Object obj): boolean
+    - name: String
+    - matricNumber: String
+    + getName(): String
+    + getMatricNumber(): String
+    + equals(Object obj): boolean
+    + toString(): String
 }
 
 
 class Grade{
-    -score: double
-    -component: Component
-    -student: Student
-    +Grade(component: Component, student: Student, score: double)
-    +equals(Object obj):boolean
+    - score: double
+    - component: Component
+    - student: Student
+    + Grade(component: Component, student: Student, score: double)
+    + equals(Object obj):boolean
+    + toString(): String
 }
 
 
@@ -77,19 +80,20 @@ class GradeList{
     + findGrade(student: Student, component: Component): Grade
     + addGrade(grade: Grade): void
     + deleteGrade(grade: Grade): void
+    + toString(): String
 }
 class StudentList {
     + findStudentById(id: String): Student
-    + findStudentByName(name: String): Student
+    + findStudentByName(name: String): Student 
     + addStudent(student: Student): void
     + deleteGrade(student: Student): void
     + toString(): String
 }
 class ComponentList {
-    + findComponent(id: String): Student
-    + findStudentByName(name: String): Student
-    + addStudent(student: Student): void
-    + deleteGrade(student: Student): void
+    + findComponent(id: String): Component
+    + addComponent(component: Component): void
+    + deleteComponent(component: Component): void
+    + toString(): String
 }
 
 AppState -> "1" GradeList
