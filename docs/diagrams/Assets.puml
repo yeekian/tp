@@ -36,7 +36,7 @@ abstract class Command {
 Command ..right.. CommandResult
 
 
-class Component {
+abstract class Component {
     -name: String
     -maxScore: double
     -weight: double
