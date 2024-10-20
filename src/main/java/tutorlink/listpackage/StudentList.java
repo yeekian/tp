@@ -1,6 +1,8 @@
 package tutorlink.listpackage;
 
+import tutorlink.exceptionspackage.DuplicateMatricNumberException;
 import tutorlink.exceptionspackage.ItemNotFoundException;
+import tutorlink.exceptionspackage.StudentNotFoundException;
 import tutorlink.exceptionspackage.TutorLinkException;
 import tutorlink.studentpackage.Student;
 
@@ -10,6 +12,8 @@ import java.util.stream.IntStream;
 
 public class StudentList extends ItemList {
     private ArrayList<Student> studentArrayList;
+    private final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number %s already"
+            + "exists in the list!";
 
     public StudentList() {
         this.studentArrayList = new ArrayList<>();
@@ -20,8 +24,13 @@ public class StudentList extends ItemList {
         return studentArrayList.remove(student);
     }
 
-    public void addStudent(String matricNumber, String name) {
+    public void addStudent(String matricNumber, String name) throws DuplicateMatricNumberException {
         Student student = new Student(matricNumber, name);
+        for (Student s : studentArrayList) {
+            if (s.getMatricNumber().equals(matricNumber)) {
+                throw new DuplicateMatricNumberException(ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD);
+            }
+        }
         studentArrayList.add(student);
     }
 
@@ -47,7 +56,7 @@ public class StudentList extends ItemList {
                 .filter(student -> student.getMatricNumber().equals(matricNumber))
                 .collect(Collectors.toCollection(ArrayList::new));
         if(filteredList.studentArrayList.isEmpty()) {
-            throw new ItemNotFoundException("No students with matricNumber " + matricNumber + " found");
+            throw new StudentNotFoundException("No students with matricNumber " + matricNumber + " found");
         }
         return filteredList;
     }
@@ -59,7 +68,7 @@ public class StudentList extends ItemList {
                 .filter(student -> student.getName().equals(name))
                 .collect(Collectors.toCollection(ArrayList::new));
         if(filteredList.studentArrayList.isEmpty()) {
-            throw new ItemNotFoundException("No students with name " + name + " found");
+            throw new StudentNotFoundException("No students with name " + name + " found");
         }
         return filteredList;
     }
