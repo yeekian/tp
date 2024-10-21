@@ -6,10 +6,10 @@ import tutorlink.result.CommandResult;
 
 import java.util.HashMap;
 
-public class Exit extends Command {
+public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
 
-    public Exit() {
+    public ExitCommand() {
     }
 
     @Override
