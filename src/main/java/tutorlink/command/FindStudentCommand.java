@@ -13,7 +13,6 @@ public class FindStudentCommand extends Command {
     public static final String COMMAND_WORD = "find_student";
 
     private static final String ERROR_BOTH_NULL = "Error! Both parameters passed are null!";
-    private static final String DUPLICATE_MATRIC_NUMBER = "Error! Duplicate Matric Numbers found!";
 
     @Override
     public CommandResult execute(AppState appstate, HashMap<String,String> hashmap) throws TutorLinkException {
@@ -30,5 +29,15 @@ public class FindStudentCommand extends Command {
         }
         assert students.getStudentArrayList().size() <= 1;
         return new CommandResult(students.toString());
+    }
+
+    @Override
+    public String[] getArgumentPrefixes() {
+        return ARGUMENT_PREFIXES;
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 }

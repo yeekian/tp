@@ -20,8 +20,9 @@ public class StudentList extends ItemList {
     }
 
     public boolean deleteStudent(String matricNumber) {
-        for(Student student : studentArrayList) {
-            if(student.getMatricNumber().equals(matricNumber)) {
+        matricNumber = matricNumber.toUpperCase();
+        for (Student student : studentArrayList) {
+            if (student.getMatricNumber().equals(matricNumber)) {
                 return studentArrayList.remove(student);
             }
         }
@@ -29,6 +30,7 @@ public class StudentList extends ItemList {
     }
 
     public void addStudent(String matricNumber, String name) throws DuplicateMatricNumberException {
+        matricNumber = matricNumber.toUpperCase();
         Student student = new Student(matricNumber, name);
         for (Student s : studentArrayList) {
             if (s.getMatricNumber().equals(matricNumber)) {
@@ -38,7 +40,7 @@ public class StudentList extends ItemList {
         studentArrayList.add(student);
     }
 
-    public int getNumberOfStudents() {
+    public int size() {
         return studentArrayList.size();
     }
 
@@ -57,9 +59,9 @@ public class StudentList extends ItemList {
         StudentList filteredList = new StudentList();
         filteredList.studentArrayList = studentArrayList
                 .stream()
-                .filter(student -> student.getMatricNumber().equals(matricNumber))
+                .filter(student -> student.getMatricNumber().equals(matricNumber.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
-        if(filteredList.studentArrayList.isEmpty()) {
+        if (filteredList.studentArrayList.isEmpty()) {
             throw new StudentNotFoundException("No students with matricNumber " + matricNumber + " found");
         }
         return filteredList;
@@ -71,7 +73,7 @@ public class StudentList extends ItemList {
                 .stream()
                 .filter(student -> student.getName().equals(name))
                 .collect(Collectors.toCollection(ArrayList::new));
-        if(filteredList.studentArrayList.isEmpty()) {
+        if (filteredList.studentArrayList.isEmpty()) {
             throw new StudentNotFoundException("No students with name " + name + " found");
         }
         return filteredList;

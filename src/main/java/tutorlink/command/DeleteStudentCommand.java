@@ -29,4 +29,14 @@ public class DeleteStudentCommand extends Command {
             throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
         }
     }
+
+    @Override
+    public String[] getArgumentPrefixes() {
+        return ARGUMENT_PREFIXES;
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 }

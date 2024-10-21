@@ -12,9 +12,6 @@ import tutorlink.result.CommandResult;
  */
 public abstract class Command {
 
-    public static String[] ARGUMENT_PREFIXES = new String[]{};
-    public static String COMMAND_WORD = "";
-
     /**
      * Executes the required operations to perform the command issued by the user.
      */
@@ -22,6 +19,9 @@ public abstract class Command {
             AppState appState,
             HashMap<String, String> parameters
     ) throws TutorLinkException;
+
+    public abstract String getCommandWord();
+    public abstract String[] getArgumentPrefixes();
 
     /**
      * Checks if the command is an exit command.

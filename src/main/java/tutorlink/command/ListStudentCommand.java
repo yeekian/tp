@@ -14,4 +14,13 @@ public class ListStudentCommand extends Command {
         return new CommandResult(appState.students.toString());
     }
 
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
+
+    @Override
+    public String[] getArgumentPrefixes() {
+        return new String[0];
+    }
 }

@@ -91,10 +91,11 @@ class GradeList{
     + toString(): String
 }
 class StudentList {
-    + findStudentByMatricNumber(matricNumber: String): Student
-    + findStudentByName(name: String): Student
+    + findStudentByMatricNumber(matricNumber: String): StudentList
+    + findStudentByName(name: String): StudentList
     + addStudent(matricNumber: String, name: String) void
     + deleteStudent(matricNumber: String, name: String): boolean
+    + size(): int
     + toString(): String
 }
 class ComponentList {
