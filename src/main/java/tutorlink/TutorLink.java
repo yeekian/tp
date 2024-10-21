@@ -38,14 +38,18 @@ public class TutorLink {
         ui.displayWelcomeMessage();
         while (true) {
             try {
-                // Actual code once the parser is implemented
-                // String line = ui.getUserInput();
-                // Command currentCommand = parser.getCommand(line);
-                // HashMap<String, String> arguments = parser.getArguments(currentCommand.getArgumentPrefixes(), line);
+                String line = ui.getUserInput();
+
+                //Actual code once the parser is implemented
+                //Command currentCommand = parser.getCommand(line);
+                //HashMap<String, String> arguments = parser.getArguments(currentCommand.getArgumentPrefixes(), line);
+
                 Command currentCommand = new ExitCommand();
                 HashMap<String, String> arguments = new HashMap<>();
                 CommandResult res = currentCommand.execute(appState, arguments);
+
                 ui.displayResult(res);
+
                 if (currentCommand.isExit()) {
                     break;
                 }
