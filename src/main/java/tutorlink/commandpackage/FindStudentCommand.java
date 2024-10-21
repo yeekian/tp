@@ -1,42 +1,34 @@
 package tutorlink.commandpackage;
 
+import java.util.HashMap;
+import tutorlink.exceptionspackage.IllegalValueException;
+import tutorlink.exceptionspackage.TutorLinkException;
 import tutorlink.listpackage.StudentList;
 import tutorlink.resultpackage.CommandResult;
+import tutorlink.appstatepackage.AppState;
 
 public class FindStudentCommand extends Command {
 
+    public static final String[] ARGUMENT_PREFIXES = {"i/", "n/"};
     public static final String COMMAND_WORD = "find_student";
-    public static final String FORMAT_ERROR_MESSAGE = "Error, expected format: " + COMMAND_WORD
-            + " n/NAME {AND/OR} " + "i/MATRIC NUMBER";
-    public static final int PREFIX_INDEX = 2;
-    public static final String REGEX = "^find_student (i/(A\\d{7}[A-Z])?( n/[\\w\\d]+)?|n/[\\w\\d]" +
-            "+( i/(A\\d{7}[A-Z])?)?)( )?$";
 
-    protected static final String ERROR_MESSAGE = "Student (%s) not found in Student List";
-
-    private static final String SUCCESS_MESSAGE = "Found the following students:";
-    protected String name;
-    protected String matricNumber;
-
-    public FindStudentCommand(String name, String matricNumber) {
-        this.name = name;
-        this.matricNumber = matricNumber;
-    }
+    private static final String ERROR_BOTH_NULL = "Error! Both parameters passed are null!";
+    private static final String DUPLICATE_MATRIC_NUMBER = "Error! Duplicate Matric Numbers found!";
 
     @Override
-    public CommandResult execute() {
-        StudentList filteredList = students.filterList(this.name, this.matricNumber);
-        if (filteredList.getNumberOfStudents() > 0) {
-            return new CommandResult(SUCCESS_MESSAGE, filteredList);
-        } else {
-
-            return new CommandResult(String.format(ERROR_MESSAGE, getIdentifier()));
+    public CommandResult execute(AppState appstate, HashMap<String,String> hashmap) throws TutorLinkException {
+        String matricNumber = hashmap.get(ARGUMENT_PREFIXES[0]);
+        String name = hashmap.get(ARGUMENT_PREFIXES[1]);
+        StudentList students;
+        if(name == null && matricNumber == null) {
+            throw new IllegalValueException(ERROR_BOTH_NULL);
         }
-    }
-
-    protected String getIdentifier() {
-        return (this.name != null ? this.name : "")
-                + (this.matricNumber != null && this.name != null ? ", " : "")
-                + (this.matricNumber != null ? "Matric no: " + this.matricNumber : "");
+        if(hashmap.containsKey(ARGUMENT_PREFIXES[0])) {
+            students = appstate.students.findStudentByMatricNumber(matricNumber);
+        } else {
+            students = appstate.students.findStudentByName(name);
+        }
+        assert students.getStudentArrayList().size() <= 1;
+        return new CommandResult(students.toString());
     }
 }

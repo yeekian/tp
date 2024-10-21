@@ -1,34 +1,32 @@
 package tutorlink.commandpackage;
 
+import java.util.HashMap;
+import tutorlink.appstatepackage.AppState;
+import tutorlink.exceptionspackage.IllegalValueException;
+import tutorlink.exceptionspackage.StudentNotFoundException;
+import tutorlink.exceptionspackage.TutorLinkException;
 import tutorlink.resultpackage.CommandResult;
-import tutorlink.studentpackage.StudentClass;
 
-public class DeleteStudentCommand extends FindStudentCommand {
+public class DeleteStudentCommand extends Command {
 
+    public static final String[] ARGUMENT_PREFIXES = {"i/"};
     public static final String COMMAND_WORD = "delete_student";
-    public static final String REGEX = "^delete_student (i/(A\\d{7}[A-Z])?( n/[\\w\\d]+)?|n/[\\w\\d]" +
-            "+( i/(A\\d{7}[A-Z])?)?)( )?$";
 
+    private static final String ERROR_MATRIC_NUMBER_NULL = "Error! Matric number is null";
+    private static final String STUDENT_NOT_FOUND = "Error! Student (Matric Number %s) not found";
     private static final String SUCCESS_MESSAGE = "Student %s successfully deleted";
 
-    public DeleteStudentCommand(String name, String matricNumber) {
-        super(name, matricNumber);
-    }
-
     @Override
-    public CommandResult execute() {
-        StudentClass studentToRemove = null;
-        for (StudentClass student : students.getStudentArrayList()) {
-            boolean match = student.getName().equalsIgnoreCase(this.name)
-                    || student.getMatricNumber().equals(this.matricNumber);
-            if (match) {
-                studentToRemove = student;
-            }
+    public CommandResult execute(AppState appState, HashMap<String,String> hashmap) throws TutorLinkException {
+        String matricNumber = hashmap.get(ARGUMENT_PREFIXES[0]);
+        if(matricNumber == null) {
+            throw new IllegalValueException(ERROR_MATRIC_NUMBER_NULL);
         }
-        if (studentToRemove != null) {
-            students.deleteStudent(studentToRemove);
-            return new CommandResult(String.format(SUCCESS_MESSAGE, studentToRemove));
+        boolean result = appState.students.deleteStudent(matricNumber);
+        if(result) {
+            return new CommandResult(String.format(SUCCESS_MESSAGE, matricNumber));
+        } else {
+            throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
         }
-        return new CommandResult(String.format(ERROR_MESSAGE, getIdentifier()));
     }
 }

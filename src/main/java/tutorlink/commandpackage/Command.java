@@ -1,7 +1,7 @@
 package tutorlink.commandpackage;
 
-import tutorlink.listpackage.AssignmentList;
-import tutorlink.listpackage.StudentList;
+import java.util.HashMap;
+import tutorlink.appstatepackage.AppState;
 import tutorlink.resultpackage.CommandResult;
 
 /**
@@ -9,14 +9,10 @@ import tutorlink.resultpackage.CommandResult;
  * single user-issued command from the terminal.
  */
 public abstract class Command {
-
-    protected static StudentList students = new StudentList();
-    protected static AssignmentList assignments = new AssignmentList();
-
     /**
      * Executes the required operations to perform the command issued by the user.
      */
-    public abstract CommandResult execute();
+    public abstract CommandResult execute(AppState appState, HashMap<String,String> parameters);
 
     /**
      * Checks if the command is an exit command.
@@ -25,14 +21,6 @@ public abstract class Command {
      */
     public boolean isExit() {
         return false;
-    }
-
-    public static StudentList getStudentList() {
-        return students;
-    }
-
-    public static AssignmentList getAssignmentList() {
-        return assignments;
     }
 }
 
