@@ -9,8 +9,8 @@ import tutorlink.result.CommandResult;
 
 public class AddStudentCommand extends Command {
 
-    private final String[] ARGUMENT_PREFIXES = {"i/", "n/"};
-    private final String COMMAND_WORD = "add_student";
+    public static final String[] ARGUMENT_PREFIXES = {"i/", "n/"};
+    public static final String COMMAND_WORD = "add_student";
 
     private static final String ERROR_EITHER_NULL = "Error! Either parameter passed is null!";
     private static final String SUCCESS_MESSAGE = "Student %s (%s) added successfully!";
@@ -29,10 +29,5 @@ public class AddStudentCommand extends Command {
     @Override
     public String[] getArgumentPrefixes() {
         return ARGUMENT_PREFIXES;
-    }
-
-    @Override
-    public String getCommandWord() {
-        return COMMAND_WORD;
     }
 }

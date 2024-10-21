@@ -1,6 +1,7 @@
 package tutorlink.command;
 
 import java.util.HashMap;
+
 import tutorlink.appstate.AppState;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.StudentNotFoundException;
@@ -17,13 +18,13 @@ public class DeleteStudentCommand extends Command {
     private static final String SUCCESS_MESSAGE = "Student %s successfully deleted";
 
     @Override
-    public CommandResult execute(AppState appState, HashMap<String,String> hashmap) throws TutorLinkException {
+    public CommandResult execute(AppState appState, HashMap<String, String> hashmap) throws TutorLinkException {
         String matricNumber = hashmap.get(ARGUMENT_PREFIXES[0]);
-        if(matricNumber == null) {
+        if (matricNumber == null) {
             throw new IllegalValueException(ERROR_MATRIC_NUMBER_NULL);
         }
         boolean result = appState.students.deleteStudent(matricNumber);
-        if(result) {
+        if (result) {
             return new CommandResult(String.format(SUCCESS_MESSAGE, matricNumber));
         } else {
             throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
@@ -33,10 +34,5 @@ public class DeleteStudentCommand extends Command {
     @Override
     public String[] getArgumentPrefixes() {
         return ARGUMENT_PREFIXES;
-    }
-
-    @Override
-    public String getCommandWord() {
-        return COMMAND_WORD;
     }
 }

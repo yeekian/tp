@@ -20,7 +20,6 @@ public abstract class Command {
             HashMap<String, String> parameters
     ) throws TutorLinkException;
 
-    public abstract String getCommandWord();
     public abstract String[] getArgumentPrefixes();
 
     /**

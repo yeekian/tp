@@ -27,19 +27,11 @@ Ui .. TutorLinkException
 abstract class TutorLinkException
 
 abstract class Command {
-    + commandWord: String
-    + argumentPrefixes: String[]
+    + {static}COMMAND_WORD: String
     + Command() {abstract}
-    + {abstract}{static} getCommandWord() : String
-    + {abstract}{static} getArguments() : String[]
+    + {abstract} getArgumentsPrefixes() : String[]
     + execute(state: AppState, arguments: HashMap<String, String>): CommandResult {abstract}
     + isExit(): boolean
-}
-
-class AddStudentCommand{
-    +commandWord: String
-    +argumentPrefixes: String[]
-    +execute(state: AppState, arguments: HashMap<String, String>): CommandResult
 }
 
 Command ..right.. CommandResult

@@ -1,6 +1,7 @@
 package tutorlink.command;
 
 import java.util.HashMap;
+
 import tutorlink.appstate.AppState;
 import tutorlink.result.CommandResult;
 
@@ -10,13 +11,8 @@ public class ListStudentCommand extends Command {
     private static final String SUCCESS_MESSAGE = "Here are your students:";
 
     @Override
-    public CommandResult execute(AppState appState, HashMap<String,String> hashMap) {
+    public CommandResult execute(AppState appState, HashMap<String, String> hashMap) {
         return new CommandResult(appState.students.toString());
-    }
-
-    @Override
-    public String getCommandWord() {
-        return COMMAND_WORD;
     }
 
     @Override
