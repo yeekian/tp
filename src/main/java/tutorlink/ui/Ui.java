@@ -8,10 +8,10 @@ import java.util.Scanner;
 public class Ui {
     private Scanner in = new Scanner(System.in);
 
-    private final String logo = "___________      __               .____    .__        __    \n"
+    private final String logo = "___________      __               .____    .__        __\n"
             + "\\__    ___/_ ___/  |_  ___________|    |   |__| ____ |  | __\n"
             + "  |    | |  |  \\   __\\/  _ \\_  __ \\    |   |  |/    \\|  |/ /\n"
-            + "  |    | |  |  /|  | (  <_> )  | \\/    |___|  |   |  \\    < \n"
+            + "  |    | |  |  /|  | (  <_> )  | \\/    |___|  |   |  \\    <\n"
             + "  |____| |____/ |__|  \\____/|__|  |_______ \\__|___|  /__|_ \\\n"
             + "                                          \\/       \\/     \\/\n";
     private final String halfBreakLine =
