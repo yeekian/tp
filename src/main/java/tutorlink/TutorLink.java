@@ -1,7 +1,7 @@
 package tutorlink;
 
-import tutorlink.uipackage.Ui;
-import tutorlink.parserpackage.Parser;
+import tutorlink.ui.Ui;
+import tutorlink.parser.Parser;
 
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
@@ -31,6 +31,7 @@ public class TutorLink {
         ui.displayWelcomeMessage();
         while (true) {
             //main code goes here
+
             break;
         }
     }
