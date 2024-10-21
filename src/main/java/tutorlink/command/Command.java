@@ -1,6 +1,7 @@
 package tutorlink.command;
 
 import java.util.HashMap;
+
 import tutorlink.appstate.AppState;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
@@ -10,10 +11,17 @@ import tutorlink.result.CommandResult;
  * single user-issued command from the terminal.
  */
 public abstract class Command {
+
+    public static String[] ARGUMENT_PREFIXES = new String[]{};
+    public static String COMMAND_WORD = "";
+
     /**
      * Executes the required operations to perform the command issued by the user.
      */
-    public abstract CommandResult execute(AppState appState, HashMap<String,String> parameters) throws TutorLinkException;
+    public abstract CommandResult execute(
+            AppState appState,
+            HashMap<String, String> parameters
+    ) throws TutorLinkException;
 
     /**
      * Checks if the command is an exit command.
