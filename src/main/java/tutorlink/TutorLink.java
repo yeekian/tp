@@ -1,8 +1,5 @@
 package tutorlink;
 
-import tutorlink.commandpackage.Command;
-import tutorlink.exceptionspackage.TutorLinkException;
-import tutorlink.resultpackage.CommandResult;
 import tutorlink.uipackage.Ui;
 import tutorlink.parserpackage.Parser;
 
@@ -33,18 +30,8 @@ public class TutorLink {
 
         ui.displayWelcomeMessage();
         while (true) {
-            try {
-                String line = ui.getUserInput();
-                Command command = parser.parse(line);
-                LOGGER.log(Level.INFO, "Parser created");
-                CommandResult commandResult = command.execute();
-                ui.displayResult(commandResult);
-                if (command.isExit()) {
-                    break;
-                }
-            } catch (TutorLinkException e) {
-                ui.displayException(e);
-            }
+            //main code goes here
+            break;
         }
     }
 
