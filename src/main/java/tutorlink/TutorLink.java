@@ -41,11 +41,11 @@ public class TutorLink {
                 String line = ui.getUserInput();
 
                 //Actual code once the parser is implemented
-                //Command currentCommand = parser.getCommand(line);
-                //HashMap<String, String> arguments = parser.getArguments(currentCommand.getArgumentPrefixes(), line);
+                Command currentCommand = parser.getCommand(line);
+                HashMap<String, String> arguments = parser.getArguments(currentCommand.getArgumentPrefixes(), line);
 
-                Command currentCommand = new ExitCommand();
-                HashMap<String, String> arguments = new HashMap<>();
+                //Command currentCommand = new ExitCommand();
+                //HashMap<String, String> arguments = new HashMap<>();
                 CommandResult res = currentCommand.execute(appState, arguments);
 
                 ui.displayResult(res);
