@@ -17,6 +17,6 @@ public class ListStudentCommand extends Command {
 
     @Override
     public String[] getArgumentPrefixes() {
-        return new String[0];
+        return null;
     }
 }
