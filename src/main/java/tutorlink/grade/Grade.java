@@ -14,6 +14,14 @@ public class Grade {
         this.score = score;
     }
 
+    public String getGradeMatricNumber(Student student) {
+        return student.getMatricNumber();
+    }
+
+    public String getGradeComponentDescription(Student student) {
+        return student.toString();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Grade grade) {
