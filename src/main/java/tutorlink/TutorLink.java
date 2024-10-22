@@ -1,13 +1,15 @@
 package tutorlink;
 
-import tutorlink.commandpackage.Command;
-import tutorlink.consolepackage.Console;
-import tutorlink.exceptionspackage.MissingNextLineException;
-import tutorlink.resultpackage.CommandResult;
-import tutorlink.uipackage.Ui;
-import tutorlink.parserpackage.Parser;
+import tutorlink.appstate.AppState;
+import tutorlink.command.Command;
+import tutorlink.command.ExitCommand;
+import tutorlink.exceptions.TutorLinkException;
+import tutorlink.result.CommandResult;
+import tutorlink.ui.Ui;
+import tutorlink.parser.Parser;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -20,47 +22,58 @@ import java.util.logging.FileHandler;
 public class TutorLink {
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
+    private static final AppState appState = new AppState();
 
     private static final Logger LOGGER = Logger.getLogger(TutorLink.class.getName());
 
 
-    /** Main entry-point for TutorLink */
+    /**
+     * Main entry-point for TutorLink
+     */
     public static void main(String[] args) {
 
         setUpLogger();
         LOGGER.log(Level.INFO, "Test log message successful");
 
-        Console.printWelcomeMessage();
-        while(true) {
+        ui.displayWelcomeMessage();
+        while (true) {
             try {
-                String line = ui.collectUserInput();
-                Command command = parser.parse(line);
-                LOGGER.log(Level.INFO, "Parser created");
-                CommandResult commandResult = command.execute();
-                Console.displayCommandResult(commandResult);
-                if(command.isExit()) {
+                String line = ui.getUserInput();
+
+                //Actual code once the parser is implemented
+                //Command currentCommand = parser.getCommand(line);
+                //HashMap<String, String> arguments = parser.getArguments(currentCommand.getArgumentPrefixes(), line);
+
+                Command currentCommand = new ExitCommand();
+                HashMap<String, String> arguments = new HashMap<>();
+                CommandResult res = currentCommand.execute(appState, arguments);
+
+                ui.displayResult(res);
+
+                if (currentCommand.isExit()) {
                     break;
                 }
-            } catch (MissingNextLineException e) {
-                Console.printMessage(e.getMessage());
+            } catch (TutorLinkException e) {
+                ui.displayException(e);
             }
         }
     }
 
     private static void setUpLogger() {
         LogManager.getLogManager().reset();
-        LOGGER.setLevel(Level.WARNING);
+        Logger rootLogger = Logger.getLogger("");
+        rootLogger.setLevel(Level.WARNING);
         ConsoleHandler ch = new ConsoleHandler();
         ch.setLevel(Level.INFO);
-        LOGGER.addHandler(ch);
+        rootLogger.addHandler(ch);
 
         try {
             FileHandler fh = new FileHandler("myLogger.log");
             fh.setLevel(Level.FINE);
-            LOGGER.addHandler(fh);
+            rootLogger.addHandler(fh);
         } catch (IOException e) {
             //ignore
-            LOGGER.log(Level.SEVERE, "File logger not working", e);
+            rootLogger.log(Level.SEVERE, "File logger not working", e);
         }
     }
 }
