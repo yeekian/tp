@@ -57,6 +57,10 @@ public class Parser {
     public HashMap<String, String> getArguments(String[] argumentPrefixes, String line) {
         HashMap<String, String> arguments = new HashMap<>();
 
+        if (argumentPrefixes == null) {
+            return arguments;
+        }
+
         // Build regex pattern dynamically from the provided argument prefixes
         StringBuilder regexBuilder = new StringBuilder("(?i)(");
         for (String prefix : argumentPrefixes) {
