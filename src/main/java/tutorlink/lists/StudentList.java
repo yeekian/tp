@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class StudentList extends ItemList {
+public class StudentList {
     private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number %s already"
             + "exists in the list!";
     private ArrayList<Student> studentArrayList;
@@ -38,10 +38,6 @@ public class StudentList extends ItemList {
             }
         }
         studentArrayList.add(student);
-    }
-
-    public int size() {
-        return studentArrayList.size();
     }
 
     public ArrayList<Student> getStudentArrayList() {

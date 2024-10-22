@@ -4,7 +4,7 @@ import tutorlink.attendance.Attendance;
 
 import java.util.ArrayList;
 
-public class AttendanceList extends ItemList {
+public class AttendanceList {
     private ArrayList<Attendance> attendanceArrayList;
 
     public AttendanceList() {
