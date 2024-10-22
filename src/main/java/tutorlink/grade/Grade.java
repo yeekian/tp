@@ -18,8 +18,16 @@ public class Grade {
         return student;
     }
 
-    public Component getComponent(){
+    public Component getComponent() {
         return component;
+    }
+
+    public boolean isSameSubmission(Object obj) {
+        if (obj instanceof Grade grade) {
+            return this.component.equals(grade.component)
+                    && this.student.equals(grade.student);
+        }
+        return false;
     }
 
     @Override
