@@ -1,6 +1,11 @@
 package tutorlink.parser;
 
-import tutorlink.command.*;
+import tutorlink.command.AddStudentCommand;
+import tutorlink.command.Command;
+import tutorlink.command.DeleteStudentCommand;
+import tutorlink.command.ExitCommand;
+import tutorlink.command.FindStudentCommand;
+import tutorlink.command.ListStudentCommand;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -52,7 +57,7 @@ public class Parser {
      *
      * @param argumentPrefixes an array of valid argument prefixes (e.g., "n/", "i/")
      * @param line the user input containing command arguments
-     * @return a HashMap where the keys are the prefixes (e.g., "n/", "i/") and the values are the corresponding arguments
+     * @return a HashMap where keys are the prefixes (e.g., "n/", "i/") and the values are the corresponding arguments
      */
     public HashMap<String, String> getArguments(String[] argumentPrefixes, String line) {
         HashMap<String, String> arguments = new HashMap<>();
@@ -77,7 +82,7 @@ public class Parser {
         while (matcher.find()) {
             String tag = matcher.group(1).toLowerCase(); // Group 1 is the tag (e.g., n/, i/, etc.)
             String argument = matcher.group(2).trim();   // Group 2 is the argument after the tag
-            arguments.put(tag.substring(0, tag.length()), argument); // Store the tag (with '/') as the key, argument as the value
+            arguments.put(tag.substring(0, tag.length()), argument);
         }
 
         return arguments;

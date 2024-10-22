@@ -2,7 +2,6 @@ package tutorlink;
 
 import tutorlink.appstate.AppState;
 import tutorlink.command.Command;
-import tutorlink.command.ExitCommand;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
 import tutorlink.ui.Ui;
