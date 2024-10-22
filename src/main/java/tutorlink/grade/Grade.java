@@ -14,12 +14,12 @@ public class Grade {
         this.score = score;
     }
 
-    public String getGradeMatricNumber(Student student) {
-        return student.getMatricNumber();
+    public Student getStudent() {
+        return student;
     }
 
-    public String getGradeComponentDescription(Student student) {
-        return student.toString();
+    public Component getComponent(){
+        return component;
     }
 
     @Override
