@@ -5,6 +5,7 @@ import tutorlink.command.Command;
 import tutorlink.command.DeleteStudentCommand;
 import tutorlink.command.ExitCommand;
 import tutorlink.command.FindStudentCommand;
+import tutorlink.command.InvalidCommand;
 import tutorlink.command.ListStudentCommand;
 
 import java.util.HashMap;
@@ -45,8 +46,7 @@ public class Parser {
             return new ExitCommand(); // Lists all students
 
         default:
-            LOGGER.warning(UNKNOWN_COMMAND_ERROR_MESSAGE);
-            return null; // or handle unknown command appropriately
+            return new InvalidCommand();
         }
 
     }
