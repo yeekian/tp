@@ -32,7 +32,7 @@ public class GradeList {
     }
 
     public void addGrade(Grade grade) throws DuplicateGradeException {
-        for (Student gradeToCompare : gradeArrayList) {
+        for (Grade gradeToCompare : gradeArrayList) {
             if (grade == gradeToCompare) {
                 throw new DuplicateGradeException(ERROR_DUPLICATE_GRADE_ON_ADD);
             }
