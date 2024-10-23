@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 public class StudentList {
     private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number %s already"
             + "exists in the list!";
+    private static final String toStringDelimiter = "\n\t";
     private ArrayList<Student> studentArrayList;
 
     public StudentList() {
@@ -48,7 +49,7 @@ public class StudentList {
     public String toString() {
         return IntStream.range(0, studentArrayList.size())
                 .mapToObj(i -> (i + 1) + ": " + studentArrayList.get(i)) // 1-based index
-                .collect(Collectors.joining("\n\t"));
+                .collect(Collectors.joining(toStringDelimiter));
     }
 
     public StudentList findStudentByMatricNumber(String matricNumber) throws TutorLinkException {
@@ -63,11 +64,11 @@ public class StudentList {
         return filteredList;
     }
 
-    public StudentList findStudentByName(String name) throws ItemNotFoundException {
+    public StudentList findStudentByName(String name) throws StudentNotFoundException {
         StudentList filteredList = new StudentList();
         filteredList.studentArrayList = studentArrayList
                 .stream()
-                .filter(student -> student.getName().equals(name))
+                .filter(student -> student.getName().contains(name))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.studentArrayList.isEmpty()) {
             throw new StudentNotFoundException("No students with name " + name + " found");
