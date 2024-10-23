@@ -1,7 +1,6 @@
 package tutorlink.lists;
 
 import tutorlink.exceptions.DuplicateMatricNumberException;
-import tutorlink.exceptions.ItemNotFoundException;
 import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.student.Student;
