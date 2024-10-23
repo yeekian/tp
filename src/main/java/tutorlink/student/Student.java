@@ -5,9 +5,9 @@ public class Student {
     private String name;
     private double gpa;
 
-    public Student(String name, String matricNumber) {
+    public Student(String matricNumber, String name) {
         this.name = name;
-        this.matricNumber = matricNumber;
+        this.matricNumber = matricNumber.toUpperCase();
     }
 
     public String getName() {
@@ -20,7 +20,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return this.name + ", matric no: " + this.matricNumber;
+        return this.name + " (matric no: " + this.matricNumber + ")";
     }
 
     @Override
