@@ -39,4 +39,10 @@ public class Grade {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Student: " + this.student + ", Component: " + this.component
+                + ", Score: " + this.score;
+    }
 }

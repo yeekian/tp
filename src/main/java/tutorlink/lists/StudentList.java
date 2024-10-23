@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class StudentList extends ItemList {
+public class StudentList {
     private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number %s already"
             + "exists in the list!";
+    private static final String TO_STRING_DELIMITER = "\n";
     private ArrayList<Student> studentArrayList;
 
     public StudentList() {
@@ -52,7 +53,7 @@ public class StudentList extends ItemList {
     public String toString() {
         return IntStream.range(0, studentArrayList.size())
                 .mapToObj(i -> ("\t" + (i + 1)) + ": " + studentArrayList.get(i)) // 1-based index
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(TO_STRING_DELIMITER));
     }
 
     public StudentList findStudentByMatricNumber(String matricNumber) throws TutorLinkException {
@@ -67,11 +68,11 @@ public class StudentList extends ItemList {
         return filteredList;
     }
 
-    public StudentList findStudentByName(String name) throws ItemNotFoundException {
+    public StudentList findStudentByName(String name) throws StudentNotFoundException {
         StudentList filteredList = new StudentList();
         filteredList.studentArrayList = studentArrayList
                 .stream()
-                .filter(student -> student.getName().equals(name))
+                .filter(student -> student.getName().contains(name))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.studentArrayList.isEmpty()) {
             throw new StudentNotFoundException("No students with name " + name + " found");
