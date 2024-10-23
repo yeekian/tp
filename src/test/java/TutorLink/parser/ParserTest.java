@@ -100,7 +100,7 @@ public class ParserTest {
     }
 
     @Test
-    void  getArguments_addStudentCommandExtraArguments_addStudentCommandHashMapReturned() {
+    void  getArguments_addStudentCommandExtraArguments_ignoreExtraTag() {
         Parser parser = new Parser();
         String line = "add_student i/A1234567X n/John Doe t/extraTag";
 
