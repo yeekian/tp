@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
-import tutorlink.student.Student;
+import tutorlink.grade.Grade;
 
 /**
  * Represents a list of grades.
@@ -24,8 +24,9 @@ public class GradeList {
         matricNumber = matricNumber.toUpperCase();
         componentDescription = componentDescription.toLowerCase();
         for (Grade grade : gradeArrayList) {
-            if (grade.getMatricNumber().equals(matricNumber) && grade.getComponentDescription().equals(componentDescription)) {
-                return studentArrayList.remove(grade);
+            if (grade.getStudent().getMatricNumber().equals(matricNumber)
+                    && grade.getComponent().getName().equals(componentDescription)) {
+                return gradeArrayList.remove(grade);
             }
         }
         return false;
@@ -51,8 +52,8 @@ public class GradeList {
         GradeList filteredList = new GradeList();
         filteredList.gradeArrayList = gradeArrayList
                 .stream()
-                .filter(grade -> grade.getMatricNumber().equals(matricNumber.toUpperCase())
-                && grade.getComponentDescription().equals(componentDescription.toLowerCase()))
+                .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase())
+                && grade.getComponent().getName().equals(componentDescription.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.gradeArrayList.isEmpty()) {
             throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
