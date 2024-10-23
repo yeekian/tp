@@ -12,10 +12,9 @@ public class DeleteStudentCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"i/"};
     public static final String COMMAND_WORD = "delete_student";
-
-    private static final String ERROR_MATRIC_NUMBER_NULL = "Error! Matric number is null";
-    private static final String STUDENT_NOT_FOUND = "Error! Student (Matric Number %s) not found";
-    private static final String SUCCESS_MESSAGE = "Student %s successfully deleted";
+    public static final String ERROR_MATRIC_NUMBER_NULL = "Error! Matric number is null";
+    public static final String STUDENT_NOT_FOUND = "Error! Student (Matric Number %s) not found";
+    public static final String SUCCESS_MESSAGE = "Student %s successfully deleted";
 
     @Override
     public CommandResult execute(AppState appState, HashMap<String, String> hashmap) throws TutorLinkException {
