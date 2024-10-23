@@ -6,7 +6,7 @@ public abstract class Component {
     private double weight;
 
     public Component(String name, double maxScore, double weight) {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.maxScore = maxScore;
         this.weight = weight;
     }
@@ -35,6 +35,6 @@ public abstract class Component {
 
     @Override
     public String toString() {
-        return "[name=" + name + ", maxScore=" + maxScore + ", weight=" + weight + "]";
+            return "[name=" + name + ", maxScore=" + maxScore + ", weight=" + weight + "]";
     }
 }
