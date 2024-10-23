@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
 
     @Override
     public String[] getArgumentPrefixes() {
-        return new String[0];
+        return null;
     }
 
     @Override
