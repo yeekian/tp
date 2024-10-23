@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StudentList {
-    private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number %s already"
+
+    //Use Java String formatting to replace %s with matricNumber
+    private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number, %s, already "
             + "exists in the list!";
     private static final String TO_STRING_DELIMITER = "\n";
     private ArrayList<Student> studentArrayList;
@@ -35,7 +37,7 @@ public class StudentList {
         Student student = new Student(matricNumber, name);
         for (Student s : studentArrayList) {
             if (s.getMatricNumber().equals(matricNumber)) {
-                throw new DuplicateMatricNumberException(ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD);
+                throw new DuplicateMatricNumberException(String.format(ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD , matricNumber));
             }
         }
         studentArrayList.add(student);
