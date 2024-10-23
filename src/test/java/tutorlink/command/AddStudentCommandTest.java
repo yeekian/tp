@@ -1,4 +1,4 @@
-package tutorlink.command.studentcommand;
+package tutorlink.command;
 
 import java.util.HashMap;
 import org.junit.jupiter.api.Test;
