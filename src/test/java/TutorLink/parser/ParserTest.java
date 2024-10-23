@@ -1,7 +1,6 @@
 package tutorlink.parser;
 
 import org.junit.jupiter.api.Test;
-import tutorlink.appstate.AppState;
 import tutorlink.command.AddStudentCommand;
 import tutorlink.command.Command;
 import tutorlink.command.DeleteStudentCommand;
@@ -9,23 +8,13 @@ import tutorlink.command.ExitCommand;
 import tutorlink.command.FindStudentCommand;
 import tutorlink.command.InvalidCommand;
 import tutorlink.command.ListStudentCommand;
-import tutorlink.exceptions.IllegalValueException;
-import tutorlink.result.CommandResult;
+
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import tutorlink.parser.Parser;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
 
 public class ParserTest {
-
-
 
     @Test
     void  getCommand_addStudentCommand_addStudentCommandReturned() {
@@ -34,7 +23,7 @@ public class ParserTest {
         String input = "add_student i/A1234567X n/John";
         Command actualCommand = parser.getCommand(input);
 
-        assertEquals(new AddStudentCommand() ,actualCommand);
+        assertEquals(AddStudentCommand.class, actualCommand.getClass());
     }
 
     @Test
@@ -43,7 +32,7 @@ public class ParserTest {
         String input = "delete_student i/A1234567X";
         Command actualCommand = parser.getCommand(input);
 
-        assertEquals(new DeleteStudentCommand() ,actualCommand);
+        assertEquals(DeleteStudentCommand.class, actualCommand.getClass());
     }
 
     @Test
@@ -52,7 +41,7 @@ public class ParserTest {
         String input = "bye";
         Command actualCommand = parser.getCommand(input);
 
-        assertEquals(new ExitCommand() ,actualCommand);
+        assertEquals(ExitCommand.class, actualCommand.getClass());
     }
 
     @Test
@@ -61,7 +50,7 @@ public class ParserTest {
         String input = "list_student";
         Command actualCommand = parser.getCommand(input);
 
-        assertEquals(new ListStudentCommand() ,actualCommand);
+        assertEquals(ListStudentCommand.class, actualCommand.getClass());
     }
 
     @Test
@@ -70,7 +59,7 @@ public class ParserTest {
         String input = "find_student i/A1234567X n/John";
         Command actualCommand = parser.getCommand(input);
 
-        assertEquals(new FindStudentCommand() ,actualCommand);
+        assertEquals(FindStudentCommand.class, actualCommand.getClass());
     }
 
     @Test
@@ -79,6 +68,49 @@ public class ParserTest {
         String input = "test_input";
         Command actualCommand = parser.getCommand(input);
 
-        assertEquals(new InvalidCommand() ,actualCommand);
+        assertEquals(InvalidCommand.class, actualCommand.getClass());
+    }
+
+    @Test
+    void  getArguments_addStudentCommand_addStudentCommandHashMapReturned() {
+        Parser parser = new Parser();
+        String line = "add_student i/A1234567X n/John";
+
+        Command currentCommand = new AddStudentCommand();
+        String[] argumentPrefixes = currentCommand.getArgumentPrefixes();
+
+        HashMap<String, String>  arguments = parser.getArguments(argumentPrefixes, line);
+
+        assertEquals(2, arguments.size());
+        assertEquals("A1234567X", arguments.get("i/")); // Check matriculation number
+        assertEquals("John", arguments.get("n/")); // Check
+    }
+
+    @Test
+    void  getArguments_ExitCommandNoArgumentPrefix_ExitCommandHashMapReturned() {
+        Parser parser = new Parser();
+        String line = "bye";
+
+        Command currentCommand = new ExitCommand();
+        String[] argumentPrefixes = currentCommand.getArgumentPrefixes();
+
+        HashMap<String, String>  arguments = parser.getArguments(argumentPrefixes, line);
+
+        assertEquals(0, arguments.size());
+    }
+
+    @Test
+    void  getArguments_addStudentCommandExtraArguments_addStudentCommandHashMapReturned() {
+        Parser parser = new Parser();
+        String line = "add_student i/A1234567X n/John t/extraTag";
+
+        Command currentCommand = new AddStudentCommand();
+        String[] argumentPrefixes = currentCommand.getArgumentPrefixes();
+
+        HashMap<String, String>  arguments = parser.getArguments(argumentPrefixes, line);
+
+        assertEquals(2, arguments.size());
+        assertEquals("A1234567X", arguments.get("i/")); // Check matriculation number
+        assertEquals("John", arguments.get("n/")); // Check
     }
 }
