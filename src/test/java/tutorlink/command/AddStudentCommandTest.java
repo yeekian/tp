@@ -1,28 +1,33 @@
 package tutorlink.command;
 
 import java.util.HashMap;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
-import tutorlink.command.AddStudentCommand;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.result.CommandResult;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class AddStudentCommandTest {
+    private AppState appState;
+    private HashMap<String, String> arguments;
+    private AddStudentCommand command;
 
-
+    @BeforeEach
+    void setup() {
+        appState = new AppState();
+        arguments = new HashMap<>();
+        command = new AddStudentCommand();
+    }
 
     @Test
     void execute_addOne_expectOne() {
-        AppState appState = new AppState();
-        HashMap<String, String> arguments = new HashMap<>();
         arguments.put("i/","A1234567X");
         arguments.put("n/", "John");
-        AddStudentCommand command = new AddStudentCommand();
         CommandResult result = command.execute(appState, arguments);
         assertNotNull(result);
         assertEquals(result.toString(), "Student John (A1234567X) added successfully!");
@@ -31,11 +36,7 @@ public class AddStudentCommandTest {
 
     @Test
     void execute_emptyInput_exceptionThrown() {
-        AppState appState = new AppState();
-        HashMap<String, String> arguments = new HashMap<>();
         arguments.put("i/","A1234567X");
-        AddStudentCommand command = new AddStudentCommand();
-
         try {
             CommandResult result = command.execute(appState, arguments);
             fail("Expected an exception to be thrown due to empty input");

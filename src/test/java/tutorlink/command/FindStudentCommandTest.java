@@ -5,62 +5,74 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
 import tutorlink.exceptions.IllegalValueException;
-import tutorlink.lists.StudentList;
+import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.result.CommandResult;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class FindStudentCommandTest {
     private FindStudentCommand findCommand;
     private AddStudentCommand addCommand;
-    private AppState appState;
-    private StudentList mockStudentList;
+    private final AppState appState = new AppState();
+    private HashMap<String, String> arguments;
+    private CommandResult result;
 
     @BeforeEach
-    void setUp() {
+    void setup() {
         findCommand = new FindStudentCommand();
         addCommand = new AddStudentCommand();
-        appState = new AppState();
-        HashMap<String, String> arguments = new HashMap<>();
+        arguments = new HashMap<>();
         arguments.put("i/","A1234567X");
         arguments.put("n/", "John");
-        addCommand.execute(appState, arguments);
+        result = addCommand.execute(appState, arguments);
+        assertNotNull(result);
         arguments.put("i/","A2234567X");
         arguments.put("n/", "Jon");
+        result = addCommand.execute(appState, arguments);
+        assertNotNull(result);
     }
 
     @Test
-    void execute_find_by_matric_expect_one() {
-        HashMap<String, String> arguments = new HashMap<>();
+    void execute_matric_one() {
+        arguments.clear();
         arguments.put("i/","A1234567X");
         CommandResult result = findCommand.execute(appState,arguments);
-        assertEquals(result.toString(), "1: John, matric no: A1234567X");
+        assertEquals(result.toString(), "1: John (matric no: A1234567X)");
     }
 
     @Test
-    void execute_find_by_matric_expect_none() {
-        HashMap<String, String> arguments = new HashMap<>();
+    void execute_matric_none() {
+        arguments.clear();
         arguments.put("i/","A1111111X");
-        CommandResult result = findCommand.execute(appState,arguments);
-        assertEquals(result.toString(), "");
+        try {
+            CommandResult result = findCommand.execute(appState, arguments);
+        } catch (StudentNotFoundException e) {
+            assertEquals(e.getMessage(), "No students with matricNumber " + "A1111111X" + " found");
+        } catch (Exception e) {
+            fail("Expected: StudentNotFoundException, Actual: " + e.getMessage());
+        }
     }
 
     @Test
-    void execute_find_by_name_expect_two() {
+    void execute_name_two() {
         HashMap<String, String> arguments = new HashMap<>();
         arguments.put("n/","Jo");
         CommandResult result = findCommand.execute(appState,arguments);
-        assertEquals(result.toString(), "1: John, matric no: A1234567X\n2: Jon, matric no: A2234567X");
+        assertEquals(result.toString(), "1: John (matric no: A1234567X)" + "\n\t"
+                + "2: Jon (matric no: A2234567X)");
     }
 
     @Test
-    void execute_find_throw_error_both_void() {
+    void execute_find_bothNull() {
         HashMap<String, String> arguments = new HashMap<>();
         try {
             CommandResult result = findCommand.execute(appState, arguments);
         } catch (IllegalValueException e) {
-            assertEquals(e.getMessage(), "Error! Both parameters passed are null!");
+            assertEquals(e.getMessage(), FindStudentCommand.ERROR_BOTH_NULL);
+        } catch (Exception e) {
+            fail("Expected: IllegalValueException, Actual: " + e.getMessage());
         }
-
     }
+
 }
