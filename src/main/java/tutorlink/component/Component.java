@@ -35,6 +35,6 @@ public abstract class Component {
 
     @Override
     public String toString() {
-            return "[name=" + name + ", maxScore=" + maxScore + ", weight=" + weight + "]";
+        return "[name=" + name + ", maxScore=" + maxScore + ", weight=" + weight + "]";
     }
 }
