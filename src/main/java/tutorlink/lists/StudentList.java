@@ -51,8 +51,8 @@ public class StudentList extends ItemList {
     @Override
     public String toString() {
         return IntStream.range(0, studentArrayList.size())
-                .mapToObj(i -> (i + 1) + ": " + studentArrayList.get(i)) // 1-based index
-                .collect(Collectors.joining("\n\t"));
+                .mapToObj(i -> ("\t" + (i + 1)) + ": " + studentArrayList.get(i)) // 1-based index
+                .collect(Collectors.joining("\n"));
     }
 
     public StudentList findStudentByMatricNumber(String matricNumber) throws TutorLinkException {
