@@ -77,14 +77,17 @@ class Grade{
 
 class AppState
 class GradeList{
-    + findGrade(student: Student, component: Component): Grade
+	- size(): int
+	+ getGradeArrayList(): ArrayList<Grade>
+    + findGrade(matricNumber: String, componentDescription: String): GradeList
     + addGrade(grade: Grade): void
-    + deleteGrade(grade: Grade): void
+    + deleteGrade(matricNumber: String, componentDescription: String): void
     + toString(): String
 }
 class StudentList {
     + findStudentByMatricNumber(matricNumber: String): StudentList
     + findStudentByName(name: String): StudentList
+	+ getStudentArrayList() : StudentList
     + addStudent(matricNumber: String, name: String) void
     + deleteStudent(matricNumber: String, name: String): boolean
     + size(): int

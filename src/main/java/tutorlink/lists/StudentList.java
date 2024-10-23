@@ -1,7 +1,6 @@
 package tutorlink.lists;
 
 import tutorlink.exceptions.DuplicateMatricNumberException;
-import tutorlink.exceptions.ItemNotFoundException;
 import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.student.Student;
@@ -10,9 +9,10 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class StudentList extends ItemList {
+public class StudentList {
     private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number %s already"
             + "exists in the list!";
+    private static final String TO_STRING_DELIMITER = "\n\t";
     private ArrayList<Student> studentArrayList;
 
     public StudentList() {
@@ -40,10 +40,6 @@ public class StudentList extends ItemList {
         studentArrayList.add(student);
     }
 
-    public int size() {
-        return studentArrayList.size();
-    }
-
     public ArrayList<Student> getStudentArrayList() {
         return studentArrayList;
     }
@@ -52,7 +48,7 @@ public class StudentList extends ItemList {
     public String toString() {
         return IntStream.range(0, studentArrayList.size())
                 .mapToObj(i -> (i + 1) + ": " + studentArrayList.get(i)) // 1-based index
-                .collect(Collectors.joining("\n\t"));
+                .collect(Collectors.joining(TO_STRING_DELIMITER));
     }
 
     public StudentList findStudentByMatricNumber(String matricNumber) throws TutorLinkException {
@@ -67,11 +63,11 @@ public class StudentList extends ItemList {
         return filteredList;
     }
 
-    public StudentList findStudentByName(String name) throws ItemNotFoundException {
+    public StudentList findStudentByName(String name) throws StudentNotFoundException {
         StudentList filteredList = new StudentList();
         filteredList.studentArrayList = studentArrayList
                 .stream()
-                .filter(student -> student.getName().equals(name))
+                .filter(student -> student.getName().contains(name))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.studentArrayList.isEmpty()) {
             throw new StudentNotFoundException("No students with name " + name + " found");

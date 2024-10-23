@@ -12,8 +12,7 @@ public class FindStudentCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"i/", "n/"};
     public static final String COMMAND_WORD = "find_student";
-
-    private static final String ERROR_BOTH_NULL = "Error! Both parameters passed are null!";
+    public static final String ERROR_BOTH_NULL = "Error! Both parameters passed are null!";
 
     @Override
     public CommandResult execute(AppState appstate, HashMap<String, String> hashmap) throws TutorLinkException {
@@ -25,10 +24,10 @@ public class FindStudentCommand extends Command {
         }
         if (hashmap.containsKey(ARGUMENT_PREFIXES[0])) {
             students = appstate.students.findStudentByMatricNumber(matricNumber);
+            assert students.getStudentArrayList().size() <= 1; //there should only be 1 unique matric number
         } else {
             students = appstate.students.findStudentByName(name);
         }
-        assert students.getStudentArrayList().size() <= 1;
         return new CommandResult(students.toString());
     }
 
