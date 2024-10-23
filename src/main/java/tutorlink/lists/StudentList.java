@@ -1,7 +1,6 @@
 package tutorlink.lists;
 
 import tutorlink.exceptions.DuplicateMatricNumberException;
-import tutorlink.exceptions.ItemNotFoundException;
 import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.student.Student;
@@ -13,8 +12,8 @@ import java.util.stream.IntStream;
 public class StudentList {
 
     //Use Java String formatting to replace %s with matricNumber
-    private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD = "Error! Student with Matric Number, %s, already "
-            + "exists in the list!";
+    private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD =
+            "Error! Student with Matric Number, %s, already exists in the list!";
     private static final String TO_STRING_DELIMITER = "\n";
     private ArrayList<Student> studentArrayList;
 
@@ -37,7 +36,8 @@ public class StudentList {
         Student student = new Student(matricNumber, name);
         for (Student s : studentArrayList) {
             if (s.getMatricNumber().equals(matricNumber)) {
-                throw new DuplicateMatricNumberException(String.format(ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD , matricNumber));
+                String errorMessage = String.format(ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD, matricNumber);
+                throw new DuplicateMatricNumberException(errorMessage);
             }
         }
         studentArrayList.add(student);
