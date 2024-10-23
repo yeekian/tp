@@ -72,7 +72,8 @@ public class Parser {
             regexBuilder.append(Pattern.quote(prefix)).append("|");
         }
         regexBuilder.setLength(regexBuilder.length() - 1); // Remove the last "|"
-        regexBuilder.append(")([^\\s]+)"); // Capture the argument after the prefix
+        // Match argument that could have spaces, but ends before another prefix or end of the string
+        regexBuilder.append(")([^\\s].*?)(?=(\\s+[^\\s]+/|$))");
 
         String regex = regexBuilder.toString();
         Pattern pattern = Pattern.compile(regex);
@@ -80,9 +81,9 @@ public class Parser {
 
         // Iterate through all found tags and arguments
         while (matcher.find()) {
-            String tag = matcher.group(1).toLowerCase(); // Group 1 is the tag (e.g., n/, i/, etc.)
-            String argument = matcher.group(2).trim();   // Group 2 is the argument after the tag
-            arguments.put(tag.substring(0, tag.length()), argument);
+            String tag = matcher.group(1); // Group 1 is the tag (e.g., n/, i/, etc.)
+            String argument = matcher.group(2).trim(); // Group 2 is the argument after the tag
+            arguments.put(tag, argument); // Store the tag and argument
         }
 
         return arguments;
