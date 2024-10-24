@@ -38,7 +38,7 @@ public class FindStudentCommandTest {
         arguments.clear();
         arguments.put("i/","A1234567X");
         CommandResult result = findCommand.execute(appState,arguments);
-        assertEquals(result.toString(), "1: John (matric no: A1234567X)");
+        assertEquals(result.toString(), "\t1: John (matric no: A1234567X)");
     }
 
     @Test
@@ -59,7 +59,7 @@ public class FindStudentCommandTest {
         HashMap<String, String> arguments = new HashMap<>();
         arguments.put("n/","Jo");
         CommandResult result = findCommand.execute(appState,arguments);
-        assertEquals(result.toString(), "1: John (matric no: A1234567X)" + "\n\t"
+        assertEquals(result.toString(), "\t1: John (matric no: A1234567X)" + "\n\t"
                 + "2: Jon (matric no: A2234567X)");
     }
 
