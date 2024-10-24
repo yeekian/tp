@@ -61,6 +61,7 @@ public class ComponentList {
    
     public ArrayList<Component> findAllComponents() {
         return new ArrayList<>(componentArrayList);
+    }
 
     public ArrayList<Component> getComponentArrayList() {
         return componentArrayList;
