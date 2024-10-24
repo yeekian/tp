@@ -29,14 +29,29 @@ The key classes providing functionality to TutorLink are:
 The sequence diagram below depicts a typical user interaction with <code>TutorLink</code>:
 
 
-## Product scope
-### Target user profile
+## Product Scope
 
-{Describe the target user profile}
+### Target User Profile
 
-### Value proposition
+The target users for **TutorLink** are professors at NUS who manage small, single-staffed classes. These professors typically have strong technical expertise but are often overwhelmed by time-consuming administrative tasks that detract from their ability to focus on teaching and curriculum development.
 
-{Describe the value proposition: what problem does it solve?}
+#### Key Characteristics:
+- **Time-Constrained**: Professors have limited time for lesson preparation due to the administrative burden of managing grades, assignments, and attendance.
+- **Technologically Savvy**: While proficient in using educational platforms, they often find existing tools slow, overly complex, or requiring constant internet connectivity.
+- **Desire for Simplicity**: They prefer tools that are easy to use, automate repetitive tasks, and function offline, allowing them to streamline administrative work without unnecessary complexity.
+
+The target user values efficiency, reliability, and simplicity, seeking a solution that reduces administrative workload and enables them to focus more on the core aspects of teaching.
+
+### Value Proposition
+
+**TutorLink** solves the problem of administrative overload by automating routine tasks such as managing assignments, and monitoring student performance. Professors often struggle with time-consuming admin work that takes away from their primary focus: teaching and preparing lessons.
+
+By offering an offline, lightweight solution that simplifies these processes, TutorLink helps professors:
+- Save time by automating tedious administrative tasks.
+- Access important information quickly, without needing an internet connection.
+- Focus on teaching and lesson development instead of being bogged down by admin work.
+
+In contrast to bloated systems, TutorLink is designed to be fast, simple, and effective—freeing up valuable time and enhancing teaching efficiency.
 
 ## User Stories
 
