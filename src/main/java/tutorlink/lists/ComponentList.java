@@ -58,4 +58,12 @@ public class ComponentList {
                 .mapToObj(i -> (i + 1) + ": " + componentArrayList.get(i))
                 .collect(Collectors.joining("\n\t"));
     }
+
+    public ArrayList<Component> getComponentArrayList() {
+        return componentArrayList;
+    }
+
+    public int size() {
+        return componentArrayList.size();
+    }
 }

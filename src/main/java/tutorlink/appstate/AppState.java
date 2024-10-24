@@ -1,5 +1,6 @@
 package tutorlink.appstate;
 
+import tutorlink.lists.ComponentList;
 import tutorlink.lists.GradeList;
 import tutorlink.lists.StudentList;
 

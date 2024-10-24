@@ -6,6 +6,8 @@ import java.util.stream.IntStream;
 
 import tutorlink.appstate.AppState;
 import tutorlink.component.Component;
+import tutorlink.exceptions.ComponentNotFoundException;
+import tutorlink.exceptions.DuplicateComponentException;
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.DuplicateMatricNumberException;
 import tutorlink.exceptions.GradeNotFoundException;
@@ -15,7 +17,6 @@ import tutorlink.grade.Grade;
 import tutorlink.student.Student;
 
 import static tutorlink.command.DeleteStudentCommand.STUDENT_NOT_FOUND;
-import static tutorlink.lists.StudentList.ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD;
 
 /**
  * Represents a list of grades.
@@ -25,6 +26,9 @@ public class GradeList {
     private static final String ERROR_NO_GRADE_FOUND = "Error! Grade (%s, %s) does not exist in the list!";
     private static final String ERROR_DUPLICATE_MATRIC_NUMBER =
             "Error! There is more than 1 student with the Matric Number, %s!";
+    private static final String ERROR_COMPONENT_NOT_FOUND = "Error! Component (%s) does not exist in the list!";
+    private static final String ERROR_DUPLICATE_COMPONENT =
+            "Error! There is more than 1 component with the description, %s!";
 
     private ArrayList<Grade> gradeArrayList;
 
@@ -47,16 +51,25 @@ public class GradeList {
     public void addGrade(AppState appState, String matricNumber, String componentDescription, String scoreNumber)
             throws DuplicateGradeException {
 
-        //Get Component component object using String componentDescription
-        Component component = appState.components.findComponent(componentDescription);
+        //Get component object using String componentDescription
+        ComponentList componentFilteredList = appState.components.findComponent(componentDescription);
+        Component component;
+        if (componentFilteredList.size() == 1) {
+            component = componentFilteredList.getComponentArrayList().get(0);
+        } else if (componentFilteredList.size() == 0) {
+            throw new ComponentNotFoundException(String.format(ERROR_COMPONENT_NOT_FOUND, componentDescription));
+        } else {
+            String errorMessage = String.format(ERROR_DUPLICATE_COMPONENT, componentDescription);
+            throw new DuplicateComponentException(errorMessage);
+        }
 
         //Get Student student object using String matricNumber
-        StudentList filteredList = appState.students.findStudentByMatricNumber(matricNumber);
+        StudentList studentFilteredList = appState.students.findStudentByMatricNumber(matricNumber);
 
         Student student;
-        if (filteredList.size() == 1) {
-            student = filteredList.getStudentArrayList().get(0);
-        } else if (filteredList.size() == 0) {
+        if (studentFilteredList.size() == 1) {
+            student = studentFilteredList.getStudentArrayList().get(0);
+        } else if (studentFilteredList.size() == 0) {
             throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
         } else {
             String errorMessage = String.format(ERROR_DUPLICATE_MATRIC_NUMBER, matricNumber);
