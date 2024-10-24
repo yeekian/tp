@@ -17,9 +17,14 @@ import tutorlink.result.CommandResult;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class AddGradeCommandTest {
+
+    private final String successMessage = "%s grade added successfully to %s for %s!";
 
     @Test
     void addGrade_allArgumentsExam_successful() {
@@ -58,10 +63,9 @@ public class AddGradeCommandTest {
         CommandResult gradeResult = addGradeCommand.execute(appState, gradeArguments);
 
         //Test grade added
-        String SUCCESS_MESSAGE = "%s grade added successfully to %s for %s!";
-
         assertNotNull(gradeResult);
-        assertEquals(String.format(SUCCESS_MESSAGE, scoreNumber, componentDescription, matricNumber), gradeResult.toString());
+        assertEquals(String.format(successMessage, scoreNumber, componentDescription, matricNumber),
+                gradeResult.toString());
     }
 
     @Test
@@ -101,10 +105,10 @@ public class AddGradeCommandTest {
         CommandResult gradeResult = addGradeCommand.execute(appState, gradeArguments);
 
         //Test grade added
-        String SUCCESS_MESSAGE = "%s grade added successfully to %s for %s!";
 
         assertNotNull(gradeResult);
-        assertEquals(String.format(SUCCESS_MESSAGE, scoreNumber, componentDescription, matricNumber), gradeResult.toString());
+        assertEquals(String.format(successMessage, scoreNumber, componentDescription, matricNumber),
+                gradeResult.toString());
     }
 
     @Test
@@ -144,10 +148,9 @@ public class AddGradeCommandTest {
         CommandResult gradeResult = addGradeCommand.execute(appState, gradeArguments);
 
         //Test grade added
-        String SUCCESS_MESSAGE = "%s grade added successfully to %s for %s!";
-
         assertNotNull(gradeResult);
-        assertEquals(String.format(SUCCESS_MESSAGE, scoreNumber, componentDescription, matricNumber), gradeResult.toString());
+        assertEquals(String.format(successMessage, scoreNumber, componentDescription, matricNumber),
+                gradeResult.toString());
     }
 
     @Test
@@ -185,7 +188,9 @@ public class AddGradeCommandTest {
         Command addGradeCommand = new AddGradeCommand();
 
         //Test grade added
-        assertThrows(IllegalValueException.class, () -> {addGradeCommand.execute(appState, gradeArguments);});
+        assertThrows(IllegalValueException.class, () -> {
+            addGradeCommand.execute(appState, gradeArguments);
+        });
     }
 
     @Test
@@ -223,7 +228,7 @@ public class AddGradeCommandTest {
 
         Command addGradeCommand = new AddGradeCommand();
 
-        assertThrows(IllegalValueException.class, () -> {addGradeCommand.execute(appState, gradeArguments);});
+        assertThrows(IllegalValueException.class, () -> addGradeCommand.execute(appState, gradeArguments));
     }
 
     @Test
@@ -261,7 +266,7 @@ public class AddGradeCommandTest {
 
         Command addGradeCommand = new AddGradeCommand();
 
-        assertThrows(IllegalValueException.class, () -> {addGradeCommand.execute(appState, gradeArguments);});
+        assertThrows(IllegalValueException.class, () -> addGradeCommand.execute(appState, gradeArguments));
     }
 
     @Test
@@ -293,7 +298,7 @@ public class AddGradeCommandTest {
 
         Command addGradeCommand = new AddGradeCommand();
 
-        assertThrows(ComponentNotFoundException.class, () -> {addGradeCommand.execute(appState, gradeArguments);});
+        assertThrows(ComponentNotFoundException.class, () -> addGradeCommand.execute(appState, gradeArguments));
     }
 
     @Test
@@ -322,7 +327,7 @@ public class AddGradeCommandTest {
 
         Command addGradeCommand = new AddGradeCommand();
 
-        assertThrows(StudentNotFoundException.class, () -> {addGradeCommand.execute(appState, gradeArguments);});
+        assertThrows(StudentNotFoundException.class, () -> addGradeCommand.execute(appState, gradeArguments));
     }
 
     @Test
@@ -362,10 +367,9 @@ public class AddGradeCommandTest {
         CommandResult gradeResult = addGradeCommand.execute(appState, gradeArguments);
 
         //Test grade added
-        String SUCCESS_MESSAGE = "%s grade added successfully to %s for %s!";
-
         assertNotNull(gradeResult);
-        assertEquals(String.format(SUCCESS_MESSAGE, originalScoreNumber, componentDescription, matricNumber), gradeResult.toString());
+        assertEquals(String.format(successMessage, originalScoreNumber, componentDescription, matricNumber),
+                gradeResult.toString());
 
         //Add repeat exam grade
         HashMap<String, String> assignmentArguments = new HashMap<>();
@@ -377,7 +381,7 @@ public class AddGradeCommandTest {
         gradeArguments.put("c/", componentDescription);
         gradeArguments.put("s/", changedScoreNumber);
 
-        assertThrows(DuplicateGradeException.class, () -> {addGradeCommand.execute(appState, gradeArguments);});
+        assertThrows(DuplicateGradeException.class, () -> addGradeCommand.execute(appState, gradeArguments));
 
         GradeList findGradeList = appState.grades.findGrade(matricNumber, componentDescription);
         assertEquals(1, findGradeList.getGradeArrayList().size());

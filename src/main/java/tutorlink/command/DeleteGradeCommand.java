@@ -10,17 +10,15 @@ import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.lists.StudentList;
 import tutorlink.result.CommandResult;
-import tutorlink.student.Student;
-
-import static tutorlink.command.DeleteStudentCommand.STUDENT_NOT_FOUND;
 
 public class DeleteGradeCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/"};
     public static final String COMMAND_WORD = "delete_grade";
-    private static final String ERROR_EITHER_NULL = "Error! Either parameter passed is null!";
     public static final String STUDENT_NOT_FOUND = "Error! Student (Matric Number %s) not found";
     public static final String SUCCESS_MESSAGE = "Component %s for student %s successfully deleted";
+
+    private static final String ERROR_EITHER_NULL = "Error! Either parameter passed is null!";
     private static final String ERROR_DUPLICATE_MATRIC_NUMBER =
             "Error! There is more than 1 student with the Matric Number, %s!";
 
