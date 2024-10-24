@@ -32,10 +32,6 @@ public class Grade {
         return false;
     }
 
-    public double getScore() {
-        return score;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Grade grade) {
