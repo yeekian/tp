@@ -82,6 +82,7 @@ class GradeList{
     + findGrade(matricNumber: String, componentDescription: String): GradeList
     + addGrade(grade: Grade): void
     + deleteGrade(matricNumber: String, componentDescription: String): void
+    + calculateStudentGPA(matricNumber: String): double
     + toString(): String
 }
 class StudentList {

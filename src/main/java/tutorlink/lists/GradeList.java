@@ -3,8 +3,10 @@ package tutorlink.lists;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
+import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.grade.Grade;
 
@@ -53,7 +55,7 @@ public class GradeList {
         filteredList.gradeArrayList = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase())
-                && grade.getComponent().getName().equals(componentDescription.toLowerCase()))
+                        && grade.getComponent().getName().equals(componentDescription.toLowerCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.gradeArrayList.isEmpty()) {
             throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
@@ -61,4 +63,19 @@ public class GradeList {
         return filteredList;
     }
 
+    public double calculateStudentGPA(String matricNumber) {
+        ArrayList<Grade> studentGrades = gradeArrayList
+                .stream()
+                .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase()))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        if (studentGrades.isEmpty()) {
+            return 0.0;
+        }
+
+        return studentGrades
+                .stream()
+                .mapToDouble(grade -> grade.getScore() * grade.getComponent().getWeight())
+                .sum();
+    }
 }
