@@ -98,6 +98,7 @@ class ComponentList {
     + findComponent(id: String): Component
     + addComponent(component: Component): void
     + deleteComponent(component: Component): void
+    + findAllComponents(): ArrayList<Component>
     + toString(): String
 }
 
