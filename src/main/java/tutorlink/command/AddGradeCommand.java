@@ -30,7 +30,7 @@ public class AddGradeCommand extends Command {
     private static final String ERROR_DUPLICATE_COMPONENT =
             "Error! There is more than 1 component with the description, %s!";
     private static final String ERROR_INVALID_SCORE =
-            "Error! Score must be more than or equal to 0, and not exceed the max score!";
+            "Error! Score must be double that is more than or equal to 0, and not exceed the max score!";
 
     @Override
     public CommandResult execute(AppState appstate, HashMap<String, String> hashmap) throws TutorLinkException {
@@ -40,7 +40,6 @@ public class AddGradeCommand extends Command {
         if (matricNumber == null || componentDescription == null || scoreNumber == null) {
             throw new IllegalValueException(ERROR_ARGUMENT_NULL);
         }
-
 
         //Get component object using String componentDescription
         ComponentList componentFilteredList = appstate.components.findComponent(componentDescription.toUpperCase());
@@ -53,6 +52,8 @@ public class AddGradeCommand extends Command {
             String errorMessage = String.format(ERROR_DUPLICATE_COMPONENT, componentDescription);
             throw new DuplicateComponentException(errorMessage);
         }
+
+        assert component != null : "Component object should not be null after this point";
 
         //Get Student student object using String matricNumber
         StudentList studentFilteredList = appstate.students.findStudentByMatricNumber(matricNumber);
@@ -67,15 +68,25 @@ public class AddGradeCommand extends Command {
             throw new DuplicateMatricNumberException(errorMessage);
         }
 
+        assert student != null : "Student object should not be null after this point";
+
         //Convert scoreNumber to double
-        double score = Double.parseDouble(scoreNumber);
-        if (score < 0.0 || score >= component.getMaxScore()) {
+        try {
+            double score = Double.parseDouble(scoreNumber);
+
+            if (score < 0.0 || score >= component.getMaxScore()) {
+                throw new IllegalValueException(ERROR_INVALID_SCORE);
+            }
+
+            //create a new grade object
+            Grade grade = new Grade(component, student, score);
+
+            appstate.grades.addGrade(grade);
+        } catch (NumberFormatException e) {
             throw new IllegalValueException(ERROR_INVALID_SCORE);
+
         }
 
-        //create a new grade object
-        Grade grade = new Grade(component, student, score);
-        appstate.grades.addGrade(grade);
         return new CommandResult(String.format(SUCCESS_MESSAGE, scoreNumber, componentDescription, matricNumber));
     }
 

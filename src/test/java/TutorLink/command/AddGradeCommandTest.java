@@ -194,6 +194,44 @@ public class AddGradeCommandTest {
     }
 
     @Test
+    void addGrade_nonDoubleScoreExam_illegalValueExceptionThrown() {
+        AppState appState = new AppState();
+        Parser parser = new Parser();
+
+        //Create student
+        String line = "add_student i/A1234567X n/John Doe";
+        Command addStudentCommand = new AddStudentCommand();
+        String[] argumentPrefixes = addStudentCommand.getArgumentPrefixes();
+        HashMap<String, String>  arguments = parser.getArguments(argumentPrefixes, line);
+        CommandResult result = addStudentCommand.execute(appState, arguments);
+        assertNotNull(result);
+        assertEquals("Student John Doe (A1234567X) added successfully!", result.toString());
+        assertEquals(appState.students.getStudentArrayList().size(), 1);
+
+        //Create component
+        String examName = "Exam Under Test";
+        double examMaxScore = 100.0;
+        double examWeight = 50.0;
+        Exam exam = new Exam(examName,examMaxScore, examWeight);
+
+        appState.components.addComponent(exam);
+
+        //Add grade
+        HashMap<String, String> gradeArguments = new HashMap<>();
+
+        String matricNumber = "A1234567X";
+        String componentDescription = "Exam Under Test";
+        String scoreNumber = "Non-double String";
+        gradeArguments.put("i/",matricNumber);
+        gradeArguments.put("c/", componentDescription);
+        gradeArguments.put("s/", scoreNumber);
+
+        Command addGradeCommand = new AddGradeCommand();
+
+        assertThrows(IllegalValueException.class, () -> addGradeCommand.execute(appState, gradeArguments));
+    }
+
+    @Test
     void addGrade_scoreMoreThanMax_throwIllegalValueException() {
         AppState appState = new AppState();
         Parser parser = new Parser();
