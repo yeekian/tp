@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import tutorlink.exceptions.DuplicateGradeException;
-import tutorlink.exceptions.GradeNotFoundException;
-import tutorlink.exceptions.TutorLinkException;
+import tutorlink.component.Component;
+import tutorlink.exceptions.*;
 import tutorlink.grade.Grade;
 
 /**
@@ -62,14 +61,25 @@ public class GradeList {
         return filteredList;
     }
 
-    public double calculateStudentGPA(String matricNumber) {
+    public double calculateStudentGPA(String matricNumber, ComponentList componentList) throws IncompleteGradesException {
         ArrayList<Grade> studentGrades = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
+        ArrayList<Component> allComponents = componentList.findAllComponents();
+
         if (studentGrades.isEmpty()) {
-            return 0.0;
+            throw new StudentNotFoundException("No grades found for student: " + matricNumber);
+        }
+
+        boolean hasAllComponents = allComponents.stream()
+                .allMatch(component -> studentGrades.stream()
+                        .anyMatch(grade -> grade.getComponent().equals(component)));
+
+        if (!hasAllComponents) {
+            throw new IncompleteGradesException(
+                    "Cannot calculate GPA: Student " + matricNumber + " is missing grades for some components");
         }
 
         return studentGrades
@@ -77,4 +87,5 @@ public class GradeList {
                 .mapToDouble(grade -> grade.getScore() * grade.getComponent().getWeight())
                 .sum();
     }
+
 }
