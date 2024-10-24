@@ -65,7 +65,8 @@ public class GradeList {
         return filteredList;
     }
 
-    public double calculateStudentGPA(String matricNumber, ComponentList componentList) throws IncompleteGradesException {
+    public double calculateStudentGPA(String matricNumber, ComponentList componentList)
+            throws IncompleteGradesException {
         ArrayList<Grade> studentGrades = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase()))
