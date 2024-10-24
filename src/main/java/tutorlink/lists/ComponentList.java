@@ -25,7 +25,7 @@ public class ComponentList {
         ComponentList filteredList = new ComponentList();
         filteredList.componentArrayList = componentArrayList
                 .stream()
-                .filter(comp -> comp.getName().contains(name))
+                .filter(comp -> comp.getName().toUpperCase().contains(name.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.componentArrayList.isEmpty()) {
             throw new ComponentNotFoundException(ERROR_COMPONENT_NOT_FOUND);
@@ -57,5 +57,13 @@ public class ComponentList {
         return IntStream.range(0, componentArrayList.size())
                 .mapToObj(i -> (i + 1) + ": " + componentArrayList.get(i))
                 .collect(Collectors.joining("\n\t"));
+    }
+
+    public ArrayList<Component> getComponentArrayList() {
+        return componentArrayList;
+    }
+
+    public int size() {
+        return componentArrayList.size();
     }
 }

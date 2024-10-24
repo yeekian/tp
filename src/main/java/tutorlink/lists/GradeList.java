@@ -3,6 +3,7 @@ package tutorlink.lists;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
@@ -14,6 +15,8 @@ import tutorlink.grade.Grade;
 public class GradeList {
     private static final String ERROR_DUPLICATE_GRADE_ON_ADD = "Error! Grade (%s, %s) already exists in the list!";
     private static final String ERROR_NO_GRADE_FOUND = "Error! Grade (%s, %s) does not exist in the list!";
+
+
     private ArrayList<Grade> gradeArrayList;
 
     public GradeList() {
@@ -32,7 +35,9 @@ public class GradeList {
         return false;
     }
 
-    public void addGrade(Grade grade) throws DuplicateGradeException {
+    public void addGrade(Grade grade)
+            throws DuplicateGradeException {
+
         for (Grade gradeToCompare : gradeArrayList) {
             if (grade.equals(gradeToCompare)) {
                 throw new DuplicateGradeException(ERROR_DUPLICATE_GRADE_ON_ADD);
@@ -61,4 +66,7 @@ public class GradeList {
         return filteredList;
     }
 
+    public ArrayList<Grade> getGradeArrayList() {
+        return gradeArrayList;
+    }
 }
