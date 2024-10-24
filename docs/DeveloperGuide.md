@@ -29,14 +29,29 @@ The key classes providing functionality to TutorLink are:
 The sequence diagram below depicts a typical user interaction with <code>TutorLink</code>:
 
 
-## Product scope
-### Target user profile
+## Product Scope
 
-{Describe the target user profile}
+### Target User Profile
 
-### Value proposition
+The target users for **TutorLink** are professors at NUS who manage small, single-staffed classes. These professors typically have strong technical expertise but are often overwhelmed by time-consuming administrative tasks that detract from their ability to focus on teaching and curriculum development.
 
-{Describe the value proposition: what problem does it solve?}
+#### Key Characteristics:
+- **Time-Constrained**: Professors have limited time for lesson preparation due to the administrative burden of managing grades, assignments, and attendance.
+- **Technologically Savvy**: While proficient in using educational platforms, they often find existing tools slow, overly complex, or requiring constant internet connectivity.
+- **Desire for Simplicity**: They prefer tools that are easy to use, automate repetitive tasks, and function offline, allowing them to streamline administrative work without unnecessary complexity.
+
+The target user values efficiency, reliability, and simplicity, seeking a solution that reduces administrative workload and enables them to focus more on the core aspects of teaching.
+
+### Value Proposition
+
+**TutorLink** solves the problem of administrative overload by automating routine tasks such as managing assignments, and monitoring student performance. Professors often struggle with time-consuming admin work that takes away from their primary focus: teaching and preparing lessons.
+
+By offering an offline, lightweight solution that simplifies these processes, TutorLink helps professors:
+- Save time by automating tedious administrative tasks.
+- Access important information quickly, without needing an internet connection.
+- Focus on teaching and lesson development instead of being bogged down by admin work.
+
+In contrast to bloated systems, TutorLink is designed to be fast, simple, and effective—freeing up valuable time and enhancing teaching efficiency.
 
 ## User Stories
 
@@ -56,3 +71,61 @@ The sequence diagram below depicts a typical user interaction with <code>TutorLi
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+## Implementation
+This section describes some noteworthy details on how certain features are implemented.
+
+### Add/delete grade feature
+
+#### Implementation
+
+The `AddGradeCommand` or `DeleteGradeCommand` is responsible for adding or deleting a grade to a student for a specified component within the TutorLink application, respectively. It validates the inputs to ensure that they meet the required criteria before performing the addition, thus maintaining data integrity.
+The grades are added to GradeList as a Grade object.
+
+Additional, it implements
+
+#### Key Operations
+
+- **AddGradeCommand#execute(AppState appstate, HashMap<String, String> hashmap)**: Executes the command to add a grade to a student. It performs the following steps:
+    1. Retrieves and validates the matric number, component description, and score from the `hashmap`.
+    2. Checks for the existence of the specified component and student.
+    3. Validates the score to ensure it is within the acceptable range.
+    4. Creates a new `Grade` object and adds it to the `GradeList` within the `AppState`.
+
+
+- **DeleteGradeCommand#execute(AppState appstate, HashMap<String, String> hashmap)**: Executes the command to delete a grade to a student. It performs the following steps:
+    1. Retrieves and validates the matric number, and component description from the `hashmap`.
+    2. Checks for the existence of the specified component and student.
+    4. Deletes the `Grade` object from the `GradeList` within the `AppState`.
+
+#### Example Usage Scenario
+
+Step 1. The user launches the application and has already added students and graded components into TutorLink
+
+
+Step 2: The user executes ________ . The add_grade command is parsed through the parser, causing a AddGradeCommand object to be created. A hashmap containing all the input parameters are also returned
+
+
+Step 3: The AddGradeCommand is then executed in the TutorLink class file. The execution takes in the current appState and the hashmap of arguments generated in step 2.
+
+
+Step 4: During execution, the command extracts the matricNumber, componentDescription, and scoreNumber from the hashmap as String objects. A check is done to ensure that all arguments are not null, else an IllegalValueException is thrown
+
+
+Step 5: As grades are added to a component, the component is found using the componentDescription if it is equal to the name of the component.
+
+
+Step 6: The corresponding student object will also have to be found, using the matricNumber.
+Note that exceptions will be thrown should there be components or students that are missing or duplicated.
+
+Step 7: The String scoreNumber is then converted to a double as score. An exception will be thrown when score is negative, more than the maximum score of the component, or the input is not suitable for double conversion.
+
+
+Step 8: Using the score double, and student and component objects, a grade object is created
+
+
+Step 9: The newly created grade object is then added to the gradelist.
+
+<Insert Sequence diagram here, todo>
+
+
