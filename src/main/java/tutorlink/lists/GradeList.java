@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
-import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.grade.Grade;
 
