@@ -9,7 +9,6 @@ public class AppState {
     public GradeList grades = new GradeList();
     public ComponentList components = new ComponentList();
 
-
     public AppState() {
     }
 }
