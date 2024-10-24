@@ -50,4 +50,33 @@ class ComponentListTest {
         componentList.addComponent(comp2);
         assertThrows(ComponentNotFoundException.class, () -> componentList.deleteComponent(comp1));
     }
+
+    @Test
+    void findComponent_findExisting_success() {
+        componentList.addComponent(comp1);
+        componentList.addComponent(comp2);
+        componentList.addComponent(comp3);
+        ComponentList filteredList = componentList.findComponent("homework");
+        assertEquals(2, filteredList.size());
+        String expectedResult = "1: Assignment [name=homework 1, maxScore=30.0, weight=0.1]\n" +
+                "\t2: Assignment [name=homework 2, maxScore=30.0, weight=0.1]";
+        assertEquals(expectedResult, filteredList.toString());
+    }
+
+    @Test
+    void findComponent_findNotInList_exceptionThrown() {
+        componentList.addComponent(comp1);
+        componentList.addComponent(comp2);
+        componentList.addComponent(comp3);
+        assertThrows(ComponentNotFoundException.class, () -> componentList.findComponent("midterm"));
+    }
+
+    @Test
+    void toString_test() {
+        componentList.addComponent(comp1);
+        componentList.addComponent(comp3);
+        String expectedResult = "1: Assignment [name=homework 1, maxScore=30.0, weight=0.1]\n" +
+                "\t2: Exam [name=finals, maxScore=100.0, weight=0.5]";
+        assertEquals(expectedResult, componentList.toString());
+    }
 }
