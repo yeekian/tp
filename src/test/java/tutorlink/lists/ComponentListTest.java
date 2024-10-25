@@ -1,3 +1,4 @@
+//@@author jinzihan2002
 package tutorlink.lists;
 
 import org.junit.jupiter.api.Test;
@@ -80,3 +81,4 @@ class ComponentListTest {
         assertEquals(expectedResult, componentList.toString());
     }
 }
+//@@author

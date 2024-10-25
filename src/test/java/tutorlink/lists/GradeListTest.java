@@ -1,4 +1,5 @@
-package tutorlink.list;
+//@@author RCPilot1604
+package tutorlink.lists;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,6 @@ import tutorlink.component.Exam;
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
 import tutorlink.grade.Grade;
-import tutorlink.lists.GradeList;
 import tutorlink.student.Student;
 import tutorlink.component.Component;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -84,3 +84,4 @@ class GradeListTest {
         assertEquals(expectedString, gradeList.toString());
     }
 }
+//@@author

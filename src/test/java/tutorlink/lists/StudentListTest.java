@@ -1,10 +1,10 @@
-package tutorlink.list;
+//@@author RCPilot1604
+package tutorlink.lists;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.exceptions.DuplicateMatricNumberException;
 import tutorlink.exceptions.StudentNotFoundException;
-import tutorlink.lists.StudentList;
 import tutorlink.student.Student;
 import java.util.ArrayList;
 
@@ -86,3 +86,4 @@ class StudentListTest {
         assertEquals(expectedString, studentList.toString());
     }
 }
+//@@author
