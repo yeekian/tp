@@ -15,7 +15,7 @@ public class ExamTest {
 
     @Test
     void constructor_validExam_success() {
-        assertEquals("Midterm", exam.getName());
+        assertEquals("midterm", exam.getName());
         assertEquals(100.0, exam.getMaxScore());
         assertEquals(0.4, exam.getWeight());
     }

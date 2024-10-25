@@ -15,7 +15,7 @@ public class ClassParticipationTest {
 
     @Test
     void constructor_validParticipation_success() {
-        assertEquals("Participation", participation.getName());
+        assertEquals("participation", participation.getName());
         assertEquals(10.0, participation.getMaxScore());
         assertEquals(0.1, participation.getWeight());
     }

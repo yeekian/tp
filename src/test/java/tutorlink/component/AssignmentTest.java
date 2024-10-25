@@ -15,7 +15,7 @@ public class AssignmentTest {
 
     @Test
     void constructor_validAssignment_success() {
-        assertEquals("Homework", assignment.getName());
+        assertEquals("homework", assignment.getName());
         assertEquals(30.0, assignment.getMaxScore());
         assertEquals(0.2, assignment.getWeight());
     }

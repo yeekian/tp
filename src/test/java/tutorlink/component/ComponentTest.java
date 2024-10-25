@@ -2,7 +2,6 @@ package tutorlink.component;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import tutorlink.exceptions.InvalidComponentException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,32 +21,32 @@ public class ComponentTest {
 
     @Test
     void constructor_validInputs_success() {
-        assertEquals("Assignment 1", assignment.getName());
+        assertEquals("assignment 1", assignment.getName());
         assertEquals(50.0, assignment.getMaxScore());
         assertEquals(0.3, assignment.getWeight());
     }
 
     @Test
     void constructor_invalidName_exceptionThrown() {
-        assertThrows(InvalidComponentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 new Assignment("", 50.0, 0.3));
-        assertThrows(InvalidComponentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 new Assignment(null, 50.0, 0.3));
     }
 
     @Test
     void constructor_invalidMaxScore_exceptionThrown() {
-        assertThrows(InvalidComponentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 new Assignment("Assignment 1", -50.0, 0.3));
-        assertThrows(InvalidComponentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 new Assignment("Assignment 1", 0.0, 0.3));
     }
 
     @Test
     void constructor_invalidWeight_exceptionThrown() {
-        assertThrows(InvalidComponentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 new Assignment("Assignment 1", 50.0, -0.1));
-        assertThrows(InvalidComponentException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 new Assignment("Assignment 1", 50.0, 1.1));
     }
 
@@ -77,3 +76,4 @@ public class ComponentTest {
         assertEquals(expectedParticipation, participation.toString());
     }
 }
+
