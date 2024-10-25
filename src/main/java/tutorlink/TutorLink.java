@@ -2,8 +2,10 @@ package tutorlink;
 
 import tutorlink.appstate.AppState;
 import tutorlink.command.Command;
+import tutorlink.exceptions.StorageOperationException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
+import tutorlink.storage.StorageFile;
 import tutorlink.ui.Ui;
 import tutorlink.parser.Parser;
 
@@ -19,9 +21,14 @@ import java.util.logging.FileHandler;
  * Represents the main class containing the entry point for the TutorLink application
  */
 public class TutorLink {
+    private static final String STUDENT_FILE_PATH = "./data/studentlist.txt";
+    private static final String COMPONENT_FILE_PATH = "./data/componentlist.txt";
+
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
     private static final AppState appState = new AppState();
+    private static StorageFile studentStorage;
+    private static StorageFile componentStorage;
 
     private static final Logger LOGGER = Logger.getLogger(TutorLink.class.getName());
 
@@ -35,6 +42,15 @@ public class TutorLink {
         LOGGER.log(Level.INFO, "Test log message successful");
 
         ui.displayWelcomeMessage();
+
+        try {
+            studentStorage = new StorageFile(STUDENT_FILE_PATH);
+            componentStorage = new StorageFile(COMPONENT_FILE_PATH);
+        } catch (StorageOperationException e) {
+            System.out.println("File storage error encountered: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+
         while (true) {
             try {
                 String line = ui.getUserInput();
