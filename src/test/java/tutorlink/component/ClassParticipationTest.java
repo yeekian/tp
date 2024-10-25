@@ -22,7 +22,7 @@ public class ClassParticipationTest {
 
     @Test
     void toString_validParticipation_correctFormat() {
-        String expected = "ClassParticipation [name=participation, maxScore=10.0, weight=0.1]";
+        String expected = "[name=participation, maxScore=10.0, weight=0.1]";
         assertEquals(expected, participation.toString());
     }
 }

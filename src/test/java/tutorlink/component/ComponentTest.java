@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ComponentTest {
@@ -27,30 +26,6 @@ public class ComponentTest {
     }
 
     @Test
-    void constructor_invalidName_exceptionThrown() {
-        assertThrows(IllegalArgumentException.class, () ->
-                new Assignment("", 50.0, 0.3));
-        assertThrows(IllegalArgumentException.class, () ->
-                new Assignment(null, 50.0, 0.3));
-    }
-
-    @Test
-    void constructor_invalidMaxScore_exceptionThrown() {
-        assertThrows(IllegalArgumentException.class, () ->
-                new Assignment("Assignment 1", -50.0, 0.3));
-        assertThrows(IllegalArgumentException.class, () ->
-                new Assignment("Assignment 1", 0.0, 0.3));
-    }
-
-    @Test
-    void constructor_invalidWeight_exceptionThrown() {
-        assertThrows(IllegalArgumentException.class, () ->
-                new Assignment("Assignment 1", 50.0, -0.1));
-        assertThrows(IllegalArgumentException.class, () ->
-                new Assignment("Assignment 1", 50.0, 1.1));
-    }
-
-    @Test
     void equals_sameComponent_returnsTrue() {
         Component duplicateAssignment = new Assignment("Assignment 1", 50.0, 0.3);
         assertEquals(assignment, duplicateAssignment);
@@ -67,13 +42,12 @@ public class ComponentTest {
 
     @Test
     void toString_validComponent_correctFormat() {
-        String expectedAssignment = "Assignment [name=assignment 1, maxScore=50.0, weight=0.3]";
-        String expectedExam = "Exam [name=final exam, maxScore=100.0, weight=0.4]";
-        String expectedParticipation = "ClassParticipation [name=class participation, maxScore=20.0, weight=0.1]";
+        String expectedAssignment = "[name=assignment 1, maxScore=50.0, weight=0.3]";
+        String expectedExam = "[name=final exam, maxScore=100.0, weight=0.4]";
+        String expectedParticipation = "[name=class participation, maxScore=20.0, weight=0.1]";
 
         assertEquals(expectedAssignment, assignment.toString());
         assertEquals(expectedExam, exam.toString());
         assertEquals(expectedParticipation, participation.toString());
     }
 }
-

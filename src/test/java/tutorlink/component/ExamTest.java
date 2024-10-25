@@ -22,7 +22,7 @@ public class ExamTest {
 
     @Test
     void toString_validExam_correctFormat() {
-        String expected = "Exam [name=midterm, maxScore=100.0, weight=0.4]";
+        String expected = "[name=midterm, maxScore=100.0, weight=0.4]";
         assertEquals(expected, exam.toString());
     }
 }

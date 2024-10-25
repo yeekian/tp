@@ -22,7 +22,8 @@ public class AssignmentTest {
 
     @Test
     void toString_validAssignment_correctFormat() {
-        String expected = "Assignment [name=homework, maxScore=30.0, weight=0.2]";
+        String expected = "[name=homework, maxScore=30.0, weight=0.2]";
         assertEquals(expected, assignment.toString());
     }
 }
+
