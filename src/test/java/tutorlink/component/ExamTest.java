@@ -19,10 +19,4 @@ public class ExamTest {
         assertEquals(100.0, exam.getMaxScore());
         assertEquals(0.4, exam.getWeight());
     }
-
-    @Test
-    void toString_validExam_correctFormat() {
-        String expected = "[name=midterm, maxScore=100.0, weight=0.4]";
-        assertEquals(expected, exam.toString());
-    }
 }

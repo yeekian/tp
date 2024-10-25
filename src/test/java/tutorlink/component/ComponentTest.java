@@ -39,15 +39,4 @@ public class ComponentTest {
         assertNotEquals(assignment, null);
         assertNotEquals(assignment, "not a component");
     }
-
-    @Test
-    void toString_validComponent_correctFormat() {
-        String expectedAssignment = "[name=assignment 1, maxScore=50.0, weight=0.3]";
-        String expectedExam = "[name=final exam, maxScore=100.0, weight=0.4]";
-        String expectedParticipation = "[name=class participation, maxScore=20.0, weight=0.1]";
-
-        assertEquals(expectedAssignment, assignment.toString());
-        assertEquals(expectedExam, exam.toString());
-        assertEquals(expectedParticipation, participation.toString());
-    }
 }

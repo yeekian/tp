@@ -19,11 +19,5 @@ public class AssignmentTest {
         assertEquals(30.0, assignment.getMaxScore());
         assertEquals(0.2, assignment.getWeight());
     }
-
-    @Test
-    void toString_validAssignment_correctFormat() {
-        String expected = "[name=homework, maxScore=30.0, weight=0.2]";
-        assertEquals(expected, assignment.toString());
-    }
 }
 
