@@ -5,7 +5,7 @@ import tutorlink.command.Command;
 import tutorlink.exceptions.StorageOperationException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
-import tutorlink.storage.StorageFile;
+import tutorlink.storage.Storage;
 import tutorlink.ui.Ui;
 import tutorlink.parser.Parser;
 
@@ -27,8 +27,8 @@ public class TutorLink {
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
     private static final AppState appState = new AppState();
-    private static StorageFile studentStorage;
-    private static StorageFile componentStorage;
+    private static Storage studentStorage;
+    private static Storage componentStorage;
 
     private static final Logger LOGGER = Logger.getLogger(TutorLink.class.getName());
 
@@ -44,8 +44,8 @@ public class TutorLink {
         ui.displayWelcomeMessage();
 
         try {
-            studentStorage = new StorageFile(STUDENT_FILE_PATH);
-            componentStorage = new StorageFile(COMPONENT_FILE_PATH);
+            studentStorage = new Storage(STUDENT_FILE_PATH);
+            componentStorage = new Storage(COMPONENT_FILE_PATH);
         } catch (StorageOperationException e) {
             System.out.println("File storage error encountered: " + e.getMessage());
             throw new RuntimeException(e);

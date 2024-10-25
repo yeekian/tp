@@ -7,10 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class StorageFile {
+public class Storage {
     public final Path path;
 
-    public StorageFile(String filePath) throws StorageOperationException {
+    public Storage(String filePath) throws StorageOperationException {
         path = Paths.get(filePath);
         try {
             Files.createDirectories(path.getParent());
