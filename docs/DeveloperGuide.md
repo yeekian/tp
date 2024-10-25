@@ -79,9 +79,9 @@ enhancing teaching efficiency.
 
 {Give non-functional requirements}
 
-1. Performance: The system should respond to any command within 2 seconds
+1. Performance: The system should respond to any command within a few seconds
 2. Reliability: The system should not lose any user data even if it crashes unexpectedly
-3. Usability: A new user should be able to use basic features without referring to the user guide
+3. Usability: A new user should be able to use basic features without confusion
 4. Compatibility: The system should work on any mainstream OS (Windows, macOS, Linux) that has Java 11 or above
    installed
 5. Maintainability: The system should be able to export all data in a human-readable format for backup purposes
