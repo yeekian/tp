@@ -1,6 +1,6 @@
 package tutorlink.exceptions;
 
-public class InvalidComponentException extends TutorLinkException {
+public class InvalidComponentException extends IllegalArgumentException  {
     public InvalidComponentException(String message) {
         super(message);
     }
