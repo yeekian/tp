@@ -13,10 +13,8 @@ import tutorlink.lists.ComponentList;
 import tutorlink.lists.StudentList;
 import tutorlink.result.CommandResult;
 import tutorlink.student.Student;
-
 import java.util.HashMap;
-
-import static tutorlink.command.DeleteStudentCommand.STUDENT_NOT_FOUND;
+import static tutorlink.lists.StudentList.STUDENT_NOT_FOUND;
 
 public class AddGradeCommand extends Command {
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/", "s/"};
