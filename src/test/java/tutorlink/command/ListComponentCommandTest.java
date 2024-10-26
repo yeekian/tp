@@ -33,7 +33,7 @@ public class ListComponentCommandTest {
     }
 
     @Test
-    void execute_nonEmptyList_showsAllComponents() throws TutorLinkException, DuplicateComponentException {
+    void execute_nonEmptyList_showsAllComponents() throws TutorLinkException {
         appState.components.addComponent(new Assignment("Assignment 1", 50.0, 0.3));
         appState.components.addComponent(new Exam("Midterm", 100.0, 0.4));
 
