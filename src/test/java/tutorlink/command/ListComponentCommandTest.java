@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
 import tutorlink.component.Assignment;
 import tutorlink.component.Exam;
-import tutorlink.exceptions.DuplicateComponentException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
 
