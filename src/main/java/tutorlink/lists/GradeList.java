@@ -27,21 +27,42 @@ public class GradeList {
         this.gradeArrayList = new ArrayList<>();
     }
 
-    public boolean deleteGrade(String matricNumber, String componentDescription) {
+    public void deleteGrade(String matricNumber, String componentDescription) throws GradeNotFoundException {
         matricNumber = matricNumber.toUpperCase();
         componentDescription = componentDescription.toLowerCase();
         for (Grade grade : gradeArrayList) {
             if (grade.getStudent().getMatricNumber().equals(matricNumber)
                     && grade.getComponent().getName().equals(componentDescription)) {
-                return gradeArrayList.remove(grade);
+                gradeArrayList.remove(grade);
+                return;
             }
         }
-        return false;
+        throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
     }
 
-    public void addGrade(Grade grade)
-            throws DuplicateGradeException {
+    public void deleteGradesByMatric(String matricNumber) {
+        matricNumber = matricNumber.toUpperCase();
+        ArrayList<Grade> gradesToDelete = new ArrayList<>();
+        for (Grade grade : gradeArrayList) {
+            if (grade.getStudent().getMatricNumber().equals(matricNumber)) {
+                gradesToDelete.add(grade);
+            }
+        }
+        gradeArrayList.removeAll(gradesToDelete);
+    }
 
+    public void deleteGradesByComponent(String componentDescription) {
+        componentDescription = componentDescription.toLowerCase();
+        ArrayList<Grade> gradesToDelete = new ArrayList<>();
+        for (Grade grade : gradeArrayList) {
+            if (grade.getComponent().getName().equals(componentDescription)) {
+                gradesToDelete.add(grade);
+            }
+        }
+        gradeArrayList.removeAll(gradesToDelete);
+    }
+
+    public void addGrade(Grade grade) throws DuplicateGradeException {
         for (Grade gradeToCompare : gradeArrayList) {
             if (grade.equals(gradeToCompare)) {
                 throw new DuplicateGradeException(ERROR_DUPLICATE_GRADE_ON_ADD);
