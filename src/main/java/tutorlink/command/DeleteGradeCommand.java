@@ -4,18 +4,17 @@ import java.util.HashMap;
 
 import tutorlink.appstate.AppState;
 import tutorlink.exceptions.DuplicateMatricNumberException;
-import tutorlink.exceptions.GradeNotFoundException;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.lists.StudentList;
 import tutorlink.result.CommandResult;
+import static tutorlink.lists.StudentList.STUDENT_NOT_FOUND;
 
 public class DeleteGradeCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/"};
     public static final String COMMAND_WORD = "delete_grade";
-    public static final String STUDENT_NOT_FOUND = "Error! Student (Matric Number %s) not found";
     public static final String SUCCESS_MESSAGE = "Component %s for student %s successfully deleted";
 
     private static final String ERROR_EITHER_NULL = "Error! Either parameter passed is null!";
@@ -42,12 +41,8 @@ public class DeleteGradeCommand extends Command {
         }
 
         //Attempt to delete grade
-        boolean result = appState.grades.deleteGrade(matricNumber, componentDescription);
-        if (result) {
-            return new CommandResult(String.format(SUCCESS_MESSAGE, componentDescription, matricNumber));
-        } else {
-            throw new GradeNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
-        }
+        appState.grades.deleteGrade(matricNumber, componentDescription);
+        return new CommandResult(String.format(SUCCESS_MESSAGE, componentDescription, matricNumber));
     }
 
     @Override
