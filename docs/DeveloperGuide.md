@@ -24,10 +24,37 @@ The key classes providing functionality to TutorLink are:
 
 <code>CommandResult</code> represents the result of user input.
 
-### How the architecture components Interact with one another
+#### Typical Architecture-Level Interaction
 
 The sequence diagram below depicts a typical user interaction with <code>TutorLink</code>:
 
+### AppState 
+//Content goes here
+
+### Attendance 
+//Content goes here
+
+### Command 
+//Content goes here
+
+### Component
+//Content goes here
+
+### Exceptions
+//Content goes here
+
+### Grade
+//Content goes here
+
+### Result
+//Content goes here
+
+### Student
+//Content goes here
+
+### Ui
+//Content goes here
+//contains Ui and Parser classes
 
 ## Product Scope
 
