@@ -10,14 +10,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StudentList {
-
     //Use Java String formatting to replace %s with matricNumber
+    public static final String STUDENT_NOT_FOUND = "Error! Student (Matric Number %s) not found";
     private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD =
             "Error! Student with Matric Number, %s, already exists in the list!";
     private static final String TO_STRING_DELIMITER = "\n";
     private ArrayList<Student> studentArrayList;
-
-    public static final String STUDENT_NOT_FOUND = "Error! Student (Matric Number %s) not found";
 
     public StudentList() {
         this.studentArrayList = new ArrayList<>();
