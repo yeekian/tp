@@ -73,7 +73,7 @@ public class DeleteStudentCommandTest {
         try {
             result = deleteCommand.execute(appState, arguments);
         } catch (StudentNotFoundException e) {
-            assertEquals(e.getMessage(), String.format("Error! Student A9999999X does not exist in the list!"));
+            assertEquals(e.getMessage(), String.format("Error! Student (Matric Number A9999999X) not found"));
         }
     }
 }
