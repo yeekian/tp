@@ -17,18 +17,21 @@ public class StudentList {
     private static final String TO_STRING_DELIMITER = "\n";
     private ArrayList<Student> studentArrayList;
 
+    public static final String STUDENT_NOT_FOUND = "Error! Student (Matric Number %s) not found";
+
     public StudentList() {
         this.studentArrayList = new ArrayList<>();
     }
 
-    public boolean deleteStudent(String matricNumber) {
+    public void deleteStudent(String matricNumber) throws StudentNotFoundException{
         matricNumber = matricNumber.toUpperCase();
         for (Student student : studentArrayList) {
             if (student.getMatricNumber().equals(matricNumber)) {
-                return studentArrayList.remove(student);
+                studentArrayList.remove(student);
+                return;
             }
         }
-        return false;
+        throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
     }
 
     public void addStudent(String matricNumber, String name) throws DuplicateMatricNumberException {
