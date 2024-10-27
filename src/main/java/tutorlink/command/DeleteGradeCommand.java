@@ -15,7 +15,7 @@ public class DeleteGradeCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/"};
     public static final String COMMAND_WORD = "delete_grade";
-    public static final String SUCCESS_MESSAGE = "Component %s for student %s successfully deleted";
+    public static final String SUCCESS_MESSAGE = "Grade: Component %s for student %s successfully deleted";
 
     private static final String ERROR_EITHER_NULL = "Error! Either parameter passed is null!";
     private static final String ERROR_DUPLICATE_MATRIC_NUMBER =
