@@ -1,0 +1,56 @@
+@startuml
+<style>
+    participant {
+        FontColor White
+    }
+</style>
+!include Style.puml
+actor user
+
+participant ":TutorLink" as TL LOGIC_COLOR_5
+participant ":Logic" as L LOGIC_COLOR_7
+participant ":Ui" as UI LOGIC_COLOR_6
+participant ":AppState" as A LOGIC_COLOR_3
+participant ":Storage" as S LOGIC_COLOR_4
+
+create TL
+user -> TL: start
+activate TL
+create UI
+TL -> UI
+create L
+TL -> L
+create A
+TL -> A
+create S
+TL -> S
+user -> TL:"delete_student i/A1234567X"
+TL -> UI: getUserInput()
+activate UI
+TL <-- UI: String
+TL -> L : getCommand(line)
+activate L
+TL <-- L: Command
+TL -> L : getArguments
+TL <-- L : HashMap<String,String>
+TL -> L : execute()
+L -> A : deleteStudentByMatricNumber("A1234567X")
+activate A
+A -> S : saveStudentFile(students)
+activate S
+S -> S : save to file
+activate S
+S --> S
+deactivate S
+A <-- S
+deactivate S
+
+L <-- A
+deactivate A
+TL <-- L : CommandResult
+deactivate L
+TL -> UI : displayResult
+TL <-- UI
+deactivate UI
+user <-- TL
+@enduml

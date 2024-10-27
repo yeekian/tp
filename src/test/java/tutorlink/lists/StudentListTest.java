@@ -9,7 +9,6 @@ import tutorlink.student.Student;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -39,13 +38,17 @@ class StudentListTest {
     @Test
     void delete_success() throws DuplicateMatricNumberException {
         studentList.addStudent("A1234567B", "John Doe");
-        assertTrue(studentList.deleteStudent("A1234567B"));
+        studentList.deleteStudent("A1234567B");
         assertTrue(studentList.getStudentArrayList().isEmpty());
     }
 
     @Test
     void delete_failure() {
-        assertFalse(studentList.deleteStudent("A1234567B"));
+        try {
+            studentList.deleteStudent("A1234567B");
+        } catch (StudentNotFoundException e) {
+            assertEquals(e.getMessage(), "Error! Student (Matric Number A1234567B) not found");
+        }
     }
 
     @Test
