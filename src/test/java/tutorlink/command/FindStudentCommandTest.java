@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
+import tutorlink.commons.Commons;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.result.CommandResult;
@@ -70,7 +71,7 @@ public class FindStudentCommandTest {
         try {
             CommandResult result = findCommand.execute(appState, arguments);
         } catch (IllegalValueException e) {
-            assertEquals(e.getMessage(), FindStudentCommand.ERROR_BOTH_NULL);
+            assertEquals(e.getMessage(), Commons.ERROR_STUDENT_BOTH_NULL);
         } catch (Exception e) {
             fail("Expected: IllegalValueException, Actual: " + e.getMessage());
         }

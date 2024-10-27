@@ -1,6 +1,7 @@
 package tutorlink.command;
 
 import tutorlink.appstate.AppState;
+import tutorlink.commons.Commons;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
 
@@ -14,7 +15,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(AppState state, HashMap<String, String> arguments) throws TutorLinkException {
-        return new CommandResult("Goodbye! See you soon!");
+        return new CommandResult(Commons.EXIT);
     }
 
     @Override
