@@ -36,7 +36,8 @@ public class AddGradeCommand extends Command {
         if (componentFilteredList.size() == 1) {
             component = componentFilteredList.getComponentArrayList().get(0);
         } else if (componentFilteredList.size() == 0) {
-            throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND, componentDescription));
+            throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND,
+                    componentDescription));
         } else {
             String errorMessage = String.format(Commons.ERROR_DUPLICATE_COMPONENT, componentDescription);
             throw new DuplicateComponentException(errorMessage);
@@ -76,7 +77,8 @@ public class AddGradeCommand extends Command {
 
         }
 
-        return new CommandResult(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription, matricNumber));
+        return new CommandResult(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription,
+                matricNumber));
     }
 
     @Override

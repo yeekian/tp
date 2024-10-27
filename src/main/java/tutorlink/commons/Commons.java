@@ -2,11 +2,11 @@ package tutorlink.commons;
 
 public class Commons {
 
-    public static String ERROR_NULL = "Error! Null parameter passed!";
+    public static final String ERROR_NULL = "Error! Null parameter passed!";
 
     //@@RCPilot1604
     //Student
-    public static String ADD_STUDENT_SUCCESS = "Student %s (%s) added successfully!";
+    public static final String ADD_STUDENT_SUCCESS = "Student %s (%s) added successfully!";
     public static final String ERROR_DUPLICATE_STUDENT =
             "Error! There is more than 1 student with the Matric Number, %s!";
     public static final String ERROR_STUDENT_BOTH_NULL = "Error! Both parameters passed are null!";
