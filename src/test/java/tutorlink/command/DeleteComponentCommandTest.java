@@ -4,6 +4,7 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
+import tutorlink.commons.Commons;
 import tutorlink.component.Assignment;
 import tutorlink.component.ClassParticipation;
 import tutorlink.component.Exam;
@@ -63,7 +64,7 @@ public class DeleteComponentCommandTest {
         try {
             command.execute(appState, arguments);
         } catch (IllegalValueException e) {
-            assertEquals(e.getMessage(), "Error! Component name is null");
+            assertEquals(e.getMessage(), Commons.ERROR_NULL);
         } catch (Exception e) {
             fail("Expected: ComponentNotFoundException, actual: " + e.getMessage());
         }

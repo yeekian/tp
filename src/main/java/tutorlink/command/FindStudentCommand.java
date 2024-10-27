@@ -2,6 +2,7 @@ package tutorlink.command;
 
 import java.util.HashMap;
 
+import tutorlink.commons.Commons;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.lists.StudentList;
@@ -12,7 +13,6 @@ public class FindStudentCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"i/", "n/"};
     public static final String COMMAND_WORD = "find_student";
-    public static final String ERROR_BOTH_NULL = "Error! Both parameters passed are null!";
 
     @Override
     public CommandResult execute(AppState appstate, HashMap<String, String> hashmap) throws TutorLinkException {
@@ -20,7 +20,7 @@ public class FindStudentCommand extends Command {
         String name = hashmap.get(ARGUMENT_PREFIXES[1]);
         StudentList students;
         if (name == null && matricNumber == null) {
-            throw new IllegalValueException(ERROR_BOTH_NULL);
+            throw new IllegalValueException(Commons.ERROR_STUDENT_BOTH_NULL);
         }
         if (hashmap.containsKey(ARGUMENT_PREFIXES[0])) {
             students = appstate.students.findStudentByMatricNumber(matricNumber);

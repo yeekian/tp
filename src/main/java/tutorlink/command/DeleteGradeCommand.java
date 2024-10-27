@@ -3,6 +3,7 @@ package tutorlink.command;
 import java.util.HashMap;
 
 import tutorlink.appstate.AppState;
+import tutorlink.commons.Commons;
 import tutorlink.exceptions.DuplicateMatricNumberException;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.StudentNotFoundException;
@@ -15,19 +16,13 @@ public class DeleteGradeCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/"};
     public static final String COMMAND_WORD = "delete_grade";
-    public static final String SUCCESS_MESSAGE = "Grade: Component %s for student %s successfully deleted";
-
-    private static final String ERROR_EITHER_NULL = "Error! Either parameter passed is null!";
-    private static final String ERROR_DUPLICATE_MATRIC_NUMBER =
-            "Error! There is more than 1 student with the Matric Number, %s!";
-
     @Override
     public CommandResult execute(AppState appState, HashMap<String, String> hashmap) throws TutorLinkException {
         String matricNumber = hashmap.get(ARGUMENT_PREFIXES[0]);
         String componentDescription = hashmap.get(ARGUMENT_PREFIXES[1]);
 
         if (matricNumber == null || componentDescription == null) {
-            throw new IllegalValueException(ERROR_EITHER_NULL);
+            throw new IllegalValueException(Commons.ERROR_NULL);
         }
 
         //Check number of students with matricNumber
@@ -36,13 +31,13 @@ public class DeleteGradeCommand extends Command {
         if (filteredList.size() == 0) {
             throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
         } else if (filteredList.size() > 1) {
-            String errorMessage = String.format(ERROR_DUPLICATE_MATRIC_NUMBER, matricNumber);
+            String errorMessage = String.format(Commons.ERROR_DUPLICATE_STUDENT, matricNumber);
             throw new DuplicateMatricNumberException(errorMessage);
         }
 
         //Attempt to delete grade
         appState.grades.deleteGrade(matricNumber, componentDescription);
-        return new CommandResult(String.format(SUCCESS_MESSAGE, componentDescription, matricNumber));
+        return new CommandResult(String.format(Commons.DELETE_GRADE_SUCCESS, componentDescription, matricNumber));
     }
 
     @Override
