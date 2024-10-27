@@ -2,6 +2,7 @@ package tutorlink.parser;
 
 import tutorlink.command.AddStudentCommand;
 import tutorlink.command.Command;
+import tutorlink.command.DeleteComponentCommand;
 import tutorlink.command.DeleteGradeCommand;
 import tutorlink.command.DeleteStudentCommand;
 import tutorlink.command.ExitCommand;
@@ -49,6 +50,8 @@ public class Parser {
 
         case DeleteGradeCommand.COMMAND_WORD:
             return new DeleteGradeCommand();
+        case DeleteComponentCommand.COMMAND_WORD:
+            return new DeleteComponentCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(); // Lists all students
