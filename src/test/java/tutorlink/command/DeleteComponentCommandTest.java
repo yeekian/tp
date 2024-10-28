@@ -5,9 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
-import tutorlink.component.Assignment;
-import tutorlink.component.ClassParticipation;
-import tutorlink.component.Exam;
+import tutorlink.component.Component;
 import tutorlink.exceptions.ComponentNotFoundException;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.result.CommandResult;
@@ -24,9 +22,9 @@ public class DeleteComponentCommandTest {
     @BeforeEach
     void setup() {
         appState = new AppState();
-        appState.components.addComponent(new Exam("finals", 40.0, 0.4));
-        appState.components.addComponent(new Assignment("iP", 20.0, 0.1));
-        appState.components.addComponent(new ClassParticipation("lectures", 10.0, 0.1));
+        appState.components.addComponent(new Component("finals", 40.0, 0.4));
+        appState.components.addComponent(new Component("iP", 20.0, 0.1));
+        appState.components.addComponent(new Component("lectures", 10.0, 0.1));
     }
 
     @Test
