@@ -81,21 +81,25 @@ public class TutorLink {
 
                 ui.displayResult(res);
 
+                saveAllLists();
+
                 if (currentCommand.isExit()) {
-                    try {
-                        studentStorage.saveStudentList(appState.students.getStudentArrayList());
-                        componentStorage.saveComponentList(appState.components.getComponentArrayList());
-                        gradeStorage.saveGradeList(appState.grades.getGradeArrayList());
-                    } catch (IOException e) {
-                        System.out.println("File storage error encountered: " + e.getMessage());
-                        throw new RuntimeException(e);
-                    }
                     break;
                 }
+
             } catch (TutorLinkException e) {
                 ui.displayException(e);
+            } catch (IOException e) {
+                System.out.println("File storage error encountered: " + e.getMessage());
+                throw new RuntimeException(e);
             }
         }
+    }
+
+    private static void saveAllLists() throws IOException {
+        studentStorage.saveStudentList(appState.students.getStudentArrayList());
+        componentStorage.saveComponentList(appState.components.getComponentArrayList());
+        gradeStorage.saveGradeList(appState.grades.getGradeArrayList());
     }
 
     private static void setUpLogger() {
