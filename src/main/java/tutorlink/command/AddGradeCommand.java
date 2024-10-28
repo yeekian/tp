@@ -1,6 +1,7 @@
 package tutorlink.command;
 
 import tutorlink.appstate.AppState;
+import tutorlink.commons.Commons;
 import tutorlink.component.Component;
 import tutorlink.exceptions.ComponentNotFoundException;
 import tutorlink.exceptions.DuplicateComponentException;
@@ -13,24 +14,12 @@ import tutorlink.lists.ComponentList;
 import tutorlink.lists.StudentList;
 import tutorlink.result.CommandResult;
 import tutorlink.student.Student;
-
 import java.util.HashMap;
-
-import static tutorlink.command.DeleteStudentCommand.STUDENT_NOT_FOUND;
+import static tutorlink.lists.StudentList.STUDENT_NOT_FOUND;
 
 public class AddGradeCommand extends Command {
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/", "s/"};
     public static final String COMMAND_WORD = "add_grade";
-
-    private static final String ERROR_ARGUMENT_NULL = "Error! At least one parameter passed is null!";
-    private static final String SUCCESS_MESSAGE = "%s grade added successfully to %s for %s!";
-    private static final String ERROR_DUPLICATE_MATRIC_NUMBER =
-            "Error! There is more than 1 student with the Matric Number, %s!";
-    private static final String ERROR_COMPONENT_NOT_FOUND = "Error! Component (%s) does not exist in the list!";
-    private static final String ERROR_DUPLICATE_COMPONENT =
-            "Error! There is more than 1 component with the description, %s!";
-    private static final String ERROR_INVALID_SCORE =
-            "Error! Score must be double that is more than or equal to 0, and not exceed the max score!";
 
     @Override
     public CommandResult execute(AppState appstate, HashMap<String, String> hashmap) throws TutorLinkException {
@@ -38,7 +27,7 @@ public class AddGradeCommand extends Command {
         String componentDescription = hashmap.get(ARGUMENT_PREFIXES[1]);
         String scoreNumber = hashmap.get(ARGUMENT_PREFIXES[2]);
         if (matricNumber == null || componentDescription == null || scoreNumber == null) {
-            throw new IllegalValueException(ERROR_ARGUMENT_NULL);
+            throw new IllegalValueException(Commons.ERROR_NULL);
         }
 
         //Get component object using String componentDescription
@@ -47,9 +36,10 @@ public class AddGradeCommand extends Command {
         if (componentFilteredList.size() == 1) {
             component = componentFilteredList.getComponentArrayList().get(0);
         } else if (componentFilteredList.size() == 0) {
-            throw new ComponentNotFoundException(String.format(ERROR_COMPONENT_NOT_FOUND, componentDescription));
+            throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND,
+                    componentDescription));
         } else {
-            String errorMessage = String.format(ERROR_DUPLICATE_COMPONENT, componentDescription);
+            String errorMessage = String.format(Commons.ERROR_DUPLICATE_COMPONENT, componentDescription);
             throw new DuplicateComponentException(errorMessage);
         }
 
@@ -64,7 +54,7 @@ public class AddGradeCommand extends Command {
         } else if (studentFilteredList.size() == 0) {
             throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
         } else {
-            String errorMessage = String.format(ERROR_DUPLICATE_MATRIC_NUMBER, matricNumber);
+            String errorMessage = String.format(Commons.ERROR_DUPLICATE_STUDENT, matricNumber);
             throw new DuplicateMatricNumberException(errorMessage);
         }
 
@@ -75,7 +65,7 @@ public class AddGradeCommand extends Command {
             double score = Double.parseDouble(scoreNumber);
 
             if (score < 0.0 || score >= component.getMaxScore()) {
-                throw new IllegalValueException(ERROR_INVALID_SCORE);
+                throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
             }
 
             //create a new grade object
@@ -83,11 +73,12 @@ public class AddGradeCommand extends Command {
 
             appstate.grades.addGrade(grade);
         } catch (NumberFormatException e) {
-            throw new IllegalValueException(ERROR_INVALID_SCORE);
+            throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
 
         }
 
-        return new CommandResult(String.format(SUCCESS_MESSAGE, scoreNumber, componentDescription, matricNumber));
+        return new CommandResult(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription,
+                matricNumber));
     }
 
     @Override

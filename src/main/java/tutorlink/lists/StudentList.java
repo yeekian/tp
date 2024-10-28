@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StudentList {
-
     //Use Java String formatting to replace %s with matricNumber
+    public static final String STUDENT_NOT_FOUND = "Error! Student (Matric Number %s) not found";
     private static final String ERROR_DUPLICATE_MATRIC_NUMBER_ON_ADD =
             "Error! Student with Matric Number, %s, already exists in the list!";
     private static final String TO_STRING_DELIMITER = "\n";
@@ -21,14 +21,15 @@ public class StudentList {
         this.studentArrayList = new ArrayList<>();
     }
 
-    public boolean deleteStudent(String matricNumber) {
+    public void deleteStudent(String matricNumber) throws StudentNotFoundException{
         matricNumber = matricNumber.toUpperCase();
         for (Student student : studentArrayList) {
             if (student.getMatricNumber().equals(matricNumber)) {
-                return studentArrayList.remove(student);
+                studentArrayList.remove(student);
+                return;
             }
         }
-        return false;
+        throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
     }
 
     public void addStudent(String matricNumber, String name) throws DuplicateMatricNumberException {

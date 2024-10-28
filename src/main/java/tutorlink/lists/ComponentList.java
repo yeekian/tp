@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
  * Represents a list of components.
  */
 public class ComponentList {
-    private static final String ERROR_COMPONENT_NOT_FOUND = "Error! No matching component found!";
+    private static final String ERROR_COMPONENT_NOT_FOUND = "Error! Component %s does not exist in the list!";
     private static final String ERROR_DUPLICATE_COMPONENT = "Error! Component already exists in the list!";
 
     private ArrayList<Component> componentArrayList;
@@ -28,7 +28,7 @@ public class ComponentList {
                 .filter(comp -> comp.getName().toUpperCase().contains(name.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.componentArrayList.isEmpty()) {
-            throw new ComponentNotFoundException(ERROR_COMPONENT_NOT_FOUND);
+            throw new ComponentNotFoundException(String.format(ERROR_COMPONENT_NOT_FOUND, name));
         }
         return filteredList;
     }
@@ -49,7 +49,7 @@ public class ComponentList {
                 return;
             }
         }
-        throw new ComponentNotFoundException(ERROR_COMPONENT_NOT_FOUND);
+        throw new ComponentNotFoundException(String.format(ERROR_COMPONENT_NOT_FOUND, component));
     }
 
     @Override

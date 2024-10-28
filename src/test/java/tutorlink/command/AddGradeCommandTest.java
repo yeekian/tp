@@ -3,6 +3,7 @@ package tutorlink.command;
 
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
+import tutorlink.commons.Commons;
 import tutorlink.component.Assignment;
 import tutorlink.component.ClassParticipation;
 import tutorlink.component.Exam;
@@ -24,9 +25,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class AddGradeCommandTest {
-
-    private final String successMessage = "%s grade added successfully to %s for %s!";
-
     @Test
     void addGrade_allArgumentsExam_successful() {
         AppState appState = new AppState();
@@ -65,7 +63,7 @@ public class AddGradeCommandTest {
 
         //Test grade added
         assertNotNull(gradeResult);
-        assertEquals(String.format(successMessage, scoreNumber, componentDescription, matricNumber),
+        assertEquals(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription, matricNumber),
                 gradeResult.toString());
     }
 
@@ -108,7 +106,7 @@ public class AddGradeCommandTest {
         //Test grade added
 
         assertNotNull(gradeResult);
-        assertEquals(String.format(successMessage, scoreNumber, componentDescription, matricNumber),
+        assertEquals(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription, matricNumber),
                 gradeResult.toString());
     }
 
@@ -150,7 +148,7 @@ public class AddGradeCommandTest {
 
         //Test grade added
         assertNotNull(gradeResult);
-        assertEquals(String.format(successMessage, scoreNumber, componentDescription, matricNumber),
+        assertEquals(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription, matricNumber),
                 gradeResult.toString());
     }
 
@@ -407,7 +405,7 @@ public class AddGradeCommandTest {
 
         //Test grade added
         assertNotNull(gradeResult);
-        assertEquals(String.format(successMessage, originalScoreNumber, componentDescription, matricNumber),
+        assertEquals(String.format(Commons.ADD_GRADE_SUCCESS, originalScoreNumber, componentDescription, matricNumber),
                 gradeResult.toString());
 
         //Add repeat exam grade
