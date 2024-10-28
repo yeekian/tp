@@ -21,6 +21,10 @@ public class ComponentList {
         this.componentArrayList = new ArrayList<>();
     }
 
+    public ComponentList(ArrayList<Component> componentArrayList) {
+        this.componentArrayList = componentArrayList;
+    }
+
     public ComponentList findComponent(String name) throws ComponentNotFoundException {
         ComponentList filteredList = new ComponentList();
         filteredList.componentArrayList = componentArrayList
@@ -65,10 +69,6 @@ public class ComponentList {
 
     public ArrayList<Component> getComponentArrayList() {
         return componentArrayList;
-    }
-
-    public void setComponentArrayList(ArrayList<Component> componentArrayList) {
-        this.componentArrayList = componentArrayList;
     }
 
     public int size() {

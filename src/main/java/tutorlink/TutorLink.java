@@ -33,7 +33,7 @@ public class TutorLink {
 
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
-    private static final AppState appState = new AppState();
+    private static AppState appState;
     private static StudentStorage studentStorage;
     private static ComponentStorage componentStorage;
     private static GradeStorage gradeStorage;
@@ -54,15 +54,14 @@ public class TutorLink {
         try {
             studentStorage = new StudentStorage(STUDENT_FILE_PATH);
             ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
-            appState.students.setStudentArrayList(initialStudentList);
 
             componentStorage = new ComponentStorage(COMPONENT_FILE_PATH);
             ArrayList<Component> initialComponentList = componentStorage.loadComponentList();
-            appState.components.setComponentArrayList(initialComponentList);
 
             gradeStorage = new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList);
             ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList();
-            appState.grades.setGradeArrayList(initialGradeList);
+            
+            appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
         } catch (IOException | StorageOperationException e) {
             System.out.println("File storage error encountered: " + e.getMessage());
             throw new RuntimeException(e);
