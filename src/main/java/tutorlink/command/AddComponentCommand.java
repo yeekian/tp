@@ -27,7 +27,8 @@ public class AddComponentCommand extends Command {
 
         double maxScore = convertMaxScoreToValidDouble(maxScoreNumber);
         appState.components.addComponent(new Component(componentName, maxScore, weightage));
-        return new CommandResult(String.format(Commons.ADD_COMPONENT_SUCCESS, componentName, weightageNumber, maxScoreNumber));
+        return new CommandResult(String.format(Commons.ADD_COMPONENT_SUCCESS,
+                componentName, weightageNumber, maxScoreNumber));
     }
 
     private static double convertWeightageToValidDouble(String weightageNumber) {
