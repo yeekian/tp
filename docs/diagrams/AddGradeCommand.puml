@@ -1,0 +1,75 @@
+@startuml
+
+TutorLink -> Ui : getUserInput()
+activate Ui
+TutorLink <-- Ui: line
+deactivate Ui
+
+TutorLink -> Parser : getCommand(line)
+activate Parser
+Parser -> AddGradeCommand : create AddGradeCommand object
+
+activate AddGradeCommand
+Parser <-- AddGradeCommand : AddGradeCommand object
+deactivate AddGradeCommand
+TutorLink <-- Parser : AddGradeCommand object
+
+deactivate Parser
+
+TutorLink -> AddGradeCommand : getArgumentPrefixes()
+activate AddGradeCommand
+TutorLink <-- AddGradeCommand : argumentPrefixes
+deactivate AddGradeCommand
+
+TutorLink -> Parser : getArguments(argumentPrefixes, line)
+activate Parser
+TutorLink <-- Parser : arguments
+deactivate Parser
+
+TutorLink -> AddGradeCommand : execute(AppState, arguments)
+activate AddGradeCommand
+
+AddGradeCommand -> AddGradeCommand : findComponentFromComponents
+activate AddGradeCommand
+AddGradeCommand -> ComponentList : findComponent(componentDescription)
+activate ComponentList
+AddGradeCommand <-- ComponentList : componentFilteredList
+deactivate ComponentList
+AddGradeCommand --> AddGradeCommand : component
+deactivate AddGradeCommand
+
+
+
+AddGradeCommand -> AddGradeCommand : findStudentFromStudents
+activate AddGradeCommand
+AddGradeCommand -> StudentList : findStudentByMatricNumber(matricNumber)
+activate StudentList
+AddGradeCommand <-- StudentList : return studentFilteredList
+deactivate StudentList
+AddGradeCommand --> AddGradeCommand : student
+deactivate AddGradeCommand
+
+AddGradeCommand -> AddGradeCommand : convertScoreToValidDouble(scoreNumber)
+activate AddGradeCommand
+AddGradeCommand --> AddGradeCommand : score
+deactivate AddGradeCommand
+
+AddGradeCommand -> Grade : Grade(component, student, score)
+activate Grade
+AddGradeCommand <-- Grade : grade
+deactivate Grade
+
+AddGradeCommand -> GradeList : addGrade(grade)
+activate GradeList
+deactivate GradeList
+
+
+TutorLink <-- AddGradeCommand  : res
+deactivate AddGradeCommand
+
+TutorLink -> Ui : displayResult(res)
+activate Ui
+deactivate Ui
+
+
+@enduml
