@@ -67,6 +67,10 @@ public class ComponentList {
         return componentArrayList;
     }
 
+    public void setComponentArrayList(ArrayList<Component> componentArrayList) {
+        this.componentArrayList = componentArrayList;
+    }
+
     public int size() {
         return componentArrayList.size();
     }
