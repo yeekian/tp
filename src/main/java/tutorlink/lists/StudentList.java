@@ -52,6 +52,10 @@ public class StudentList {
         return studentArrayList;
     }
 
+    public void setStudentArrayList(ArrayList<Student> studentArrayList) {
+        this.studentArrayList = studentArrayList;
+    }
+
     @Override
     public String toString() {
         return IntStream.range(0, studentArrayList.size())

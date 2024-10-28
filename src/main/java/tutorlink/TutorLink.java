@@ -6,10 +6,12 @@ import tutorlink.exceptions.StorageOperationException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
 import tutorlink.storage.Storage;
+import tutorlink.student.Student;
 import tutorlink.ui.Ui;
 import tutorlink.parser.Parser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
@@ -46,7 +48,10 @@ public class TutorLink {
         try {
             studentStorage = new Storage(STUDENT_FILE_PATH);
             componentStorage = new Storage(COMPONENT_FILE_PATH);
-        } catch (StorageOperationException e) {
+
+            ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
+            appState.students.setStudentArrayList(initialStudentList);
+        } catch (IOException | StorageOperationException e) {
             System.out.println("File storage error encountered: " + e.getMessage());
             throw new RuntimeException(e);
         }
