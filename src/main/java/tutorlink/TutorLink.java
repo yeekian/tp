@@ -7,7 +7,9 @@ import tutorlink.exceptions.StorageOperationException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.grade.Grade;
 import tutorlink.result.CommandResult;
-import tutorlink.storage.Storage;
+import tutorlink.storage.ComponentStorage;
+import tutorlink.storage.GradeStorage;
+import tutorlink.storage.StudentStorage;
 import tutorlink.student.Student;
 import tutorlink.ui.Ui;
 import tutorlink.parser.Parser;
@@ -32,9 +34,9 @@ public class TutorLink {
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
     private static final AppState appState = new AppState();
-    private static Storage studentStorage;
-    private static Storage componentStorage;
-    private static Storage gradeStorage;
+    private static StudentStorage studentStorage;
+    private static ComponentStorage componentStorage;
+    private static GradeStorage gradeStorage;
 
     private static final Logger LOGGER = Logger.getLogger(TutorLink.class.getName());
 
@@ -50,9 +52,8 @@ public class TutorLink {
         ui.displayWelcomeMessage();
 
         try {
-            studentStorage = new Storage(STUDENT_FILE_PATH);
-            componentStorage = new Storage(COMPONENT_FILE_PATH);
-            gradeStorage = new Storage(GRADE_FILE_PATH);
+            studentStorage = new StudentStorage(STUDENT_FILE_PATH);
+            componentStorage = new ComponentStorage(COMPONENT_FILE_PATH);
 
             ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
             appState.students.setStudentArrayList(initialStudentList);
@@ -60,7 +61,8 @@ public class TutorLink {
             ArrayList<Component> initialComponentList = componentStorage.loadComponentList();
             appState.components.setComponentArrayList(initialComponentList);
 
-            ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList(initialComponentList, initialStudentList);
+            gradeStorage = new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList);
+            ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList();
             appState.grades.setGradeArrayList(initialGradeList);
 
         } catch (IOException | StorageOperationException e) {

@@ -1,22 +1,16 @@
 package tutorlink.storage;
 
-import tutorlink.component.Assignment;
-import tutorlink.component.ClassParticipation;
-import tutorlink.component.Component;
-import tutorlink.component.Exam;
 import tutorlink.exceptions.StorageOperationException;
-import tutorlink.grade.Grade;
-import tutorlink.student.Student;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Storage {
+    protected static final String READ_DELIMITER = " \\| ";
+    protected static final String WRITE_DELIMITER = " | ";
+
     public final Path path;
 
     public Storage(String filePath) throws StorageOperationException {
@@ -31,127 +25,4 @@ public class Storage {
         }
     }
 
-    public ArrayList<Student> loadStudentList() throws IOException {
-        ArrayList<Student> students = new ArrayList<>();
-        Scanner fileScanner = new Scanner(path);
-        while (fileScanner.hasNext()) {
-            students.add(getStudentFromFileLine(fileScanner.nextLine()));
-        }
-        return students;
-    }
-
-    public void saveStudentList(ArrayList<Student> students) throws IOException {
-        FileWriter fileWriter = new FileWriter(path.toFile());
-        for (Student student : students) {
-            fileWriter.write(getFileInputForStudent(student) + System.lineSeparator());
-        }
-        fileWriter.close();
-    }
-
-    private Student getStudentFromFileLine(String fileLine) {
-        String[] stringParts = fileLine.split(" \\| ");
-        String matricNumber = stringParts[0];
-        String name = stringParts[1];
-        return new Student(matricNumber, name);
-    }
-
-    private String getFileInputForStudent(Student student) {
-        return student.getMatricNumber() + " | " + student.getName();
-    }
-
-    public ArrayList<Component> loadComponentList() throws IOException {
-        ArrayList<Component> components = new ArrayList<>();
-        Scanner fileScanner = new Scanner(path);
-        while (fileScanner.hasNext()) {
-            components.add(getComponentFromFileLine(fileScanner.nextLine()));
-        }
-        return components;
-    }
-
-    public void saveComponentList(ArrayList<Component> components) throws IOException {
-        FileWriter fileWriter = new FileWriter(path.toFile());
-        for (Component comp : components) {
-            fileWriter.write(getFileInputForComponent(comp) + System.lineSeparator());
-        }
-        fileWriter.close();
-    }
-
-    private Component getComponentFromFileLine(String fileLine) {
-        String[] stringParts = fileLine.split(" \\| ");
-        String componentType = stringParts[0];
-        String name = stringParts[1];
-        double maxScore = Double.parseDouble(stringParts[2]);
-        double weight = Double.parseDouble(stringParts[3]);
-        switch (componentType) {
-        case "P":
-            return new ClassParticipation(name, maxScore, weight);
-        case "A":
-            return new Assignment(name, maxScore, weight);
-        case "E":
-            return new Exam(name, maxScore, weight);
-        default:
-            throw new RuntimeException();
-        }
-    }
-
-    private String getFileInputForComponent(Component component) {
-        String convertedString = "";
-        if (component instanceof ClassParticipation) {
-            convertedString += "P | ";
-        } else if (component instanceof Assignment) {
-            convertedString += "A | ";
-        } else if (component instanceof Exam) {
-            convertedString += "E | ";
-        }
-        convertedString += component.getName() + " | " + component.getMaxScore() + " | " + component.getWeight();
-        return convertedString;
-    }
-
-    public ArrayList<Grade> loadGradeList(ArrayList<Component> componentList, ArrayList<Student> studentList)
-            throws IOException {
-        ArrayList<Grade> grades = new ArrayList<>();
-        Scanner fileScanner = new Scanner(path);
-        while (fileScanner.hasNext()) {
-            String[] stringParts = fileScanner.nextLine().split(" \\| ");
-            String componentName = stringParts[0];
-            String matricNumber = stringParts[1];
-            double score = Double.parseDouble(stringParts[2]);
-
-            Component selectedComp = null;
-            for (Component comp : componentList) {
-                if (comp.getName().equals(componentName)) {
-                    selectedComp = comp;
-                    break;
-                }
-            }
-            Student selectedStudent = null;
-            for (Student student : studentList) {
-                if (student.getMatricNumber().equals(matricNumber)) {
-                    selectedStudent = student;
-                    break;
-                }
-            }
-
-            if (selectedComp != null && selectedStudent != null) {
-                Grade newGrade = new Grade(selectedComp, selectedStudent, score);
-                grades.add(newGrade);
-            }
-        }
-        return grades;
-    }
-
-    public void saveGradeList(ArrayList<Grade> grades) throws IOException {
-        FileWriter fileWriter = new FileWriter(path.toFile());
-        for (Grade grade : grades) {
-            fileWriter.write(getFileInputForGrade(grade) + System.lineSeparator());
-        }
-        fileWriter.close();
-    }
-
-    private String getFileInputForGrade(Grade grade) {
-        String componentName = grade.getComponent().getName();
-        String matricNumber = grade.getStudent().getMatricNumber();
-        double score = grade.getScore();
-        return componentName + " | " + matricNumber + " | " + score;
-    }
 }
