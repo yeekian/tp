@@ -106,10 +106,44 @@ public class Storage {
         convertedString += component.getName() + " | " + component.getMaxScore() + " | " + component.getWeight();
         return convertedString;
     }
+
+    public ArrayList<Grade> loadGradeList(ArrayList<Component> componentList, ArrayList<Student> studentList)
+            throws IOException {
+        ArrayList<Grade> grades = new ArrayList<>();
+        Scanner fileScanner = new Scanner(path);
+        while (fileScanner.hasNext()) {
+            String[] stringParts = fileScanner.nextLine().split(" \\| ");
+            String componentName = stringParts[0];
+            String matricNumber = stringParts[1];
+            double score = Double.parseDouble(stringParts[2]);
+
+            Component selectedComp = null;
+            for (Component comp : componentList) {
+                if (comp.getName().equals(componentName)) {
+                    selectedComp = comp;
+                    break;
+                }
+            }
+            Student selectedStudent = null;
+            for (Student student : studentList) {
+                if (student.getMatricNumber().equals(matricNumber)) {
+                    selectedStudent = student;
+                    break;
+                }
+            }
+
+            if (selectedComp != null && selectedStudent != null) {
+                Grade newGrade = new Grade(selectedComp, selectedStudent, score);
+                grades.add(newGrade);
+            }
+        }
+        return grades;
+    }
+
     public void saveGradeList(ArrayList<Grade> grades) throws IOException {
         FileWriter fileWriter = new FileWriter(path.toFile());
         for (Grade grade : grades) {
-            fileWriter.write(getFileInputForGrade(grade));
+            fileWriter.write(getFileInputForGrade(grade) + System.lineSeparator());
         }
         fileWriter.close();
     }

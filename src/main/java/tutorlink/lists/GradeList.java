@@ -122,4 +122,8 @@ public class GradeList {
     public ArrayList<Grade> getGradeArrayList() {
         return gradeArrayList;
     }
+
+    public void setGradeArrayList(ArrayList<Grade> gradeArrayList) {
+        this.gradeArrayList = gradeArrayList;
+    }
 }
