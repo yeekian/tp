@@ -82,6 +82,9 @@ class GradeList{
     + findGrade(matricNumber: String, componentDescription: String): GradeList
     + addGrade(grade: Grade): void
     + deleteGrade(matricNumber: String, componentDescription: String): void
+	+ deleteGradesByMatric(matricNumber: String) : void
+	+ deleteGradesByComponent(componentDescription: String) : void
+    + calculateStudentGPA(matricNumber: String): double
     + toString(): String
 }
 class StudentList {
@@ -89,14 +92,16 @@ class StudentList {
     + findStudentByName(name: String): StudentList
 	+ getStudentArrayList() : StudentList
     + addStudent(matricNumber: String, name: String) void
-    + deleteStudent(matricNumber: String, name: String): boolean
+    + deleteStudent(matricNumber: String, name: String): void
     + size(): int
     + toString(): String
 }
 class ComponentList {
-    + findComponent(id: String): Component
+    + findComponent(id: String): ComponentList
     + addComponent(component: Component): void
     + deleteComponent(component: Component): void
+    + findAllComponents(): ArrayList<Component>
+    + size(): int
     + toString(): String
 }
 

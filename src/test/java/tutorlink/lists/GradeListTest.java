@@ -1,4 +1,5 @@
-package tutorlink.list;
+//@@author RCPilot1604
+package tutorlink.lists;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,13 +8,12 @@ import tutorlink.component.Exam;
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
 import tutorlink.grade.Grade;
-import tutorlink.lists.GradeList;
 import tutorlink.student.Student;
 import tutorlink.component.Component;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class GradeListTest {
 
@@ -51,13 +51,19 @@ class GradeListTest {
     @Test
     void delete_success() throws DuplicateGradeException {
         gradeList.addGrade(grade1);
-        assertTrue(gradeList.deleteGrade(grade1.getStudent().getMatricNumber(), grade1.getComponent().getName()));
+        gradeList.deleteGrade(grade1.getStudent().getMatricNumber(), grade1.getComponent().getName());
         assertEquals(0, gradeList.toString().length()); // Ensure it's removed
     }
 
     @Test
     void delete_notFound() {
-        assertFalse(gradeList.deleteGrade("A9999999B", "nonexistentComponent"));
+        try {
+            gradeList.deleteGrade("A9999999B", "nonexistentComponent");
+        } catch (GradeNotFoundException e) {
+            assertEquals(e.getMessage(), "Error! Grade (A9999999B, nonexistentcomponent) does not exist in the list!");
+        } catch (Exception e) {
+            fail("Expected: StudentNotFoundException, Actual: " + e.getMessage());
+        }
     }
 
     @Test
@@ -84,3 +90,4 @@ class GradeListTest {
         assertEquals(expectedString, gradeList.toString());
     }
 }
+//@@author
