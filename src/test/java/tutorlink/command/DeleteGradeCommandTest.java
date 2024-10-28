@@ -3,7 +3,7 @@ package tutorlink.command;
 
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
-import tutorlink.component.Exam;
+import tutorlink.component.Component;
 import tutorlink.lists.GradeList;
 import tutorlink.parser.Parser;
 import tutorlink.result.CommandResult;
@@ -52,7 +52,7 @@ public class DeleteGradeCommandTest {
         String examName = componentName;
         double examMaxScore = 100.0;
         double examWeight = 50.0;
-        Exam exam = new Exam(examName,examMaxScore, examWeight);
+        Component exam = new Component(examName,examMaxScore, examWeight);
 
         appState.components.addComponent(exam);
 
