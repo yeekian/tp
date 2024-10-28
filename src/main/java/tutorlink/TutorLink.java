@@ -26,12 +26,14 @@ import java.util.logging.FileHandler;
 public class TutorLink {
     private static final String STUDENT_FILE_PATH = "./data/studentlist.txt";
     private static final String COMPONENT_FILE_PATH = "./data/componentlist.txt";
+    private static final String GRADE_FILE_PATH = "./data/gradelist.txt";
 
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
     private static final AppState appState = new AppState();
     private static Storage studentStorage;
     private static Storage componentStorage;
+    private static Storage gradeStorage;
 
     private static final Logger LOGGER = Logger.getLogger(TutorLink.class.getName());
 
@@ -49,6 +51,7 @@ public class TutorLink {
         try {
             studentStorage = new Storage(STUDENT_FILE_PATH);
             componentStorage = new Storage(COMPONENT_FILE_PATH);
+            gradeStorage = new Storage(GRADE_FILE_PATH);
 
             ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
             appState.students.setStudentArrayList(initialStudentList);
@@ -76,6 +79,7 @@ public class TutorLink {
                     try {
                         studentStorage.saveStudentList(appState.students.getStudentArrayList());
                         componentStorage.saveComponentList(appState.components.getComponentArrayList());
+                        gradeStorage.saveGradeList(appState.grades.getGradeArrayList());
                     } catch (IOException e) {
                         System.out.println("File storage error encountered: " + e.getMessage());
                         throw new RuntimeException(e);

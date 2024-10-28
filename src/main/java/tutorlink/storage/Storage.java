@@ -5,6 +5,7 @@ import tutorlink.component.ClassParticipation;
 import tutorlink.component.Component;
 import tutorlink.component.Exam;
 import tutorlink.exceptions.StorageOperationException;
+import tutorlink.grade.Grade;
 import tutorlink.student.Student;
 
 import java.io.FileWriter;
@@ -47,7 +48,7 @@ public class Storage {
         fileWriter.close();
     }
 
-    private Student getStudentFromFileLine (String fileLine) {
+    private Student getStudentFromFileLine(String fileLine) {
         String[] stringParts = fileLine.split(" \\| ");
         String matricNumber = stringParts[0];
         String name = stringParts[1];
@@ -75,13 +76,13 @@ public class Storage {
         fileWriter.close();
     }
 
-    private Component getComponentFromFileLine (String fileLine) {
+    private Component getComponentFromFileLine(String fileLine) {
         String[] stringParts = fileLine.split(" \\| ");
         String componentType = stringParts[0];
         String name = stringParts[1];
         double maxScore = Double.parseDouble(stringParts[2]);
         double weight = Double.parseDouble(stringParts[3]);
-        switch(componentType) {
+        switch (componentType) {
         case "P":
             return new ClassParticipation(name, maxScore, weight);
         case "A":
@@ -104,5 +105,19 @@ public class Storage {
         }
         convertedString += component.getName() + " | " + component.getMaxScore() + " | " + component.getWeight();
         return convertedString;
+    }
+    public void saveGradeList(ArrayList<Grade> grades) throws IOException {
+        FileWriter fileWriter = new FileWriter(path.toFile());
+        for (Grade grade : grades) {
+            fileWriter.write(getFileInputForGrade(grade));
+        }
+        fileWriter.close();
+    }
+
+    private String getFileInputForGrade(Grade grade) {
+        String componentName = grade.getComponent().getName();
+        String matricNumber = grade.getStudent().getMatricNumber();
+        double score = grade.getScore();
+        return componentName + " | " + matricNumber + " | " + score;
     }
 }
