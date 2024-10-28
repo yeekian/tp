@@ -1,6 +1,6 @@
 package tutorlink.component;
 
-public abstract class Component {
+public class Component {
     private String name;
     private double maxScore;
     private double weight;
@@ -35,6 +35,6 @@ public abstract class Component {
 
     @Override
     public String toString() {
-        return "[name=" + name + ", maxScore=" + maxScore + ", weight=" + weight + "]";
+        return name + ", maxScore = " + maxScore + ", weight = " + weight;
     }
 }

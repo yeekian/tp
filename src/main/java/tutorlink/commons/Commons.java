@@ -22,9 +22,14 @@ public class Commons {
 
     //@@author TrungBui32
     //Component
+    public static final String ADD_COMPONENT_SUCCESS =
+            "Component %s of weight %s, with max score %s added successfully!";
     public static final String DELETE_COMPONENT_SUCCESS = "Component %s successfully deleted";
     public static final String ERROR_COMPONENT_NOT_FOUND = "Error! Component (Name %s) not found";
     public static final String ERROR_DUPLICATE_COMPONENT = "Error! Component (Name %s) already exists in the list!";
+    public static final String ERROR_INVALID_WEIGHTAGE = "Error! Weightage must be double that is between 0 and 1!";
+    public static final String ERROR_INVALID_MAX_SCORE =
+            "Error! Max Score must be double that is more than or equal to 0";
 
     //@@author RCPilot1604
     //Invalid
