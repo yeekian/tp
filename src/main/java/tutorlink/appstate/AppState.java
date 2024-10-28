@@ -8,6 +8,7 @@ public class AppState {
     public StudentList students = new StudentList();
     public GradeList grades = new GradeList();
     public ComponentList components = new ComponentList();
+
     public AppState() {
     }
 }

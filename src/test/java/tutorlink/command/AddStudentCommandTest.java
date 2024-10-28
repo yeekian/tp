@@ -1,3 +1,4 @@
+//@@author RCPilot1604
 package tutorlink.command;
 
 import java.util.HashMap;
@@ -5,6 +6,7 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
+import tutorlink.commons.Commons;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.result.CommandResult;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,10 +44,11 @@ public class AddStudentCommandTest {
             fail("Expected an exception to be thrown due to empty input");
         } catch (IllegalValueException e) {
             // Assert that the exception message matches the expected outcome
-            assertEquals("Error! Either parameter passed is null!", e.getMessage());
+            assertEquals(Commons.ERROR_NULL, e.getMessage());
         } catch (Exception e) {
             // If any other type of exception is thrown, fail the test
             fail("Expected IllegalArgumentException, but got: " + e.getClass().getSimpleName());
         }
     }
 }
+//@@author

@@ -22,6 +22,10 @@ public class Grade {
         return component;
     }
 
+    public double getScore() {
+        return score;
+    }
+
     public boolean isSameSubmission(Object obj) {
         if (obj instanceof Grade grade) {
             return this.component.equals(grade.component)
@@ -33,8 +37,7 @@ public class Grade {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Grade grade) {
-            return this.score == grade.score
-                    && this.component.equals(grade.component)
+            return this.component.equals(grade.component)
                     && this.student.equals(grade.student);
         }
         return false;
