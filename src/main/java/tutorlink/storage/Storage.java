@@ -3,6 +3,7 @@ package tutorlink.storage;
 import tutorlink.exceptions.StorageOperationException;
 import tutorlink.student.Student;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,6 +33,14 @@ public class Storage {
             students.add(getStudentFromFileLine(fileScanner.nextLine()));
         }
         return students;
+    }
+
+    public void saveStudentList(ArrayList<Student> students) throws IOException {
+        FileWriter fileWriter = new FileWriter(path.toFile());
+        for (Student student : students) {
+            fileWriter.write(getFileInputForStudent(student) + System.lineSeparator());
+        }
+        fileWriter.close();
     }
 
     private Student getStudentFromFileLine (String fileLine) {
