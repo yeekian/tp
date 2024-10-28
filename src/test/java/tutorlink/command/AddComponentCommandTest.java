@@ -1,53 +1,40 @@
-package TutorLink.command;
+//@@author yeekian
+package tutorlink.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
-import tutorlink.command.AddStudentCommand;
-import tutorlink.commons.Commons;
-import tutorlink.exceptions.IllegalValueException;
 import tutorlink.result.CommandResult;
+
 
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class AddComponentCommandTest {
     private AppState appState;
     private HashMap<String, String> arguments;
-    private AddStudentCommand command;
+    private AddComponentCommand command;
 
     @BeforeEach
     void setup() {
         appState = new AppState();
         arguments = new HashMap<>();
-        command = new AddStudentCommand();
+        command = new AddComponentCommand();
     }
 
     @Test
     void execute_addOne_expectOne() {
-        arguments.put("i/","A1234567X");
-        arguments.put("n/", "John");
+        arguments.put("c/","Quiz 1");
+        arguments.put("w/","0.3");
+        arguments.put("m/","100");
         CommandResult result = command.execute(appState, arguments);
         assertNotNull(result);
-        assertEquals(result.toString(), "Student John (A1234567X) added successfully!");
-        assertEquals(appState.students.getStudentArrayList().size(), 1);
-    }
-
-    @Test
-    void execute_emptyInput_exceptionThrown() {
-        arguments.put("i/","A1234567X");
-        try {
-            CommandResult result = command.execute(appState, arguments);
-            fail("Expected an exception to be thrown due to empty input");
-        } catch (IllegalValueException e) {
-            // Assert that the exception message matches the expected outcome
-            assertEquals(Commons.ERROR_NULL, e.getMessage());
-        } catch (Exception e) {
-            // If any other type of exception is thrown, fail the test
-            fail("Expected IllegalArgumentException, but got: " + e.getClass().getSimpleName());
-        }
+        assertEquals("Component Quiz 1 of weight 0.3, with max score 100 added successfully!", result.toString());
+        assertEquals(1, appState.components.getComponentArrayList().size());
     }
 }
+//@@author
