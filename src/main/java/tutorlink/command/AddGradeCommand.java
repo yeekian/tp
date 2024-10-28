@@ -30,43 +30,17 @@ public class AddGradeCommand extends Command {
             throw new IllegalValueException(Commons.ERROR_NULL);
         }
 
-        //Get component object using String componentDescription
-        ComponentList componentFilteredList = appstate.components.findComponent(componentDescription.toUpperCase());
-        Component component;
-        if (componentFilteredList.size() == 1) {
-            component = componentFilteredList.getComponentArrayList().get(0);
-        } else if (componentFilteredList.size() == 0) {
-            throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND,
-                    componentDescription));
-        } else {
-            String errorMessage = String.format(Commons.ERROR_DUPLICATE_COMPONENT, componentDescription);
-            throw new DuplicateComponentException(errorMessage);
-        }
+        Component component = findComponentFromComponents(appstate, componentDescription);
 
         assert component != null : "Component object should not be null after this point";
 
-        //Get Student student object using String matricNumber
-        StudentList studentFilteredList = appstate.students.findStudentByMatricNumber(matricNumber);
-
-        Student student;
-        if (studentFilteredList.size() == 1) {
-            student = studentFilteredList.getStudentArrayList().get(0);
-        } else if (studentFilteredList.size() == 0) {
-            throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
-        } else {
-            String errorMessage = String.format(Commons.ERROR_DUPLICATE_STUDENT, matricNumber);
-            throw new DuplicateMatricNumberException(errorMessage);
-        }
+        Student student = findStudentFromStudents(appstate, matricNumber);
 
         assert student != null : "Student object should not be null after this point";
 
         //Convert scoreNumber to double
         try {
-            double score = Double.parseDouble(scoreNumber);
-
-            if (score < 0.0 || score >= component.getMaxScore()) {
-                throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
-            }
+            double score = convertScoreToValidDouble(scoreNumber, component);
 
             //create a new grade object
             Grade grade = new Grade(component, student, score);
@@ -79,6 +53,47 @@ public class AddGradeCommand extends Command {
 
         return new CommandResult(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription,
                 matricNumber));
+    }
+
+    private static double convertScoreToValidDouble(String scoreNumber, Component component) {
+        double score = Double.parseDouble(scoreNumber);
+
+        if (score < 0.0 || score >= component.getMaxScore()) {
+            throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
+        }
+        return score;
+    }
+
+    private static Student findStudentFromStudents(AppState appstate, String matricNumber) {
+        //Get Student student object using String matricNumber
+        StudentList studentFilteredList = appstate.students.findStudentByMatricNumber(matricNumber);
+
+        Student student;
+        if (studentFilteredList.size() == 1) {
+            student = studentFilteredList.getStudentArrayList().get(0);
+        } else if (studentFilteredList.size() == 0) {
+            throw new StudentNotFoundException(String.format(STUDENT_NOT_FOUND, matricNumber));
+        } else {
+            String errorMessage = String.format(Commons.ERROR_DUPLICATE_STUDENT, matricNumber);
+            throw new DuplicateMatricNumberException(errorMessage);
+        }
+        return student;
+    }
+
+    private static Component findComponentFromComponents(AppState appstate, String componentDescription) {
+        //Get component object using String componentDescription
+        ComponentList componentFilteredList = appstate.components.findComponent(componentDescription.toUpperCase());
+        Component component;
+        if (componentFilteredList.size() == 1) {
+            component = componentFilteredList.getComponentArrayList().get(0);
+        } else if (componentFilteredList.size() == 0) {
+            throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND,
+                    componentDescription));
+        } else {
+            String errorMessage = String.format(Commons.ERROR_DUPLICATE_COMPONENT, componentDescription);
+            throw new DuplicateComponentException(errorMessage);
+        }
+        return component;
     }
 
     @Override

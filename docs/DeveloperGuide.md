@@ -126,60 +126,46 @@ enhancing teaching efficiency.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add/delete grade feature
+### Add/Delete Grade Feature
 
-#### Implementation
+#### Implementation Details
 
-The `AddGradeCommand` or `DeleteGradeCommand` is responsible for adding or deleting a grade to a student for a specified
-component within the TutorLink application, respectively. It validates the inputs to ensure that they meet the required
-criteria before performing the addition, thus maintaining data integrity.
-The grades are added to GradeList as a Grade object.
-
-Additional, it implements
+The `AddGradeCommand` and `DeleteGradeCommand` classes handle the addition and deletion of grades for students within the TutorLink application. Each command validates user input to ensure accuracy and consistency before making changes, preserving data integrity. Grades are stored as `Grade` objects within a `GradeList`.
 
 #### Key Operations
 
-- **AddGradeCommand#execute(AppState appstate, HashMap<String, String> hashmap)**: Executes the command to add a grade
-  to a student. It performs the following steps:
-    1. Retrieves and validates the matric number, component description, and score from the `hashmap`.
-    2. Checks for the existence of the specified component and student.
-    3. Validates the score to ensure it is within the acceptable range.
-    4. Creates a new `Grade` object and adds it to the `GradeList` within the `AppState`.
+- **`AddGradeCommand.execute(AppState appState, HashMap<String, String> arguments)`**: Adds a grade to a student by performing the following steps:
+  1. Retrieves and validates the matriculation number, component description, and score from `arguments`.
+  2. Checks that the specified component and student exist.
+  3. Ensures the score is within the allowable range for the specified component.
+  4. Creates a new `Grade` object and adds it to the `GradeList` in `AppState`.
 
-
-- **DeleteGradeCommand#execute(AppState appstate, HashMap<String, String> hashmap)**: Executes the command to delete a
-  grade to a student. It performs the following steps:
-    1. Retrieves and validates the matric number, and component description from the `hashmap`.
-    2. Checks for the existence of the specified component and student.
-    4. Deletes the `Grade` object from the `GradeList` within the `AppState`.
+- **`DeleteGradeCommand.execute(AppState appState, HashMap<String, String> arguments)`**: Removes a grade from a student by performing these steps:
+  1. Retrieves and validates the matriculation number and component description from `arguments`.
+  2. Confirms the existence of the specified component and student.
+  3. Locates and deletes the `Grade` object from the `GradeList` in `AppState`.
 
 #### Example Usage Scenario
 
-Step 1: The user launches the application and has already added students and graded components into TutorLink
+Step 1: The user has launched the application, with students and graded components already registered in TutorLink.
 
-Step 2: The user executes ________ . The add_grade command is parsed through the parser, causing a AddGradeCommand
-object to be created. A hashmap containing all the input parameters are also returned
+Step 2: The user issues a command (e.g., `add_grade`), which the parser processes, creating an `AddGradeCommand` instance and a `HashMap` containing the relevant parameters.
 
-Step 3: The AddGradeCommand is then executed in the TutorLink class file. The execution takes in the current appState
-and the hashmap of arguments generated in step 2.
+Step 3: `AddGradeCommand` is executed within the `TutorLink`, receiving both the current app state and the `HashMap` of arguments.
 
-Step 4: During execution, the command extracts the matricNumber, componentDescription, and scoreNumber from the hashmap
-as String objects. A check is done to ensure that all arguments are not null, else an IllegalValueException is thrown
+Step 4: The command extracts `matricNumber`, `componentDescription`, and `scoreNumber` from the `HashMap`. If any parameter is `null`, an `IllegalValueException` is thrown.
 
-Step 5: As grades are added to a component, the component is found using the componentDescription if it is equal to the
-name of the component.
+Step 5: The specified component is located within the application using `componentDescription`. If no match is found or duplicates exist, an exception is thrown.
 
-Step 6: The corresponding student object will also have to be found, using the matricNumber.
-Note that exceptions will be thrown should there be components or students that are missing or duplicated.
+Step 6: The student is identified using `matricNumber`, with exceptions raised for missing or duplicate entries.
 
-Step 7: The String scoreNumber is then converted to a double as score. An exception will be thrown when score is
-negative, more than the maximum score of the component, or the input is not suitable for double conversion.
+Step 7: The `scoreNumber` is converted to a `double` and checked to ensure it is within the acceptable range for the component. Negative values, scores exceeding the component maximum, or non-numeric inputs result in an exception.
 
-Step 8: Using the score double, and student and component objects, a grade object is created
+Step 8: Using the `double` score and the identified student and component, a `Grade` object is created.
 
-Step 9: The newly created grade object is then added to the gradelist.
+Step 9: The new `Grade` object is added to the `GradeList`.
 
-<Insert Sequence diagram here, todo>
+![AddGradeCommandDiagram.png](diagrams%2FAddGradeCommandDiagram.png)
 
 ### Storage feature
 
