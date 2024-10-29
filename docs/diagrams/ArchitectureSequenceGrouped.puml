@@ -1,13 +1,4 @@
 a@startuml
-<style>
-    participant {
-        FontColor White
-    }
-    ref {
-
-    }
-
-</style>
 !include Style.puml
 actor user
 participant ":TutorLink" as TL LOGIC_COLOR_5
@@ -17,42 +8,59 @@ participant ":XYZCommand" as C LOGIC_COLOR_3
 participant ":AppState" as A LOGIC_COLOR_2
 participant ":Storage" as S LOGIC_COLOR_4
 
-user -> TL:"<command> <arguments>"
 activate TL
-TL -> UI: getUserInput()
-activate UI
-TL <-- UI: String
-deactivate UI
-TL -> P : getCommand(line)
-activate P
-create C
-P -> C
-activate C
-P <-- C : XYZCommand
-deactivate C
-TL <-- P: XYZCommand
-deactivate P
-TL -> P: getArguments()
-activate P
-TL <-- P : HashMap<String,String>
-deactivate P
-TL -> C : execute(appState, arguments)
-activate C
-ref over C, A : specific command execution
-TL <-- C : CommandResult
-deactivate C
-TL -> UI : displayResult
+TL->UI: displayWelcomeMessage()
 activate UI
 TL <-- UI
 deactivate UI
-TL -> TL : saveAllLists()
-activate TL
-TL -> S : save Student, Component and Grade Lists
-activate S
-TL <-- S
-deactivate S
-TL --> TL
-deactivate TL
+user -> TL:"<command> <arguments>"
+loop until exit command issued
+    TL -> UI: getUserInput()
+    activate UI
+    TL <-- UI: String
+    deactivate UI
+    TL -> P : getCommand(line)
+    activate P
+    create C
+    P -> C
+    activate C
+    P <-- C : XYZCommand
+    deactivate C
+    TL <-- P: XYZCommand
+    deactivate P
+    TL -> P: getArguments()
+    activate P
+    TL <-- P : HashMap<String,String>
+    deactivate P
+    TL -> C : execute(appState, arguments)
+    activate C
+    ref over C, A : specific command execution
+    alt success
+        TL <-- C : CommandResult
+        deactivate C
+        TL -> UI : displayResult
+        activate UI
+        TL <-- UI
+        deactivate UI
+    else exception
+        TL -> UI : displayException()
+        activate UI
+        TL <-- UI
+        deactivate UI
+    end
+    TL -> TL : saveAllLists()
+    activate TL
+    TL -> S : save Student, Component and Grade Lists
+    activate S
+    TL <-- S
+    deactivate S
+    TL --> TL
+    deactivate TL
+end
+TL->UI: displayGoodbyeMessage()
+activate UI
+TL <-- UI
+deactivate UI
 user <-- TL
 deactivate TL
 @enduml

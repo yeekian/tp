@@ -1,0 +1,40 @@
+@startuml
+!include Style.puml
+group sd AddStudentCommand
+participant ":AddStudentCommand" as C LOGIC_COLOR_3
+participant ":AppState" as A LOGIC_COLOR_2
+participant ":HashMap<String, String>" as H LOGIC_COLOR_7
+participant ":CommandResult" as R LOGIC_COLOR_8
+
+[-> C
+create H
+C -> H
+activate H
+C <-- H : HashMap<String,String>
+deactivate H
+C -> H : get("i/")
+activate H
+C <-- H : matricNumber
+deactivate H
+C -> H : get("n/")
+activate H
+C <-- H : name
+deactivate H
+
+opt matricNumber or name is null
+[<--C : throw IllegalValueException
+end
+
+C -> A : addStudent(matricNumber, name)
+activate A
+C <-- A
+deactivate A
+create R
+C -> R : new CommandResult
+activate R
+C <-- R : CommandResult
+deactivate R
+
+[<-- C : CommandResult
+end
+@enduml
