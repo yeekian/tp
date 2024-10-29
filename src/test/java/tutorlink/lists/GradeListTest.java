@@ -58,7 +58,7 @@ class GradeListTest {
         try {
             gradeList.deleteGrade("A9999999B", "nonexistentComponent");
         } catch (GradeNotFoundException e) {
-            assertEquals(e.getMessage(), "Error! Grade (A9999999B, nonexistentcomponent) does not exist in the list!");
+            assertEquals("Error! Grade (A9999999B, NONEXISTENTCOMPONENT) does not exist in the list!", e.getMessage());
         } catch (Exception e) {
             fail("Expected: StudentNotFoundException, Actual: " + e.getMessage());
         }
