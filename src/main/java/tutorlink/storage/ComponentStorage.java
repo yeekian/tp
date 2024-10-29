@@ -1,9 +1,6 @@
 package tutorlink.storage;
 
-import tutorlink.component.Assignment;
-import tutorlink.component.ClassParticipation;
 import tutorlink.component.Component;
-import tutorlink.component.Exam;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,32 +31,14 @@ public class ComponentStorage extends Storage {
 
     private Component getComponentFromFileLine(String fileLine) {
         String[] stringParts = fileLine.split(READ_DELIMITER);
-        String componentType = stringParts[0];
-        String name = stringParts[1];
-        double maxScore = Double.parseDouble(stringParts[2]);
-        double weight = Double.parseDouble(stringParts[3]);
-        switch (componentType) {
-        case "P":
-            return new ClassParticipation(name, maxScore, weight);
-        case "A":
-            return new Assignment(name, maxScore, weight);
-        case "E":
-            return new Exam(name, maxScore, weight);
-        default:
-            throw new RuntimeException();
-        }
+        String name = stringParts[0];
+        double maxScore = Double.parseDouble(stringParts[1]);
+        double weight = Double.parseDouble(stringParts[2]);
+        return new Component(name, maxScore, weight);
     }
 
     private String getFileInputForComponent(Component component) {
-        String convertedString = "";
-        if (component instanceof ClassParticipation) {
-            convertedString += "P | ";
-        } else if (component instanceof Assignment) {
-            convertedString += "A | ";
-        } else if (component instanceof Exam) {
-            convertedString += "E | ";
-        }
-        convertedString += component.getName() + WRITE_DELIMITER + component.getMaxScore()
+        String convertedString = component.getName() + WRITE_DELIMITER + component.getMaxScore()
                 + WRITE_DELIMITER + component.getWeight();
         return convertedString;
     }
