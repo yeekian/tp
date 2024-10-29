@@ -35,6 +35,14 @@ public class Grade {
         return false;
     }
 
+    public String getStudentMatricNumber() {
+        return student.getMatricNumber();
+    }
+
+    public String getComponentName() {
+        return component.getName();
+    }
+
     @Override
     public String toString() {
         return "Student: " + this.student + ", Component: " + this.component

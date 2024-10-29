@@ -17,8 +17,10 @@ import tutorlink.grade.Grade;
  * Represents a list of grades.
  */
 public class GradeList {
-    private static final String ERROR_DUPLICATE_GRADE_ON_ADD = "Error! Grade (%s, %s) already exists in the list!";
-    private static final String ERROR_NO_GRADE_FOUND = "Error! Grade (%s, %s) does not exist in the list!";
+    private static final String ERROR_DUPLICATE_GRADE_ON_ADD =
+            "Error! Grade for component %s for student %s already exists in the list!";
+    private static final String ERROR_NO_GRADE_FOUND =
+            "Error! Grade for component %s for student %s does not exist in the list!";
 
 
     private ArrayList<Grade> gradeArrayList;
@@ -42,7 +44,7 @@ public class GradeList {
                 return;
             }
         }
-        throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
+        throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, componentDescription, matricNumber));
     }
 
     public void deleteGradesByMatric(String matricNumber) {
@@ -67,10 +69,12 @@ public class GradeList {
         gradeArrayList.removeAll(gradesToDelete);
     }
 
-    public void addGrade(Grade grade) throws DuplicateGradeException {
+    public void addGrade(Grade grade) {
         for (Grade gradeToCompare : gradeArrayList) {
             if (grade.equals(gradeToCompare)) {
-                throw new DuplicateGradeException(ERROR_DUPLICATE_GRADE_ON_ADD);
+                throw new DuplicateGradeException(
+                        String.format(ERROR_DUPLICATE_GRADE_ON_ADD,
+                                grade.getComponentName(), grade.getStudentMatricNumber()));
             }
         }
         gradeArrayList.add(grade);
@@ -91,7 +95,7 @@ public class GradeList {
                         && grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.gradeArrayList.isEmpty()) {
-            throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
+            throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, componentDescription, matricNumber));
         }
         return filteredList;
     }
