@@ -21,6 +21,10 @@ public class StudentList {
         this.studentArrayList = new ArrayList<>();
     }
 
+    public StudentList(ArrayList<Student> studentArrayList) {
+        this.studentArrayList = studentArrayList;
+    }
+
     public void deleteStudent(String matricNumber) throws StudentNotFoundException{
         matricNumber = matricNumber.toUpperCase();
         for (Student student : studentArrayList) {
