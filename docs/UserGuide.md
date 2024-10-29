@@ -12,6 +12,7 @@
 4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar TutorLink.jar command to run the application.
 
 Your command terminal should look similar to the one below.
+
 ![tutorlink_startup.png](tutorlink_startup.png)
 ## Features 
 
@@ -52,45 +53,6 @@ Displays a list of all students in the class.
 
 ---
 
-### Adding a Grade of a Component for a Student: `add_grade`
-
-Records a grade for a specific student in a particular assignment or exam component.
-- **Format**: `add_grade i/MATRIC_NUMBER c/COMPONENT  s/SCORE`
-- **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student.
-    - `COMPONENT`: The assignment or exam component.
-    - `SCORE`: The score to be recorded. Note that score cannot exceed the max score of the component.
-
-- **Example**:
-    - `add_grade i/A1234567X c/Quiz 1 s/85` adds the grade of Quiz 1 for the student with the matric number of A1234567X with a score of 85.
-
----
-
-### Deleting a Grade of a Component for a Student: `delete_grade`
-
-Removes a previously recorded grade for a specific student and component.
-
-- **Format**: `delete_grade i/MATRIC_NUMBER c/COMPONENT`
-- **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student.
-    - `COMPONENT`: The assignment or exam component.
-
-- **Example**:
-    - `delete_grade i/A1234567X c/Quiz 1` deletes the grade of Quiz 1 for the student with the matric number of A1234567X.
-
----
-
-### Listing Grades of a Student: `list_grade`
-
-Views all recorded grades and the final grade for a specific student. If the weightage of the components do not add up to 100% (i.e. the course is still in progress), IP will be returned as the final grade.
-
-- **Format**: `list_grades i/MATRIC_NUMBER`
-- **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student.
-
-- **Example**:
-    - `list_grade i/A1234567X`
-
 ### Adding a Component: `add_component`
 
 Adds a new grading component to the class (e.g., "Homework," "Midterm," "Final Exam").
@@ -127,6 +89,47 @@ Displays all grading components and their respective weights for a class.
 
 - **Example**:
     - `list_component`
+
+---
+
+### Adding a Grade of a Component for a Student: `add_grade`
+
+Records a grade for a specific student in a particular assignment or exam component.
+- **Format**: `add_grade i/MATRIC_NUMBER c/COMPONENT  s/SCORE`
+- **Parameters**:
+  - `MATRIC_NUMBER`: The unique identifier of the student.
+  - `COMPONENT`: The assignment or exam component.
+  - `SCORE`: The score to be recorded. Note that score cannot exceed the max score of the component.
+
+- **Example**:
+  - `add_grade i/A1234567X c/Quiz 1 s/85` adds the grade of Quiz 1 for the student with the matric number of A1234567X with a score of 85.
+
+---
+
+### Deleting a Grade of a Component for a Student: `delete_grade`
+
+Removes a previously recorded grade for a specific student and component.
+
+- **Format**: `delete_grade i/MATRIC_NUMBER c/COMPONENT`
+- **Parameters**:
+  - `MATRIC_NUMBER`: The unique identifier of the student.
+  - `COMPONENT`: The assignment or exam component.
+
+- **Example**:
+  - `delete_grade i/A1234567X c/Quiz 1` deletes the grade of Quiz 1 for the student with the matric number of A1234567X.
+
+---
+
+### Listing Grades of a Student: `list_grade`
+
+Views all recorded grades and the final grade for a specific student. If the weightage of the components do not add up to 100% (i.e. the course is still in progress), IP will be returned as the final grade.
+
+- **Format**: `list_grades i/MATRIC_NUMBER`
+- **Parameters**:
+  - `MATRIC_NUMBER`: The unique identifier of the student.
+
+- **Example**:
+  - `list_grade i/A1234567X`
 
 ---
 ## Notes:
