@@ -1,3 +1,4 @@
+//@@author TrungBui32
 package tutorlink.component;
 
 import org.junit.jupiter.api.Test;
@@ -9,18 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class ComponentTest {
     private Component assignment;
     private Component exam;
-    private Component participation;
 
     @BeforeEach
     void setup() {
         assignment = new Component("Assignment 1", 50.0, 0.3);
         exam = new Component("Final Exam", 100.0, 0.4);
-        participation = new Component("Class Participation", 20.0, 0.1);
     }
 
     @Test
     void constructor_validInputs_success() {
-        assertEquals("assignment 1", assignment.getName());
+        assertEquals("Assignment 1", assignment.getName());
         assertEquals(50.0, assignment.getMaxScore());
         assertEquals(0.3, assignment.getWeight());
     }
