@@ -29,7 +29,7 @@ public class Commons {
     public static final String ERROR_DUPLICATE_COMPONENT = "Error! Component (Name %s) already exists in the list!";
     public static final String ERROR_INVALID_WEIGHTAGE = "Error! Weightage must be double that is between 0 and 1!";
     public static final String ERROR_INVALID_MAX_SCORE =
-            "Error! Max Score must be double that is more than or equal to 0";
+            "Error! Max Score must be double that is more than or equal to 0!";
 
     //@@author RCPilot1604
     //Invalid
