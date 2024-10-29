@@ -11,6 +11,8 @@ original source as well}
 
 The high-level design of TutorLink is as depicted in the following **Architecture Diagram**:
 
+![Architecture.png](diagrams/Architecture.png)
+
 **Main Components of the Architecture**
 
 <code>TutorLink</code>: Main class that serves as the main entry point of the application.
@@ -26,42 +28,7 @@ The key classes providing functionality to TutorLink are:
    printing back to the CLI).
 3. <code>Parser</code>: Interprets the raw data from the user; applies data validation and handles necessary exceptions.
 4. <code>Storage</code>: Serves as long-term storage of data to be retained even after TutorLink is shut down.
-
-<code>CommandResult</code> represents the result of user input.
-
-#### Typical Architecture-Level Interaction
-
-The sequence diagram below depicts a typical user interaction with <code>TutorLink</code>:
-
-### AppState 
-//Content goes here
-
-### Attendance 
-//Content goes here
-
-### Command 
-//Content goes here
-
-### Component
-//Content goes here
-
-### Exceptions
-//Content goes here
-
-### Grade
-//Content goes here
-
-### Result
-//Content goes here
-
-### Student
-//Content goes here
-
-### Ui
-//Content goes here
-//contains Ui and Parser classes
-
-## Product Scope
+5. <code>CommandResult</code> represents the result of user input.
 
 ### Target User Profile
 
@@ -124,7 +91,40 @@ enhancing teaching efficiency.
 
 ## Implementation
 
-This section describes some noteworthy details on how certain features are implemented.
+### Command execution sequence: 
+
+All commands follow the sequence as described in the diagram below: 
+
+![ArchitectureSequenceGrouped.png](diagrams%2FArchitectureSequenceGrouped.png)
+
+Where <code>ref</code> frame is a placeholder for each command's specific operations.
+
+The specific implementation of noteworthy operations are presented below: 
+
+### Add/Delete Student/Component Feature
+
+Feature implemented by `AddStudentCommand`, `DeleteStudentCommand`, `AddComponentCommand` and `DeleteComponentCommand` 
+for `Student` and `Component` respectively. 
+
+The flow of logic for both `Student` and `Component` commands can be summarized as follows: 
+
+1. Retrieve arguments from `HashMap`.
+2. Execute data validation on the arguments and throw appropriate exception in the case of failure.
+2. Add/Delete `Student` and `Component`.
+3. Return `CommandResult` that contains the result of the Add/Delete operation.
+
+The following sequence diagrams depict the exact steps involved in the `AddStudentCommand`:
+
+![AddStudentCommand.png](diagrams/AddStudentCommand.png)
+
+The logic for `AddComponentCommand` is very similar and thus is not depicted. 
+
+Likewise, the sequence diagram for `DeleteStudentCommand` is as follows: 
+
+![DeleteStudentCommand.png](diagrams%2FDeleteStudentCommand.png)
+
+Since a `Grade` object is only well-defined when there are both `Student` and `Component` objects to be refrenced by `Grade`,
+whenever a `Student` or `Component` object is deleted, the corresponding `Grade` object is queried and then deleted as well. 
 
 ### Add/Delete Grade Feature
 

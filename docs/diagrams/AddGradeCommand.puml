@@ -1,77 +1,78 @@
+'@@author yeekian
 @startuml
+!include Style.puml
+group sd AddGradeCommand
+participant ":AddGradeCommand" as C LOGIC_COLOR_3
+participant ":AppState" as A LOGIC_COLOR_2
+participant ":HashMap<String, String>" as H LOGIC_COLOR_7
+participant ":CommandResult" as R LOGIC_COLOR_8
+participant ":Grade" as G LOGIC_COLOR_5
 
-TutorLink -> Ui : getUserInput()
-activate Ui
-TutorLink <-- Ui: line
-deactivate Ui
+[->C
 
-TutorLink -> Parser : getCommand(line)
-activate Parser
-create AddGradeCommand
-Parser -> AddGradeCommand : create AddGradeCommand object
+C -> H : get("i/")
+activate H
+C <-- H : matricNumber
+deactivate H
 
-activate AddGradeCommand
-Parser <-- AddGradeCommand : AddGradeCommand object
-deactivate AddGradeCommand
-TutorLink <-- Parser : AddGradeCommand object
+C -> H : get("c/")
+activate H
+C <-- H : componentDescription
+deactivate H
 
-deactivate Parser
+C -> H : get("s/")
+activate H
+C <-- H : scoreNumber
+deactivate H
 
-TutorLink -> AddGradeCommand : getArgumentPrefixes()
-activate AddGradeCommand
-TutorLink <-- AddGradeCommand : argumentPrefixes
-deactivate AddGradeCommand
+opt matricNumber is null
+[<--C : throw IllegalValueException
+end
 
-TutorLink -> Parser : getArguments(argumentPrefixes, line)
-activate Parser
-TutorLink <-- Parser : arguments
-deactivate Parser
+C -> C : findComponentFromComponents
+activate C
+C -> A : findComponent(componentDescription)
+activate A
+C <-- A : componentFilteredList
+deactivate A
+C --> C : component
+deactivate C
 
-TutorLink -> AddGradeCommand : execute(AppState, arguments)
-activate AddGradeCommand
+C -> C : findStudentFromStudents
+activate C
+C -> A : findStudentByMatricNumber(matricNumber)
+activate A
+C <-- A : studentFilteredList
+deactivate A
+C --> C : student
+deactivate C
 
-AddGradeCommand -> AddGradeCommand : findComponentFromComponents
-activate AddGradeCommand
-AddGradeCommand -> ComponentList : findComponent(componentDescription)
-activate ComponentList
-AddGradeCommand <-- ComponentList : componentFilteredList
-deactivate ComponentList
-AddGradeCommand --> AddGradeCommand : component
-deactivate AddGradeCommand
+C -> C : convertScoreToValidDouble(scoreNumber)
+activate C
+C --> C : score
+deactivate C
 
+Create G
+C -> G : Grade(component, student, score)
+activate G
+C <-- G : grade
+deactivate G
 
-
-AddGradeCommand -> AddGradeCommand : findStudentFromStudents
-activate AddGradeCommand
-AddGradeCommand -> StudentList : findStudentByMatricNumber(matricNumber)
-activate StudentList
-AddGradeCommand <-- StudentList : return studentFilteredList
-deactivate StudentList
-AddGradeCommand --> AddGradeCommand : student
-deactivate AddGradeCommand
-
-AddGradeCommand -> AddGradeCommand : convertScoreToValidDouble(scoreNumber)
-activate AddGradeCommand
-AddGradeCommand --> AddGradeCommand : score
-deactivate AddGradeCommand
-
-Create Grade
-AddGradeCommand -> Grade : Grade(component, student, score)
-activate Grade
-AddGradeCommand <-- Grade : grade
-deactivate Grade
-
-AddGradeCommand -> GradeList : addGrade(grade)
-activate GradeList
-deactivate GradeList
+C -> A : addGrade(grade)
+activate A
+C <-- A
+deactivate A
 
 
-TutorLink <-- AddGradeCommand  : res
-deactivate AddGradeCommand
+create R
+C -> R : new CommandResult
+activate R
+C <-- R : CommandResult
+deactivate R
 
-TutorLink -> Ui : displayResult(res)
-activate Ui
-deactivate Ui
+[<-- C : CommandResult
+
+end
 
 
 @enduml
