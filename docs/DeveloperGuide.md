@@ -11,6 +11,8 @@ original source as well}
 
 The high-level design of TutorLink is as depicted in the following **Architecture Diagram**:
 
+![Architecture.png](diagrams/Architecture.png)
+
 **Main Components of the Architecture**
 
 <code>TutorLink</code>: Main class that serves as the main entry point of the application.
@@ -26,42 +28,7 @@ The key classes providing functionality to TutorLink are:
    printing back to the CLI).
 3. <code>Parser</code>: Interprets the raw data from the user; applies data validation and handles necessary exceptions.
 4. <code>Storage</code>: Serves as long-term storage of data to be retained even after TutorLink is shut down.
-
-<code>CommandResult</code> represents the result of user input.
-
-#### Typical Architecture-Level Interaction
-
-The sequence diagram below depicts a typical user interaction with <code>TutorLink</code>:
-
-### AppState 
-//Content goes here
-
-### Attendance 
-//Content goes here
-
-### Command 
-//Content goes here
-
-### Component
-//Content goes here
-
-### Exceptions
-//Content goes here
-
-### Grade
-//Content goes here
-
-### Result
-//Content goes here
-
-### Student
-//Content goes here
-
-### Ui
-//Content goes here
-//contains Ui and Parser classes
-
-## Product Scope
+5. <code>CommandResult</code> represents the result of user input.
 
 ### Target User Profile
 
@@ -124,7 +91,15 @@ enhancing teaching efficiency.
 
 ## Implementation
 
-This section describes some noteworthy details on how certain features are implemented.
+### Command execution sequence: 
+
+All commands follow the sequence as described in the diagram below: 
+
+![ArchitectureSequenceGrouped.png](diagrams%2FArchitectureSequenceGrouped.png)
+
+Where <code>ref</code> frame is a placeholder for each command's specific operations.
+
+The specific implementation of noteworthy operations are presented below: 
 
 ### Add/Delete Grade Feature
 
