@@ -12,21 +12,21 @@ rectangle Ui LOGIC_COLOR_1
 rectangle Parser LOGIC_COLOR_2
 rectangle Command LOGIC_COLOR_3
 rectangle AppState LOGIC_COLOR_4
-rectangle Main LOGIC_COLOR_5
+rectangle TutorLink LOGIC_COLOR_5
 rectangle Storage LOGIC_COLOR_6
 rectangle CommandResult LOGIC_COLOR_7
 }
 
-User -down-> Main
-Main -down-> Parser
-Main -> Ui
-Main -up-> CommandResult
-Parser .> Main
-Ui .> Main
-Main -> AppState
+User -down-> TutorLink
+TutorLink -down-> Parser
+TutorLink -> Ui
+TutorLink -up-> CommandResult
+Parser .> TutorLink
+Ui .> TutorLink
+TutorLink -> AppState
 Parser .down.> Command
 Command ..> AppState
-Main -down-> Storage
+TutorLink -down-> Storage
 Parser.>CommandResult
 
 @enduml
