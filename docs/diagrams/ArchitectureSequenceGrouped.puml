@@ -1,56 +1,58 @@
-@startuml
+a@startuml
 <style>
     participant {
         FontColor White
     }
+    ref {
+
+    }
+
 </style>
 !include Style.puml
 actor user
-
 participant ":TutorLink" as TL LOGIC_COLOR_5
-participant ":Logic" as L LOGIC_COLOR_7
 participant ":Ui" as UI LOGIC_COLOR_6
-participant ":AppState" as A LOGIC_COLOR_3
+participant ":Parser" as P LOGIC_COLOR_7
+participant ":XYZCommand" as C LOGIC_COLOR_3
+participant ":AppState" as A LOGIC_COLOR_2
 participant ":Storage" as S LOGIC_COLOR_4
 
-create TL
-user -> TL: start
+user -> TL:"<command> <arguments>"
 activate TL
-create UI
-TL -> UI
-create L
-TL -> L
-create A
-TL -> A
-create S
-TL -> S
-user -> TL:"delete_student i/A1234567X"
 TL -> UI: getUserInput()
 activate UI
 TL <-- UI: String
-TL -> L : getCommand(line)
-activate L
-TL <-- L: Command
-TL -> L : getArguments
-TL <-- L : HashMap<String,String>
-TL -> L : execute()
-L -> A : deleteStudentByMatricNumber("A1234567X")
-activate A
-A -> S : saveStudentFile(students)
-activate S
-S -> S : save to file
-activate S
-S --> S
-deactivate S
-A <-- S
-deactivate S
-
-L <-- A
-deactivate A
-TL <-- L : CommandResult
-deactivate L
+deactivate UI
+TL -> P : getCommand(line)
+activate P
+create C
+P -> C
+activate C
+P <-- C : XYZCommand
+deactivate C
+TL <-- P: XYZCommand
+deactivate P
+TL -> P: getArguments()
+activate P
+TL <-- P : HashMap<String,String>
+deactivate P
+TL -> C : execute(appState, arguments)
+activate C
+ref over C, A : specific command execution
+TL <-- C : CommandResult
+deactivate C
 TL -> UI : displayResult
+activate UI
 TL <-- UI
 deactivate UI
+TL -> TL : saveAllLists()
+activate TL
+TL -> S : save Student, Component and Grade Lists
+activate S
+TL <-- S
+deactivate S
+TL --> TL
+deactivate TL
 user <-- TL
+deactivate TL
 @enduml
