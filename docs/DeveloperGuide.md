@@ -147,25 +147,26 @@ The `AddGradeCommand` and `DeleteGradeCommand` classes handle the addition and d
 
 #### Example Usage Scenario
 
-Step 1: The user has launched the application, with students and graded components already registered in TutorLink.
+Given below is an example usage scenario and how the AddGradeCommand and DeleteGradeCommand behaves at each step.
 
-Step 2: The user issues a command (e.g., `add_grade`), which the parser processes, creating an `AddGradeCommand` instance and a `HashMap` containing the relevant parameters.
+Consider a scenario where the Professor wants to add a grade for a student, Alice, in the midterm component of a module. The Professor would initiate the AddGradeCommand, inputting Alice's matriculation number, the component as "midterm," and a score of 85. The command will then:
 
-Step 3: `AddGradeCommand` is executed within the `TutorLink`, receiving both the current app state and the `HashMap` of arguments.
+1. Validate Alice's matriculation number and ensure that the midterm component is present in the grade configuration for the module.
+2. Confirm that the score of 85 is within the allowable range for midterm.
+3. Create a new Grade object and add it to the GradeList in AppState, reflecting Alice's score for the midterm component.
 
-Step 4: The command extracts `matricNumber`, `componentDescription`, and `scoreNumber` from the `HashMap`. If any parameter is `null`, an `IllegalValueException` is thrown.
+The sequence diagram of the DeleteGradeCommand is shown below.
 
-Step 5: The specified component is located within the application using `componentDescription`. If no match is found or duplicates exist, an exception is thrown.
+![AddGradeCommand.png](diagrams%2FAddGradeCommand.png)
 
-Step 6: The student is identified using `matricNumber`, with exceptions raised for missing or duplicate entries.
+Later, if the Professor realizes that the grade was entered incorrectly and decides to delete it, they can use the DeleteGradeCommand:
 
-Step 7: The `scoreNumber` is converted to a `double` and checked to ensure it is within the acceptable range for the component. Negative values, scores exceeding the component maximum, or non-numeric inputs result in an exception.
+1. The command verifies Alice's matriculation number and the midterm component's presence.
+2. It locates Alice's midterm Grade object and deletes it from the GradeList in AppState, effectively removing the grade record.
 
-Step 8: Using the `double` score and the identified student and component, a `Grade` object is created.
+The sequence diagram of the DeleteGradeCommand is shown below.
 
-Step 9: The new `Grade` object is added to the `GradeList`.
-
-![AddGradeCommandDiagram.png](diagrams%2FAddGradeCommandDiagram.png)
+![DeleteGradeCommand.png](diagrams%2FDeleteGradeCommand.png)
 
 ### Storage feature
 
