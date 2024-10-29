@@ -25,7 +25,7 @@ public class StudentList {
         this.studentArrayList = studentArrayList;
     }
 
-    public void deleteStudent(String matricNumber) throws StudentNotFoundException{
+    public void deleteStudent(String matricNumber) throws StudentNotFoundException {
         matricNumber = matricNumber.toUpperCase();
         for (Student student : studentArrayList) {
             if (student.getMatricNumber().equals(matricNumber)) {
