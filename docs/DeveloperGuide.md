@@ -101,6 +101,31 @@ Where <code>ref</code> frame is a placeholder for each command's specific operat
 
 The specific implementation of noteworthy operations are presented below: 
 
+### Add/Delete Student/Component Feature
+
+Feature implemented by `AddStudentCommand`, `DeleteStudentCommand`, `AddComponentCommand` and `DeleteComponentCommand` 
+for `Student` and `Component` respectively. 
+
+The flow of logic for both `Student` and `Component` commands can be summarized as follows: 
+
+1. Retrieve arguments from `HashMap`.
+2. Execute data validation on the arguments and throw appropriate exception in the case of failure.
+2. Add/Delete `Student` and `Component`.
+3. Return `CommandResult` that contains the result of the Add/Delete operation.
+
+The following sequence diagrams depict the exact steps involved in the `AddStudentCommand`:
+
+![AddStudentCommand.png](diagrams/AddStudentCommand.png)
+
+The logic for `AddComponentCommand` is very similar and thus is not depicted. 
+
+Likewise, the sequence diagram for `DeleteStudentCommand` is as follows: 
+
+![DeleteStudentCommand.png](diagrams%2FDeleteStudentCommand.png)
+
+Since a `Grade` object is only well-defined when there are both `Student` and `Component` objects to be refrenced by `Grade`,
+whenever a `Student` or `Component` object is deleted, the corresponding `Grade` object is queried and then deleted as well. 
+
 ### Add/Delete Grade Feature
 
 #### Implementation Details
