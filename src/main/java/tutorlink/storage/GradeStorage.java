@@ -1,6 +1,7 @@
 package tutorlink.storage;
 
 import tutorlink.component.Component;
+import tutorlink.exceptions.InvalidDataFileLineException;
 import tutorlink.grade.Grade;
 import tutorlink.student.Student;
 
@@ -24,29 +25,10 @@ public class GradeStorage extends Storage {
         ArrayList<Grade> grades = new ArrayList<>();
         Scanner fileScanner = new Scanner(path);
         while (fileScanner.hasNext()) {
-            String[] stringParts = fileScanner.nextLine().split(READ_DELIMITER);
-            String componentName = stringParts[0];
-            String matricNumber = stringParts[1];
-            double score = Double.parseDouble(stringParts[2]);
-
-            Component selectedComp = null;
-            for (Component comp : componentList) {
-                if (comp.getName().equals(componentName)) {
-                    selectedComp = comp;
-                    break;
-                }
-            }
-            Student selectedStudent = null;
-            for (Student student : studentList) {
-                if (student.getMatricNumber().equals(matricNumber)) {
-                    selectedStudent = student;
-                    break;
-                }
-            }
-
-            if (selectedComp != null && selectedStudent != null) {
-                Grade newGrade = new Grade(selectedComp, selectedStudent, score);
-                grades.add(newGrade);
+            try {
+                grades.add(getGradeFromFileLine(fileScanner.nextLine()));
+            } catch (InvalidDataFileLineException e) {
+                // ignore invalid data file entries
             }
         }
         return grades;
@@ -58,6 +40,35 @@ public class GradeStorage extends Storage {
             fileWriter.write(getFileInputForGrade(grade) + System.lineSeparator());
         }
         fileWriter.close();
+    }
+
+    private Grade getGradeFromFileLine(String fileLine) throws InvalidDataFileLineException {
+        String[] stringParts = fileLine.split(READ_DELIMITER);
+        String componentName = stringParts[0];
+        String matricNumber = stringParts[1];
+        double score = Double.parseDouble(stringParts[2]);
+
+        Component selectedComp = null;
+        for (Component comp : componentList) {
+            if (comp.getName().equals(componentName)) {
+                selectedComp = comp;
+                break;
+            }
+        }
+
+        Student selectedStudent = null;
+        for (Student student : studentList) {
+            if (student.getMatricNumber().equals(matricNumber)) {
+                selectedStudent = student;
+                break;
+            }
+        }
+
+        if (selectedComp != null && selectedStudent != null) {
+            return new Grade(selectedComp, selectedStudent, score);
+        } else {
+            throw new InvalidDataFileLineException("Invalid grade");
+        }
     }
 
     private String getFileInputForGrade(Grade grade) {
