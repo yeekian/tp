@@ -26,7 +26,6 @@ Adds a student to your class.
 
 - **Example**:
     - `add_student i/A1234567X n/John Doe ` adds a new student named John Doe with the matric number of A1234567X to the class.
-
 ---
 
 ### Deleting a Student: `delete_student`
@@ -130,8 +129,10 @@ Displays all grading components and their respective weights for a class.
     - `list_component`
 
 ---
-
-
+## Notes:
+- Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
+will be converted to uppercase for storage. 
+- (coming soon) All other arguments are case insensitive and will be converted to lowercase for storage. 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
