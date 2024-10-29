@@ -7,11 +7,7 @@ participant ":HashMap<String, String>" as H LOGIC_COLOR_7
 participant ":CommandResult" as R LOGIC_COLOR_8
 
 [-> C
-create H
-C -> H
-activate H
-C <-- H : HashMap<String,String>
-deactivate H
+
 C -> H : get("i/")
 activate H
 C <-- H : matricNumber
