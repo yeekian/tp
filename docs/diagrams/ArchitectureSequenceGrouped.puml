@@ -1,56 +1,97 @@
-@startuml
-<style>
-    participant {
-        FontColor White
-    }
-</style>
+a@startuml
 !include Style.puml
 actor user
-
 participant ":TutorLink" as TL LOGIC_COLOR_5
-participant ":Logic" as L LOGIC_COLOR_7
 participant ":Ui" as UI LOGIC_COLOR_6
-participant ":AppState" as A LOGIC_COLOR_3
+participant ":Parser" as P LOGIC_COLOR_7
+participant ":XYZCommand" as C LOGIC_COLOR_3
+participant ":AppState" as A LOGIC_COLOR_2
 participant ":Storage" as S LOGIC_COLOR_4
 
-create TL
-user -> TL: start
 activate TL
-create UI
-TL -> UI
-create L
-TL -> L
-create A
-TL -> A
-create S
-TL -> S
-user -> TL:"delete_student i/A1234567X"
-TL -> UI: getUserInput()
+TL->UI: displayWelcomeMessage()
 activate UI
-TL <-- UI: String
-TL -> L : getCommand(line)
-activate L
-TL <-- L: Command
-TL -> L : getArguments
-TL <-- L : HashMap<String,String>
-TL -> L : execute()
-L -> A : deleteStudentByMatricNumber("A1234567X")
-activate A
-A -> S : saveStudentFile(students)
-activate S
-S -> S : save to file
-activate S
-S --> S
-deactivate S
-A <-- S
-deactivate S
+TL <-- UI
+deactivate UI
 
-L <-- A
-deactivate A
-TL <-- L : CommandResult
-deactivate L
-TL -> UI : displayResult
+create S
+
+alt success
+    TL -> S : new StudentComponent, ComponentStorage, GradeStorage
+    activate S
+    TL <-- S : StudentComponent, ComponentStorage, GradeStorage
+    deactivate S
+
+    TL -> S : loadStudentList(), loadComponentList(), loadGradeList()
+    activate S
+    TL <-- S : ArrayList<Student>, ArrayList<Component>, ArrayList<Grade>
+    deactivate S
+
+    create A
+    TL -> A : new AppState(ArrayList<Student>, ArrayList<Component>, ArrayList<Grade>)
+    activate A
+    TL <-- A : appState
+    deactivate A
+else exception
+        TL -> UI : displayException
+        activate UI
+        TL <-- UI
+        deactivate UI
+end
+
+deactivate UI
+loop until exit command issued
+    user -> TL:"<command> <arguments>"
+    TL -> UI: getUserInput()
+    activate UI
+    TL <-- UI: line
+    deactivate UI
+    TL -> P : getCommand(line)
+    activate P
+    create C
+    P -> C
+    activate C
+    P <-- C : XYZCommand
+    deactivate C
+    TL <-- P: XYZCommand
+    deactivate P
+    TL -> C : getArgumentPrefixes()
+    activate C
+    TL <-- C : argumentPrefixes
+    deactivate C
+    TL -> P: getArguments(argumentPrefixes, line)
+    activate P
+    TL <-- P : HashMap<String,String>
+    deactivate P
+    TL -> C : execute(appState, arguments)
+    activate C
+    ref over C, A : specific command execution
+    alt success
+        TL <-- C : CommandResult
+        deactivate C
+        TL -> UI : displayResult
+        activate UI
+        TL <-- UI
+        deactivate UI
+    else exception
+        TL -> UI : displayException()
+        activate UI
+        TL <-- UI
+        deactivate UI
+    end
+    TL -> TL : saveAllLists()
+    activate TL
+    TL -> S : save Student, Component and Grade Lists
+    activate S
+    TL <-- S
+    deactivate S
+    TL --> TL
+    deactivate TL
+end
+TL->UI: displayGoodbyeMessage()
+activate UI
 TL <-- UI
 deactivate UI
 user <-- TL
+deactivate TL
 @enduml

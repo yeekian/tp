@@ -1,14 +1,30 @@
 package tutorlink.appstate;
 
+import tutorlink.component.Component;
+import tutorlink.grade.Grade;
 import tutorlink.lists.ComponentList;
 import tutorlink.lists.GradeList;
 import tutorlink.lists.StudentList;
+import tutorlink.student.Student;
+
+import java.util.ArrayList;
 
 public class AppState {
-    public StudentList students = new StudentList();
-    public GradeList grades = new GradeList();
-    public ComponentList components = new ComponentList();
+    public StudentList students;
+    public GradeList grades;
+    public ComponentList components;
 
     public AppState() {
+        students = new StudentList();
+        grades = new GradeList();
+        components = new ComponentList();
+    }
+
+    public AppState(ArrayList<Student> studentArrayList,
+                    ArrayList<Grade> gradeArrayList,
+                    ArrayList<Component> componentArrayList) {
+        students = new StudentList(studentArrayList);
+        grades = new GradeList(gradeArrayList);
+        components = new ComponentList(componentArrayList);
     }
 }
