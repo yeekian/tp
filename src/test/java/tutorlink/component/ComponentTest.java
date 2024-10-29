@@ -13,9 +13,9 @@ public class ComponentTest {
 
     @BeforeEach
     void setup() {
-        assignment = new Assignment("Assignment 1", 50.0, 0.3);
-        exam = new Exam("Final Exam", 100.0, 0.4);
-        participation = new ClassParticipation("Class Participation", 20.0, 0.1);
+        assignment = new Component("Assignment 1", 50.0, 0.3);
+        exam = new Component("Final Exam", 100.0, 0.4);
+        participation = new Component("Class Participation", 20.0, 0.1);
     }
 
     @Test
@@ -27,13 +27,13 @@ public class ComponentTest {
 
     @Test
     void equals_sameComponent_returnsTrue() {
-        Component duplicateAssignment = new Assignment("Assignment 1", 50.0, 0.3);
+        Component duplicateAssignment = new Component("Assignment 1", 50.0, 0.3);
         assertEquals(assignment, duplicateAssignment);
     }
 
     @Test
     void equals_differentComponent_returnsFalse() {
-        Component differentAssignment = new Assignment("Assignment 2", 50.0, 0.3);
+        Component differentAssignment = new Component("Assignment 2", 50.0, 0.3);
         assertNotEquals(assignment, differentAssignment);
         assertNotEquals(assignment, exam);
         assertNotEquals(assignment, null);
