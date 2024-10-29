@@ -31,12 +31,13 @@ public class GradeList {
         this.gradeArrayList = gradeArrayList;
     }
 
+    //@@author RCPilot1604
     public void deleteGrade(String matricNumber, String componentDescription) throws GradeNotFoundException {
         matricNumber = matricNumber.toUpperCase();
-        componentDescription = componentDescription.toLowerCase();
+        componentDescription = componentDescription.toUpperCase();
         for (Grade grade : gradeArrayList) {
             if (grade.getStudent().getMatricNumber().equals(matricNumber)
-                    && grade.getComponent().getName().equals(componentDescription)) {
+                    && grade.getComponent().getName().toUpperCase().equals(componentDescription)) {
                 gradeArrayList.remove(grade);
                 return;
             }
@@ -56,10 +57,10 @@ public class GradeList {
     }
 
     public void deleteGradesByComponent(String componentDescription) {
-        componentDescription = componentDescription.toLowerCase();
+        componentDescription = componentDescription.toUpperCase();
         ArrayList<Grade> gradesToDelete = new ArrayList<>();
         for (Grade grade : gradeArrayList) {
-            if (grade.getComponent().getName().equals(componentDescription)) {
+            if (grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase())) {
                 gradesToDelete.add(grade);
             }
         }
@@ -87,14 +88,16 @@ public class GradeList {
         filteredList.gradeArrayList = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase())
-                        && grade.getComponent().getName().equals(componentDescription.toLowerCase()))
+                        && grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.gradeArrayList.isEmpty()) {
             throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
         }
         return filteredList;
     }
+    //@@author
 
+    //@@author TrungBui32
     public double calculateStudentGPA(String matricNumber, ComponentList componentList)
             throws IncompleteGradesException {
         ArrayList<Grade> studentGrades = gradeArrayList
@@ -122,6 +125,7 @@ public class GradeList {
                 .mapToDouble(grade -> grade.getScore() * grade.getComponent().getWeight())
                 .sum();
     }
+    //@@author
 
     public ArrayList<Grade> getGradeArrayList() {
         return gradeArrayList;
