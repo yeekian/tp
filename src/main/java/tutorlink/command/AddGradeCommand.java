@@ -58,7 +58,7 @@ public class AddGradeCommand extends Command {
     private static double convertScoreToValidDouble(String scoreNumber, Component component) {
         double score = Double.parseDouble(scoreNumber);
 
-        if (score < 0.0 || score >= component.getMaxScore()) {
+        if (score < 0.0 || score > component.getMaxScore()) {
             throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
         }
         return score;

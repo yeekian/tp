@@ -27,6 +27,10 @@ public class GradeList {
         this.gradeArrayList = new ArrayList<>();
     }
 
+    public GradeList(ArrayList<Grade> gradeArrayList) {
+        this.gradeArrayList = gradeArrayList;
+    }
+
     public void deleteGrade(String matricNumber, String componentDescription) throws GradeNotFoundException {
         matricNumber = matricNumber.toUpperCase();
         componentDescription = componentDescription.toLowerCase();
@@ -122,4 +126,5 @@ public class GradeList {
     public ArrayList<Grade> getGradeArrayList() {
         return gradeArrayList;
     }
+
 }

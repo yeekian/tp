@@ -2,12 +2,20 @@ package tutorlink;
 
 import tutorlink.appstate.AppState;
 import tutorlink.command.Command;
+import tutorlink.component.Component;
+import tutorlink.exceptions.StorageOperationException;
 import tutorlink.exceptions.TutorLinkException;
+import tutorlink.grade.Grade;
 import tutorlink.result.CommandResult;
+import tutorlink.storage.ComponentStorage;
+import tutorlink.storage.GradeStorage;
+import tutorlink.storage.StudentStorage;
+import tutorlink.student.Student;
 import tutorlink.ui.Ui;
 import tutorlink.parser.Parser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
@@ -19,9 +27,16 @@ import java.util.logging.FileHandler;
  * Represents the main class containing the entry point for the TutorLink application
  */
 public class TutorLink {
+    private static final String STUDENT_FILE_PATH = "./data/studentlist.txt";
+    private static final String COMPONENT_FILE_PATH = "./data/componentlist.txt";
+    private static final String GRADE_FILE_PATH = "./data/gradelist.txt";
+
     private static final Ui ui = new Ui();
     private static final Parser parser = new Parser();
-    private static final AppState appState = new AppState();
+    private static AppState appState;
+    private static StudentStorage studentStorage;
+    private static ComponentStorage componentStorage;
+    private static GradeStorage gradeStorage;
 
     private static final Logger LOGGER = Logger.getLogger(TutorLink.class.getName());
 
@@ -35,6 +50,27 @@ public class TutorLink {
         LOGGER.log(Level.INFO, "Test log message successful");
 
         ui.displayWelcomeMessage();
+
+        try {
+            studentStorage = new StudentStorage(STUDENT_FILE_PATH);
+            ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
+
+            componentStorage = new ComponentStorage(COMPONENT_FILE_PATH);
+            ArrayList<Component> initialComponentList = componentStorage.loadComponentList();
+
+            gradeStorage = new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList);
+            ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList();
+            
+            appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
+        } catch (IOException | StorageOperationException e) {
+            System.out.println("File storage error encountered: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        assert studentStorage != null;
+        assert componentStorage != null;
+        assert gradeStorage != null;
+
         while (true) {
             try {
                 String line = ui.getUserInput();
@@ -46,13 +82,25 @@ public class TutorLink {
 
                 ui.displayResult(res);
 
+                saveAllLists();
+
                 if (currentCommand.isExit()) {
                     break;
                 }
+
             } catch (TutorLinkException e) {
                 ui.displayException(e);
+            } catch (IOException e) {
+                System.out.println("File storage error encountered: " + e.getMessage());
+                throw new RuntimeException(e);
             }
         }
+    }
+
+    private static void saveAllLists() throws IOException {
+        studentStorage.saveStudentList(appState.students.getStudentArrayList());
+        componentStorage.saveComponentList(appState.components.getComponentArrayList());
+        gradeStorage.saveGradeList(appState.grades.getGradeArrayList());
     }
 
     private static void setUpLogger() {
