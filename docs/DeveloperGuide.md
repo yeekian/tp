@@ -27,8 +27,8 @@ The key classes providing functionality to TutorLink are:
 2. <code>Ui</code>: Collects data (via Strings sent via CLI) from the user and relays information to the user (via
    printing back to the CLI).
 3. <code>Parser</code>: Interprets the raw data from the user; applies data validation and handles necessary exceptions.
-4. <code>Storage</code>: Serves as long-term storage of data to be retained even after TutorLink is shut down.
-5. <code>CommandResult</code> represents the result of user input.
+4. <code>Storage</code>: Handles the loading and storage of data to be retained even after TutorLink is shut down.
+5. <code>CommandResult</code>: Represents the result of user input.
 
 ### Target User Profile
 
@@ -110,8 +110,8 @@ The flow of logic for both `Student` and `Component` commands can be summarized 
 
 1. Retrieve arguments from `HashMap`.
 2. Execute data validation on the arguments and throw appropriate exception in the case of failure.
-2. Add/Delete `Student` and `Component`.
-3. Return `CommandResult` that contains the result of the Add/Delete operation.
+3. Add/Delete `Student` and `Component`.
+4. Return `CommandResult` that contains the result of the Add/Delete operation.
 
 The following sequence diagrams depict the exact steps involved in the `AddStudentCommand`:
 
