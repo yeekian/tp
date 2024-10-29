@@ -5,14 +5,13 @@ import java.util.HashMap;
 import tutorlink.appstate.AppState;
 import tutorlink.result.CommandResult;
 
-public class ListStudentCommand extends Command {
+public class ListGradeCommand extends Command {
 
-    public static final String COMMAND_WORD = "list_student";
-
+    public static final String COMMAND_WORD = "list_grade";
 
     @Override
     public CommandResult execute(AppState appState, HashMap<String, String> hashMap) {
-        return new CommandResult(appState.students.toString());
+        return new CommandResult(appState.grades.toString());
     }
 
     @Override

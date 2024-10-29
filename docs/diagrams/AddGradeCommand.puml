@@ -1,0 +1,79 @@
+'@@author yeekian
+@startuml
+!include Style.puml
+group sd AddGradeCommand
+participant ":AddGradeCommand" as C LOGIC_COLOR_3
+participant ":AppState" as A LOGIC_COLOR_2
+participant ":HashMap<String, String>" as H LOGIC_COLOR_7
+participant ":CommandResult" as R LOGIC_COLOR_8
+participant ":Grade" as G LOGIC_COLOR_5
+
+[->C
+activate C
+C -> H : get("i/")
+activate H
+C <-- H : matricNumber
+deactivate H
+
+C -> H : get("c/")
+activate H
+C <-- H : componentDescription
+deactivate H
+
+C -> H : get("s/")
+activate H
+C <-- H : scoreNumber
+deactivate H
+
+opt matricNumber or componentDescription or scoreNumber is null
+    [<--C : throw IllegalValueException
+end
+
+C -> C : findComponentFromComponents
+activate C
+C -> A : findComponent(componentDescription)
+activate A
+C <-- A : componentFilteredList
+deactivate A
+C --> C : component
+deactivate C
+
+C -> C : findStudentFromStudents
+activate C
+C -> A : findStudentByMatricNumber(matricNumber)
+activate A
+C <-- A : studentFilteredList
+deactivate A
+C --> C : student
+deactivate C
+
+C -> C : convertScoreToValidDouble(scoreNumber)
+activate C
+C --> C : score
+deactivate C
+
+Create G
+C -> G : Grade(component, student, score)
+activate G
+C <-- G : grade
+deactivate G
+
+C -> A : addGrade(grade)
+activate A
+C <-- A
+deactivate A
+
+
+create R
+C -> R : new CommandResult
+activate R
+C <-- R : CommandResult
+deactivate R
+
+[<-- C : CommandResult
+deactivate C
+
+end
+
+
+@enduml
