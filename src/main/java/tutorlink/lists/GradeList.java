@@ -95,32 +95,30 @@ public class GradeList {
         return filteredList;
     }
 
-    public double calculateStudentGPA(String matricNumber, ComponentList componentList)
-            throws IncompleteGradesException {
+    public double calculateStudentGPA(String matricNumber, ComponentList componentList) {
         ArrayList<Grade> studentGrades = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        ArrayList<Component> allComponents = componentList.findAllComponents();
-
         if (studentGrades.isEmpty()) {
-            throw new StudentNotFoundException("No grades found for student: " + matricNumber);
+            return 0;
         }
 
-        boolean hasAllComponents = allComponents.stream()
-                .allMatch(component -> studentGrades.stream()
-                        .anyMatch(grade -> grade.getComponent().equals(component)));
-
-        if (!hasAllComponents) {
-            throw new IncompleteGradesException(
-                    "Cannot calculate GPA: Student " + matricNumber + " is missing grades for some components");
-        }
+        double totalWeighting = componentList
+                .getComponentArrayList()
+                .stream()
+                .mapToDouble(c -> c.getWeight())
+                .sum();
 
         return studentGrades
                 .stream()
-                .mapToDouble(grade -> grade.getScore() * grade.getComponent().getWeight())
-                .sum();
+                .mapToDouble(grade ->
+                        grade.getScore()
+                        / grade.getComponent().getMaxScore()
+                        * grade.getComponent().getWeight()
+                )
+                .sum() / totalWeighting;
     }
 
     public ArrayList<Grade> getGradeArrayList() {
