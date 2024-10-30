@@ -11,7 +11,7 @@ import tutorlink.lists.ComponentList;
 import tutorlink.result.CommandResult;
 
 public class DeleteComponentCommand extends Command{
-    public static final String[] ARGUMENT_PREFIXES = {"n/"};
+    public static final String[] ARGUMENT_PREFIXES = {"c/"};
     public static final String COMMAND_WORD = "delete_component";
 
     @Override

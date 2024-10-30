@@ -17,8 +17,10 @@ import tutorlink.grade.Grade;
  * Represents a list of grades.
  */
 public class GradeList {
-    private static final String ERROR_DUPLICATE_GRADE_ON_ADD = "Error! Grade (%s, %s) already exists in the list!";
-    private static final String ERROR_NO_GRADE_FOUND = "Error! Grade (%s, %s) does not exist in the list!";
+    private static final String ERROR_DUPLICATE_GRADE_ON_ADD =
+            "Error! Grade for component %s for student %s already exists in the list!";
+    private static final String ERROR_NO_GRADE_FOUND =
+            "Error! Grade for component %s for student %s does not exist in the list!";
 
 
     private ArrayList<Grade> gradeArrayList;
@@ -31,17 +33,18 @@ public class GradeList {
         this.gradeArrayList = gradeArrayList;
     }
 
+    //@@author RCPilot1604
     public void deleteGrade(String matricNumber, String componentDescription) throws GradeNotFoundException {
         matricNumber = matricNumber.toUpperCase();
-        componentDescription = componentDescription.toLowerCase();
+        componentDescription = componentDescription.toUpperCase();
         for (Grade grade : gradeArrayList) {
             if (grade.getStudent().getMatricNumber().equals(matricNumber)
-                    && grade.getComponent().getName().equals(componentDescription)) {
+                    && grade.getComponent().getName().toUpperCase().equals(componentDescription)) {
                 gradeArrayList.remove(grade);
                 return;
             }
         }
-        throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
+        throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, componentDescription, matricNumber));
     }
 
     public void deleteGradesByMatric(String matricNumber) {
@@ -56,20 +59,22 @@ public class GradeList {
     }
 
     public void deleteGradesByComponent(String componentDescription) {
-        componentDescription = componentDescription.toLowerCase();
+        componentDescription = componentDescription.toUpperCase();
         ArrayList<Grade> gradesToDelete = new ArrayList<>();
         for (Grade grade : gradeArrayList) {
-            if (grade.getComponent().getName().equals(componentDescription)) {
+            if (grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase())) {
                 gradesToDelete.add(grade);
             }
         }
         gradeArrayList.removeAll(gradesToDelete);
     }
 
-    public void addGrade(Grade grade) throws DuplicateGradeException {
+    public void addGrade(Grade grade) {
         for (Grade gradeToCompare : gradeArrayList) {
             if (grade.equals(gradeToCompare)) {
-                throw new DuplicateGradeException(ERROR_DUPLICATE_GRADE_ON_ADD);
+                throw new DuplicateGradeException(
+                        String.format(ERROR_DUPLICATE_GRADE_ON_ADD,
+                                grade.getComponentName(), grade.getStudentMatricNumber()));
             }
         }
         gradeArrayList.add(grade);
@@ -87,14 +92,16 @@ public class GradeList {
         filteredList.gradeArrayList = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase())
-                        && grade.getComponent().getName().equals(componentDescription.toLowerCase()))
+                        && grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.gradeArrayList.isEmpty()) {
-            throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
+            throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, componentDescription, matricNumber));
         }
         return filteredList;
     }
+    //@@author
 
+    //@@author TrungBui32
     public double calculateStudentGPA(String matricNumber, ComponentList componentList)
             throws IncompleteGradesException {
         ArrayList<Grade> studentGrades = gradeArrayList
@@ -122,6 +129,7 @@ public class GradeList {
                 .mapToDouble(grade -> grade.getScore() * grade.getComponent().getWeight())
                 .sum();
     }
+    //@@author
 
     public ArrayList<Grade> getGradeArrayList() {
         return gradeArrayList;

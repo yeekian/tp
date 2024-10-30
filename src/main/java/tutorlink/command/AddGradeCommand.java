@@ -15,11 +15,13 @@ import tutorlink.lists.StudentList;
 import tutorlink.result.CommandResult;
 import tutorlink.student.Student;
 import java.util.HashMap;
+
 import static tutorlink.lists.StudentList.STUDENT_NOT_FOUND;
 
 public class AddGradeCommand extends Command {
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/", "s/"};
     public static final String COMMAND_WORD = "add_grade";
+    private static final String ERROR_DUPLICATE_GRADE_ON_ADD = "Error! Grade (%s, %s) already exists in the list!";
 
     @Override
     public CommandResult execute(AppState appstate, HashMap<String, String> hashmap) throws TutorLinkException {
@@ -48,7 +50,6 @@ public class AddGradeCommand extends Command {
             appstate.grades.addGrade(grade);
         } catch (NumberFormatException e) {
             throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
-
         }
 
         return new CommandResult(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription,
