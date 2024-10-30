@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DeleteGradeCommandTest {
 
-    private final String successMessage = "%s grade added successfully to %s for %s!";
+    private final String successMessage = "Score of %s added successfully to %s for %s!";
 
     @Test
     void addGrade_allArgumentsExam_successful() {
