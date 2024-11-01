@@ -1,6 +1,17 @@
 package tutorlink.parser;
 
-import tutorlink.command.*;
+import tutorlink.command.AddStudentCommand;
+import tutorlink.command.Command;
+import tutorlink.command.DeleteComponentCommand;
+import tutorlink.command.DeleteGradeCommand;
+import tutorlink.command.DeleteStudentCommand;
+import tutorlink.command.ExitCommand;
+import tutorlink.command.FindStudentCommand;
+import tutorlink.command.InvalidCommand;
+import tutorlink.command.ListComponentCommand;
+import tutorlink.command.ListStudentCommand;
+import tutorlink.command.AddGradeCommand;
+import tutorlink.command.AddComponentCommand;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -50,8 +61,6 @@ public class Parser {
 
         case ListComponentCommand.COMMAND_WORD:
             return new ListComponentCommand();
-        case CalculateStudentGPACommand.COMMAND_WORD:
-            return new CalculateStudentGPACommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(); // Lists all students

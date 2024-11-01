@@ -5,12 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
-import tutorlink.component.Component;
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
-import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
-import tutorlink.exceptions.IncompleteGradesException;
 import tutorlink.grade.Grade;
 
 /**
