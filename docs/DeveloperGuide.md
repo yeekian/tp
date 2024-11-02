@@ -140,30 +140,16 @@ The `AddGradeCommand` and `DeleteGradeCommand` classes handle the addition and d
   3. Ensures the score is within the allowable range for the specified component.
   4. Creates a new `Grade` object and adds it to the `GradeList` in `AppState`.
 
+The sequence diagram of the AddGradeCommand is shown below.
+
+![AddGradeCommand.png](diagrams%2FAddGradeCommand.png)
+
 - **`DeleteGradeCommand.execute(AppState appState, HashMap<String, String> arguments)`**: Removes a grade from a student by performing these steps:
   1. Retrieves and validates the matriculation number and component description from `arguments`.
   2. Confirms the existence of the specified component and student.
   3. Locates and deletes the `Grade` object from the `GradeList` in `AppState`.
 
-#### Example Usage Scenario
-
-Given below is an example usage scenario and how the AddGradeCommand and DeleteGradeCommand behaves at each step.
-
-Consider a scenario where the Professor wants to add a grade for a student, Alice, in the midterm component of a module. The Professor would initiate the AddGradeCommand, inputting Alice's matriculation number, the component as "midterm," and a score of 85. The command will then:
-
-1. Validate Alice's matriculation number and ensure that the midterm component is present in the grade configuration for the module.
-2. Confirm that the score of 85 is within the allowable range for midterm.
-3. Create a new Grade object and add it to the GradeList in AppState, reflecting Alice's score for the midterm component.
-
-The sequence diagram of the DeleteGradeCommand is shown below.
-
-![AddGradeCommand.png](diagrams%2FAddGradeCommand.png)
-
-Later, if the Professor realizes that the grade was entered incorrectly and decides to delete it, they can use the DeleteGradeCommand:
-
-1. The command verifies Alice's matriculation number and the midterm component's presence.
-2. It locates Alice's midterm Grade object and deletes it from the GradeList in AppState, effectively removing the grade record.
-
+    
 The sequence diagram of the DeleteGradeCommand is shown below.
 
 ![DeleteGradeCommand.png](diagrams%2FDeleteGradeCommand.png)
