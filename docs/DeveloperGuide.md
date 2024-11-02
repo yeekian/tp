@@ -99,6 +99,16 @@ All commands follow the sequence as described in the diagram below:
 
 Where <code>ref</code> frame is a placeholder for each command's specific operations.
 
+#### Setup: 
+
+During the setup phase of `TutorLink`, the following operations are performed:
+1. `Ui` displays welcome message
+2. `StudentStorage`, `ComponentStorage` and `GradeStorage` objects are instantiated
+3. `ArrayList` of Student, Component and Grade are obtained from the respective Storage classes
+4. `AppState` object is instantiated, passing the `ArrayList`s in step 3
+
+![Setup.png](diagrams/Setup.png)
+
 The specific implementation of noteworthy operations are presented below: 
 
 ### Add/Delete Student/Component Feature
