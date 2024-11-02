@@ -16,7 +16,7 @@ public class Commons {
     //@@author yeekian
     //Grade
     public static final String DELETE_GRADE_SUCCESS = "Grade: Component %s for student %s successfully deleted";
-    public static final String ADD_GRADE_SUCCESS = "%s grade added successfully to %s for %s!";
+    public static final String ADD_GRADE_SUCCESS = "Score of %s added successfully to %s for %s!";
     public static final String ERROR_INVALID_SCORE =
             "Error! Score must be double that is more than or equal to 0, and not exceed the max score!";
 

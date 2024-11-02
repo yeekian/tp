@@ -30,7 +30,7 @@ public class DeleteComponentCommandTest {
     @Test
     void deleteComponent_success() {
         arguments = new HashMap<>();
-        arguments.put("n/", "finals");
+        arguments.put("c/", "finals");
         result = command.execute(appState, arguments);
         assertNotNull(result);
         assertEquals(appState.components.size(), 2);
@@ -46,7 +46,7 @@ public class DeleteComponentCommandTest {
     @Test
     void deleteComponent_notFound_fail() {
         arguments = new HashMap<>();
-        arguments.put("n/", "midterms");
+        arguments.put("c/", "midterms");
         try {
             command.execute(appState, arguments);
         } catch (ComponentNotFoundException e) {

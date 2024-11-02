@@ -27,8 +27,8 @@ The key classes providing functionality to TutorLink are:
 2. <code>Ui</code>: Collects data (via Strings sent via CLI) from the user and relays information to the user (via
    printing back to the CLI).
 3. <code>Parser</code>: Interprets the raw data from the user; applies data validation and handles necessary exceptions.
-4. <code>Storage</code>: Serves as long-term storage of data to be retained even after TutorLink is shut down.
-5. <code>CommandResult</code> represents the result of user input.
+4. <code>Storage</code>: Handles the loading and storage of data to be retained even after TutorLink is shut down.
+5. <code>CommandResult</code>: Represents the result of user input.
 
 ### Target User Profile
 
@@ -110,8 +110,8 @@ The flow of logic for both `Student` and `Component` commands can be summarized 
 
 1. Retrieve arguments from `HashMap`.
 2. Execute data validation on the arguments and throw appropriate exception in the case of failure.
-2. Add/Delete `Student` and `Component`.
-3. Return `CommandResult` that contains the result of the Add/Delete operation.
+3. Add/Delete `Student` and `Component`.
+4. Return `CommandResult` that contains the result of the Add/Delete operation.
 
 The following sequence diagrams depict the exact steps involved in the `AddStudentCommand`:
 
@@ -168,19 +168,23 @@ The sequence diagram of the DeleteGradeCommand is shown below.
 
 ![DeleteGradeCommand.png](diagrams%2FDeleteGradeCommand.png)
 
-### Storage feature
+### Storage Load feature
 
-#### Implementation
+The `StudentStorage`, `GradeStorage` and `ComponentStorage` classes implement the feature to load data from the 
+data `.txt` files into their respective List objects at the start of the program.
 
-The `Storage` class is responsible for the automatic loading and saving of list data to and from `.txt` files,
-so that data will be retained between runs of the application.
+The load list methods for the Storage classes have largely similar logic flows.  
+The following section and sequence diagram elaborate on the implementation of the `loadGradeList` method in `GradeStorage`:
 
-#### Example Usage Scenario
+![GradeStorage.png](diagrams/GradeStorage.png)
 
-Step 1: The user launches the application. During startup, the `main` method calls constructors for `Storage` objects
-for each of `StudentList`, `ComponentList` and `Gradelist`.
-
-Step 2: The predefined filepaths are passed into the constructor. The directory and file are created if they do not
-currently exist.
-
-<Insert Sequence diagram here, todo>
+1. TutorLink constructs a new `GradeStorage`.
+2. TutorLink calls `loadGradeList`.
+3. `GradeStorage` creates a new `ArrayList` of `Grade`s.
+4. `GradeStorage` creates a new `Scanner` with the path to the file.
+5. While there are next lines in the data file:
+   - `Scanner` returns the current file line as a String and moves to the next file line.
+   - `GradeStorage` calls its `getGradeFromFileLine` method with the file line.
+   - If the file line references a valid `Component` and a valid `Student`, a `Grade` is returned and added to the `ArrayList`.
+   - If not (e.g. if data file was corrupted), the file line is simply ignored, and the loop continues to the next iteration.
+6. The `ArrayList` of `Grade`s is returned to TutorLink.

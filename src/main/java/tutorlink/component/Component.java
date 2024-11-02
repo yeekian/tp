@@ -1,12 +1,13 @@
 package tutorlink.component;
 
+//@@author TrungBui32
 public class Component {
     private String name;
     private double maxScore;
     private double weight;
 
     public Component(String name, double maxScore, double weight) {
-        this.name = name.toLowerCase();
+        this.name = name;
         this.maxScore = maxScore;
         this.weight = weight;
     }

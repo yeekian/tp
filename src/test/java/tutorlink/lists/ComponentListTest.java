@@ -57,8 +57,8 @@ class ComponentListTest {
         componentList.addComponent(comp3);
         ComponentList filteredList = componentList.findComponent("homework");
         assertEquals(2, filteredList.size());
-        String expectedResult = "1: homework 1, maxScore = 30.0, weight = 0.1\n" +
-                "\t2: homework 2, maxScore = 30.0, weight = 0.1";
+        String expectedResult = "1: Homework 1, maxScore = 30.0, weight = 0.1\n" +
+                "\t2: Homework 2, maxScore = 30.0, weight = 0.1";
         assertEquals(expectedResult, filteredList.toString());
     }
 
@@ -74,8 +74,8 @@ class ComponentListTest {
     void toString_test() {
         componentList.addComponent(comp1);
         componentList.addComponent(comp3);
-        String expectedResult = "1: homework 1, maxScore = 30.0, weight = 0.1\n" +
-                "\t2: finals, maxScore = 100.0, weight = 0.5";
+        String expectedResult = "1: Homework 1, maxScore = 30.0, weight = 0.1\n" +
+                "\t2: Finals, maxScore = 100.0, weight = 0.5";
         assertEquals(expectedResult, componentList.toString());
     }
 }

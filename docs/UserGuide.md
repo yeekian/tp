@@ -12,6 +12,7 @@
 4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar TutorLink.jar command to run the application.
 
 Your command terminal should look similar to the one below.
+
 ![tutorlink_startup.png](tutorlink_startup.png)
 ## Features 
 
@@ -26,7 +27,6 @@ Adds a student to your class.
 
 - **Example**:
     - `add_student i/A1234567X n/John Doe ` adds a new student named John Doe with the matric number of A1234567X to the class.
-
 ---
 
 ### Deleting a Student: `delete_student`
@@ -52,45 +52,6 @@ Displays a list of all students in the class.
     - `list_student`
 
 ---
-
-### Adding a Grade of a Component for a Student: `add_grade`
-
-Records a grade for a specific student in a particular assignment or exam component.
-- **Format**: `add_grade i/MATRIC_NUMBER c/COMPONENT  s/SCORE`
-- **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student.
-    - `COMPONENT`: The assignment or exam component.
-    - `SCORE`: The score to be recorded. Note that score cannot exceed the max score of the component.
-
-- **Example**:
-    - `add_grade i/A1234567X c/Quiz 1 s/85` adds the grade of Quiz 1 for the student with the matric number of A1234567X with a score of 85.
-
----
-
-### Deleting a Grade of a Component for a Student: `delete_grade`
-
-Removes a previously recorded grade for a specific student and component.
-
-- **Format**: `delete_grade i/MATRIC_NUMBER c/COMPONENT`
-- **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student.
-    - `COMPONENT`: The assignment or exam component.
-
-- **Example**:
-    - `delete_grade i/A1234567X c/Quiz 1` deletes the grade of Quiz 1 for the student with the matric number of A1234567X.
-
----
-
-### Listing Grades of a Student: `list_grade`
-
-Views all recorded grades and the final grade for a specific student. If the weightage of the components do not add up to 100% (i.e. the course is still in progress), IP will be returned as the final grade.
-
-- **Format**: `list_grades i/MATRIC_NUMBER`
-- **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student.
-
-- **Example**:
-    - `list_grade i/A1234567X`
 
 ### Adding a Component: `add_component`
 
@@ -131,7 +92,60 @@ Displays all grading components and their respective weights for a class.
 
 ---
 
+### Adding a Grade of a Component for a Student: `add_grade`
 
+Records a grade for a specific student in a particular assignment or exam component.
+- **Format**: `add_grade i/MATRIC_NUMBER c/COMPONENT  s/SCORE`
+- **Parameters**:
+  - `MATRIC_NUMBER`: The unique identifier of the student.
+  - `COMPONENT`: The assignment or exam component.
+  - `SCORE`: The score to be recorded. Note that score cannot exceed the max score of the component.
+
+- **Example**:
+  - `add_grade i/A1234567X c/Quiz 1 s/85` adds the grade of Quiz 1 for the student with the matric number of A1234567X with a score of 85.
+
+---
+
+### Deleting a Grade of a Component for a Student: `delete_grade`
+
+Removes a previously recorded grade for a specific student and component.
+
+- **Format**: `delete_grade i/MATRIC_NUMBER c/COMPONENT`
+- **Parameters**:
+  - `MATRIC_NUMBER`: The unique identifier of the student.
+  - `COMPONENT`: The assignment or exam component.
+
+- **Example**:
+  - `delete_grade i/A1234567X c/Quiz 1` deletes the grade of Quiz 1 for the student with the matric number of A1234567X.
+
+---
+
+### Listing Grades of a Student: `list_grade`
+
+Views all recorded grades and the final grade for a specific student. If the weightage of the components do not add up to 100% (i.e. the course is still in progress), IP will be returned as the final grade.
+
+- **Format**: `list_grades i/MATRIC_NUMBER`
+- **Parameters**:
+  - `MATRIC_NUMBER`: The unique identifier of the student.
+
+- **Example**:
+  - `list_grade i/A1234567X`
+
+---
+
+### Saving the data
+
+TutorLink data is saved in the hard disk automatically after every command execution. There is no need to save manually.
+Existing data from previous application runs are loaded on startup.
+
+The data from the student, component and grade lists are stored in `studentlist.txt`, `componentlist.txt` and `gradelist.txt`
+respectively, located in the `[JAR file location]/data/` directory.
+
+---
+## Notes:
+- Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
+will be converted to uppercase for storage. 
+- (coming soon) All other arguments are case insensitive and will be converted to lowercase for storage. 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
