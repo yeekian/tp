@@ -2,6 +2,7 @@ package tutorlink;
 
 import tutorlink.appstate.AppState;
 import tutorlink.command.Command;
+import tutorlink.commons.Commons;
 import tutorlink.component.Component;
 import tutorlink.exceptions.StorageOperationException;
 import tutorlink.exceptions.TutorLinkException;
@@ -66,7 +67,7 @@ public class TutorLink {
             appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
 
         } catch (IOException | StorageOperationException e) {
-            System.out.println("File storage error encountered: " + e.getMessage());
+            System.out.println(Commons.ERROR_FILESTORAGE_EXCEPTION + e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -96,7 +97,7 @@ public class TutorLink {
             } catch (TutorLinkException e) {
                 ui.displayException(e);
             } catch (IOException e) {
-                System.out.println("File storage error encountered: " + e.getMessage());
+                System.out.println(Commons.ERROR_FILESTORAGE_EXCEPTION + e.getMessage());
                 throw new RuntimeException(e);
             }
         }

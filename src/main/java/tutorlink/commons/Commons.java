@@ -35,6 +35,8 @@ public class Commons {
     //Invalid
     public static final String ERROR_INVALID_COMMAND = "Error! Invalid command given!";
 
+    public static final String ERROR_FILESTORAGE_EXCEPTION = "Error! File storage exception encountered: ";
+
     //Exit
     public static final String EXIT = "Goodbye! See you soon!";
 }
