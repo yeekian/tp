@@ -83,7 +83,7 @@ public class AddGradeCommand extends Command {
 
     private static Component findComponentFromComponents(AppState appstate, String componentDescription) {
         //Get component object using String componentDescription
-        ComponentList componentFilteredList = appstate.components.findComponent(componentDescription.toUpperCase());
+        ComponentList componentFilteredList = appstate.components.findComponent(componentDescription);
         Component component;
         if (componentFilteredList.size() == 1) {
             component = componentFilteredList.getComponentArrayList().get(0);
