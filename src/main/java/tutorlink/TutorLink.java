@@ -49,8 +49,6 @@ public class TutorLink {
         setUpLogger();
         LOGGER.log(Level.INFO, "Test log message successful");
 
-        ui.displayWelcomeMessage();
-
         try {
             studentStorage = new StudentStorage(STUDENT_FILE_PATH);
             ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
@@ -60,8 +58,13 @@ public class TutorLink {
 
             gradeStorage = new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList);
             ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList();
-            
+            ArrayList<String> discardedGrades = gradeStorage.getDiscardedEntries();
+            if (!discardedGrades.isEmpty()) {
+                ui.displayDiscardedEntries(discardedGrades, "Discarded grade data:");
+            }
+
             appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
+
         } catch (IOException | StorageOperationException e) {
             System.out.println("File storage error encountered: " + e.getMessage());
             throw new RuntimeException(e);
@@ -70,6 +73,8 @@ public class TutorLink {
         assert studentStorage != null;
         assert componentStorage != null;
         assert gradeStorage != null;
+
+        ui.displayWelcomeMessage();
 
         while (true) {
             try {

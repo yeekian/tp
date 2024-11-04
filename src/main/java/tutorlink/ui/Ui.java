@@ -3,6 +3,7 @@ package tutorlink.ui;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -42,6 +43,15 @@ public class Ui {
     public void displayException(TutorLinkException error) {
         System.out.println(halfBreakLine + "   Error   " + halfBreakLine);
         System.out.println(error.getMessage());
+        System.out.println(fullBreakLine);
+    }
+
+    public void displayDiscardedEntries(ArrayList<String> discardedEntries, String header) {
+        System.out.println(fullBreakLine);
+        System.out.println(header);
+        for (String entry : discardedEntries) {
+            System.out.println(entry);
+        }
         System.out.println(fullBreakLine);
     }
 }

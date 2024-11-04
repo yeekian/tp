@@ -28,7 +28,7 @@ public class GradeStorage extends Storage {
             try {
                 grades.add(getGradeFromFileLine(fileScanner.nextLine()));
             } catch (InvalidDataFileLineException e) {
-                // ignore invalid data file entries
+                discardedEntries.add(e.getMessage());
             }
         }
         return grades;
@@ -67,7 +67,7 @@ public class GradeStorage extends Storage {
         if (selectedComp != null && selectedStudent != null) {
             return new Grade(selectedComp, selectedStudent, score);
         } else {
-            throw new InvalidDataFileLineException("Invalid grade");
+            throw new InvalidDataFileLineException(fileLine);
         }
     }
 
