@@ -85,7 +85,7 @@ class StudentListTest {
     void testToString() throws DuplicateMatricNumberException {
         studentList.addStudent("A1234567B", "John Doe");
         studentList.addStudent("A7654321B", "Jane Smith");
-        String expectedString = "\t1: John Doe (matric no: A1234567B)\n\t2: Jane Smith (matric no: A7654321B)";
+        String expectedString = "\t1: John Doe (matric no: A1234567B, GPA: 0.0)\n\t2: Jane Smith (matric no: A7654321B, GPA: 0.0)";
         assertEquals(expectedString, studentList.toString());
     }
 }
