@@ -1,7 +1,6 @@
 //@@author yeekian
 package tutorlink.parser;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.command.AddStudentCommand;
 import tutorlink.command.Command;
