@@ -117,6 +117,10 @@ public class GradeList {
                 .mapToDouble(c -> c.getWeight())
                 .sum();
 
+        if(totalWeighting == 0) {
+            return 0;
+        }
+
         return studentGrades
                 .stream()
                 .mapToDouble(grade ->
