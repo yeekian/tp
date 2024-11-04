@@ -4,6 +4,7 @@ package tutorlink.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
+import tutorlink.commons.Commons;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.result.CommandResult;
 
@@ -29,11 +30,11 @@ public class AddComponentCommandTest {
     @Test
     void execute_validArguments_componentAddedSuccessfully() {
         arguments.put("c/", "Quiz 1");
-        arguments.put("w/", "0.3");
+        arguments.put("w/", "30");
         arguments.put("m/", "100");
         CommandResult result = command.execute(appState, arguments);
         assertNotNull(result);
-        assertEquals("Component Quiz 1 of weight 0.3, with max score 100 added successfully!", result.toString());
+        assertEquals("Component Quiz 1 of weight 30, with max score 100 added successfully!", result.toString());
         assertEquals(1, appState.components.getComponentArrayList().size());
     }
 
@@ -59,13 +60,13 @@ public class AddComponentCommandTest {
     @Test
     void execute_extraArgument_componentAddedSuccessfully() {
         arguments.put("c/", "Quiz 1");
-        arguments.put("w/", "0.5");
+        arguments.put("w/", "50");
         arguments.put("m/", "100");
         arguments.put("extra/", "extra value");
 
         CommandResult result = command.execute(appState, arguments);
         assertNotNull(result);
-        assertEquals("Component Quiz 1 of weight 0.5, with max score 100 added successfully!", result.toString());
+        assertEquals("Component Quiz 1 of weight 50, with max score 100 added successfully!", result.toString());
         assertEquals(1, appState.components.getComponentArrayList().size());
     }
 
@@ -78,7 +79,7 @@ public class AddComponentCommandTest {
         IllegalValueException exception = assertThrows(IllegalValueException.class, () -> {
             command.execute(appState, arguments);
         });
-        assertEquals("Error! Weightage must be double that is between 0 and 1!", exception.getMessage());
+        assertEquals(Commons.ERROR_INVALID_WEIGHTAGE, exception.getMessage());
     }
 
     @Test
@@ -90,7 +91,7 @@ public class AddComponentCommandTest {
         IllegalValueException exception = assertThrows(IllegalValueException.class, () -> {
             command.execute(appState, arguments);
         });
-        assertEquals("Error! Max Score must be double that is more than or equal to 0!", exception.getMessage());
+        assertEquals(Commons.ERROR_INVALID_WEIGHTAGE, exception.getMessage());
     }
 
     @Test
@@ -102,7 +103,7 @@ public class AddComponentCommandTest {
         IllegalValueException exception = assertThrows(IllegalValueException.class, () -> {
             command.execute(appState, arguments);
         });
-        assertEquals("Error! Weightage must be double that is between 0 and 1!", exception.getMessage());
+        assertEquals(Commons.ERROR_INVALID_WEIGHTAGE, exception.getMessage());
     }
 
     @Test
@@ -114,7 +115,7 @@ public class AddComponentCommandTest {
         IllegalValueException exception = assertThrows(IllegalValueException.class, () -> {
             command.execute(appState, arguments);
         });
-        assertEquals("Error! Max Score must be double that is more than or equal to 0!", exception.getMessage());
+        assertEquals(Commons.ERROR_INVALID_WEIGHTAGE, exception.getMessage());
     }
 }
 //@@author
