@@ -44,6 +44,9 @@ public class GradeStorage extends Storage {
 
     private Grade getGradeFromFileLine(String fileLine) throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
+        if (stringParts.length != 3) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
         String componentName = stringParts[0];
         String matricNumber = stringParts[1];
         double score = Double.parseDouble(stringParts[2]);
