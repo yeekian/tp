@@ -1,6 +1,7 @@
 package tutorlink.storage;
 
 import tutorlink.component.Component;
+import tutorlink.exceptions.InvalidDataFileLineException;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +17,12 @@ public class ComponentStorage extends Storage {
         ArrayList<Component> components = new ArrayList<>();
         Scanner fileScanner = new Scanner(path);
         while (fileScanner.hasNext()) {
-            components.add(getComponentFromFileLine(fileScanner.nextLine()));
+            try {
+                Component newComponent = getComponentFromFileLine(fileScanner.nextLine(), components);
+                components.add(newComponent);
+            } catch (InvalidDataFileLineException e) {
+                discardedEntries.add(e.getMessage());
+            }
         }
         return components;
     }
@@ -29,12 +35,20 @@ public class ComponentStorage extends Storage {
         fileWriter.close();
     }
 
-    private Component getComponentFromFileLine(String fileLine) {
+    private Component getComponentFromFileLine(String fileLine, ArrayList<Component> components)
+            throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
+        if (stringParts.length != 3) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
         String name = stringParts[0];
         double maxScore = Double.parseDouble(stringParts[1]);
         double weight = Double.parseDouble(stringParts[2]);
-        return new Component(name, maxScore, weight);
+        Component newComponent = new Component(name, maxScore, weight);
+        if (components.contains(newComponent)) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
+        return newComponent;
     }
 
     private String getFileInputForComponent(Component component) {
