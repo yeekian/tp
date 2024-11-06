@@ -7,6 +7,8 @@ import tutorlink.commons.Commons;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddStudentCommand extends Command {
 
@@ -19,6 +21,12 @@ public class AddStudentCommand extends Command {
         String name = hashmap.get(ARGUMENT_PREFIXES[1]);
         if (matricNumber == null || name == null) {
             throw new IllegalValueException(Commons.ERROR_NULL);
+        }
+        matricNumber = matricNumber.toUpperCase();
+        Pattern pattern = Pattern.compile(Commons.MATRIC_NUMBER_REGEX);
+        Matcher matcher = pattern.matcher(matricNumber);
+        if (!matcher.find()) {
+            throw new IllegalValueException(Commons.ERROR_ILLEGAL_MATRIC_NUMBER);
         }
         appState.students.addStudent(matricNumber, name);
         return new CommandResult(String.format(Commons.ADD_STUDENT_SUCCESS, name, matricNumber));

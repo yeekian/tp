@@ -95,9 +95,19 @@ enhancing teaching efficiency.
 
 All commands follow the sequence as described in the diagram below: 
 
-![ArchitectureSequenceGrouped.png](diagrams%2FArchitectureSequenceGrouped.png)
+![ArchitectureSequenceGrouped.png](diagrams/ArchitectureSequenceGrouped.png)
 
 Where <code>ref</code> frame is a placeholder for each command's specific operations.
+
+#### Setup: 
+
+During the setup phase of `TutorLink`, the following operations are performed:
+1. `Ui` displays welcome message
+2. `StudentStorage`, `ComponentStorage` and `GradeStorage` objects are instantiated
+3. `ArrayList` of Student, Component and Grade are obtained from the respective Storage classes
+4. `AppState` object is instantiated, passing the `ArrayList`s in step 3
+
+![Setup.png](diagrams/Setup.png)
 
 The specific implementation of noteworthy operations are presented below: 
 
@@ -106,25 +116,39 @@ The specific implementation of noteworthy operations are presented below:
 Feature implemented by `AddStudentCommand`, `DeleteStudentCommand`, `AddComponentCommand` and `DeleteComponentCommand` 
 for `Student` and `Component` respectively. 
 
-The flow of logic for both `Student` and `Component` commands can be summarized as follows: 
+#### Implementation Details
 
-1. Retrieve arguments from `HashMap`.
-2. Execute data validation on the arguments and throw appropriate exception in the case of failure.
-3. Add/Delete `Student` and `Component`.
-4. Return `CommandResult` that contains the result of the Add/Delete operation.
+The `AddStudentCommand`/`AddComponentCommand` and `DeleteStudentCommand`/`DeleteComponentCommand` classes handle the 
+addition and deletion of student and components within the TutorLink application respectively.
+
+***Key Operations***:
+
+- `AddStudentCommand.execute(AppState appState, HashMap<String, String> arguments)`: Adds a student to the application by
+performing the following steps: 
+
+  1. Retrieves and validates the matriculation number and name from `arguments`, throwing relevant exception in the case
+of failure.
+  3. Creates and adds a `Student` object to `StudentList` in `AppState`
+  4. Return `CommandResult` that contains the result of the Add/Delete operation.
 
 The following sequence diagrams depict the exact steps involved in the `AddStudentCommand`:
 
 ![AddStudentCommand.png](diagrams/AddStudentCommand.png)
 
-The logic for `AddComponentCommand` is very similar and thus is not depicted. 
-
-Likewise, the sequence diagram for `DeleteStudentCommand` is as follows: 
+- `DeleteStudentCommand.execute(AppState appState, HashMap<String, String> arguments)`: Removes a student via the following 
+steps: 
+    1. Retrieves and validates the matriculation number from arguments, throwing `IllegaValueException` exception 
+if matriculation number is null.
+    2. Searches for and deletes the student from `AppState`. Throws `StudentNotFoundException` if no student matching the matriculation number
+is found. 
+    3. Searches for and deletes `Grade` objects in `GradeList` containing a student matching the matriculation number.
 
 ![DeleteStudentCommand.png](diagrams%2FDeleteStudentCommand.png)
 
-Since a `Grade` object is only well-defined when there are both `Student` and `Component` objects to be refrenced by `Grade`,
-whenever a `Student` or `Component` object is deleted, the corresponding `Grade` object is queried and then deleted as well. 
+*Note: Step (iii) is performed because a `Grade` object is only well-defined when there are both `Student` and `Component` objects to be refrenced by `Grade`,
+whenever a `Student` or `Component` object is deleted, the corresponding `Grade` object is queried and then deleted as well.*
+
+The logic for `AddComponentCommand` is very similar (replacing `matriculation number` with `component description`and is therefore not depicted.
 
 ### Add/Delete Grade Feature
 

@@ -22,9 +22,9 @@ public class DeleteComponentCommandTest {
     @BeforeEach
     void setup() {
         appState = new AppState();
-        appState.components.addComponent(new Component("finals", 40.0, 0.4));
-        appState.components.addComponent(new Component("iP", 20.0, 0.1));
-        appState.components.addComponent(new Component("lectures", 10.0, 0.1));
+        appState.components.addComponent(new Component("finals", 40.0, 40));
+        appState.components.addComponent(new Component("iP", 20.0, 10));
+        appState.components.addComponent(new Component("lectures", 10.0, 10));
     }
 
     @Test
