@@ -4,8 +4,6 @@
 participant ":TutorLink" as TL LOGIC_COLOR_5
 participant "gradeStorage: GradeStorage" as GS LOGIC_COLOR_4
 participant "grades: ArrayList<Grade>" as AL LOGIC_COLOR_6
-participant "fileScanner: Scanner" as FS LOGIC_COLOR_7
-
 create GS
 TL -> GS: new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList)
 activate GS
@@ -21,17 +19,9 @@ activate AL
 GS <-- AL: grades: Grade
 deactivate AL
 
-create FS
-GS -> FS: new Scanner(path: String)
-activate FS
-GS <-- FS: fileScanner: Scanner
-deactivate FS
+
 
 loop fileScanner.hasNext()
-    GS -> FS: nextLine()
-    activate FS
-    GS <-- FS: currentLine: String
-    deactivate FS
     GS -> GS: getGradeFromFileLine(currentLine: String)
     activate GS
     GS --> GS: newGrade: Grade
@@ -47,7 +37,6 @@ loop fileScanner.hasNext()
 
 end
 
-destroy FS
 
 TL <-- GS: grades: Grade
 deactivate GS

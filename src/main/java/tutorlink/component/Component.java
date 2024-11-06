@@ -4,9 +4,9 @@ package tutorlink.component;
 public class Component {
     private String name;
     private double maxScore;
-    private double weight;
+    private int weight;
 
-    public Component(String name, double maxScore, double weight) {
+    public Component(String name, double maxScore, int weight) {
         this.name = name;
         this.maxScore = maxScore;
         this.weight = weight;

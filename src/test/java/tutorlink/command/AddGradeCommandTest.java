@@ -41,7 +41,7 @@ public class AddGradeCommandTest {
         //Create component
         String examName = "Exam Under Test";
         double examMaxScore = 100.0;
-        double examWeight = 50.0;
+        int examWeight = 50;
         Component exam = new Component(examName,examMaxScore, examWeight);
 
         appState.components.addComponent(exam);
@@ -83,7 +83,7 @@ public class AddGradeCommandTest {
         //Create component
         String assignmentName = "Assignment Under Test";
         double assignmentMaxScore = 100.0;
-        double assignmentWeight = 50.0;
+        int assignmentWeight = 50;
         Component assignment = new Component(assignmentName,assignmentMaxScore, assignmentWeight);
 
         appState.components.addComponent(assignment);
@@ -123,7 +123,7 @@ public class AddGradeCommandTest {
         //Create component
         String examName = "Exam Under Test";
         double examMaxScore = 100.0;
-        double examWeight = 50.0;
+        int examWeight = 50;
         Component exam = new Component(examName,examMaxScore, examWeight);
 
         appState.components.addComponent(exam);
@@ -161,7 +161,7 @@ public class AddGradeCommandTest {
         //Create component
         String examName = "Exam Under Test";
         double examMaxScore = 100.0;
-        double examWeight = 50.0;
+        int examWeight = 50;
         Component exam = new Component(examName,examMaxScore, examWeight);
 
         appState.components.addComponent(exam);
@@ -199,7 +199,7 @@ public class AddGradeCommandTest {
         //Create component
         String examName = "Exam Under Test";
         double examMaxScore = 100.0;
-        double examWeight = 50.0;
+        int examWeight = 50;
         Component exam = new Component(examName,examMaxScore, examWeight);
 
         appState.components.addComponent(exam);
@@ -260,7 +260,7 @@ public class AddGradeCommandTest {
         //Create component
         String assignmentName = "Assignment Under Test";
         double assignmentMaxScore = 100.0;
-        double assignmentWeight = 50.0;
+        int assignmentWeight = 50;
         Component assignment = new Component(assignmentName,assignmentMaxScore, assignmentWeight);
 
         appState.components.addComponent(assignment);
@@ -298,7 +298,7 @@ public class AddGradeCommandTest {
         //Create Component component
         String examName = "Test";
         double examMaxScore = 100.0;
-        double examWeight = 50.0;
+        int examWeight = 50;
         Component exam = new Component(examName,examMaxScore, examWeight);
 
         appState.components.addComponent(exam);
