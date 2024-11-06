@@ -38,17 +38,18 @@ public class ComponentStorage extends Storage {
     private Component getComponentFromFileLine(String fileLine, ArrayList<Component> components)
             throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
-        if (stringParts.length != 3) {
+        try {
+            String name = stringParts[0];
+            double maxScore = Double.parseDouble(stringParts[1]);
+            double weight = Double.parseDouble(stringParts[2]);
+            Component newComponent = new Component(name, maxScore, weight);
+            if (components.contains(newComponent)) {
+                throw new InvalidDataFileLineException(fileLine);
+            }
+            return newComponent;
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidDataFileLineException(fileLine);
         }
-        String name = stringParts[0];
-        double maxScore = Double.parseDouble(stringParts[1]);
-        double weight = Double.parseDouble(stringParts[2]);
-        Component newComponent = new Component(name, maxScore, weight);
-        if (components.contains(newComponent)) {
-            throw new InvalidDataFileLineException(fileLine);
-        }
-        return newComponent;
     }
 
     private String getFileInputForComponent(Component component) {
