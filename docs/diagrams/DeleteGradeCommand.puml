@@ -4,23 +4,14 @@
 group sd DeleteGradeCommand
 participant ":DeleteGradeCommand" as C LOGIC_COLOR_3
 participant ":AppState" as A LOGIC_COLOR_2
-participant ":HashMap<String, String>" as H LOGIC_COLOR_7
 participant ":CommandResult" as R LOGIC_COLOR_8
 
 [->C
 activate C
-C -> H : get("i/")
-activate H
-C <-- H : matricNumber
-deactivate H
 
-C -> H : get("c/")
-activate H
-C <-- H : componentDescription
-deactivate H
 
 opt matricNumber or componentDescription is null
-    [<--C : throw IllegalValueException
+    [<--C : IllegalValueException
 end
 
 C -> C : findComponentFromComponents

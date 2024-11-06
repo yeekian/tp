@@ -3,23 +3,22 @@
 group sd DeleteStudentCommand
 participant ":DeleteStudentCommand" as C LOGIC_COLOR_3
 participant ":AppState" as A LOGIC_COLOR_2
-participant ":HashMap<String, String>" as H LOGIC_COLOR_7
 participant ":CommandResult" as R LOGIC_COLOR_8
 
 [-> C
 
-C -> H : get("i/")
-activate H
-C <-- H : matricNumber
-deactivate H
-
 opt matricNumber is null
-[<--C : throw IllegalValueException
+[<--C : IllegalValueException
 end
 
 C -> A : deleteStudent(matricNumber)
 activate A
+alt student found and deleted
 C <-- A
+else student not found
+C <-- A : StudentNotFoundException
+[<-- C : StudentNotFoundException
+end
 deactivate A
 
 C -> A : deleteGradesByMatricNumber(matricNumber)
