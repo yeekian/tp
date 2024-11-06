@@ -133,7 +133,7 @@ Error! Component Wuiz does not exist in the list!
 Error! Invalid command given!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-
+No grades have been recorded yet.
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Invalid command given!

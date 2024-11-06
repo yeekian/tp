@@ -41,7 +41,7 @@ public class ComponentStorage extends Storage {
         try {
             String name = stringParts[0];
             double maxScore = Double.parseDouble(stringParts[1]);
-            double weight = Double.parseDouble(stringParts[2]);
+            int weight = Integer.parseInt(stringParts[2]);
             Component newComponent = new Component(name, maxScore, weight);
             if (components.contains(newComponent)) {
                 throw new InvalidDataFileLineException(fileLine);
