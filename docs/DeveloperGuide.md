@@ -27,8 +27,8 @@ The key classes providing functionality to TutorLink are:
 2. <code>Ui</code>: Collects data (via Strings sent via CLI) from the user and relays information to the user (via
    printing back to the CLI).
 3. <code>Parser</code>: Interprets the raw data from the user; applies data validation and handles necessary exceptions.
-4. <code>Storage</code>: Serves as long-term storage of data to be retained even after TutorLink is shut down.
-5. <code>CommandResult</code> represents the result of user input.
+4. <code>Storage</code>: Handles the loading and storage of data to be retained even after TutorLink is shut down.
+5. <code>CommandResult</code>: Represents the result of user input.
 
 ### Target User Profile
 
@@ -110,8 +110,8 @@ The flow of logic for both `Student` and `Component` commands can be summarized 
 
 1. Retrieve arguments from `HashMap`.
 2. Execute data validation on the arguments and throw appropriate exception in the case of failure.
-2. Add/Delete `Student` and `Component`.
-3. Return `CommandResult` that contains the result of the Add/Delete operation.
+3. Add/Delete `Student` and `Component`.
+4. Return `CommandResult` that contains the result of the Add/Delete operation.
 
 The following sequence diagrams depict the exact steps involved in the `AddStudentCommand`:
 
@@ -140,47 +140,37 @@ The `AddGradeCommand` and `DeleteGradeCommand` classes handle the addition and d
   3. Ensures the score is within the allowable range for the specified component.
   4. Creates a new `Grade` object and adds it to the `GradeList` in `AppState`.
 
+The sequence diagram of the AddGradeCommand is shown below.
+
+![AddGradeCommand.png](diagrams%2FAddGradeCommand.png)
+
 - **`DeleteGradeCommand.execute(AppState appState, HashMap<String, String> arguments)`**: Removes a grade from a student by performing these steps:
   1. Retrieves and validates the matriculation number and component description from `arguments`.
   2. Confirms the existence of the specified component and student.
   3. Locates and deletes the `Grade` object from the `GradeList` in `AppState`.
 
-#### Example Usage Scenario
-
-Given below is an example usage scenario and how the AddGradeCommand and DeleteGradeCommand behaves at each step.
-
-Consider a scenario where the Professor wants to add a grade for a student, Alice, in the midterm component of a module. The Professor would initiate the AddGradeCommand, inputting Alice's matriculation number, the component as "midterm," and a score of 85. The command will then:
-
-1. Validate Alice's matriculation number and ensure that the midterm component is present in the grade configuration for the module.
-2. Confirm that the score of 85 is within the allowable range for midterm.
-3. Create a new Grade object and add it to the GradeList in AppState, reflecting Alice's score for the midterm component.
-
-The sequence diagram of the DeleteGradeCommand is shown below.
-
-![AddGradeCommand.png](diagrams%2FAddGradeCommand.png)
-
-Later, if the Professor realizes that the grade was entered incorrectly and decides to delete it, they can use the DeleteGradeCommand:
-
-1. The command verifies Alice's matriculation number and the midterm component's presence.
-2. It locates Alice's midterm Grade object and deletes it from the GradeList in AppState, effectively removing the grade record.
-
+    
 The sequence diagram of the DeleteGradeCommand is shown below.
 
 ![DeleteGradeCommand.png](diagrams%2FDeleteGradeCommand.png)
 
-### Storage feature
+### Storage Load feature
 
-#### Implementation
+The `StudentStorage`, `GradeStorage` and `ComponentStorage` classes implement the feature to load data from the 
+data `.txt` files into their respective List objects at the start of the program.
 
-The `Storage` class is responsible for the automatic loading and saving of list data to and from `.txt` files,
-so that data will be retained between runs of the application.
+The load list methods for the Storage classes have largely similar logic flows.  
+The following section and sequence diagram elaborate on the implementation of the `loadGradeList` method in `GradeStorage`:
 
-#### Example Usage Scenario
+![GradeStorage.png](diagrams/GradeStorage.png)
 
-Step 1: The user launches the application. During startup, the `main` method calls constructors for `Storage` objects
-for each of `StudentList`, `ComponentList` and `Gradelist`.
-
-Step 2: The predefined filepaths are passed into the constructor. The directory and file are created if they do not
-currently exist.
-
-<Insert Sequence diagram here, todo>
+1. TutorLink constructs a new `GradeStorage`.
+2. TutorLink calls `loadGradeList`.
+3. `GradeStorage` creates a new `ArrayList` of `Grade`s.
+4. `GradeStorage` creates a new `Scanner` with the path to the file.
+5. While there are next lines in the data file:
+   - `Scanner` returns the current file line as a String and moves to the next file line.
+   - `GradeStorage` calls its `getGradeFromFileLine` method with the file line.
+   - If the file line references a valid `Component` and a valid `Student`, a `Grade` is returned and added to the `ArrayList`.
+   - If not (e.g. if data file was corrupted), the file line is simply ignored, and the loop continues to the next iteration.
+6. The `ArrayList` of `Grade`s is returned to TutorLink.

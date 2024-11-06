@@ -132,6 +132,16 @@ Views all recorded grades and the final grade for a specific student. If the wei
   - `list_grade i/A1234567X`
 
 ---
+
+### Saving the data
+
+TutorLink data is saved in the hard disk automatically after every command execution. There is no need to save manually.
+Existing data from previous application runs are loaded on startup.
+
+The data from the student, component and grade lists are stored in `studentlist.txt`, `componentlist.txt` and `gradelist.txt`
+respectively, located in the `[JAR file location]/data/` directory.
+
+---
 ## Notes:
 - Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
 will be converted to uppercase for storage. 
