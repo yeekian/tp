@@ -38,16 +38,17 @@ public class StudentStorage extends Storage {
     private Student getStudentFromFileLine(String fileLine, ArrayList<Student> students)
             throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
-        if (stringParts.length != 2) {
+        try {
+            String matricNumber = stringParts[0];
+            String name = stringParts[1];
+            Student newStudent = new Student(matricNumber, name);
+            if (students.contains(newStudent)) {
+                throw new InvalidDataFileLineException(fileLine);
+            }
+            return newStudent;
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidDataFileLineException(fileLine);
         }
-        String matricNumber = stringParts[0];
-        String name = stringParts[1];
-        Student newStudent = new Student(matricNumber, name);
-        if (students.contains(newStudent)) {
-            throw new InvalidDataFileLineException(fileLine);
-        }
-        return newStudent;
     }
 
     private String getFileInputForStudent(Student student) {
