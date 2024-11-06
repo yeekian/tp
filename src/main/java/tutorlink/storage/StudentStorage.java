@@ -1,5 +1,6 @@
 package tutorlink.storage;
 
+import tutorlink.exceptions.InvalidDataFileLineException;
 import tutorlink.student.Student;
 
 import java.io.FileWriter;
@@ -16,7 +17,12 @@ public class StudentStorage extends Storage {
         ArrayList<Student> students = new ArrayList<>();
         Scanner fileScanner = new Scanner(path);
         while (fileScanner.hasNext()) {
-            students.add(getStudentFromFileLine(fileScanner.nextLine()));
+            try {
+                Student newStudent = getStudentFromFileLine(fileScanner.nextLine(), students);
+                students.add(newStudent);
+            } catch (InvalidDataFileLineException e) {
+                discardedEntries.add(e.getMessage());
+            }
         }
         return students;
     }
@@ -29,11 +35,20 @@ public class StudentStorage extends Storage {
         fileWriter.close();
     }
 
-    private Student getStudentFromFileLine(String fileLine) {
+    private Student getStudentFromFileLine(String fileLine, ArrayList<Student> students)
+            throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
-        String matricNumber = stringParts[0];
-        String name = stringParts[1];
-        return new Student(matricNumber, name);
+        try {
+            String matricNumber = stringParts[0];
+            String name = stringParts[1];
+            Student newStudent = new Student(matricNumber, name);
+            if (students.contains(newStudent)) {
+                throw new InvalidDataFileLineException(fileLine);
+            }
+            return newStudent;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
     }
 
     private String getFileInputForStudent(Student student) {
