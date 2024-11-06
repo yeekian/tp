@@ -11,13 +11,13 @@ Hello! I'm TutorLink
 What can I do for you?
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Student Ethan Chua (A0276007H, GPA: 0.0) added successfully!
+Student Ethan Chua (A0276007H) added successfully!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Student John Doe (A9999999Z, GPA: 0.0) added successfully!
+Student John Doe (A9999999Z) added successfully!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Student John Smith (A1111111B, GPA: 0.0) added successfully!
+Student John Smith (A1111111B) added successfully!
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Ensure matric number is of the form A\d{7}[A-Z] (case insensitive)
