@@ -5,6 +5,11 @@ public class Commons {
     public static final String ERROR_NULL = "Error! Null parameter passed!";
 
     //@@author RCPilot1604
+
+    //Input Validation
+    public static final String MATRIC_NUMBER_REGEX = "A\\d{7}[A-Z]";
+    public static final String ERROR_ILLEGAL_MATRIC_NUMBER = "Error! Ensure matric " +
+            "number is of the form A\\d{7}[A-Z] (case insensitive)";
     //Student
     public static final String ADD_STUDENT_SUCCESS = "Student %s (%s) added successfully!";
     public static final String ERROR_DUPLICATE_STUDENT =
@@ -27,7 +32,7 @@ public class Commons {
     public static final String DELETE_COMPONENT_SUCCESS = "Component %s successfully deleted";
     public static final String ERROR_COMPONENT_NOT_FOUND = "Error! Component (Name %s) not found";
     public static final String ERROR_DUPLICATE_COMPONENT = "Error! Component (Name %s) already exists in the list!";
-    public static final String ERROR_INVALID_WEIGHTAGE = "Error! Weightage must be double that is between 0 and 1!";
+    public static final String ERROR_INVALID_WEIGHTAGE = "Error! Weightage must be integer that is between 0 and 100!";
     public static final String ERROR_INVALID_MAX_SCORE =
             "Error! Max Score must be double that is more than or equal to 0!";
 

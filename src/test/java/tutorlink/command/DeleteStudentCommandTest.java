@@ -32,11 +32,11 @@ public class DeleteStudentCommandTest {
         appState.students.addStudent("A2468102C", "Arthur Mueller");
 
         appState.grades.addGrade(new Grade(new Component("Take Home Quiz 1", 10.0,
-                0.2), new Student("A1234567X", "John Doe"), 7.0));
+                20), new Student("A1234567X", "John Doe"), 7.0));
         appState.grades.addGrade(new Grade(new Component("Take Home Quiz 2", 10.0,
-                0.2), new Student("A1234567X", "John Doe"), 9.0));
+                20), new Student("A1234567X", "John Doe"), 9.0));
         appState.grades.addGrade(new Grade(new Component("Take Home Quiz 1", 10.0,
-                0.2), new Student("A7654321B", "Jane Smith"), 9.0));
+                20), new Student("A7654321B", "Jane Smith"), 9.0));
     }
 
     @Test

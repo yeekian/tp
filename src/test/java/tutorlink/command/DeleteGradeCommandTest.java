@@ -51,7 +51,7 @@ public class DeleteGradeCommandTest {
         //Create component
         String examName = componentName;
         double examMaxScore = 100.0;
-        double examWeight = 50.0;
+        int examWeight = 50;
         Component exam = new Component(examName,examMaxScore, examWeight);
 
         appState.components.addComponent(exam);
