@@ -36,10 +36,21 @@ The key classes providing functionality to TutorLink are:
 
 All commands follow the sequence as described in the diagram below: 
 
-![ArchitectureSequenceGrouped.png](diagrams%2FArchitectureSequenceGrouped.png)
+![ArchitectureSequenceGrouped.png](diagrams/ArchitectureSequenceGrouped.png)
 
 Where <code>ref</code> frame is a placeholder for each command's specific operations.
 
+#### Setup:
+
+During the setup phase of `TutorLink`, the following operations are performed:
+1. `Ui` displays welcome message
+2. `StudentStorage`, `ComponentStorage` and `GradeStorage` objects are instantiated
+3. `ArrayList` of Student, Component and Grade are obtained from the respective Storage classes
+4. `AppState` object is instantiated, passing the `ArrayList`s in step 3
+
+![Setup.png](diagrams/Setup.png)
+
+The specific implementation of noteworthy operations are presented below:
 The specific implementation of noteworthy operations are presented below: 
 
 ### Add/Delete Student/Component Feature
@@ -52,23 +63,33 @@ Each command validates user input to ensure accuracy and consistency before maki
 
 The flow of logic for both `Student` and `Component` commands can be summarized as follows: 
 
-1. Retrieve arguments from `HashMap`.
-2. Execute data validation on the arguments and throw appropriate exception in the case of failure.
-3. Add/Delete `Student` and `Component`.
-4. Return `CommandResult` that contains the result of the Add/Delete operation.
+- `AddStudentCommand.execute(AppState appState, HashMap<String, String> arguments)`: Adds a student to the application by
+  performing the following steps:
+
+    1. Retrieves and validates the matriculation number and name from `arguments`, throwing relevant exception in the case
+       of failure.
+    2. Creates and adds a `Student` object to `StudentList` in `AppState`
+    3. Return `CommandResult` that contains the result of the Add/Delete operation.
 
 The following sequence diagrams depict the exact steps involved in the `AddStudentCommand`:
 
 ![AddStudentCommand.png](diagrams/AddStudentCommand.png)
 
-The logic for `AddComponentCommand` is very similar and thus is not depicted. 
-
-Likewise, the sequence diagram for `DeleteStudentCommand` is as follows: 
+- `DeleteStudentCommand.execute(AppState appState, HashMap<String, String> arguments)`: Removes a student via the following
+  steps:
+    1. Retrieves and validates the matriculation number from arguments, throwing `IllegaValueException` exception
+       if matriculation number is null.
+    2. Searches for and deletes the student from `AppState`. Throws `StudentNotFoundException` if no student matching the matriculation number
+       is found.
+    3. Searches for and deletes `Grade` objects in `GradeList` containing a student matching the matriculation number.
 
 ![DeleteStudentCommand.png](diagrams%2FDeleteStudentCommand.png)
 
-Since a `Grade` object is only well-defined when there are both `Student` and `Component` objects to be referenced by `Grade`,
-whenever a `Student` or `Component` object is deleted, the corresponding `Grade` object is queried and then deleted as well. 
+*Note: Step (iii) is performed because a `Grade` object is only well-defined when there are both `Student` and `Component` objects to be refrenced by `Grade`,
+whenever a `Student` or `Component` object is deleted, the corresponding `Grade` object is queried and then deleted as well.*
+
+The logic for `AddComponentCommand` is very similar (replacing `matriculation number` with `component description`and is therefore not depicted.
+ 
 
 ### Add/Delete Grade Feature
 
@@ -165,14 +186,14 @@ Priorities: High (must have) - * * *, Medium (nice to have) - * *, Low (unlikely
 
 | Priority | As a ...  | I want to ...                            | So that I can ...                                                                               |
 |----------|-----------|------------------------------------------|-------------------------------------------------------------------------------------------------|
-| * * *     | new user  | see usage instructions                   | refer to them when I forget how to use the application                                          |
-| * * *     | professor | add a student                            | start to record his grades after he enrolls in the class                                        |
-| * * *     | professor | check the list of students               | see how many students are in my class                                                           |
-| * * *     | professor | find a student                           | check whether the student is enrolled in the class without having to go through the entire list |
-| * * *     | professor | delete a student                         | remove the student if he decides to drop out of the class                                       |
-| * * *     | professor | add a grade of an individual student     | record his/her grade after marking                                                              |
-| * * *     | professor | check the grade of an individual student | see how the student is doing                                                                    |
-| * * *     | professor | delete a grade of an individual student  | remove incorrectly inputted grades                                                              |
+| * * *    | new user  | see usage instructions                   | refer to them when I forget how to use the application                                          |
+| * * *    | professor | add a student                            | start to record his grades after he enrolls in the class                                        |
+| * * *    | professor | check the list of students               | see how many students are in my class                                                           |
+| * * *    | professor | find a student                           | check whether the student is enrolled in the class without having to go through the entire list |
+| * * *    | professor | delete a student                         | remove the student if he decides to drop out of the class                                       |
+| * * *    | professor | add a grade of an individual student     | record his/her grade after marking                                                              |
+| * * *    | professor | check the grade of an individual student | see how the student is doing                                                                    |
+| * * *    | professor | delete a grade of an individual student  | remove incorrectly inputted grades                                                              |
 
 ## Appendix C: Non-Functional Requirements
 
@@ -213,7 +234,6 @@ Priorities: High (must have) - * * *, Medium (nice to have) - * *, Low (unlikely
 * *Storage* - A component in TutorLink responsible for saving and loading data to and from files, allowing persistence of student, component, and grade information across sessions.
 
 * *Validation* - The process of verifying that user input or file data meets specific requirements and constraints to maintain application integrity and avoid errors.
-
 
 ## Appendix E: Instructions for manual testing
 
