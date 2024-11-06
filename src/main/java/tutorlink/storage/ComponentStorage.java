@@ -33,7 +33,7 @@ public class ComponentStorage extends Storage {
         String[] stringParts = fileLine.split(READ_DELIMITER);
         String name = stringParts[0];
         double maxScore = Double.parseDouble(stringParts[1]);
-        double weight = Double.parseDouble(stringParts[2]);
+        int weight = Integer.parseInt(stringParts[2]);
         return new Component(name, maxScore, weight);
     }
 
