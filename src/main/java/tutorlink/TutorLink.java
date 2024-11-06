@@ -2,6 +2,7 @@ package tutorlink;
 
 import tutorlink.appstate.AppState;
 import tutorlink.command.Command;
+import tutorlink.commons.Commons;
 import tutorlink.component.Component;
 import tutorlink.exceptions.StorageOperationException;
 import tutorlink.exceptions.TutorLinkException;
@@ -49,27 +50,19 @@ public class TutorLink {
         setUpLogger();
         LOGGER.log(Level.INFO, "Test log message successful");
 
-        ui.displayWelcomeMessage();
-
         try {
-            studentStorage = new StudentStorage(STUDENT_FILE_PATH);
-            ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
-
-            componentStorage = new ComponentStorage(COMPONENT_FILE_PATH);
-            ArrayList<Component> initialComponentList = componentStorage.loadComponentList();
-
-            gradeStorage = new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList);
-            ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList();
-            
-            appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
+            setupAllLists();
+            saveAllLists();
         } catch (IOException | StorageOperationException e) {
-            System.out.println("File storage error encountered: " + e.getMessage());
+            System.out.println(Commons.ERROR_FILESTORAGE_EXCEPTION + e.getMessage());
             throw new RuntimeException(e);
         }
 
         assert studentStorage != null;
         assert componentStorage != null;
         assert gradeStorage != null;
+
+        ui.displayWelcomeMessage();
 
         while (true) {
             try {
@@ -91,10 +84,30 @@ public class TutorLink {
             } catch (TutorLinkException e) {
                 ui.displayException(e);
             } catch (IOException e) {
-                System.out.println("File storage error encountered: " + e.getMessage());
+                System.out.println(Commons.ERROR_FILESTORAGE_EXCEPTION + e.getMessage());
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private static void setupAllLists() throws IOException, StorageOperationException {
+        studentStorage = new StudentStorage(STUDENT_FILE_PATH);
+        ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
+        ArrayList<String> discardedStudents = studentStorage.getDiscardedEntries();
+
+        componentStorage = new ComponentStorage(COMPONENT_FILE_PATH);
+        ArrayList<Component> initialComponentList = componentStorage.loadComponentList();
+        ArrayList<String> discardedComponents = componentStorage.getDiscardedEntries();
+
+        gradeStorage = new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList);
+        ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList();
+        ArrayList<String> discardedGrades = gradeStorage.getDiscardedEntries();
+
+        ui.displayDiscardedEntries(discardedStudents, "Discarded student data:");
+        ui.displayDiscardedEntries(discardedComponents, "Discarded component data:");
+        ui.displayDiscardedEntries(discardedGrades, "Discarded grade data:");
+
+        appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
     }
 
     private static void saveAllLists() throws IOException {

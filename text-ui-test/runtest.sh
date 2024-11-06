@@ -8,6 +8,12 @@ cd ..
 
 cd text-ui-test
 
+# delete data directory from previous run if it exists
+if [ -d "./data" ]
+then
+    rm -rf data
+fi
+
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
