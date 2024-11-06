@@ -28,6 +28,7 @@ public class Ui {
     }
 
     public void displayWelcomeMessage() {
+        System.out.println(fullBreakLine);
         System.out.println(logo);
         System.out.println(fullBreakLine);
         System.out.println("Hello! I'm TutorLink\nWhat can I do for you?");
@@ -47,11 +48,13 @@ public class Ui {
     }
 
     public void displayDiscardedEntries(ArrayList<String> discardedEntries, String header) {
+        if (discardedEntries.isEmpty()) {
+            return;
+        }
         System.out.println(fullBreakLine);
         System.out.println(header);
         for (String entry : discardedEntries) {
-            System.out.println(entry);
+            System.out.println("  " + entry);
         }
-        System.out.println(fullBreakLine);
     }
 }

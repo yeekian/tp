@@ -51,21 +51,8 @@ public class TutorLink {
         LOGGER.log(Level.INFO, "Test log message successful");
 
         try {
-            studentStorage = new StudentStorage(STUDENT_FILE_PATH);
-            ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
-
-            componentStorage = new ComponentStorage(COMPONENT_FILE_PATH);
-            ArrayList<Component> initialComponentList = componentStorage.loadComponentList();
-
-            gradeStorage = new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList);
-            ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList();
-            ArrayList<String> discardedGrades = gradeStorage.getDiscardedEntries();
-            if (!discardedGrades.isEmpty()) {
-                ui.displayDiscardedEntries(discardedGrades, "Discarded grade data:");
-            }
-
-            appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
-
+            setupAllLists();
+            saveAllLists();
         } catch (IOException | StorageOperationException e) {
             System.out.println(Commons.ERROR_FILESTORAGE_EXCEPTION + e.getMessage());
             throw new RuntimeException(e);
@@ -101,6 +88,26 @@ public class TutorLink {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private static void setupAllLists() throws IOException, StorageOperationException {
+        studentStorage = new StudentStorage(STUDENT_FILE_PATH);
+        ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
+        ArrayList<String> discardedStudents = studentStorage.getDiscardedEntries();
+
+        componentStorage = new ComponentStorage(COMPONENT_FILE_PATH);
+        ArrayList<Component> initialComponentList = componentStorage.loadComponentList();
+        ArrayList<String> discardedComponents = componentStorage.getDiscardedEntries();
+
+        gradeStorage = new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList);
+        ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList();
+        ArrayList<String> discardedGrades = gradeStorage.getDiscardedEntries();
+
+        ui.displayDiscardedEntries(discardedStudents, "Discarded student data:");
+        ui.displayDiscardedEntries(discardedComponents, "Discarded component data:");
+        ui.displayDiscardedEntries(discardedGrades, "Discarded grade data:");
+
+        appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
     }
 
     private static void saveAllLists() throws IOException {
