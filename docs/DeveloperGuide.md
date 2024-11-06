@@ -83,7 +83,7 @@ The following sequence diagrams depict the exact steps involved in the `AddStude
        is found.
     3. Searches for and deletes `Grade` objects in `GradeList` containing a student matching the matriculation number.
 
-![DeleteStudentCommand.png](diagrams%2FDeleteStudentCommand.png)
+![DeleteStudentCommand.png](diagrams/DeleteStudentCommand.png)
 
 *Note: Step (iii) is performed because a `Grade` object is only well-defined when there are both `Student` and `Component` objects to be refrenced by `Grade`,
 whenever a `Student` or `Component` object is deleted, the corresponding `Grade` object is queried and then deleted as well.*
@@ -107,7 +107,7 @@ The `AddGradeCommand` and `DeleteGradeCommand` classes handle the addition and d
 
 The sequence diagram of the AddGradeCommand is shown below.
 
-![AddGradeCommand.png](diagrams%2FAddGradeCommand.png)
+![AddGradeCommand.png](diagrams/AddGradeCommand.png)
 
 - **`DeleteGradeCommand.execute(AppState appState, HashMap<String, String> arguments)`**: Removes a grade from a student by performing these steps:
   1. Retrieves and validates the matric number and component description from `arguments`.
@@ -117,7 +117,7 @@ The sequence diagram of the AddGradeCommand is shown below.
     
 The sequence diagram of the DeleteGradeCommand is shown below.
 
-![DeleteGradeCommand.png](diagrams%2FDeleteGradeCommand.png)
+![DeleteGradeCommand.png](diagrams/DeleteGradeCommand.png)
 
 ### Storage Load feature
 
