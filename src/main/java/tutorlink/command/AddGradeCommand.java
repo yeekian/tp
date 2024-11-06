@@ -16,6 +16,8 @@ import tutorlink.result.CommandResult;
 import tutorlink.student.Student;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static tutorlink.lists.StudentList.STUDENT_NOT_FOUND;
 
@@ -31,6 +33,12 @@ public class AddGradeCommand extends Command {
         String scoreNumber = hashmap.get(ARGUMENT_PREFIXES[2]);
         if (matricNumber == null || componentDescription == null || scoreNumber == null) {
             throw new IllegalValueException(Commons.ERROR_NULL);
+        }
+        matricNumber = matricNumber.toUpperCase();
+        Pattern pattern = Pattern.compile(Commons.MATRIC_NUMBER_REGEX);
+        Matcher matcher = pattern.matcher(matricNumber);
+        if (!matcher.find()) {
+            throw new IllegalValueException(Commons.ERROR_ILLEGAL_MATRIC_NUMBER);
         }
 
         Component component = findComponentFromComponents(appstate, componentDescription);
@@ -95,7 +103,7 @@ public class AddGradeCommand extends Command {
     private static Component findComponentFromComponents(AppState appstate, String componentDescription)
             throws DuplicateComponentException {
         //Get component object using String componentDescription
-        ComponentList componentFilteredList = appstate.components.findComponent(componentDescription.toUpperCase());
+        ComponentList componentFilteredList = appstate.components.findComponent(componentDescription);
         Component component;
         if (componentFilteredList.size() == 1) {
             component = componentFilteredList.getComponentArrayList().get(0);

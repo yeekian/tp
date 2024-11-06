@@ -9,6 +9,7 @@ import tutorlink.command.ExitCommand;
 import tutorlink.command.FindStudentCommand;
 import tutorlink.command.InvalidCommand;
 import tutorlink.command.ListComponentCommand;
+import tutorlink.command.ListGradeCommand;
 import tutorlink.command.ListStudentCommand;
 import tutorlink.command.AddGradeCommand;
 import tutorlink.command.AddComponentCommand;
@@ -61,6 +62,9 @@ public class Parser {
 
         case ListComponentCommand.COMMAND_WORD:
             return new ListComponentCommand();
+
+        case ListGradeCommand.COMMAND_WORD:
+            return new ListGradeCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(); // Lists all students

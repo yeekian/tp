@@ -33,10 +33,9 @@ public class GradeList {
     //@@author RCPilot1604
     public void deleteGrade(String matricNumber, String componentDescription) throws GradeNotFoundException {
         matricNumber = matricNumber.toUpperCase();
-        componentDescription = componentDescription.toUpperCase();
         for (Grade grade : gradeArrayList) {
-            if (grade.getStudent().getMatricNumber().equals(matricNumber)
-                    && grade.getComponent().getName().toUpperCase().equals(componentDescription)) {
+            if (grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase())
+                    && grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase())) {
                 gradeArrayList.remove(grade);
                 return;
             }
