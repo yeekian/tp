@@ -14,6 +14,7 @@ import tutorlink.lists.ComponentList;
 import tutorlink.lists.StudentList;
 import tutorlink.result.CommandResult;
 import tutorlink.student.Student;
+
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,6 +57,14 @@ public class AddGradeCommand extends Command {
             Grade grade = new Grade(component, student, score);
 
             appstate.grades.addGrade(grade);
+
+            double newGPA = appstate.grades.calculateStudentGPA(
+                    student.getMatricNumber(),
+                    appstate.components
+            );
+
+            student.setGpa(newGPA);
+
         } catch (NumberFormatException e) {
             throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
         }
@@ -64,7 +73,8 @@ public class AddGradeCommand extends Command {
                 matricNumber));
     }
 
-    private static double convertScoreToValidDouble(String scoreNumber, Component component) {
+    private static double convertScoreToValidDouble(String scoreNumber, Component component)
+            throws IllegalValueException {
         double score = Double.parseDouble(scoreNumber);
 
         if (score < 0.0 || score > component.getMaxScore()) {
@@ -73,7 +83,8 @@ public class AddGradeCommand extends Command {
         return score;
     }
 
-    private static Student findStudentFromStudents(AppState appstate, String matricNumber) {
+    private static Student findStudentFromStudents(AppState appstate, String matricNumber)
+            throws StudentNotFoundException {
         //Get Student student object using String matricNumber
         StudentList studentFilteredList = appstate.students.findStudentByMatricNumber(matricNumber);
 
@@ -89,7 +100,8 @@ public class AddGradeCommand extends Command {
         return student;
     }
 
-    private static Component findComponentFromComponents(AppState appstate, String componentDescription) {
+    private static Component findComponentFromComponents(AppState appstate, String componentDescription)
+            throws DuplicateComponentException {
         //Get component object using String componentDescription
         ComponentList componentFilteredList = appstate.components.findComponent(componentDescription);
         Component component;
