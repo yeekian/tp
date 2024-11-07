@@ -90,6 +90,28 @@ whenever a `Student` or `Component` object is deleted, the corresponding `Grade`
 
 The logic for `AddComponentCommand` is very similar (replacing `matriculation number` with `component description`and is therefore not depicted.
  
+### Find Student Feature
+
+#### Implementation Details
+The `FindStudentCommand` searches for and returns matching `Students` stored in the TutorLink application. 
+`FindStudentCommand` can accept either `matric number` or `name` as argument. If `matric number` is supplied, the query 
+will be executed using `matric number`, else `name` will be used for the search query. 
+
+#### Key Operations
+
+The flow of logic for `FindStudentCommand` can be summarized as follows:
+
+- `FindStudentCommand.execute(AppState appState, HashMap<String, String> arguments)`: Adds a student to the application by
+  performing the following steps:
+
+    1. Retrieves and validates the matriculation number/name from `arguments`, throwing relevant exception in the case
+       of failure.
+    2. Calls `AppState.findStudentByMatricNumber` and `AppState.findStudentByName` respectively to fetch list of `Student` 
+objects matching the supplied `matric number`/`name`.
+    3. Return `CommandResult` that contains the matching `Students`.
+
+The following sequence diagrams depict the exact steps involved in the `FindStudentCommand`:
+![FindStudentCommand.png](diagrams/FindStudentCommand.png)
 
 ### Add/Delete Grade Feature
 

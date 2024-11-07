@@ -6,10 +6,7 @@ participant ":AppState" as A LOGIC_COLOR_2
 participant ":CommandResult" as R LOGIC_COLOR_8
 
 [-> C: execute(appState, arguments)
-
-opt matricNumber or name is null
-[<--C : throw IllegalValueException
-end
+activate C
 
 C -> A : addStudent(matricNumber, name)
 activate A
@@ -22,5 +19,6 @@ C <-- R : CommandResult
 deactivate R
 
 [<-- C : CommandResult
+deactivate C
 end
 @enduml

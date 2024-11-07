@@ -8,6 +8,7 @@ public class Student {
     public Student(String matricNumber, String name) {
         this.name = name;
         this.matricNumber = matricNumber.toUpperCase();
+        this.gpa = 0.0;
     }
 
     public String getName() {
@@ -18,9 +19,17 @@ public class Student {
         return matricNumber;
     }
 
+    public double getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
+    }
+
     @Override
     public String toString() {
-        return this.name + " (matric no: " + this.matricNumber + ")";
+        return this.name + " (matric no: " + this.matricNumber + ", GPA: " + this.gpa + ")";
     }
 
     @Override

@@ -5,12 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
-import tutorlink.component.Component;
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
-import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
-import tutorlink.exceptions.IncompleteGradesException;
 import tutorlink.grade.Grade;
 
 /**
@@ -68,7 +65,7 @@ public class GradeList {
         gradeArrayList.removeAll(gradesToDelete);
     }
 
-    public void addGrade(Grade grade) {
+    public void addGrade(Grade grade) throws DuplicateGradeException {
         for (Grade gradeToCompare : gradeArrayList) {
             if (grade.equals(gradeToCompare)) {
                 throw new DuplicateGradeException(
@@ -100,35 +97,35 @@ public class GradeList {
     }
     //@@author
 
-    //@@author TrungBui32
-    public double calculateStudentGPA(String matricNumber, ComponentList componentList)
-            throws IncompleteGradesException {
+    public double calculateStudentGPA(String matricNumber, ComponentList componentList) {
         ArrayList<Grade> studentGrades = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        ArrayList<Component> allComponents = componentList.findAllComponents();
-
         if (studentGrades.isEmpty()) {
-            throw new StudentNotFoundException("No grades found for student: " + matricNumber);
+            return 0;
         }
 
-        boolean hasAllComponents = allComponents.stream()
-                .allMatch(component -> studentGrades.stream()
-                        .anyMatch(grade -> grade.getComponent().equals(component)));
+        double totalWeighting = componentList
+                .getComponentArrayList()
+                .stream()
+                .mapToDouble(c -> c.getWeight())
+                .sum();
 
-        if (!hasAllComponents) {
-            throw new IncompleteGradesException(
-                    "Cannot calculate GPA: Student " + matricNumber + " is missing grades for some components");
+        if(totalWeighting == 0) {
+            return 0;
         }
 
         return studentGrades
                 .stream()
-                .mapToDouble(grade -> grade.getScore() * grade.getComponent().getWeight())
-                .sum();
+                .mapToDouble(grade ->
+                        grade.getScore()
+                        / grade.getComponent().getMaxScore()
+                        * grade.getComponent().getWeight()
+                )
+                .sum() / totalWeighting;
     }
-    //@@author
 
     public ArrayList<Grade> getGradeArrayList() {
         return gradeArrayList;

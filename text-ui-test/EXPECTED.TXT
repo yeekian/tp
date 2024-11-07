@@ -35,9 +35,9 @@ Error! Null parameter passed!
 Error! Invalid command given!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: Ethan Chua (matric no: A0276007H)
-	2: John Doe (matric no: A9999999Z)
-	3: John Smith (matric no: A1111111B)
+	1: Ethan Chua (matric no: A0276007H, GPA: 0.0)
+	2: John Doe (matric no: A9999999Z, GPA: 0.0)
+	3: John Smith (matric no: A1111111B, GPA: 0.0)
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Invalid command given!
@@ -58,8 +58,8 @@ Error! Ensure matric number is of the form A\d{7}[A-Z] (case insensitive)
 Error! Invalid command given!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: John Doe (matric no: A9999999Z)
-	2: John Smith (matric no: A1111111B)
+	1: John Doe (matric no: A9999999Z, GPA: 0.0)
+	2: John Smith (matric no: A1111111B, GPA: 0.0)
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Invalid command given!
@@ -113,9 +113,9 @@ Student Ethan Chua (A0276007H) added successfully!
 Error! Invalid command given!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: John Doe (matric no: A9999999Z)
-	2: John Smith (matric no: A1111111B)
-	3: Ethan Chua (matric no: A0276007H)
+	1: John Doe (matric no: A9999999Z, GPA: 0.0)
+	2: John Smith (matric no: A1111111B, GPA: 0.0)
+	3: Ethan Chua (matric no: A0276007H, GPA: 0.0)
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Component Quiz does not exist in the list!
