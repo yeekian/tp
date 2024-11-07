@@ -41,18 +41,20 @@ public class StudentStorage extends Storage {
         try {
             String matricNumber = stringParts[0];
             String name = stringParts[1];
-            Student newStudent = new Student(matricNumber, name);
+            String gpaString = stringParts[2];
+            double gpa = Double.parseDouble(gpaString);
+            Student newStudent = new Student(matricNumber, name, gpa);
             if (students.contains(newStudent)) {
                 throw new InvalidDataFileLineException(fileLine);
             }
             return newStudent;
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidDataFileLineException(fileLine);
         }
     }
 
     private String getFileInputForStudent(Student student) {
-        return student.getMatricNumber() + WRITE_DELIMITER + student.getName();
+        return student.getMatricNumber() + WRITE_DELIMITER + student.getName() + WRITE_DELIMITER + student.getGpa();
     }
 
 }

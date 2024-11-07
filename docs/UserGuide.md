@@ -16,6 +16,8 @@ Your command terminal should look similar to the one below.
 ![tutorlink_startup.png](tutorlink_startup.png)
 ## Features 
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a Student: `add_student`
 
 Adds a student to your class.
@@ -52,6 +54,8 @@ Displays a list of all students in the class.
     - `list_student`
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Finding a Student: `find_student`
 
@@ -94,6 +98,8 @@ Removes an existing grading component from the class.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Listing Components: `list_component`
 
 Displays all grading components and their respective weights for a class.
@@ -133,12 +139,14 @@ Removes a previously recorded grade for a specific student and component.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Listing Grades: `list_grade`
 
-Views all recorded grades for a specific student or all students, and final GPA calculation. If the weightage of components does not add up to 100% (i.e., the course is still in progress), "IP" (In Progress) will be shown instead of a final GPA.
+Views all recorded grades for a specific student or all students, and final percentage calculation. If the weightage of components does not add up to 100% (i.e., the course is still in progress), "IP" (In Progress) will be shown instead of a final percentage.
 
 - **For a Specific Student**:
-  - Lists all recorded grades and the final GPA for the specified student. 
+  - Lists all recorded grades and the final percentage for the specified student. 
   - **Format**: `list_grade i/MATRIC_NUMBER`
   - **Parameters**:
     - `MATRIC_NUMBER`: The unique identifier of the student.
@@ -147,7 +155,7 @@ Views all recorded grades for a specific student or all students, and final GPA 
 
 
 - **For All Students**:
-  - Lists all recorded grades for each student in a numbered format, with individual grade details and a final GPA for each student.
+  - Lists all recorded grades for each student in a numbered format, with individual grade details and a final percentage for each student.
   - **Format**: `list_grade`
 
 
@@ -168,6 +176,9 @@ The data from the student, component and grade lists are stored in `studentlist.
 respectively, located in the `[JAR file location]/data/` directory.
 
 ---
+
+<div style="page-break-after: always;"></div>
+
 ## Notes:
 - Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
 will be converted to uppercase for storage. 
@@ -178,7 +189,16 @@ will be converted to uppercase for storage.
 
 **A**: To transfer data, simply copy the `TutorLink` home folder (where the `.jar` file and data files are located) to your new computer. Then, download Java 17 (if not already installed), place the `.jar` file in the copied folder, and run `java -jar TutorLink.jar` from that folder.
 
+**Q**: Can I update data by directly editing the data files?
+
+**A**: Do so at your own risk. If changes to the data file alter its format, invalid file lines will discarded 
+during startup, and displayed in the command line for verification. While TutorLink can detect most invalid file entries, 
+certain edits can cause unexpected behaviour. Therefore, it is not recommended to edit the data files
+unless you are confident you can do so correctly.
+
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 

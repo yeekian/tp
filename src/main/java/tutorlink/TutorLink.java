@@ -94,17 +94,16 @@ public class TutorLink {
         studentStorage = new StudentStorage(STUDENT_FILE_PATH);
         ArrayList<Student> initialStudentList = studentStorage.loadStudentList();
         ArrayList<String> discardedStudents = studentStorage.getDiscardedEntries();
+        ui.displayDiscardedEntries(discardedStudents, "Discarded student data:");
 
         componentStorage = new ComponentStorage(COMPONENT_FILE_PATH);
         ArrayList<Component> initialComponentList = componentStorage.loadComponentList();
         ArrayList<String> discardedComponents = componentStorage.getDiscardedEntries();
+        ui.displayDiscardedEntries(discardedComponents, "Discarded component data:");
 
         gradeStorage = new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList);
         ArrayList<Grade> initialGradeList = gradeStorage.loadGradeList();
         ArrayList<String> discardedGrades = gradeStorage.getDiscardedEntries();
-
-        ui.displayDiscardedEntries(discardedStudents, "Discarded student data:");
-        ui.displayDiscardedEntries(discardedComponents, "Discarded component data:");
         ui.displayDiscardedEntries(discardedGrades, "Discarded grade data:");
 
         appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
