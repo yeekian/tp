@@ -8,14 +8,14 @@ participant "componentStorage:Storage" as CS LOGIC_COLOR_4
 participant "gradeStorage:Storage" as GS LOGIC_COLOR_4
 
 group sd setup
-
+[->TL : main()
 activate TL
 TL->UI: displayWelcomeMessage()
 activate UI
 TL <-- UI
 deactivate UI
 
-alt success
+alt setup success
     create SS
     TL -> SS : new StudentStorage
     activate SS
@@ -54,14 +54,15 @@ alt success
     activate A
     TL <-- A : appState
     deactivate A
-else setup error
-        TL -> UI : displayException
+else TutorLinkException
+        TL -> UI : displayException(exception)
         activate UI
         TL <-- UI
         deactivate UI
 end
 
 deactivate UI
-
+[<-- TL
+deactivate TL
 end
 @enduml
