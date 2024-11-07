@@ -49,8 +49,8 @@ public class DeleteGradeCommand extends Command {
 
         // Update student GPA
         Student student = filteredList.getStudentArrayList().get(0);
-        double newPercentageScore = appState.grades.calculateStudentPercentageScore(matricNumber, appState.components);
-        student.setPercentageScore(newPercentageScore);
+        double newGPA = appState.grades.calculateStudentPercentageScore(matricNumber, appState.components);
+        student.setPercentageScore(newGPA);
 
         return new CommandResult(String.format(Commons.DELETE_GRADE_SUCCESS, componentDescription, matricNumber));
     }
