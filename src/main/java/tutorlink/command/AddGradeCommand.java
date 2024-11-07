@@ -58,12 +58,12 @@ public class AddGradeCommand extends Command {
 
             appstate.grades.addGrade(grade);
 
-            double newGPA = appstate.grades.calculateStudentGPA(
+            double newPercentageScore = appstate.grades.calculateStudentPercentageScore(
                     student.getMatricNumber(),
                     appstate.components
             );
 
-            student.setGpa(newGPA);
+            student.setPercentageScore(newPercentageScore);
 
         } catch (NumberFormatException e) {
             throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
@@ -111,7 +111,7 @@ public class AddGradeCommand extends Command {
             throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND,
                     componentDescription));
         } else {
-            String errorMessage = String.format(Commons.ERROR_DUPLICATE_COMPONENT, componentDescription);
+            String errorMessage = String.format(Commons.ERROR_MULTIPLE_QUERY_RESULT, componentDescription);
             throw new DuplicateComponentException(errorMessage);
         }
         return component;
