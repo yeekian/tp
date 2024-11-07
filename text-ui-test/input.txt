@@ -20,4 +20,5 @@ add_grade c/Quiz 1 s/0 i/a1111111b
 add_grade c/Quiz 2 s/0 i/a1111111b
 add_grade c/Quiz 3 s/0 i/a1111111b
 add_grade c/Quiz 4 s/0 i/a1111111b
+list_grade
 bye
