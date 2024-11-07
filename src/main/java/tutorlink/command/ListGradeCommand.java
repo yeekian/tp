@@ -65,7 +65,7 @@ public class ListGradeCommand extends Command {
                 .sorted(Comparator.comparing(g -> g.getComponent().getName()))
                 .collect(Collectors.toList())) {
             output.append(
-                    String.format("%d. %-15s: %.2f\n", gradeIndex++, grade.getComponent().getName(), grade.getScore()));
+                    String.format("%d: %-15s: %.2f\n", gradeIndex++, grade.getComponent().getName(), grade.getScore()));
         }
 
         // Calculate and display the GPA (final grade)
@@ -89,7 +89,7 @@ public class ListGradeCommand extends Command {
         for (Map.Entry<String, ArrayList<Grade>> entry : gradesByStudent.entrySet()) {
             Student student = entry.getValue().get(0).getStudent();
             output.append(
-                    String.format("%d. %s (%s):\n", studentIndex++, student.getName(), student.getMatricNumber()));
+                    String.format("%d: %s (%s):\n", studentIndex++, student.getName(), student.getMatricNumber()));
 
             // Grade numbering for each student's grades
             int gradeIndex = 1;
