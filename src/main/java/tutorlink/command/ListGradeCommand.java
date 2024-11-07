@@ -51,7 +51,7 @@ public class ListGradeCommand extends Command {
         }
 
         // Otherwise, display all students' grades
-        return generateAllGradesReport(grades);
+        return generateAllGradesReport(grades, appState);
     }
 
     private CommandResult generateStudentGradeReport(Student student, ArrayList<Grade> studentGrades,
@@ -75,7 +75,7 @@ public class ListGradeCommand extends Command {
         return new CommandResult(output.toString());
     }
 
-    private CommandResult generateAllGradesReport(ArrayList<Grade> grades) {
+    private CommandResult generateAllGradesReport(ArrayList<Grade> grades, AppState appState) {
         StringBuilder output = new StringBuilder("List of All Grades:\n\n");
 
         Map<String, ArrayList<Grade>> gradesByStudent = grades.stream()
@@ -89,8 +89,7 @@ public class ListGradeCommand extends Command {
         for (Map.Entry<String, ArrayList<Grade>> entry : gradesByStudent.entrySet()) {
             Student student = entry.getValue().get(0).getStudent();
             output.append(
-                    String.format("%d. %s (%s):\n", studentIndex++,
-                            student.getName(), student.getMatricNumber()));
+                    String.format("%d. %s (%s):\n", studentIndex++, student.getName(), student.getMatricNumber()));
 
             // Grade numbering for each student's grades
             int gradeIndex = 1;
@@ -102,7 +101,9 @@ public class ListGradeCommand extends Command {
                                 grade.getComponent().getName(), grade.getScore()));
             }
 
-            output.append("\n");
+            // Calculate and display the GPA for the student
+            double gpa = appState.grades.calculateStudentGPA(student.getMatricNumber(), appState.components);
+            output.append(String.format("   Final GPA: %.2f\n\n", gpa));
         }
 
         return new CommandResult(output.toString());
