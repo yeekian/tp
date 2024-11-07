@@ -1,12 +1,20 @@
 @startuml
+scale 1200*1200
 
 !include Style.puml
 participant ":TutorLink" as TL LOGIC_COLOR_5
 participant "gradeStorage: GradeStorage" as GS LOGIC_COLOR_4
 participant "grades: ArrayList<Grade>" as AL LOGIC_COLOR_6
+participant "discardedEntries: ArrayList<String>" as DE LOGIC_COLOR_7
+
 create GS
 TL -> GS: new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList)
 activate GS
+create DE
+GS -> DE: new ArrayList<String>()
+activate DE
+GS <-- DE: discardedEntries: String
+deactivate DE
 TL <-- GS: gradeStorage: GradeStorage
 deactivate GS
 
@@ -21,18 +29,22 @@ deactivate AL
 
 
 
-loop fileScanner.hasNext()
+loop file has next line
     GS -> GS: getGradeFromFileLine(currentLine: String)
     activate GS
     GS --> GS: newGrade: Grade
     deactivate GS
 
-    alt success
+    alt read grade success
         GS -> AL: add(newGrade)
         activate AL
         GS <-- AL
         deactivate AL
     else InvalidDataFileLineException
+        GS -> DE: add(currentLine: String)
+        activate DE
+        GS <-- DE
+        deactivate DE
     end
 
 end
