@@ -372,7 +372,7 @@ This appendix provides a guide for manually testing various features of TutorLin
 
 ---
 
-### Handling Missing or Corrupted Data Files
+### Handling Missing Files or Corrupted Data
 
 1. **Simulate Missing Data Files**:
     - Delete one or more files from the `data` folder (`studentlist.txt`, `componentlist.txt`, `gradelist.txt`).
@@ -380,10 +380,12 @@ This appendix provides a guide for manually testing various features of TutorLin
 
    **Expected**: TutorLink creates new empty files if missing. The application should not crash, and it should operate normally.
 
-2. **Simulate Corrupted Data Files**:
-    - Open any data file and add random text or invalid data structure, then save.
+2. **Simulate Corrupted Data**:
+    - Open any data file and add random text or invalid data entry, then save.
     - Re-launch TutorLink.
 
-   **Expected**: TutorLink should detect the corrupted data, provide an error message or recreate a new empty file if unreadable. The application should not crash.
+   **Expected**: TutorLink should detect the corrupted or invalid data, 
+   display them to the user as entries to be discarded, and only load valid data entries.
+   The application should not crash.
 
 ---
