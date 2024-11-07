@@ -2,10 +2,10 @@ package tutorlink.component;
 
 //@@author TrungBui32
 public class Component {
+    public static int totalWeight = 0;
     private String name;
     private double maxScore;
     private int weight;
-    public static int totalWeight = 0;
 
     public Component(String name, double maxScore, int weight) {
         this.name = name;
@@ -35,6 +35,6 @@ public class Component {
 
     @Override
     public String toString() {
-        return name + " (maxScore: " + maxScore + ", weight: " + weight + ")";
+        return name + " (maxScore: " + maxScore + ", weight: " + weight + "%)";
     }
 }
