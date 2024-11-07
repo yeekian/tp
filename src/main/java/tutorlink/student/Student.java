@@ -3,12 +3,12 @@ package tutorlink.student;
 public class Student {
     private String matricNumber;
     private String name;
-    private double gpa;
+    private double percentageScore;
 
     public Student(String matricNumber, String name) {
         this.name = name;
         this.matricNumber = matricNumber.toUpperCase();
-        this.gpa = 0.0;
+        this.percentageScore = 0.0;
     }
 
     public String getName() {
@@ -19,17 +19,17 @@ public class Student {
         return matricNumber;
     }
 
-    public double getGpa() {
-        return gpa;
+    public double getPercentageScore() {
+        return percentageScore;
     }
 
-    public void setGpa(double gpa) {
-        this.gpa = gpa;
+    public void setPercentageScore(double percentageScore) {
+        this.percentageScore = percentageScore;
     }
 
     @Override
     public String toString() {
-        return this.name + " (matric no: " + this.matricNumber + ", GPA: " + this.gpa + ")";
+        return this.name + " (matric no: " + this.matricNumber + ", percentage score: " + String.format("%.2f", this.percentageScore) + ")";
     }
 
     @Override
