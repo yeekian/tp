@@ -96,9 +96,9 @@ Error! Weightage must be integer that is between 0 and 100!
 Error! Weightage must be integer that is between 0 and 100!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: Finals (maxScore: 100.0, weight: 50)
-	2: Quiz (maxScore: 20.0, weight: 5)
-	3: Fail (maxScore: 2.0, weight: 0)
+	1: Finals (maxScore: 100.0, weight: 50%)
+	2: Quiz (maxScore: 20.0, weight: 5%)
+	3: Fail (maxScore: 2.0, weight: 0%)
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Invalid command given!
@@ -107,8 +107,8 @@ Error! Invalid command given!
 Component Quiz successfully deleted
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: Finals (maxScore: 100.0, weight: 50)
-	2: Fail (maxScore: 2.0, weight: 0)
+	1: Finals (maxScore: 100.0, weight: 50%)
+	2: Fail (maxScore: 2.0, weight: 0%)
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Invalid command given!
