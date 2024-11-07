@@ -133,16 +133,23 @@ Removes a previously recorded grade for a specific student and component.
 
 ---
 
-### Listing Grades of a Student: `list_grade`
+### Listing Grades: `list_grade`
 
-Views all recorded grades and the final grade for a specific student. If the weightage of the components do not add up to 100% (i.e. the course is still in progress), IP will be returned as the final grade.
+Views all recorded grades for a specific student or all students, and final GPA calculation. If the weightage of components does not add up to 100% (i.e., the course is still in progress), "IP" (In Progress) will be shown instead of a final GPA.
 
-- **Format**: `list_grades i/MATRIC_NUMBER`
-- **Parameters**:
-  - `MATRIC_NUMBER`: The unique identifier of the student.
+- **For a Specific Student**:
+  - Lists all recorded grades and the final GPA for the specified student. 
+  - **Format**: `list_grade i/MATRIC_NUMBER`
+  - **Parameters**:
+    - `MATRIC_NUMBER`: The unique identifier of the student.
+  - **Example**:
+    - `list_grade i/A1234567X`
 
-- **Example**:
-  - `list_grade i/A1234567X`
+
+- **For All Students**:
+  - Lists all recorded grades for each student in a numbered format, with individual grade details and a final GPA for each student.
+  - **Format**: `list_grade`
+
 
 ---
 
