@@ -34,7 +34,7 @@ public class AddComponentCommandTest {
         arguments.put("m/", "100");
         CommandResult result = command.execute(appState, arguments);
         assertNotNull(result);
-        assertEquals("Component Quiz 1 of weight 30, with max score 100 added successfully!", result.toString());
+        assertEquals("Component Quiz 1 of weight 30%, with max score 100 added successfully!", result.toString());
         assertEquals(1, appState.components.getComponentArrayList().size());
     }
 
@@ -66,7 +66,7 @@ public class AddComponentCommandTest {
 
         CommandResult result = command.execute(appState, arguments);
         assertNotNull(result);
-        assertEquals("Component Quiz 1 of weight 50, with max score 100 added successfully!", result.toString());
+        assertEquals("Component Quiz 1 of weight 50%, with max score 100 added successfully!", result.toString());
         assertEquals(1, appState.components.getComponentArrayList().size());
     }
 
