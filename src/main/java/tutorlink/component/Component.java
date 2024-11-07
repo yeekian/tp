@@ -5,6 +5,7 @@ public class Component {
     private String name;
     private double maxScore;
     private int weight;
+    public static int totalWeight = 0;
 
     public Component(String name, double maxScore, int weight) {
         this.name = name;
@@ -27,15 +28,13 @@ public class Component {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Component comp) {
-            return comp.getName().equals(this.getName())
-                    && comp.getMaxScore() == this.getMaxScore()
-                    && comp.getWeight() == this.getWeight();
+            return comp.getName().equals(this.getName());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return name + ", maxScore = " + maxScore + ", weight = " + weight;
+        return name + " (maxScore: " + maxScore + ", weight: " + weight + ")";
     }
 }
