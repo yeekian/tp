@@ -178,6 +178,13 @@ will be converted to uppercase for storage.
 
 **A**: To transfer data, simply copy the `TutorLink` home folder (where the `.jar` file and data files are located) to your new computer. Then, download Java 17 (if not already installed), place the `.jar` file in the copied folder, and run `java -jar TutorLink.jar` from that folder.
 
+**Q**: Can I update data by directly editing the data files?
+
+**A**: Do so at your own risk. If changes to the data file alter its format, invalid file lines will discarded 
+during startup, and displayed in the command line for verification. While TutorLink can detect most invalid file entries, 
+certain edits can cause unexpected behaviour. Therefore, it is not recommended to edit the data files
+unless you are confident you can do so correctly.
+
 ---
 
 ## Command Summary
