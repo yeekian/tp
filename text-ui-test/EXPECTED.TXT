@@ -65,30 +65,40 @@ Error! Invalid command given!
 Error! Invalid command given!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Component Finals of weight 50, with max score 100 added successfully!
+Component Finals of weight 50%, with max score 100 added successfully!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Component Quiz of weight 5, with max score 20 added successfully!
+Component Quiz of weight 5%, with max score 20 added successfully!
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
-Error! Weightage must be integer that is between 0 and 100!
--------------------------------------------------------------
--------------------------   Result   -------------------------
-Component Fail of weight 0, with max score 2 added successfully!
+Error! Component already exists in the list!
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
-Error! Weightage must be integer that is between 0 and 100!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Weightage must be integer that is between 0 and 100!
+Error! Component already exists in the list!
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Weightage must be integer that is between 0 and 100!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: Finals, maxScore = 100.0, weight = 50
-	2: Quiz, maxScore = 20.0, weight = 5
-	3: Fail, maxScore = 2.0, weight = 0
+Component Fail of weight 0%, with max score 2 added successfully!
+-------------------------------------------------------------
+-------------------------   Error   -------------------------
+Error! Total weighting must add up to 100%.
+Current weighting (after addition): 169%
+-------------------------------------------------------------
+-------------------------   Error   -------------------------
+Error! Weightage must be integer that is between 0 and 100!
+-------------------------------------------------------------
+-------------------------   Error   -------------------------
+Error! Weightage must be integer that is between 0 and 100!
+-------------------------------------------------------------
+-------------------------   Error   -------------------------
+Error! Weightage must be integer that is between 0 and 100!
+-------------------------------------------------------------
+-------------------------   Result   -------------------------
+	1: Finals (maxScore: 100.0, weight: 50%)
+	2: Quiz (maxScore: 20.0, weight: 5%)
+	3: Fail (maxScore: 2.0, weight: 0%)
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Invalid command given!
@@ -97,8 +107,8 @@ Error! Invalid command given!
 Component Quiz successfully deleted
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: Finals, maxScore = 100.0, weight = 50
-	2: Fail, maxScore = 2.0, weight = 0
+	1: Finals (maxScore: 100.0, weight: 50%)
+	2: Fail (maxScore: 2.0, weight: 0%)
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
 Error! Invalid command given!

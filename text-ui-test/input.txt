@@ -17,8 +17,11 @@ list_student
 
 add_component c/Finals w/50 m/100
 add_component c/Quiz w/5 m/20
+add_component c/Quiz w/5 m/15
+add_component c/Quiz w/10 m/20
 add_component c/Fail w/101 m/1
 add_component c/Fail w/0 m/2
+add_component c/Fail w/99 m/20
 add_component c/123 w/hello m/byebye
 add_component c/FailMax w/2147483647 m/2147483647
 add_component c/FailMax w/-1 m/-1
