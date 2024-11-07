@@ -14,7 +14,7 @@ public class Student {
     public Student(String matricNumber, String name, double gpa) {
         this.name = name;
         this.matricNumber = matricNumber.toUpperCase();
-        this.gpa = gpa;
+        this.percentageScore = gpa;
     }
 
     public String getName() {
