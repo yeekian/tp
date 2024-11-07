@@ -21,3 +21,13 @@ skinparam packageStyle Rectangle
 hide footbox
 hide members
 hide circle
+
+<style>
+    participant {
+        FontColor White
+    }
+    ref {
+
+    }
+
+</style>

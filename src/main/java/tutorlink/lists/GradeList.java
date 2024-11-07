@@ -5,20 +5,19 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
-import tutorlink.component.Component;
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
-import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
-import tutorlink.exceptions.IncompleteGradesException;
 import tutorlink.grade.Grade;
 
 /**
  * Represents a list of grades.
  */
 public class GradeList {
-    private static final String ERROR_DUPLICATE_GRADE_ON_ADD = "Error! Grade (%s, %s) already exists in the list!";
-    private static final String ERROR_NO_GRADE_FOUND = "Error! Grade (%s, %s) does not exist in the list!";
+    private static final String ERROR_DUPLICATE_GRADE_ON_ADD =
+            "Error! Grade for component %s for student %s already exists in the list!";
+    private static final String ERROR_NO_GRADE_FOUND =
+            "Error! Grade for component %s for student %s does not exist in the list!";
 
 
     private ArrayList<Grade> gradeArrayList;
@@ -27,17 +26,21 @@ public class GradeList {
         this.gradeArrayList = new ArrayList<>();
     }
 
+    public GradeList(ArrayList<Grade> gradeArrayList) {
+        this.gradeArrayList = gradeArrayList;
+    }
+
+    //@@author RCPilot1604
     public void deleteGrade(String matricNumber, String componentDescription) throws GradeNotFoundException {
         matricNumber = matricNumber.toUpperCase();
-        componentDescription = componentDescription.toLowerCase();
         for (Grade grade : gradeArrayList) {
-            if (grade.getStudent().getMatricNumber().equals(matricNumber)
-                    && grade.getComponent().getName().equals(componentDescription)) {
+            if (grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase())
+                    && grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase())) {
                 gradeArrayList.remove(grade);
                 return;
             }
         }
-        throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
+        throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, componentDescription, matricNumber));
     }
 
     public void deleteGradesByMatric(String matricNumber) {
@@ -52,10 +55,10 @@ public class GradeList {
     }
 
     public void deleteGradesByComponent(String componentDescription) {
-        componentDescription = componentDescription.toLowerCase();
+        componentDescription = componentDescription.toUpperCase();
         ArrayList<Grade> gradesToDelete = new ArrayList<>();
         for (Grade grade : gradeArrayList) {
-            if (grade.getComponent().getName().equals(componentDescription)) {
+            if (grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase())) {
                 gradesToDelete.add(grade);
             }
         }
@@ -65,7 +68,9 @@ public class GradeList {
     public void addGrade(Grade grade) throws DuplicateGradeException {
         for (Grade gradeToCompare : gradeArrayList) {
             if (grade.equals(gradeToCompare)) {
-                throw new DuplicateGradeException(ERROR_DUPLICATE_GRADE_ON_ADD);
+                throw new DuplicateGradeException(
+                        String.format(ERROR_DUPLICATE_GRADE_ON_ADD,
+                                grade.getComponentName(), grade.getStudentMatricNumber()));
             }
         }
         gradeArrayList.add(grade);
@@ -83,43 +88,47 @@ public class GradeList {
         filteredList.gradeArrayList = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase())
-                        && grade.getComponent().getName().equals(componentDescription.toLowerCase()))
+                        && grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.gradeArrayList.isEmpty()) {
-            throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, matricNumber, componentDescription));
+            throw new GradeNotFoundException(String.format(ERROR_NO_GRADE_FOUND, componentDescription, matricNumber));
         }
         return filteredList;
     }
+    //@@author
 
-    public double calculateStudentGPA(String matricNumber, ComponentList componentList)
-            throws IncompleteGradesException {
+    public double calculateStudentGPA(String matricNumber, ComponentList componentList) {
         ArrayList<Grade> studentGrades = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        ArrayList<Component> allComponents = componentList.findAllComponents();
-
         if (studentGrades.isEmpty()) {
-            throw new StudentNotFoundException("No grades found for student: " + matricNumber);
+            return 0;
         }
 
-        boolean hasAllComponents = allComponents.stream()
-                .allMatch(component -> studentGrades.stream()
-                        .anyMatch(grade -> grade.getComponent().equals(component)));
+        double totalWeighting = componentList
+                .getComponentArrayList()
+                .stream()
+                .mapToDouble(c -> c.getWeight())
+                .sum();
 
-        if (!hasAllComponents) {
-            throw new IncompleteGradesException(
-                    "Cannot calculate GPA: Student " + matricNumber + " is missing grades for some components");
+        if(totalWeighting == 0) {
+            return 0;
         }
 
         return studentGrades
                 .stream()
-                .mapToDouble(grade -> grade.getScore() * grade.getComponent().getWeight())
-                .sum();
+                .mapToDouble(grade ->
+                        grade.getScore()
+                        / grade.getComponent().getMaxScore()
+                        * grade.getComponent().getWeight()
+                )
+                .sum() / totalWeighting;
     }
 
     public ArrayList<Grade> getGradeArrayList() {
         return gradeArrayList;
     }
+
 }

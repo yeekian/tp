@@ -3,7 +3,7 @@ package tutorlink.command;
 
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
-import tutorlink.component.Exam;
+import tutorlink.component.Component;
 import tutorlink.lists.GradeList;
 import tutorlink.parser.Parser;
 import tutorlink.result.CommandResult;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class DeleteGradeCommandTest {
 
-    private final String successMessage = "%s grade added successfully to %s for %s!";
+    private final String successMessage = "Score of %s added successfully to %s for %s!";
 
     @Test
     void addGrade_allArgumentsExam_successful() {
@@ -51,8 +51,8 @@ public class DeleteGradeCommandTest {
         //Create component
         String examName = componentName;
         double examMaxScore = 100.0;
-        double examWeight = 50.0;
-        Exam exam = new Exam(examName,examMaxScore, examWeight);
+        int examWeight = 50;
+        Component exam = new Component(examName,examMaxScore, examWeight);
 
         appState.components.addComponent(exam);
 

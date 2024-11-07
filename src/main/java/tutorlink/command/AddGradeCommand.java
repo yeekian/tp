@@ -14,12 +14,17 @@ import tutorlink.lists.ComponentList;
 import tutorlink.lists.StudentList;
 import tutorlink.result.CommandResult;
 import tutorlink.student.Student;
+
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static tutorlink.lists.StudentList.STUDENT_NOT_FOUND;
 
 public class AddGradeCommand extends Command {
     public static final String[] ARGUMENT_PREFIXES = {"i/", "c/", "s/"};
     public static final String COMMAND_WORD = "add_grade";
+    private static final String ERROR_DUPLICATE_GRADE_ON_ADD = "Error! Grade (%s, %s) already exists in the list!";
 
     @Override
     public CommandResult execute(AppState appstate, HashMap<String, String> hashmap) throws TutorLinkException {
@@ -29,22 +34,57 @@ public class AddGradeCommand extends Command {
         if (matricNumber == null || componentDescription == null || scoreNumber == null) {
             throw new IllegalValueException(Commons.ERROR_NULL);
         }
-
-        //Get component object using String componentDescription
-        ComponentList componentFilteredList = appstate.components.findComponent(componentDescription.toUpperCase());
-        Component component;
-        if (componentFilteredList.size() == 1) {
-            component = componentFilteredList.getComponentArrayList().get(0);
-        } else if (componentFilteredList.size() == 0) {
-            throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND,
-                    componentDescription));
-        } else {
-            String errorMessage = String.format(Commons.ERROR_DUPLICATE_COMPONENT, componentDescription);
-            throw new DuplicateComponentException(errorMessage);
+        matricNumber = matricNumber.toUpperCase();
+        Pattern pattern = Pattern.compile(Commons.MATRIC_NUMBER_REGEX);
+        Matcher matcher = pattern.matcher(matricNumber);
+        if (!matcher.find()) {
+            throw new IllegalValueException(Commons.ERROR_ILLEGAL_MATRIC_NUMBER);
         }
+
+        Component component = findComponentFromComponents(appstate, componentDescription);
 
         assert component != null : "Component object should not be null after this point";
 
+        Student student = findStudentFromStudents(appstate, matricNumber);
+
+        assert student != null : "Student object should not be null after this point";
+
+        //Convert scoreNumber to double
+        try {
+            double score = convertScoreToValidDouble(scoreNumber, component);
+
+            //create a new grade object
+            Grade grade = new Grade(component, student, score);
+
+            appstate.grades.addGrade(grade);
+
+            double newGPA = appstate.grades.calculateStudentGPA(
+                    student.getMatricNumber(),
+                    appstate.components
+            );
+
+            student.setGpa(newGPA);
+
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
+        }
+
+        return new CommandResult(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription,
+                matricNumber));
+    }
+
+    private static double convertScoreToValidDouble(String scoreNumber, Component component)
+            throws IllegalValueException {
+        double score = Double.parseDouble(scoreNumber);
+
+        if (score < 0.0 || score > component.getMaxScore()) {
+            throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
+        }
+        return score;
+    }
+
+    private static Student findStudentFromStudents(AppState appstate, String matricNumber)
+            throws StudentNotFoundException {
         //Get Student student object using String matricNumber
         StudentList studentFilteredList = appstate.students.findStudentByMatricNumber(matricNumber);
 
@@ -57,28 +97,24 @@ public class AddGradeCommand extends Command {
             String errorMessage = String.format(Commons.ERROR_DUPLICATE_STUDENT, matricNumber);
             throw new DuplicateMatricNumberException(errorMessage);
         }
+        return student;
+    }
 
-        assert student != null : "Student object should not be null after this point";
-
-        //Convert scoreNumber to double
-        try {
-            double score = Double.parseDouble(scoreNumber);
-
-            if (score < 0.0 || score >= component.getMaxScore()) {
-                throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
-            }
-
-            //create a new grade object
-            Grade grade = new Grade(component, student, score);
-
-            appstate.grades.addGrade(grade);
-        } catch (NumberFormatException e) {
-            throw new IllegalValueException(Commons.ERROR_INVALID_SCORE);
-
+    private static Component findComponentFromComponents(AppState appstate, String componentDescription)
+            throws DuplicateComponentException {
+        //Get component object using String componentDescription
+        ComponentList componentFilteredList = appstate.components.findComponent(componentDescription);
+        Component component;
+        if (componentFilteredList.size() == 1) {
+            component = componentFilteredList.getComponentArrayList().get(0);
+        } else if (componentFilteredList.size() == 0) {
+            throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND,
+                    componentDescription));
+        } else {
+            String errorMessage = String.format(Commons.ERROR_DUPLICATE_COMPONENT, componentDescription);
+            throw new DuplicateComponentException(errorMessage);
         }
-
-        return new CommandResult(String.format(Commons.ADD_GRADE_SUCCESS, scoreNumber, componentDescription,
-                matricNumber));
+        return component;
     }
 
     @Override

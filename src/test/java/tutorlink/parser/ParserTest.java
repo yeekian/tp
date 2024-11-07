@@ -16,6 +16,19 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
+    Parser parser = new Parser();
+
+    @Test
+    void  parserTestInterchangingArgument() {
+        String input = "add_student i/A1234567X n/John Doe";
+        String input2 = "add_student n/John Doe i/A1234567X";
+        String[] args = new String[] {"i/, n/"};
+
+        var out1 = parser.getArguments(args, input);
+        var out2 = parser.getArguments(args, input2);
+
+        assertEquals(out1, out2);
+    }
 
     @Test
     void  getCommand_addStudentCommand_addStudentCommandReturned() {

@@ -3,9 +3,7 @@ package tutorlink.lists;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import tutorlink.component.Assignment;
 import tutorlink.component.Component;
-import tutorlink.component.Exam;
 import tutorlink.exceptions.ComponentNotFoundException;
 import tutorlink.exceptions.DuplicateComponentException;
 
@@ -21,9 +19,9 @@ class ComponentListTest {
     @BeforeEach
     void setup() {
         componentList = new ComponentList();
-        comp1 = new Assignment("Homework 1", 30, 0.1);
-        comp2 = new Assignment("Homework 2", 30, 0.1);
-        comp3 = new Exam("Finals", 100, 0.5);
+        comp1 = new Component("Homework 1", 30, 10);
+        comp2 = new Component("Homework 2", 30, 10);
+        comp3 = new Component("Finals", 100, 50);
     }
 
     @Test
@@ -35,7 +33,7 @@ class ComponentListTest {
     @Test
     void addComponent_addDuplicateComponent_exceptionThrown() {
         componentList.addComponent(comp1);
-        Component duplicateComp = new Assignment("Homework 1", 30, 0.1);
+        Component duplicateComp = new Component("Homework 1", 30, 10);
         assertThrows(DuplicateComponentException.class, () -> componentList.addComponent(duplicateComp));
     }
 
@@ -59,8 +57,8 @@ class ComponentListTest {
         componentList.addComponent(comp3);
         ComponentList filteredList = componentList.findComponent("homework");
         assertEquals(2, filteredList.size());
-        String expectedResult = "1: Assignment [name=homework 1, maxScore=30.0, weight=0.1]\n" +
-                "\t2: Assignment [name=homework 2, maxScore=30.0, weight=0.1]";
+        String expectedResult = "\t1: Homework 1 (maxScore: 30.0, weight: 10%)\n" +
+                "\t2: Homework 2 (maxScore: 30.0, weight: 10%)";
         assertEquals(expectedResult, filteredList.toString());
     }
 
@@ -76,8 +74,8 @@ class ComponentListTest {
     void toString_test() {
         componentList.addComponent(comp1);
         componentList.addComponent(comp3);
-        String expectedResult = "1: Assignment [name=homework 1, maxScore=30.0, weight=0.1]\n" +
-                "\t2: Exam [name=finals, maxScore=100.0, weight=0.5]";
+        String expectedResult = "\t1: Homework 1 (maxScore: 30.0, weight: 10%)\n" +
+                "\t2: Finals (maxScore: 100.0, weight: 50%)";
         assertEquals(expectedResult, componentList.toString());
     }
 }

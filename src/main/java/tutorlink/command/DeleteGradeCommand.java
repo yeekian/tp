@@ -1,6 +1,8 @@
 package tutorlink.command;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
@@ -10,6 +12,8 @@ import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.lists.StudentList;
 import tutorlink.result.CommandResult;
+import tutorlink.student.Student;
+
 import static tutorlink.lists.StudentList.STUDENT_NOT_FOUND;
 
 public class DeleteGradeCommand extends Command {
@@ -24,7 +28,12 @@ public class DeleteGradeCommand extends Command {
         if (matricNumber == null || componentDescription == null) {
             throw new IllegalValueException(Commons.ERROR_NULL);
         }
-
+        matricNumber = matricNumber.toUpperCase();
+        Pattern pattern = Pattern.compile(Commons.MATRIC_NUMBER_REGEX);
+        Matcher matcher = pattern.matcher(matricNumber);
+        if (!matcher.find()) {
+            throw new IllegalValueException(Commons.ERROR_ILLEGAL_MATRIC_NUMBER);
+        }
         //Check number of students with matricNumber
         StudentList filteredList = appState.students.findStudentByMatricNumber(matricNumber);
 
@@ -37,6 +46,12 @@ public class DeleteGradeCommand extends Command {
 
         //Attempt to delete grade
         appState.grades.deleteGrade(matricNumber, componentDescription);
+
+        // Update student GPA
+        Student student = filteredList.getStudentArrayList().get(0);
+        double newGPA = appState.grades.calculateStudentGPA(matricNumber, appState.components);
+        student.setGpa(newGPA);
+
         return new CommandResult(String.format(Commons.DELETE_GRADE_SUCCESS, componentDescription, matricNumber));
     }
 

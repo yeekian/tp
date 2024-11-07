@@ -1,12 +1,14 @@
 package tutorlink.component;
 
-public abstract class Component {
+//@@author TrungBui32
+public class Component {
+    public static int totalWeight = 0;
     private String name;
     private double maxScore;
-    private double weight;
+    private int weight;
 
-    public Component(String name, double maxScore, double weight) {
-        this.name = name.toLowerCase();
+    public Component(String name, double maxScore, int weight) {
+        this.name = name;
         this.maxScore = maxScore;
         this.weight = weight;
     }
@@ -19,22 +21,20 @@ public abstract class Component {
         return maxScore;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Component comp) {
-            return comp.getName().equals(this.getName())
-                    && comp.getMaxScore() == this.getMaxScore()
-                    && comp.getWeight() == this.getWeight();
+            return comp.getName().equals(this.getName());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return "[name=" + name + ", maxScore=" + maxScore + ", weight=" + weight + "]";
+        return name + " (maxScore: " + maxScore + ", weight: " + weight + "%)";
     }
 }

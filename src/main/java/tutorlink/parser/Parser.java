@@ -8,8 +8,11 @@ import tutorlink.command.DeleteStudentCommand;
 import tutorlink.command.ExitCommand;
 import tutorlink.command.FindStudentCommand;
 import tutorlink.command.InvalidCommand;
+import tutorlink.command.ListComponentCommand;
+import tutorlink.command.ListGradeCommand;
 import tutorlink.command.ListStudentCommand;
 import tutorlink.command.AddGradeCommand;
+import tutorlink.command.AddComponentCommand;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -19,9 +22,6 @@ import java.util.regex.Pattern;
 
 public class Parser {
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
-
-    private static final String EMPTY_INPUT_ERROR_MESSAGE = "Error: Input cannot be empty";
-    private static final String UNKNOWN_COMMAND_ERROR_MESSAGE = "Error: Unknown command";
 
     private String extractCommandWord(String input) {
         String[] words = input.split("\\s+");
@@ -50,8 +50,18 @@ public class Parser {
 
         case DeleteGradeCommand.COMMAND_WORD:
             return new DeleteGradeCommand();
+
+        case AddComponentCommand.COMMAND_WORD:
+            return new AddComponentCommand();
+
         case DeleteComponentCommand.COMMAND_WORD:
             return new DeleteComponentCommand();
+
+        case ListComponentCommand.COMMAND_WORD:
+            return new ListComponentCommand();
+
+        case ListGradeCommand.COMMAND_WORD:
+            return new ListGradeCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(); // Lists all students

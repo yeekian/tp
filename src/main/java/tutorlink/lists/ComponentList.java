@@ -21,6 +21,10 @@ public class ComponentList {
         this.componentArrayList = new ArrayList<>();
     }
 
+    public ComponentList(ArrayList<Component> componentArrayList) {
+        this.componentArrayList = componentArrayList;
+    }
+
     public ComponentList findComponent(String name) throws ComponentNotFoundException {
         ComponentList filteredList = new ComponentList();
         filteredList.componentArrayList = componentArrayList
@@ -54,7 +58,8 @@ public class ComponentList {
 
     @Override
     public String toString() {
-        return IntStream.range(0, componentArrayList.size())
+        return "\t" +
+                IntStream.range(0, componentArrayList.size())
                 .mapToObj(i -> (i + 1) + ": " + componentArrayList.get(i))
                 .collect(Collectors.joining("\n\t"));
     }

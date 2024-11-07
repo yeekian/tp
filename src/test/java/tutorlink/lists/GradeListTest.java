@@ -3,8 +3,6 @@ package tutorlink.lists;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tutorlink.component.Assignment;
-import tutorlink.component.Exam;
 import tutorlink.exceptions.DuplicateGradeException;
 import tutorlink.exceptions.GradeNotFoundException;
 import tutorlink.grade.Grade;
@@ -29,8 +27,8 @@ class GradeListTest {
         Student student1 = new Student("A1234567B", "John Doe");
         Student student2 = new Student("A7654321B", "Jane Smith");
 
-        Component component1 = new Assignment("Homework", 100, 0.2);
-        Component component2 = new Exam("Exam", 100, 0.5);
+        Component component1 = new Component("Homework", 100, 20);
+        Component component2 = new Component("Exam", 100, 50);
 
         grade1 = new Grade(component1, student1, 90.0);
         grade2 = new Grade(component2, student2, 85.0);
@@ -60,7 +58,9 @@ class GradeListTest {
         try {
             gradeList.deleteGrade("A9999999B", "nonexistentComponent");
         } catch (GradeNotFoundException e) {
-            assertEquals(e.getMessage(), "Error! Grade (A9999999B, nonexistentcomponent) does not exist in the list!");
+            assertEquals(
+                    "Error! Grade for component nonexistentComponent " +
+                            "for student A9999999B does not exist in the list!", e.getMessage());
         } catch (Exception e) {
             fail("Expected: StudentNotFoundException, Actual: " + e.getMessage());
         }
