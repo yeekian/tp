@@ -8,49 +8,17 @@ participant "componentStorage:Storage" as CS LOGIC_COLOR_4
 participant "gradeStorage:Storage" as GS LOGIC_COLOR_4
 
 group sd setup
-[->TL : main()
-activate TL
-TL->UI: displayWelcomeMessage()
-activate UI
-TL <-- UI
-deactivate UI
 
 alt setup success
-    create SS
-    TL -> SS : new StudentStorage
-    activate SS
-    TL <-- SS : StudentStorage
-    deactivate SS
 
-    create CS
-    TL -> CS : new ComponentStorage
-    activate CS
-    TL <-- CS :ComponentStorage
-    deactivate CS
+    ref over TL, UI, SS: load student data
 
-    create GS
-    TL -> GS : new ComponentStorage
-    activate GS
-    TL <-- GS :ComponentStorage
-    deactivate GS
+    ref over TL, UI, CS: load component data
 
-    TL -> SS : loadStudentList()
-    activate SS
-    TL <-- SS : ArrayList<Student>
-    deactivate SS
-
-    TL -> CS : loadComponentList()
-    activate CS
-    TL <-- CS : ArrayList<Component>
-    deactivate CS
-
-    TL -> GS : loadGradeList()
-    activate GS
-    TL <-- GS : ArrayList<Grade>
-    deactivate GS
+    ref over TL, UI, GS: load grade data
 
     create A
-    TL -> A : new AppState(ArrayList<Student>, ArrayList<Component>, ArrayList<Grade>)
+    TL -> A : new AppState(students, grades, components)
     activate A
     TL <-- A : appState
     deactivate A
@@ -62,7 +30,11 @@ else TutorLinkException
 end
 
 deactivate UI
-[<-- TL
-deactivate TL
+
+TL->UI: displayWelcomeMessage()
+activate UI
+TL <-- UI
+deactivate UI
+
 end
 @enduml

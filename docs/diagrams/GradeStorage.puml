@@ -1,17 +1,17 @@
 @startuml
-scale 1200*1200
 
 !include Style.puml
 participant ":TutorLink" as TL LOGIC_COLOR_5
+participant ":Ui" as UI LOGIC_COLOR_6
+
 participant "gradeStorage: GradeStorage" as GS LOGIC_COLOR_4
-participant "grades: ArrayList<Grade>" as AL LOGIC_COLOR_6
+participant "grades: ArrayList<Grade>" as AL LOGIC_COLOR_3
 participant "discardedEntries: ArrayList<String>" as DE LOGIC_COLOR_7
 
-[->TL : setupAllLists()
-activate TL
+group sd load grade data
 
 create GS
-TL -> GS: new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList)
+TL -> GS: new GradeStorage(filepath, components, students)
 activate GS
 create DE
 GS -> DE: new ArrayList<String>()
@@ -29,8 +29,6 @@ GS -> AL: new ArrayList<Grade>()
 activate AL
 GS <-- AL: grades: Grade
 deactivate AL
-
-
 
 loop file has next line
     GS -> GS: getGradeFromFileLine(currentLine: String)
@@ -52,11 +50,19 @@ loop file has next line
 
 end
 
-
 TL <-- GS: grades: Grade
 deactivate GS
 
-[<--TL
-deactivate TL
+TL -> GS: getDiscardedEntries()
+activate GS
+TL <-- GS: discardedGrades: String
+deactivate GS
+
+TL -> UI: displayDiscardedEntries(discardedGrades)
+activate UI
+TL <-- UI
+deactivate UI
+
+end
 
 @enduml
