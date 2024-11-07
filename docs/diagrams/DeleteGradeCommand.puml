@@ -6,13 +6,8 @@ participant ":DeleteGradeCommand" as C LOGIC_COLOR_3
 participant ":AppState" as A LOGIC_COLOR_2
 participant ":CommandResult" as R LOGIC_COLOR_8
 
-[->C
+[->C : execute(appState, arguments)
 activate C
-
-
-opt matricNumber or componentDescription is null
-    [<--C : IllegalValueException
-end
 
 C -> C : findComponentFromComponents
 activate C

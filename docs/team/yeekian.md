@@ -51,6 +51,7 @@ can be further filtered down for analysis.
 
     - Developer Guide:
       - Added implementation details of the AddGradeCommand and DeleteGradeCommand feature. [#106](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/106)
+      - Wrote appendices: Product Scope, User Stories, Non-Functional Requirements, Glossary, and Instructions for Manual Testing
 
 
 - **Community:**

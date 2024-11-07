@@ -20,7 +20,7 @@ public class Component {
         return maxScore;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 

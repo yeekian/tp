@@ -53,6 +53,19 @@ Displays a list of all students in the class.
 
 ---
 
+### Finding a Student: `find_student`
+
+Adds a student to your class.
+
+- **Format**: `find_student i/MATRIC_NUMBER n/STUDENT_NAME`
+- **Parameters**:
+  - `STUDENT_NAME`: The full name of the student.
+  - `MATRIC_NUMBER`: A unique identifier for the student.
+
+- **Example**:
+  - `find_student i/A1234567X n/John Doe ` find the student named John Doe with the matric number of A1234567X among the list of students and prints out the student information.
+---
+
 ### Adding a Component: `add_component`
 
 Adds a new grading component to the class (e.g., "Homework," "Midterm," "Final Exam").
@@ -133,6 +146,12 @@ Views all recorded grades and the final grade for a specific student. If the wei
 
 ---
 
+### Exiting the program: `bye`
+
+Exits the program.
+- **Format**: `bye`
+
+---
 ### Saving the data
 
 TutorLink data is saved in the hard disk automatically after every command execution. There is no need to save manually.
@@ -156,17 +175,20 @@ will be converted to uppercase for storage.
 
 ## Command Summary
 
-| **Command**               | **Description**                                     | **Example**                                 |
-|---------------------------|-----------------------------------------------------|---------------------------------------------|
-| `add_student`             | Adds a student to the class roster                  | `add_student i/A1234567X n/John Doe`        |
-| `delete_student`          | Deletes a student from the class roster             | `delete_student i/A1234567X`                |
-| `list_student`            | Lists all students in the class                     | `list_student`                              |
-| `add_grade`               | Adds a grade for a student for a specific component | `add_grade i/A1234567X c/Quiz 1 s/85`       |
-| `delete_grade`            | Deletes a student's grade for a specific component  | `delete_grade i/A1234567X c/Quiz 1`         |
-| `list_grade`              | Lists all grades for a student                      | `list_grade i/A1234567X`                    |
-| `add_component`           | Adds a new grading component to the class           | `add_component c/Quiz 1 w/30 m/50`          |
-| `delete_component`        | Deletes a grading component from the class          | `delete_component c/Quiz 1`                 |
-| `list_component`          | Lists all grading components                        | `list_component`                            |
+| **Command**        | **Description**                                              | **Example**                           |
+|--------------------|--------------------------------------------------------------|---------------------------------------|
+| `add_student`      | Adds a student to the class roster                           | `add_student i/A1234567X n/John Doe`  |
+| `delete_student`   | Deletes a student from the class roster                      | `delete_student i/A1234567X`          |
+| `list_student`     | Lists all students in the class                              | `list_student`                        |
+| `find_student`     | Finds a student in the class roster by name or matric number | `find_student i/A1234567X n/John Doe` |
+| `add_component`    | Adds a new grading component to the class                    | `add_component c/Quiz 1 w/30 m/50`    |
+| `delete_component` | Deletes a grading component from the class                   | `delete_component c/Quiz 1`           |
+| `list_component`   | Lists all grading components                                 | `list_component`                      |
+| `add_grade`        | Adds a grade for a student for a specific component          | `add_grade i/A1234567X c/Quiz 1 s/85` |
+| `delete_grade`     | Deletes a student's grade for a specific component           | `delete_grade i/A1234567X c/Quiz 1`   |
+| `list_grade`       | Lists all grades for a student                               | `list_grade i/A1234567X`              |
+| `bye`              | Exits the program                                            | `bye`                                 |
 
 ---
+
 

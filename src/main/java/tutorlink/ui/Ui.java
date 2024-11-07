@@ -3,6 +3,7 @@ package tutorlink.ui;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.result.CommandResult;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -27,6 +28,7 @@ public class Ui {
     }
 
     public void displayWelcomeMessage() {
+        System.out.println(fullBreakLine);
         System.out.println(logo);
         System.out.println(fullBreakLine);
         System.out.println("Hello! I'm TutorLink\nWhat can I do for you?");
@@ -43,5 +45,16 @@ public class Ui {
         System.out.println(halfBreakLine + "   Error   " + halfBreakLine);
         System.out.println(error.getMessage());
         System.out.println(fullBreakLine);
+    }
+
+    public void displayDiscardedEntries(ArrayList<String> discardedEntries, String header) {
+        if (discardedEntries.isEmpty()) {
+            return;
+        }
+        System.out.println(fullBreakLine);
+        System.out.println(header);
+        for (String entry : discardedEntries) {
+            System.out.println("  " + entry);
+        }
     }
 }
