@@ -59,12 +59,14 @@ public class ListGradeCommand extends Command {
         StringBuilder output = new StringBuilder(
                 String.format("Grades for %s (%s):\n", student.getName(), student.getMatricNumber()));
 
-        // Sort grades by component name and display each
-        studentGrades.stream()
-                .sorted(Comparator.comparing(grade -> grade.getComponent().getName()))
-                .forEach(grade -> output.append(String.format("%-15s: %.2f\n",
-                        grade.getComponent().getName(),
-                        grade.getScore())));
+        // Sort grades by component name and display each with numbering
+        int gradeIndex = 1;
+        for (Grade grade : studentGrades.stream()
+                .sorted(Comparator.comparing(g -> g.getComponent().getName()))
+                .collect(Collectors.toList())) {
+            output.append(
+                    String.format("%d. %-15s: %.2f\n", gradeIndex++, grade.getComponent().getName(), grade.getScore()));
+        }
 
         // Calculate and display the GPA (final grade)
         double gpa = appState.grades.calculateStudentGPA(student.getMatricNumber(), appState.components);
@@ -83,18 +85,25 @@ public class ListGradeCommand extends Command {
                         Collectors.toCollection(ArrayList::new)
                 ));
 
-        gradesByStudent.forEach((matricNumber, studentGrades) -> {
-            Student student = studentGrades.get(0).getStudent();
-            output.append(String.format("Student %s (%s):\n", student.getName(), matricNumber));
+        int studentIndex = 1;
+        for (Map.Entry<String, ArrayList<Grade>> entry : gradesByStudent.entrySet()) {
+            Student student = entry.getValue().get(0).getStudent();
+            output.append(
+                    String.format("%d. %s (%s):\n", studentIndex++,
+                            student.getName(), student.getMatricNumber()));
 
-            studentGrades.stream()
-                    .sorted(Comparator.comparing(grade -> grade.getComponent().getName()))
-                    .forEach(grade -> output.append(String.format("%-15s: %.2f\n",
-                            grade.getComponent().getName(),
-                            grade.getScore())));
+            // Grade numbering for each student's grades
+            int gradeIndex = 1;
+            for (Grade grade : entry.getValue().stream()
+                    .sorted(Comparator.comparing(g -> g.getComponent().getName()))
+                    .collect(Collectors.toList())) {
+                output.append(
+                        String.format("   %d. %-15s: %.2f\n", gradeIndex++,
+                                grade.getComponent().getName(), grade.getScore()));
+            }
 
             output.append("\n");
-        });
+        }
 
         return new CommandResult(output.toString());
     }
@@ -104,3 +113,4 @@ public class ListGradeCommand extends Command {
         return ARGUMENT_PREFIXES;
     }
 }
+
