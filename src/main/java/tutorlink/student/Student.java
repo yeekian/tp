@@ -11,6 +11,12 @@ public class Student {
         this.percentageScore = 0.0;
     }
 
+    public Student(String matricNumber, String name, double gpa) {
+        this.name = name;
+        this.matricNumber = matricNumber.toUpperCase();
+        this.gpa = gpa;
+    }
+
     public String getName() {
         return name;
     }
