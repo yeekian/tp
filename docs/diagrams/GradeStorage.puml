@@ -4,6 +4,8 @@
 participant ":TutorLink" as TL LOGIC_COLOR_5
 participant "gradeStorage: GradeStorage" as GS LOGIC_COLOR_4
 participant "grades: ArrayList<Grade>" as AL LOGIC_COLOR_6
+[->TL : setupAllLists()
+activate TL
 create GS
 TL -> GS: new GradeStorage(GRADE_FILE_PATH, initialComponentList, initialStudentList)
 activate GS
@@ -27,7 +29,7 @@ loop fileScanner.hasNext()
     GS --> GS: newGrade: Grade
     deactivate GS
 
-    alt success
+    alt read grade success
         GS -> AL: add(newGrade)
         activate AL
         GS <-- AL
@@ -40,5 +42,7 @@ end
 
 TL <-- GS: grades: Grade
 deactivate GS
+[<--TL
+deactivate TL
 
 @enduml
