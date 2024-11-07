@@ -16,6 +16,8 @@ Your command terminal should look similar to the one below.
 ![tutorlink_startup.png](tutorlink_startup.png)
 ## Features 
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a Student: `add_student`
 
 Adds a student to your class.
@@ -52,6 +54,8 @@ Displays a list of all students in the class.
     - `list_student`
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Finding a Student: `find_student`
 
@@ -94,6 +98,8 @@ Removes an existing grading component from the class.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Listing Components: `list_component`
 
 Displays all grading components and their respective weights for a class.
@@ -133,6 +139,8 @@ Removes a previously recorded grade for a specific student and component.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Listing Grades: `list_grade`
 
 Views all recorded grades for a specific student or all students, and final percentage calculation. If the weightage of components does not add up to 100% (i.e., the course is still in progress), "IP" (In Progress) will be shown instead of a final percentage.
@@ -168,6 +176,9 @@ The data from the student, component and grade lists are stored in `studentlist.
 respectively, located in the `[JAR file location]/data/` directory.
 
 ---
+
+<div style="page-break-after: always;"></div>
+
 ## Notes:
 - Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
 will be converted to uppercase for storage. 
@@ -186,6 +197,8 @@ certain edits can cause unexpected behaviour. Therefore, it is not recommended t
 unless you are confident you can do so correctly.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
