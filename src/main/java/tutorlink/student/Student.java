@@ -29,7 +29,8 @@ public class Student {
 
     @Override
     public String toString() {
-        return this.name + " (matric no: " + this.matricNumber + ", percentage score: " + String.format("%.2f", this.percentageScore) + ")";
+        return this.name + " (matric no: " + this.matricNumber + ", percentage score: " +
+                String.format("%.2f", this.percentageScore) + ")";
     }
 
     @Override
