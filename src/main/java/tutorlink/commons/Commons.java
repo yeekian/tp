@@ -32,6 +32,8 @@ public class Commons {
     public static final String DELETE_COMPONENT_SUCCESS = "Component %s successfully deleted";
     public static final String ERROR_COMPONENT_NOT_FOUND = "Error! Component (Name %s) not found";
     public static final String ERROR_DUPLICATE_COMPONENT = "Error! Component (Name %s) already exists in the list!";
+    public static final String ERROR_MULTIPLE_QUERY_RESULT = "Error! Multiple query results for keyword: %s found " +
+            "in list!";
     public static final String ERROR_INVALID_WEIGHTAGE = "Error! Weightage must be integer that is between 0 and 100!";
     public static final String ERROR_INVALID_MAX_SCORE =
             "Error! Max Score must be double that is more than or equal to 0!";

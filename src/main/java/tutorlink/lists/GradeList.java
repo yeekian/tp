@@ -97,7 +97,7 @@ public class GradeList {
     }
     //@@author
 
-    public double calculateStudentGPA(String matricNumber, ComponentList componentList) {
+    public double calculateStudentPercentageScore(String matricNumber, ComponentList componentList) {
         ArrayList<Grade> studentGrades = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase()))
@@ -124,7 +124,7 @@ public class GradeList {
                         / grade.getComponent().getMaxScore()
                         * grade.getComponent().getWeight()
                 )
-                .sum() / totalWeighting;
+                .sum() / totalWeighting * 100;
     }
 
     public ArrayList<Grade> getGradeArrayList() {

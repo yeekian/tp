@@ -1,52 +1,24 @@
 add_student i/A0276007H n/Ethan Chua
 add_student i/A9999999Z n/John Doe
 add_student i/a1111111b n/John Smith
-add_student i/A n/failure
-
-add_student i/A0276007H
-add_student n/Ethan Chua
-
 list_student
-
-delete_student i/A0276007H
-delete_student i/A1234567X
-
-delete_student i/4567890987654567890
-
-list_student
-
-add_component c/Finals w/50 m/100
-add_component c/Quiz w/5 m/20
-add_component c/Quiz w/5 m/15
-add_component c/Quiz w/10 m/20
-add_component c/Fail w/101 m/1
-add_component c/Fail w/0 m/2
-add_component c/Fail w/99 m/20
-add_component c/123 w/hello m/byebye
-add_component c/FailMax w/2147483647 m/2147483647
-add_component c/FailMax w/-1 m/-1
-list_component
-
-delete_component c/Quiz
-list_component
-
-add_grade i/A0276007H c/Quiz s/19
-add_student i/A0276007H n/Ethan Chua
-
-list_student
-add_grade i/A0276007H c/Quiz s/19
-add_grade i/A0276007H c/Quiz s/100
-add_grade i/A1 c/Quiz s/19
-add_grade i/A0276007H c/Wuiz s/19
-
+add_component c/Quiz 1 w/25 m/10
+add_component c/Quiz 2 w/25 m/20
+add_component c/Quiz 3 w/25 m/20
+add_component c/Quiz 4 w/25 m/20
+add_grade c/Quiz 1 s/10 i/A0276007H
+add_grade c/Quiz 2 s/20 i/A0276007H
+add_grade c/Quiz 3 s/20 i/A0276007H
+add_grade c/Quiz 4 s/20 i/A0276007H
 list_grade
-
-delete_grade i/A2 c/Quiz
-delete_grade i/A0276007H c/123
-delete_grade i/A0276007H c/Quiz
-delete_grade i/A0276007H c/Quiz
-
+add_grade c/Quiz 1 s/5 i/A9999999Z
+add_grade c/Quiz 2 s/7.5 i/A9999999Z
+add_grade c/Quiz 3 s/10 i/A9999999Z
+add_grade c/Quiz 4 s/10 i/A9999999Z
+list_grade
+add_grade c/Quiz 1 s/0 i/a1111111b
+add_grade c/Quiz 2 s/0 i/a1111111b
+add_grade c/Quiz 3 s/0 i/a1111111b
+add_grade c/Quiz 4 s/0 i/a1111111b
+list_grade
 bye
-
-
-

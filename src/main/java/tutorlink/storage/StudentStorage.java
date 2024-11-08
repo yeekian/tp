@@ -54,7 +54,8 @@ public class StudentStorage extends Storage {
     }
 
     private String getFileInputForStudent(Student student) {
-        return student.getMatricNumber() + WRITE_DELIMITER + student.getName() + WRITE_DELIMITER + student.getGpa();
+        return student.getMatricNumber() + WRITE_DELIMITER + student.getName() + WRITE_DELIMITER +
+                student.getPercentageScore();
     }
 
 }
