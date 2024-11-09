@@ -22,6 +22,7 @@ public class DeleteComponentCommandTest {
     @BeforeEach
     void setup() {
         appState = new AppState();
+        appState.totalWeight = 40+10+10;
         appState.components.addComponent(new Component("finals", 40.0, 40));
         appState.components.addComponent(new Component("iP", 20.0, 10));
         appState.components.addComponent(new Component("lectures", 10.0, 10));
@@ -31,7 +32,9 @@ public class DeleteComponentCommandTest {
     void deleteComponent_success() {
         arguments = new HashMap<>();
         arguments.put("c/", "finals");
+        int initialWeighting = appState.totalWeight;
         result = command.execute(appState, arguments);
+        assertEquals(appState.totalWeight, initialWeighting-40);
         assertNotNull(result);
         assertEquals(appState.components.size(), 2);
         try {
@@ -47,24 +50,30 @@ public class DeleteComponentCommandTest {
     void deleteComponent_notFound_fail() {
         arguments = new HashMap<>();
         arguments.put("c/", "midterms");
+        int initialWeighting = appState.totalWeight;
         try {
             command.execute(appState, arguments);
         } catch (ComponentNotFoundException e) {
             assertEquals(e.getMessage(), "Error! Component midterms does not exist in the list!");
         } catch (Exception e) {
             fail("Expected: ComponentNotFoundException, actual: " + e.getMessage());
+        } finally {
+            assertEquals(appState.totalWeight, initialWeighting);
         }
     }
 
     @Test
     void deleteComponent_emptyParam_fail() {
         arguments = new HashMap<>();
+        int initialWeighting = appState.totalWeight;
         try {
             command.execute(appState, arguments);
         } catch (IllegalValueException e) {
             assertEquals(e.getMessage(), Commons.ERROR_NULL);
         } catch (Exception e) {
             fail("Expected: ComponentNotFoundException, actual: " + e.getMessage());
+        } finally {
+            assertEquals(appState.totalWeight, initialWeighting);
         }
     }
 }

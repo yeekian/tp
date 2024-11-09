@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
 import tutorlink.exceptions.IllegalValueException;
+import tutorlink.exceptions.InvalidWeightingException;
 import tutorlink.result.CommandResult;
 
 
@@ -95,7 +96,7 @@ public class AddComponentCommandTest {
     }
 
     @Test
-    void execute_weightageNotDouble_throwsIllegalValueException() {
+    void execute_weightageNotInt_throwsIllegalValueException() {
         arguments.put("c/", "Quiz 1");
         arguments.put("w/", "one");
         arguments.put("m/", "100");
@@ -116,6 +117,27 @@ public class AddComponentCommandTest {
             command.execute(appState, arguments);
         });
         assertEquals(Commons.ERROR_INVALID_WEIGHTAGE, exception.getMessage());
+    }
+
+    @Test
+    void execute_maxWeightageExceeded_throwsInvalidWeightingException() {
+        arguments.put("c/", "Quiz 1");
+        arguments.put("w/", "100");
+        arguments.put("m/", "100");
+
+        CommandResult result = command.execute(appState, arguments);
+        assertNotNull(result);
+
+        arguments.clear();
+        arguments.put("c/", "Quiz 2");
+        arguments.put("w/", "1");
+        arguments.put("m/", "100");
+
+        InvalidWeightingException exception = assertThrows(InvalidWeightingException.class, () -> {
+            command.execute(appState, arguments);
+        });
+        assertEquals(String.format(Commons.ERROR_INVALID_TOTAL_WEIGHTING, appState.totalWeight + 1),
+                exception.getMessage());
     }
 }
 //@@author
