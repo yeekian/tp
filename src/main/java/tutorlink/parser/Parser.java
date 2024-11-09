@@ -24,7 +24,7 @@ public class Parser {
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
 
     private String extractCommandWord(String input) {
-        String[] words = input.split("\\s+");
+        String[] words = input.trim().split("\\s+");
         return words[0]; //return the first word
     }
 

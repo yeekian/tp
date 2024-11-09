@@ -56,6 +56,10 @@ public class ComponentList {
         throw new ComponentNotFoundException(String.format(ERROR_COMPONENT_NOT_FOUND, component));
     }
 
+    public int getTotalWeighting() {
+        return componentArrayList.stream().mapToInt(comp -> comp.getWeight()).sum();
+    }
+
     @Override
     public String toString() {
         return "\t" +
