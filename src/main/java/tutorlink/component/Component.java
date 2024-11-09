@@ -28,7 +28,7 @@ public class Component {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Component comp) {
-            return comp.getName().equals(this.getName());
+            return comp.getName().toUpperCase().equals(this.getName().toUpperCase());
         }
         return false;
     }

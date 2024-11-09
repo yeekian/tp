@@ -23,9 +23,6 @@ public class DeleteComponentCommand extends Command{
         ComponentList componentsToDelete = appState.components.findComponent(componentName);
         if(componentsToDelete.size() == 0) {
             throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND, componentName));
-        } else if (componentsToDelete.size() > 1) {
-            throw new DuplicateComponentException(String.format(Commons.ERROR_MULTIPLE_QUERY_RESULT,
-                    componentName));
         }
         appState.components.deleteComponent(componentsToDelete.getComponentArrayList().get(0));
         return new CommandResult(String.format(Commons.DELETE_COMPONENT_SUCCESS, componentName));
