@@ -14,7 +14,6 @@ public class AddComponentCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"c/", "w/", "m/"};
     public static final String COMMAND_WORD = "add_component";
-    private static final int MAX_WEIGHT = 100;
 
     @Override
     public CommandResult execute(AppState appState, HashMap<String, String> hashmap) throws TutorLinkException {
@@ -26,14 +25,12 @@ public class AddComponentCommand extends Command {
         }
 
         int weightage = convertWeightageToValidInt(weightageNumber);
-
-        if((weightage + Component.totalWeight) > MAX_WEIGHT) {
+        if((weightage + appState.totalWeight) > Commons.MAX_WEIGHT) {
             throw new InvalidWeightingException(String.format(Commons.ERROR_INVALID_TOTAL_WEIGHTING,
-                    Component.totalWeight + weightage));
+                    appState.totalWeight + weightage));
         } else {
-            Component.totalWeight += weightage;
+            appState.totalWeight += weightage;
         }
-
         double maxScore = convertMaxScoreToValidDouble(maxScoreNumber);
         appState.components.addComponent(new Component(componentName, maxScore, weightage));
         return new CommandResult(String.format(Commons.ADD_COMPONENT_SUCCESS,
