@@ -4,7 +4,6 @@ import java.util.HashMap;
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
 import tutorlink.exceptions.ComponentNotFoundException;
-import tutorlink.exceptions.DuplicateComponentException;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.lists.ComponentList;
