@@ -5,7 +5,6 @@ import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
 import tutorlink.component.Component;
 import tutorlink.exceptions.ComponentNotFoundException;
-import tutorlink.exceptions.DuplicateComponentException;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.lists.ComponentList;
@@ -24,9 +23,6 @@ public class DeleteComponentCommand extends Command{
         ComponentList componentsToDelete = appState.components.findComponent(componentName);
         if(componentsToDelete.size() == 0) {
             throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND, componentName));
-        } else if (componentsToDelete.size() > 1) {
-            throw new DuplicateComponentException(String.format(Commons.ERROR_MULTIPLE_QUERY_RESULT,
-                    componentName));
         }
         Component toDelete = componentsToDelete.getComponentArrayList().get(0);
         appState.totalWeight -= toDelete.getWeight();

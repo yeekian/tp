@@ -25,11 +25,10 @@ public class AddComponentCommand extends Command {
         }
 
         int weightage = convertWeightageToValidInt(weightageNumber);
-        if((weightage + appState.totalWeight) > Commons.MAX_WEIGHT) {
+        int totalWeight = weightage + appState.components.getTotalWeighting();
+        if ((totalWeight) > Commons.MAX_WEIGHT) {
             throw new InvalidWeightingException(String.format(Commons.ERROR_INVALID_TOTAL_WEIGHTING,
-                    appState.totalWeight + weightage));
-        } else {
-            appState.totalWeight += weightage;
+                    totalWeight));
         }
         double maxScore = convertMaxScoreToValidDouble(maxScoreNumber);
         appState.components.addComponent(new Component(componentName, maxScore, weightage));
@@ -39,7 +38,7 @@ public class AddComponentCommand extends Command {
 
     private static int convertWeightageToValidInt(String weightageNumber) {
         try {
-            int weightage =Integer.parseInt(weightageNumber);
+            int weightage = Integer.parseInt(weightageNumber);
             if (weightage < 0 || weightage > 100) {
                 throw new IllegalValueException(Commons.ERROR_INVALID_WEIGHTAGE);
             }
