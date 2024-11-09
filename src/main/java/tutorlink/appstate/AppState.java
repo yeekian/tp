@@ -13,11 +13,13 @@ public class AppState {
     public StudentList students;
     public GradeList grades;
     public ComponentList components;
+    public int totalWeight = 0;
 
     public AppState() {
         students = new StudentList();
         grades = new GradeList();
         components = new ComponentList();
+        totalWeight = 0;
     }
 
     public AppState(ArrayList<Student> studentArrayList,
