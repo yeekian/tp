@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
+import tutorlink.exceptions.DuplicateComponentException;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.InvalidWeightingException;
 import tutorlink.result.CommandResult;
@@ -164,6 +165,46 @@ public class AddComponentCommandTest {
         assertEquals(String.format(Commons.ERROR_INVALID_TOTAL_WEIGHTING, appState.components.getTotalWeighting() + 1),
                 exception.getMessage());
         assertEquals(initialWeighting, appState.components.getTotalWeighting());
+    }
+
+    @Test
+    void execute_duplicateComponents_totalWeightingUnchanged() {
+        arguments.put("c/", "Quiz 1");
+        arguments.put("w/", "20");
+        arguments.put("m/", "100");
+
+        assertEquals(0, appState.components.getTotalWeighting());
+
+        command.execute(appState, arguments);
+
+        assertEquals(20, appState.components.getTotalWeighting());
+
+        DuplicateComponentException exception = assertThrows(DuplicateComponentException.class, () -> {
+            command.execute(appState, arguments);
+        });
+
+        assertEquals(20, appState.components.getTotalWeighting());
+    }
+
+    @Test
+    void execute_negativeWeighting_totalWeightingUnchanged() {
+        arguments.put("c/", "Quiz 1");
+        arguments.put("w/", "20");
+        arguments.put("m/", "100");
+
+        assertEquals(0, appState.components.getTotalWeighting());
+        command.execute(appState, arguments);
+        assertEquals(20, appState.components.getTotalWeighting());
+
+        arguments.clear();
+        arguments.put("c/", "Quiz 2");
+        arguments.put("w/", "-20");
+        arguments.put("m/", "100");
+        IllegalValueException exception = assertThrows(IllegalValueException.class, () -> {
+            command.execute(appState, arguments);
+        });
+        assertEquals(Commons.ERROR_INVALID_WEIGHTAGE, exception.getMessage());
+        assertEquals(20, appState.components.getTotalWeighting());
     }
 }
 //@@author
