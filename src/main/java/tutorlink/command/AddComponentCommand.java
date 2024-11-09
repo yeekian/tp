@@ -8,7 +8,6 @@ import tutorlink.component.Component;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.InvalidWeightingException;
 import tutorlink.exceptions.TutorLinkException;
-import tutorlink.lists.ComponentList;
 import tutorlink.result.CommandResult;
 
 public class AddComponentCommand extends Command {
