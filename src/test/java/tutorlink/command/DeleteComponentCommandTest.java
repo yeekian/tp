@@ -22,7 +22,6 @@ public class DeleteComponentCommandTest {
     @BeforeEach
     void setup() {
         appState = new AppState();
-        appState.totalWeight = 40+10+10;
         appState.components.addComponent(new Component("finals", 40.0, 40));
         appState.components.addComponent(new Component("iP", 20.0, 10));
         appState.components.addComponent(new Component("lectures", 10.0, 10));
@@ -32,25 +31,18 @@ public class DeleteComponentCommandTest {
     void deleteComponent_success() {
         arguments = new HashMap<>();
         arguments.put("c/", "finals");
-        int initialWeighting = appState.totalWeight;
+        int initialWeighting = appState.components.getTotalWeighting();
         result = command.execute(appState, arguments);
-        assertEquals(appState.totalWeight, initialWeighting-40);
         assertNotNull(result);
         assertEquals(appState.components.size(), 2);
-        try {
-            appState.components.findComponent("finals");
-        } catch (ComponentNotFoundException e) {
-            assertEquals(e.getMessage(), "Error! Component finals does not exist in the list!");
-        } catch (Exception e) {
-            fail("Expected: ComponentNotFoundException, actual: " + e.getMessage());
-        }
+        assertEquals(appState.components.getTotalWeighting(), initialWeighting - 40);
     }
 
     @Test
     void deleteComponent_notFound_fail() {
         arguments = new HashMap<>();
         arguments.put("c/", "midterms");
-        int initialWeighting = appState.totalWeight;
+        int initialWeighting = appState.components.getTotalWeighting();
         try {
             command.execute(appState, arguments);
         } catch (ComponentNotFoundException e) {
@@ -58,14 +50,14 @@ public class DeleteComponentCommandTest {
         } catch (Exception e) {
             fail("Expected: ComponentNotFoundException, actual: " + e.getMessage());
         } finally {
-            assertEquals(appState.totalWeight, initialWeighting);
+            assertEquals(appState.components.getTotalWeighting(), initialWeighting);
         }
     }
 
     @Test
     void deleteComponent_emptyParam_fail() {
         arguments = new HashMap<>();
-        int initialWeighting = appState.totalWeight;
+        int initialWeighting = appState.components.getTotalWeighting();
         try {
             command.execute(appState, arguments);
         } catch (IllegalValueException e) {
@@ -73,7 +65,7 @@ public class DeleteComponentCommandTest {
         } catch (Exception e) {
             fail("Expected: ComponentNotFoundException, actual: " + e.getMessage());
         } finally {
-            assertEquals(appState.totalWeight, initialWeighting);
+            assertEquals(appState.components.getTotalWeighting(), initialWeighting);
         }
     }
 }

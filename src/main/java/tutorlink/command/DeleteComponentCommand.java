@@ -3,7 +3,6 @@ package tutorlink.command;
 import java.util.HashMap;
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
-import tutorlink.component.Component;
 import tutorlink.exceptions.ComponentNotFoundException;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.TutorLinkException;
@@ -24,10 +23,7 @@ public class DeleteComponentCommand extends Command{
         if(componentsToDelete.size() == 0) {
             throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND, componentName));
         }
-        Component toDelete = componentsToDelete.getComponentArrayList().get(0);
-        appState.totalWeight -= toDelete.getWeight();
-        assert appState.totalWeight >= 0;
-        appState.components.deleteComponent(toDelete);
+        appState.components.deleteComponent(componentsToDelete.getComponentArrayList().get(0));
         return new CommandResult(String.format(Commons.DELETE_COMPONENT_SUCCESS, componentName));
     }
 
