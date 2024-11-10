@@ -120,7 +120,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void error_NaN_weight() {
+    void error_nan_weight() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "abc");
@@ -143,7 +143,7 @@ public class UpdateComponentCommandTest {
 
 
     @Test
-    void error_mark_NaN() {
+    void error_nan_mark() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "abc");
