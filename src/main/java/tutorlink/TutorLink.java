@@ -107,6 +107,12 @@ public class TutorLink {
         ui.displayDiscardedEntries(discardedGrades, "Discarded grade data:");
 
         appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
+        for (Student student : appState.students.getStudentArrayList()) {
+            double gpa = appState.grades.calculateStudentPercentageScore(
+                    student.getMatricNumber(), appState.components);
+            student.setPercentageScore(gpa);
+        }
+
     }
 
     private static void saveAllLists() throws IOException {
