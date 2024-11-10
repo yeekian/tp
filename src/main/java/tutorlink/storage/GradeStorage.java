@@ -20,13 +20,13 @@ public class GradeStorage extends Storage {
         this.studentList = studentList;
     }
 
-    public ArrayList<Grade> loadGradeList()
-            throws IOException {
+    public ArrayList<Grade> loadGradeList() throws IOException {
         ArrayList<Grade> grades = new ArrayList<>();
         Scanner fileScanner = new Scanner(path);
         while (fileScanner.hasNext()) {
             try {
-                grades.add(getGradeFromFileLine(fileScanner.nextLine()));
+                Grade newGrade = getGradeFromFileLine(fileScanner.nextLine(), grades);
+                grades.add(newGrade);
             } catch (InvalidDataFileLineException e) {
                 discardedEntries.add(e.getMessage());
             }
@@ -42,7 +42,8 @@ public class GradeStorage extends Storage {
         fileWriter.close();
     }
 
-    private Grade getGradeFromFileLine(String fileLine) throws InvalidDataFileLineException {
+    private Grade getGradeFromFileLine(String fileLine, ArrayList<Grade> grades)
+            throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
         if (stringParts.length != 3) {
             throw new InvalidDataFileLineException(fileLine);
@@ -67,11 +68,14 @@ public class GradeStorage extends Storage {
             }
         }
 
-        if (selectedComp != null && selectedStudent != null) {
-            return new Grade(selectedComp, selectedStudent, score);
-        } else {
+        if (selectedComp == null || selectedStudent == null) {
             throw new InvalidDataFileLineException(fileLine);
         }
+        Grade newGrade = new Grade(selectedComp, selectedStudent, score);
+        if (grades.contains(newGrade)) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
+        return newGrade;
     }
 
     private String getFileInputForGrade(Grade grade) {
