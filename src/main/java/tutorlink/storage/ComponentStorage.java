@@ -39,9 +39,9 @@ public class ComponentStorage extends Storage {
             throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
         try {
-            String name = stringParts[0];
-            double maxScore = Double.parseDouble(stringParts[1]);
-            int weight = Integer.parseInt(stringParts[2]);
+            String name = stringParts[0].strip();
+            double maxScore = Double.parseDouble(stringParts[1].strip());
+            int weight = Integer.parseInt(stringParts[2].strip());
             Component newComponent = new Component(name, maxScore, weight);
             if (components.contains(newComponent)) {
                 throw new InvalidDataFileLineException(fileLine);

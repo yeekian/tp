@@ -39,8 +39,8 @@ public class StudentStorage extends Storage {
             throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
         try {
-            String matricNumber = stringParts[0];
-            String name = stringParts[1];
+            String matricNumber = stringParts[0].strip();
+            String name = stringParts[1].strip();
             Student newStudent = new Student(matricNumber, name);
             if (students.contains(newStudent)) {
                 throw new InvalidDataFileLineException(fileLine);

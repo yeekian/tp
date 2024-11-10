@@ -47,9 +47,9 @@ public class GradeStorage extends Storage {
         if (stringParts.length != 3) {
             throw new InvalidDataFileLineException(fileLine);
         }
-        String componentName = stringParts[0];
-        String matricNumber = stringParts[1];
-        double score = Double.parseDouble(stringParts[2]);
+        String componentName = stringParts[0].strip();
+        String matricNumber = stringParts[1].strip();
+        double score = Double.parseDouble(stringParts[2].strip());
 
         Component selectedComp = null;
         for (Component comp : componentList) {
