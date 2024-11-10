@@ -22,7 +22,15 @@ public class UpdateComponentCommand extends Command {
         String cWeight = hashmap.get(ARGUMENT_PREFIXES[1]);
         String cMark = hashmap.get(ARGUMENT_PREFIXES[2]);
         if (name == null || (cWeight == null && cMark == null)) {
-            throw new IllegalValueException("Error! n/ is required, and one of w/ or m/ is required");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Error!");
+            if(name != null){
+                sb.append(" n/ is required!");
+            }
+            if(cWeight != null && cMark != null){
+                sb.append(" either w/ or m/ or both are required!");
+            }
+            throw new IllegalValueException(sb.toString());
         }
         Integer weight = null;
         Double mark = null;
