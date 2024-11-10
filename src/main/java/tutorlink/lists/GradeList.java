@@ -107,11 +107,8 @@ public class GradeList {
             return 0;
         }
 
-        double totalWeighting = componentList
-                .getComponentArrayList()
-                .stream()
-                .mapToDouble(c -> c.getWeight())
-                .sum();
+        int totalWeighting = componentList.getTotalWeighting();
+
 
         if(totalWeighting == 0) {
             return 0;

@@ -24,6 +24,7 @@ public class DeleteComponentCommand extends Command{
             throw new ComponentNotFoundException(String.format(Commons.ERROR_COMPONENT_NOT_FOUND, componentName));
         }
         appState.components.deleteComponent(componentsToDelete.getComponentArrayList().get(0));
+        appState.updateAllStudentPercentageScores();
         return new CommandResult(String.format(Commons.DELETE_COMPONENT_SUCCESS, componentName));
     }
 

@@ -75,6 +75,7 @@ public class UpdateComponentCommand extends Command {
             component.setMaxScore(mark);
         }
 
+        appState.updateAllStudentPercentageScores();
         return new CommandResult("Here is the updated component\n" + component.toString());
     }
 
