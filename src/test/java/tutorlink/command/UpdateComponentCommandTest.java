@@ -27,7 +27,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void execute_update_component_both_arguments() {
+    void normal_both_arguments() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "30");
@@ -39,7 +39,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void execute_update_component_only_weight() {
+    void normal_only_weight() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "30");
@@ -50,7 +50,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void execute_update_component_only_max_score() {
+    void normal_only_mark() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "30");
@@ -61,7 +61,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void execute_update_component_grade_update() {
+    void normal_updated_score() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "30");
@@ -78,7 +78,7 @@ public class UpdateComponentCommandTest {
 
 
     @Test
-    void execute_update_component_no_arguments() {
+    void error_no_args() {
         HashMap<String, String> args = new HashMap<>();
 
         assertThrows(TutorLinkException.class, () -> command.execute(appState, args));
@@ -87,7 +87,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void execute_update_component_max_weight_exceed() {
+    void error_exceed_weight() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "70");
@@ -98,7 +98,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void execute_update_component_negative_weight() {
+    void error_negative_weight() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "-30");
@@ -109,7 +109,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void execute_update_component_weight_over_100() {
+    void error_weight_over100() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "101");
@@ -120,7 +120,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void execute_update_component_weight_NaN() {
+    void error_NaN_weight() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "abc");
@@ -131,7 +131,7 @@ public class UpdateComponentCommandTest {
     }
 
     @Test
-    void execute_update_component_mark_negative() {
+    void error_mark_negative() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "-1");
@@ -143,7 +143,7 @@ public class UpdateComponentCommandTest {
 
 
     @Test
-    void execute_update_component_mark_NaN() {
+    void error_mark_NaN() {
         HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "abc");
