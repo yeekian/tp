@@ -65,7 +65,7 @@ public class Parser {
             return new ListGradeCommand();
 
         case UpdateComponentCommand.COMMAND_WORD:
-                return new UpdateComponentCommand();
+            return new UpdateComponentCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand(); // Lists all students
