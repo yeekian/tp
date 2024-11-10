@@ -5,10 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
+import tutorlink.component.Component;
 import tutorlink.exceptions.DuplicateComponentException;
 import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.InvalidWeightingException;
+import tutorlink.grade.Grade;
 import tutorlink.result.CommandResult;
+import tutorlink.student.Student;
 
 
 import java.util.HashMap;
@@ -205,6 +208,25 @@ public class AddComponentCommandTest {
         });
         assertEquals(Commons.ERROR_INVALID_WEIGHTAGE, exception.getMessage());
         assertEquals(20, appState.components.getTotalWeighting());
+    }
+
+    @Test
+    void update_gpa_accordingly () {
+        appState.students.addStudent("A1234567X", "John Doe");
+        Student student = appState.students.getStudentArrayList().get(0);
+        Component component = new Component("midterm", 50, 50);
+        appState.components.addComponent(component);
+        appState.grades.addGrade(new Grade(component, student, 50));
+        appState.updateAllStudentPercentageScores();
+
+        assertEquals(student.getPercentageScore(), 100);
+
+        arguments.put("c/", "Final");
+        arguments.put("w/", "50");
+        arguments.put("m/", "50");
+
+        command.execute(appState, arguments);
+        assertEquals(student.getPercentageScore(), 50);
     }
 }
 //@@author

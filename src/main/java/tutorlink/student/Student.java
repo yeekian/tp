@@ -45,6 +45,6 @@ public class Student {
             return false;
         }
         Student s = (Student) obj;
-        return this.matricNumber.equals(s.getMatricNumber());
+        return this.matricNumber.equalsIgnoreCase(s.getMatricNumber());
     }
 }
