@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class UpdateComponentCommand extends Command {
     public static final String[] ARGUMENT_PREFIXES = {"c/", "w/", "m/"};
-    public static final String COMMAND_WORD = "update_command";
+    public static final String COMMAND_WORD = "update_component";
 
     @Override
     public CommandResult execute(AppState appState, HashMap<String, String> hashmap) throws TutorLinkException {
