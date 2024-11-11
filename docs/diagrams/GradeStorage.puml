@@ -31,7 +31,7 @@ GS <-- AL: grades: Grade
 deactivate AL
 
 loop file has next line
-    GS -> GS: getGradeFromFileLine(currentLine: String)
+    GS -> GS: getGradeFromFileLine(currentLine: String, grades: Grade)
     activate GS
     GS --> GS: newGrade: Grade
     deactivate GS
@@ -52,6 +52,8 @@ end
 
 TL <-- GS: grades: Grade
 deactivate GS
+
+destroy AL
 
 TL -> GS: getDiscardedEntries()
 activate GS
