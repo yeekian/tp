@@ -21,12 +21,14 @@ When inputting commands into `TutorLink`, kindly take note of the following:
 - Parameters must be separated by at least one space character, otherwise the entire continuous string following a prefix
 will be considered a single parameter. *i.e* `add_student i/A1234567X n/John Doei/A1234567X` will be intepreted as adding
 a student with the name of `John Doei/A1234567X` and matric number `A1234567X`.
+- Parameters must be passed **directly** after the corresponding prefix *i.e* `i/MATRIC_NUMBER`. 
+Rouge spaces in between the prefix *i.e* `i/ MATRIC_NUMBER` will invalidate the command and be treated as a `null parameter`.
 - Parameters can be supplied in any order. *i.e* `add_student n/John i/A1234567X` is the same as `add_student i/A1234567X n/John`
 - **IMPORTANT**: Descriptions should **NOT** contain any separator tokens: `|` as this character is used for storage). 
 Including these may yield unpredictable results with the `Storage` component. 
 - Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
 will be converted to uppercase for storage.
-- Similarly, all other will be converted to lowercase for storage.
+- Similarly, all other fields will be converted to lowercase for storage.
 ## Features 
 
 <div style="page-break-after: always;"></div>
@@ -81,17 +83,25 @@ Adds a student to your class.
 
 - **Example**:
   - `find_student i/A1234567X n/John Doe ` find the student named John Doe with the matric number of A1234567X among the list of students and prints out the student information.
----
+#### Note: 
+`find_student` accepts the following combination of parameters:
+- `find_student i/matric_number`: Query by matric number
+- `find_student n/name`: Query by name
 
+If both `matric number` and `name` are supplied together: *i.e* `find_student i/matric_number n/name`, **`name` is ignored**
+
+---
 ### Adding a Component: `add_component`
 
 Adds a new grading component to the class (e.g., "Homework," "Midterm," "Final Exam").
 
 - **Format**: `add_component c/COMPONENT w/WEIGHT m/MAX_SCORE`
 - **Parameters**:
-    - `COMPONENT`: The name of the grading component.
+    - `COMPONENT`: The name of the grading component. Note that component name is insensitive, *i.e* `Test` is the same as `test`. 
+  Moreover, whitespace after the component string is trimmed.
     - `WEIGHT`: The weight of the component as a percentage, input as an integer from 0 - 100 (inclusive).
-    - `MAX_SCORE`: The max_score of the component.
+    - `MAX_SCORE`: The max_score of the component. **Must be a `double` between 0 and 10,000 (inclusive).**
+  *Use case for `MAX_SCORE = 0`:* ungraded components like optional assignments etc
 
 - **Example**:
     - `add_component c/Quiz 1 w/30 m/50` adds a Quiz 1 component with a weightage of 30%, it has a max score of 50 marks.

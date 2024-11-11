@@ -55,10 +55,9 @@ class ComponentListTest {
         componentList.addComponent(comp1);
         componentList.addComponent(comp2);
         componentList.addComponent(comp3);
-        ComponentList filteredList = componentList.findComponent("homework");
-        assertEquals(2, filteredList.size());
-        String expectedResult = "\t1: Homework 1 (maxScore: 30.0, weight: 10%)\n" +
-                "\t2: Homework 2 (maxScore: 30.0, weight: 10%)";
+        ComponentList filteredList = componentList.findComponent("Homework 1");
+        assertEquals(1, filteredList.size());
+        String expectedResult = "\t1: Homework 1 (maxScore: 30.0, weight: 10%)";
         assertEquals(expectedResult, filteredList.toString());
     }
 
