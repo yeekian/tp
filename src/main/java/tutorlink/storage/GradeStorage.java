@@ -11,19 +11,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * GradeStorage is responsible for loading and saving grade data to and from a file.
- * It extends the Storage class and manages the list of components and students.
+ * Represents a storage manager for grades, handling loading and saving of grade data to and from a file.
+ * Utilizes a list of components and students to validate grade entries.
  */
 public class GradeStorage extends Storage {
     private final ArrayList<Component> componentList;
     private final ArrayList<Student> studentList;
 
     /**
-     * Constructs a GradeStorage object with the specified file path, component list, and student list.
+     * Constructs a {@code GradeStorage} object with the specified file path, component list, and student list.
      *
-     * @param filePath the path to the file where grade data is stored
-     * @param componentList the list of components
-     * @param studentList the list of students
+     * @param filePath      The file path to store grades.
+     * @param componentList The list of components for validation.
+     * @param studentList   The list of students for validation.
      */
     public GradeStorage(String filePath, ArrayList<Component> componentList, ArrayList<Student> studentList) {
         super(filePath);
@@ -32,45 +32,101 @@ public class GradeStorage extends Storage {
     }
 
     /**
-     * Loads the list of grades from the file.
+     * Loads the grade list from the file.
      *
-     * @return an ArrayList of Grade objects loaded from the file
-     * @throws IOException if an I/O error occurs while reading the file
+     * @return An {@code ArrayList} of {@code Grade} objects loaded from the file.
+     * @throws IOException If an I/O error occurs while reading the file.
      */
     public ArrayList<Grade> loadGradeList() throws IOException {
-        // method implementation
+        ArrayList<Grade> grades = new ArrayList<>();
+        Scanner fileScanner = new Scanner(path);
+        while (fileScanner.hasNext()) {
+            try {
+                Grade newGrade = getGradeFromFileLine(fileScanner.nextLine(), grades);
+                grades.add(newGrade);
+            } catch (InvalidDataFileLineException e) {
+                discardedEntries.add(e.getMessage());
+            }
+        }
+        return grades;
     }
 
     /**
-     * Saves the list of grades to the file.
+     * Saves the provided list of grades to the file.
      *
-     * @param grades the list of Grade objects to be saved
-     * @throws IOException if an I/O error occurs while writing to the file
+     * @param grades The {@code ArrayList} of grades to be saved.
+     * @throws IOException If an I/O error occurs while writing to the file.
      */
     public void saveGradeList(ArrayList<Grade> grades) throws IOException {
-        // method implementation
+        FileWriter fileWriter = new FileWriter(path.toFile());
+        for (Grade grade : grades) {
+            fileWriter.write(getFileInputForGrade(grade) + System.lineSeparator());
+        }
+        fileWriter.close();
     }
 
     /**
-     * Parses a line from the file and creates a Grade object.
+     * Parses a line from the grade file and returns a {@code Grade} object if the data is valid.
      *
-     * @param fileLine the line from the file to be parsed
-     * @param grades the list of grades already loaded
-     * @return a Grade object created from the file line
-     * @throws InvalidDataFileLineException if the file line is invalid or contains incorrect data
+     * @param fileLine A line from the file representing a grade entry.
+     * @param grades   The current list of grades to check for duplicates.
+     * @return A {@code Grade} object created from the parsed data.
+     * @throws InvalidDataFileLineException If the line data is invalid or contains duplicates.
      */
     private Grade getGradeFromFileLine(String fileLine, ArrayList<Grade> grades)
             throws InvalidDataFileLineException {
-        // method implementation
+        String componentName;
+        String matricNumber;
+        double score;
+        String[] stringParts = fileLine.split(READ_DELIMITER);
+
+        try {
+            componentName = stringParts[0].strip();
+            matricNumber = stringParts[1].strip();
+            score = Double.parseDouble(stringParts[2].strip());
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
+
+        Component selectedComp = null;
+        for (Component comp : componentList) {
+            if (comp.getName().equals(componentName)) {
+                selectedComp = comp;
+                break;
+            }
+        }
+
+        Student selectedStudent = null;
+        for (Student student : studentList) {
+            if (student.getMatricNumber().equals(matricNumber)) {
+                selectedStudent = student;
+                break;
+            }
+        }
+
+        if (selectedComp == null || selectedStudent == null) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
+
+        boolean isValidScore = (score >= 0 && score <= selectedComp.getMaxScore());
+        Grade newGrade = new Grade(selectedComp, selectedStudent, score);
+        if (!isValidScore || grades.contains(newGrade)) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
+        return newGrade;
     }
 
     /**
-     * Converts a Grade object to a string format suitable for writing to the file.
+     * Formats a {@code Grade} object for storage in a file.
      *
-     * @param grade the Grade object to be converted
-     * @return a string representation of the Grade object
+     * @param grade The grade to format.
+     * @return A string representing the grade in file format.
      */
     private String getFileInputForGrade(Grade grade) {
-        // method implementation
+        String componentName = grade.getComponent().getName();
+        String matricNumber = grade.getStudent().getMatricNumber();
+        double score = grade.getScore();
+        return componentName + WRITE_DELIMITER + matricNumber + WRITE_DELIMITER + score;
     }
+
 }
