@@ -23,6 +23,8 @@ public class ComponentStorage extends Storage {
         super(filePath);
     }
 
+    private static final double MAX_SCORE = 10000.0;
+
     /**
      * Loads the list of components from the file specified in the file path.
      * Each line in the file represents a component's data: name, maximum score, and weight.
@@ -87,7 +89,7 @@ public class ComponentStorage extends Storage {
             throw new InvalidDataFileLineException(fileLine);
         }
 
-        boolean isValidMaxScore = (maxScore >= 0);
+        boolean isValidMaxScore = (maxScore >= 0 && maxScore <= MAX_SCORE);
         boolean isValidWeight = (weight >= 0 && (weight + totalWeight) <= 100);
         Component newComponent = new Component(name, maxScore, weight);
         if (!isValidMaxScore || !isValidWeight || components.contains(newComponent)) {
