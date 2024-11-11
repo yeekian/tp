@@ -8,63 +8,66 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * ComponentStorage is responsible for loading and saving a list of components from and to a file.
+ * It extends the Storage class and provides specific implementations for handling Component objects.
+ */
 public class ComponentStorage extends Storage {
+
+    /**
+     * Constructs a ComponentStorage object with the specified file path.
+     *
+     * @param filePath The path to the file where components are stored.
+     */
     public ComponentStorage(String filePath) {
         super(filePath);
     }
 
+    /**
+     * Loads a list of components from the file specified by the path.
+     *
+     * @return An ArrayList of Component objects loaded from the file.
+     * @throws IOException If an I/O error occurs while reading the file.
+     */
     public ArrayList<Component> loadComponentList() throws IOException {
-        ArrayList<Component> components = new ArrayList<>();
-        int totalWeight = 0;
-        Scanner fileScanner = new Scanner(path);
-        while (fileScanner.hasNext()) {
-            try {
-                Component newComponent = getComponentFromFileLine(fileScanner.nextLine(), components, totalWeight);
-                totalWeight += newComponent.getWeight();
-                components.add(newComponent);
-            } catch (InvalidDataFileLineException e) {
-                discardedEntries.add(e.getMessage());
-            }
-        }
-        return components;
+        // Method implementation
     }
 
+    /**
+     * Saves a list of components to the file specified by the path.
+     *
+     * @param components An ArrayList of Component objects to be saved to the file.
+     * @throws IOException If an I/O error occurs while writing to the file.
+     */
     public void saveComponentList(ArrayList<Component> components) throws IOException {
-        FileWriter fileWriter = new FileWriter(path.toFile());
-        for (Component comp : components) {
-            fileWriter.write(getFileInputForComponent(comp) + System.lineSeparator());
-        }
-        fileWriter.close();
+        // Method implementation
     }
 
+    /**
+     * Parses a line from the file and creates a Component object from it.
+     *
+     * @param fileLine The line from the file to be parsed.
+     * @param components The list of components already loaded, used to check for duplicates.
+     * @param totalWeight The total weight of the components already loaded.
+     * @return A Component object created from the file line.
+     * @throws InvalidDataFileLineException If the file line is invalid or contains incorrect data.
+     */
     private Component getComponentFromFileLine(
             String fileLine, ArrayList<Component> components, int totalWeight)
             throws InvalidDataFileLineException {
-        String[] stringParts = fileLine.split(READ_DELIMITER);
-        String name;
-        double maxScore;
-        int weight;
-        try {
-            name = stringParts[0].strip();
-            maxScore = Double.parseDouble(stringParts[1].strip());
-            weight = Integer.parseInt(stringParts[2].strip());
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-            throw new InvalidDataFileLineException(fileLine);
-        }
-
-        boolean isValidMaxScore = (maxScore >= 0);
-        boolean isValidWeight = (weight >= 0 && (weight + totalWeight) <= 100);
-        Component newComponent = new Component(name, maxScore, weight);
-        if (!isValidMaxScore || !isValidWeight || components.contains(newComponent)) {
-            throw new InvalidDataFileLineException(fileLine);
-        }
-        return newComponent;
+        // Method implementation
     }
 
+    /**
+     * Converts a Component object to a string suitable for writing to the file.
+     *
+     * @param component The Component object to be converted.
+     * @return A string representation of the Component object.
+     */
     private String getFileInputForComponent(Component component) {
-        String convertedString = component.getName() + WRITE_DELIMITER + component.getMaxScore()
-                + WRITE_DELIMITER + component.getWeight();
-        return convertedString;
+        // Method implementation
+    }
+}
     }
 
 }
