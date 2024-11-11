@@ -26,8 +26,8 @@ Rouge spaces in between the prefix *i.e* `i/ MATRIC_NUMBER` will invalidate the 
 - Parameters can be supplied in any order. *i.e* `add_student n/John i/A1234567X` is the same as `add_student i/A1234567X n/John`
 - **IMPORTANT**: Descriptions should **NOT** contain any separator tokens: `|` as this character is used for storage). 
 Including these may yield unpredictable results with the `Storage` component. 
-- Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
-will be converted to uppercase for storage.
+- Matric Number (`i/` argument) is case-sensitive. Therefore, only `A1234567X` is the accepted and not `a1234567x`. Matric numbers 
+will be remain in uppercase for storage.
 - Similarly, all other fields will be converted to lowercase for storage.
 ## Features 
 
@@ -40,7 +40,7 @@ Adds a student to your class.
 - **Format**: `add_student i/MATRIC_NUMBER n/STUDENT_NAME`
 - **Parameters**:
     - `STUDENT_NAME`: The full name of the student.
-    - `MATRIC_NUMBER`: A unique identifier for the student.
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
 
 - **Example**:
     - `add_student i/A1234567X n/John Doe ` adds a new student named John Doe with the matric number of A1234567X to the class.
@@ -52,7 +52,7 @@ Removes a student from the class. Note that a student can only be deleted using 
 
 - **Format**: `delete_student i/MATRIC_NUMBER`
 - **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student to be deleted.
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
 
 - **Example**:
     - `delete_student i/A1234567X` deletes a student with the matric number of A1234567X.
@@ -79,14 +79,14 @@ Adds a student to your class.
 - **Format**: `find_student i/MATRIC_NUMBER n/STUDENT_NAME`
 - **Parameters**:
   - `STUDENT_NAME`: The full name of the student.
-  - `MATRIC_NUMBER`: A unique identifier for the student.
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
 
 - **Example**:
   - `find_student i/A1234567X n/John Doe ` find the student named John Doe with the matric number of A1234567X among the list of students and prints out the student information.
 #### Note: 
 `find_student` accepts the following combination of parameters:
-- `find_student i/matric_number`: Query by matric number
-- `find_student n/name`: Query by name
+- `find_student i/MATRIC_NUMBER`: Query by matric number
+- `find_student n/STUDENT_NAME`: Query by name
 
 If both `matric number` and `name` are supplied together: *i.e* `find_student i/matric_number n/name`, **`name` is ignored**
 
@@ -139,7 +139,7 @@ Displays all grading components and their respective weights for a class.
 Records a grade for a specific student in a particular assignment or exam component.
 - **Format**: `add_grade i/MATRIC_NUMBER c/COMPONENT  s/SCORE`
 - **Parameters**:
-  - `MATRIC_NUMBER`: The unique identifier of the student.
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
   - `COMPONENT`: The assignment or exam component.
   - `SCORE`: The score to be recorded. Note that score cannot exceed the max score of the component.
 
@@ -154,7 +154,7 @@ Removes a previously recorded grade for a specific student and component.
 
 - **Format**: `delete_grade i/MATRIC_NUMBER c/COMPONENT`
 - **Parameters**:
-  - `MATRIC_NUMBER`: The unique identifier of the student.
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
   - `COMPONENT`: The assignment or exam component.
 
 - **Example**:
@@ -172,7 +172,7 @@ Views all recorded grades for a specific student or all students, and final perc
   - Lists all recorded grades and the final percentage for the specified student. 
   - **Format**: `list_grade i/MATRIC_NUMBER`
   - **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student.
+    - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
   - **Example**:
     - `list_grade i/A1234567X`
 
