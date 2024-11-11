@@ -13,9 +13,12 @@ for /f "tokens=*" %%a in (
 )
 
 :: delete data directory from previous run if it exists
-if exist "..\text-ui-test\data" (
-    rmdir /s /q "..\text-ui-test\data"
+if exist "..\..\text-ui-test\data" (
+    rmdir /s /q "..\..\text-ui-test\data"
 )
+
+:: copy data_init to data
+xcopy "..\..\text-ui-test\data_init" "..\..\text-ui-test\data" /s /e /i
 
 java -jar %jarloc% < ..\..\text-ui-test\input.txt > ..\..\text-ui-test\ACTUAL.TXT
 
