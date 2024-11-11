@@ -8,7 +8,9 @@ import tutorlink.commons.Commons;
 import tutorlink.component.Component;
 import tutorlink.exceptions.ComponentNotFoundException;
 import tutorlink.exceptions.IllegalValueException;
+import tutorlink.grade.Grade;
 import tutorlink.result.CommandResult;
+import tutorlink.student.Student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -25,11 +27,11 @@ public class DeleteComponentCommandTest {
         appState.components.addComponent(new Component("finals", 40.0, 40));
         appState.components.addComponent(new Component("iP", 20.0, 10));
         appState.components.addComponent(new Component("lectures", 10.0, 10));
+        arguments = new HashMap<>();
     }
 
     @Test
     void deleteComponent_success() {
-        arguments = new HashMap<>();
         arguments.put("c/", "finals");
         int initialWeighting = appState.components.getTotalWeighting();
         result = command.execute(appState, arguments);
@@ -40,7 +42,6 @@ public class DeleteComponentCommandTest {
 
     @Test
     void deleteComponent_notFound_fail() {
-        arguments = new HashMap<>();
         arguments.put("c/", "midterms");
         int initialWeighting = appState.components.getTotalWeighting();
         try {
@@ -56,7 +57,6 @@ public class DeleteComponentCommandTest {
 
     @Test
     void deleteComponent_emptyParam_fail() {
-        arguments = new HashMap<>();
         int initialWeighting = appState.components.getTotalWeighting();
         try {
             command.execute(appState, arguments);
@@ -67,5 +67,26 @@ public class DeleteComponentCommandTest {
         } finally {
             assertEquals(appState.components.getTotalWeighting(), initialWeighting);
         }
+    }
+
+    @Test
+    void update_gpa_accordingly () {
+        appState = new AppState();
+        appState.students.addStudent("A1234567X", "John Doe");
+        Student student = appState.students.getStudentArrayList().get(0);
+        Component component = new Component("midterm", 50, 50);
+        appState.components.addComponent(component);
+        appState.grades.addGrade(new Grade(component, student, 0));
+
+        Component component2 = new Component("final", 50, 50);
+        appState.components.addComponent(component2);
+        appState.grades.addGrade(new Grade(component2, student, 50));
+        appState.updateAllStudentPercentageScores();
+        assertEquals(student.getPercentageScore(), 50);
+
+        arguments.put("c/", "Final");
+
+        command.execute(appState, arguments);
+        assertEquals(student.getPercentageScore(), 0);
     }
 }
