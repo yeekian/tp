@@ -13,6 +13,7 @@ import java.util.Scanner;
  * The file contains data on each component with its name, maximum score, and weight.
  */
 public class ComponentStorage extends Storage {
+    private static final double MAX_SCORE = 10000.0;
 
     /**
      * Constructs a {@code ComponentStorage} with the specified file path.
@@ -22,8 +23,6 @@ public class ComponentStorage extends Storage {
     public ComponentStorage(String filePath) {
         super(filePath);
     }
-
-    private static final double MAX_SCORE = 10000.0;
 
     /**
      * Loads the list of components from the file specified in the file path.
