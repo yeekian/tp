@@ -1,11 +1,29 @@
 # Developer Guide
 
+## Table of Contents
+- [Acknowledgements](#acknowledgements)
+- [Design](#design)
+    - [Architecture](#architecture)
+- [Implementation](#implementation)
+    - [Add/Delete Student/Component Feature](#adddelete-studentcomponent-feature)
+    - [Find Student Feature](#find-student-feature)
+    - [Add/Delete Grade Feature](#adddelete-grade-feature)
+    - [Storage Load Feature](#storage-load-feature)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+
+
+---
+
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+This project was inspired by our experiences using the Canvas learning management system. While Canvas serves large educational environments well, we envisioned a simpler, offline tool tailored for small classes that prioritizes essential features like grade tracking, student management, and assessment organization. Thus, TutorLink was born.
 
-## Design & implementation
+The design and feature set of TutorLink were developed from scratch, drawing inspiration from the need for a lightweight, offline solution for managing class assignments and reducing administrative overhead in small class environments. No code or external sources were directly referenced or reused in the development of TutorLink.
+## Design
 
 ### Architecture
 
@@ -43,14 +61,13 @@ Where <code>ref</code> frame is a placeholder for each command's specific operat
 #### Setup:
 
 During the setup phase of `TutorLink`, the following operations are performed:
-1. `Ui` displays welcome message
-2. `StudentStorage`, `ComponentStorage` and `GradeStorage` objects are instantiated
-3. `ArrayList` of Student, Component and Grade are obtained from the respective Storage classes
-4. `AppState` object is instantiated, passing the `ArrayList`s in step 3
+1. `StudentStorage`, `ComponentStorage` and `GradeStorage` objects are instantiated
+2. `ArrayList` of Student, Component and Grade are obtained from the respective Storage classes
+3. `AppState` object is instantiated, passing the `ArrayList`s in step 3
+4. `Ui` displays welcome message
 
 ![Setup.png](diagrams/Setup.png)
 
-The specific implementation of noteworthy operations are presented below:
 The specific implementation of noteworthy operations are presented below: 
 
 ### Add/Delete Student/Component Feature
@@ -77,7 +94,7 @@ The following sequence diagrams depict the exact steps involved in the `AddStude
 
 - `DeleteStudentCommand.execute(AppState appState, HashMap<String, String> arguments)`: Removes a student via the following
   steps:
-    1. Retrieves and validates the matriculation number from arguments, throwing `IllegaValueException` exception
+    1. Retrieves and validates the matriculation number from arguments, throwing `IllegalValueException` exception
        if matriculation number is null.
     2. Searches for and deletes the student from `AppState`. Throws `StudentNotFoundException` if no student matching the matriculation number
        is found.
@@ -148,24 +165,26 @@ The sequence diagram of the DeleteGradeCommand is shown below.
 The `StudentStorage`, `GradeStorage` and `ComponentStorage` classes implement the feature to load data from the 
 data `.txt` files into their respective List objects at the start of the program.
 
-The load list methods for the Storage classes have largely similar logic flows.  
+The load list methods for the Storage classes have largely similar logic flows. To avoid repetition, 
+only the implementation for `GradeStorage` is shown.
 
-#### Key Operations
-
-The following section and sequence diagram elaborate on the implementation of the `loadGradeList` method in `GradeStorage`:
+The following section and sequence diagram elaborate on the implementation of the `loadGradeList` method in `GradeStorage`,
+as referenced in [Setup](#setup):
 
 ![GradeStorage.png](diagrams/GradeStorage.png)
 
 1. TutorLink constructs a new `GradeStorage`.
-2. TutorLink calls `loadGradeList`.
-3. `GradeStorage` creates a new `ArrayList` of `Grade`s.
-4. `GradeStorage` creates a new `Scanner` with the path to the file.
+2. `GradeStorage` creates a new `ArrayList` of `String`s for discarded entries.
+3. TutorLink calls `loadGradeList`.
+4. `GradeStorage` creates a new `ArrayList` of `Grade`s.
 5. While there are next lines in the data file:
-   - `Scanner` returns the current file line as a String and moves to the next file line.
+   - FileScanner returns the current file line as a String and moves to the next file line.
    - `GradeStorage` calls its `getGradeFromFileLine` method with the file line.
    - If the file line references a valid `Component` and a valid `Student`, a `Grade` is returned and added to the `ArrayList`.
-   - If not (e.g. if data file was corrupted), the file line is simply ignored, and the loop continues to the next iteration.
+   - If not (e.g. file line was corrupted), the file line is added to `discardedEntries`,
+   and the loop continues to the next iteration.
 6. The `ArrayList` of `Grade`s is returned to TutorLink.
+7. TutorLink calls `getDiscardedEntries`, and the discarded entries are displayed by UI.
 
 ## Appendix A: Product Scope
 
@@ -394,7 +413,7 @@ This appendix provides a guide for manually testing various features of TutorLin
 
 ---
 
-### Handling Missing or Corrupted Data Files
+### Handling Missing Files or Corrupted Data
 
 1. **Simulate Missing Data Files**:
     - Delete one or more files from the `data` folder (`studentlist.txt`, `componentlist.txt`, `gradelist.txt`).
@@ -402,10 +421,12 @@ This appendix provides a guide for manually testing various features of TutorLin
 
    **Expected**: TutorLink creates new empty files if missing. The application should not crash, and it should operate normally.
 
-2. **Simulate Corrupted Data Files**:
-    - Open any data file and add random text or invalid data structure, then save.
+2. **Simulate Corrupted Data**:
+    - Open any data file and add random text or invalid data entry, then save.
     - Re-launch TutorLink.
 
-   **Expected**: TutorLink should detect the corrupted data, provide an error message or recreate a new empty file if unreadable. The application should not crash.
+   **Expected**: TutorLink should detect the corrupted or invalid data, 
+   display them to the user as entries to be discarded, and only load valid data entries.
+   The application should not crash.
 
 ---

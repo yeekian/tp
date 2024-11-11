@@ -2,7 +2,6 @@ package tutorlink.component;
 
 //@@author TrungBui32
 public class Component {
-    public static int totalWeight = 0;
     private String name;
     private double maxScore;
     private int weight;
@@ -25,10 +24,18 @@ public class Component {
         return weight;
     }
 
+    public void setMaxScore(double maxScore) {
+        this.maxScore = maxScore;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Component comp) {
-            return comp.getName().equals(this.getName());
+            return comp.getName().equalsIgnoreCase(this.getName());
         }
         return false;
     }

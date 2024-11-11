@@ -14,6 +14,9 @@ then
     rm -rf data
 fi
 
+# copy data_init to data
+cp -r data_init data
+
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
 cp EXPECTED.TXT EXPECTED-UNIX.TXT

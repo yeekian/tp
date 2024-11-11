@@ -8,8 +8,8 @@ public class Commons {
 
     //Input Validation
     public static final String MATRIC_NUMBER_REGEX = "A\\d{7}[A-Z]";
-    public static final String ERROR_ILLEGAL_MATRIC_NUMBER = "Error! Ensure matric " +
-            "number is of the form A\\d{7}[A-Z] (case insensitive)";
+    public static final String ERROR_ILLEGAL_MATRIC_NUMBER = "Error! Matric Number should start with \"A\", " +
+            "followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)";
     //Student
     public static final String ADD_STUDENT_SUCCESS = "Student %s (%s) added successfully!";
     public static final String ERROR_DUPLICATE_STUDENT =
@@ -23,20 +23,23 @@ public class Commons {
     public static final String DELETE_GRADE_SUCCESS = "Grade: Component %s for student %s successfully deleted";
     public static final String ADD_GRADE_SUCCESS = "Score of %s added successfully to %s for %s!";
     public static final String ERROR_INVALID_SCORE =
-            "Error! Score must be double that is more than or equal to 0, and not exceed the max score!";
+            "Error! Score must be a numerical value and be between 0 and the max score of the component!";
 
     //@@author TrungBui32
     //Component
+    public static final int MAX_WEIGHT = 100;
     public static final String ADD_COMPONENT_SUCCESS =
             "Component %s of weight %s%%, with max score %s added successfully!";
     public static final String DELETE_COMPONENT_SUCCESS = "Component %s successfully deleted";
     public static final String ERROR_COMPONENT_NOT_FOUND = "Error! Component (Name %s) not found";
     public static final String ERROR_DUPLICATE_COMPONENT = "Error! Component (Name %s) already exists in the list!";
+    public static final String ERROR_MULTIPLE_QUERY_RESULT = "Error! Multiple query results for keyword: %s found " +
+            "in list!";
     public static final String ERROR_INVALID_WEIGHTAGE = "Error! Weightage must be integer that is between 0 and 100!";
     public static final String ERROR_INVALID_MAX_SCORE =
             "Error! Max Score must be double that is more than or equal to 0!";
     //@@author RCPilot1604
-    public static final String ERROR_INVALID_TOTAL_WEIGHTING = "Error! Total weighting must add up to 100%%.\n" +
+    public static final String ERROR_INVALID_TOTAL_WEIGHTING = "Error! Total weighting must not exceed 100%%.\n" +
             "Current weighting (after addition): %s%%";
 
     //Invalid

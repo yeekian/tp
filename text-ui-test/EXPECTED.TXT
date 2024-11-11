@@ -16,152 +16,127 @@ Student Ethan Chua (A0276007H) added successfully!
 -------------------------   Result   -------------------------
 Student John Doe (A9999999Z) added successfully!
 -------------------------------------------------------------
--------------------------   Result   -------------------------
-Student John Smith (A1111111B) added successfully!
--------------------------------------------------------------
 -------------------------   Error   -------------------------
-Error! Ensure matric number is of the form A\d{7}[A-Z] (case insensitive)
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Null parameter passed!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Null parameter passed!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
+Error! Student with Matric Number, A1111111B, already exists in the list!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: Ethan Chua (matric no: A0276007H, GPA: 0.0)
-	2: John Doe (matric no: A9999999Z, GPA: 0.0)
-	3: John Smith (matric no: A1111111B, GPA: 0.0)
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
+	1: John Smith (matric no: A1111111B, percentage score: 80.00)
+	2: Ethan Chua (matric no: A0276007H, percentage score: 0.00)
+	3: John Doe (matric no: A9999999Z, percentage score: 0.00)
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Student A0276007H successfully deleted
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Student (Matric Number A1234567X) not found
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Ensure matric number is of the form A\d{7}[A-Z] (case insensitive)
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
+Component Quiz 1 of weight 20%, with max score 10 added successfully!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: John Doe (matric no: A9999999Z, GPA: 0.0)
-	2: John Smith (matric no: A1111111B, GPA: 0.0)
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
+Component Quiz 2 of weight 20%, with max score 20 added successfully!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Component Finals of weight 50%, with max score 100 added successfully!
+Component Quiz 3 of weight 20%, with max score 20 added successfully!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Component Quiz of weight 5%, with max score 20 added successfully!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Component already exists in the list!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Component already exists in the list!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Weightage must be integer that is between 0 and 100!
+Component Quiz 4 of weight 20%, with max score 20 added successfully!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Component Fail of weight 0%, with max score 2 added successfully!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Total weighting must add up to 100%.
-Current weighting (after addition): 169%
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Weightage must be integer that is between 0 and 100!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Weightage must be integer that is between 0 and 100!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Weightage must be integer that is between 0 and 100!
+Score of 10 added successfully to Quiz 1 for A0276007H!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: Finals (maxScore: 100.0, weight: 50%)
-	2: Quiz (maxScore: 20.0, weight: 5%)
-	3: Fail (maxScore: 2.0, weight: 0%)
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
+Score of 20 added successfully to Quiz 2 for A0276007H!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Component Quiz successfully deleted
+Score of 20 added successfully to Quiz 3 for A0276007H!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-	1: Finals (maxScore: 100.0, weight: 50%)
-	2: Fail (maxScore: 2.0, weight: 0%)
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Component Quiz does not exist in the list!
+Score of 20 added successfully to Quiz 4 for A0276007H!
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-Student Ethan Chua (A0276007H) added successfully!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
--------------------------------------------------------------
--------------------------   Result   -------------------------
-	1: John Doe (matric no: A9999999Z, GPA: 0.0)
-	2: John Smith (matric no: A1111111B, GPA: 0.0)
-	3: Ethan Chua (matric no: A0276007H, GPA: 0.0)
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Component Quiz does not exist in the list!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Component Quiz does not exist in the list!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Ensure matric number is of the form A\d{7}[A-Z] (case insensitive)
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Component Wuiz does not exist in the list!
--------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
+List of All Grades:
+
+1: Ethan Chua (A0276007H):
+   1. Quiz 1         : 10.00
+   2. Quiz 2         : 20.00
+   3. Quiz 3         : 20.00
+   4. Quiz 4         : 20.00
+   Final Percentage Score: 94.12%
+
+2: John Smith (A1111111B):
+   1. Attendance     : 4.00
+   Final Percentage Score: 4.71%
+
+
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
-No grades have been recorded yet.
+Score of 5 added successfully to Quiz 1 for A9999999Z!
 -------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
+-------------------------   Result   -------------------------
+Score of 7.5 added successfully to Quiz 2 for A9999999Z!
 -------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Ensure matric number is of the form A\d{7}[A-Z] (case insensitive)
+-------------------------   Result   -------------------------
+Score of 10 added successfully to Quiz 3 for A9999999Z!
 -------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Grade for component 123 for student A0276007H does not exist in the list!
+-------------------------   Result   -------------------------
+Score of 10 added successfully to Quiz 4 for A9999999Z!
 -------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Grade for component Quiz for student A0276007H does not exist in the list!
+-------------------------   Result   -------------------------
+List of All Grades:
+
+1: Ethan Chua (A0276007H):
+   1. Quiz 1         : 10.00
+   2. Quiz 2         : 20.00
+   3. Quiz 3         : 20.00
+   4. Quiz 4         : 20.00
+   Final Percentage Score: 94.12%
+
+2: John Smith (A1111111B):
+   1. Attendance     : 4.00
+   Final Percentage Score: 4.71%
+
+3: John Doe (A9999999Z):
+   1. Quiz 1         : 5.00
+   2. Quiz 2         : 7.50
+   3. Quiz 3         : 10.00
+   4. Quiz 4         : 10.00
+   Final Percentage Score: 44.12%
+
+
 -------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Grade for component Quiz for student A0276007H does not exist in the list!
+-------------------------   Result   -------------------------
+Score of 0 added successfully to Quiz 1 for A1111111B!
 -------------------------------------------------------------
--------------------------   Error   -------------------------
-Error! Invalid command given!
+-------------------------   Result   -------------------------
+Score of 0 added successfully to Quiz 2 for A1111111B!
+-------------------------------------------------------------
+-------------------------   Result   -------------------------
+Score of 0 added successfully to Quiz 3 for A1111111B!
+-------------------------------------------------------------
+-------------------------   Result   -------------------------
+Score of 0 added successfully to Quiz 4 for A1111111B!
+-------------------------------------------------------------
+-------------------------   Result   -------------------------
+List of All Grades:
+
+1: Ethan Chua (A0276007H):
+   1. Quiz 1         : 10.00
+   2. Quiz 2         : 20.00
+   3. Quiz 3         : 20.00
+   4. Quiz 4         : 20.00
+   Final Percentage Score: 94.12%
+
+2: John Smith (A1111111B):
+   1. Attendance     : 4.00
+   2. Quiz 1         : 0.00
+   3. Quiz 2         : 0.00
+   4. Quiz 3         : 0.00
+   5. Quiz 4         : 0.00
+   Final Percentage Score: 4.71%
+
+3: John Doe (A9999999Z):
+   1. Quiz 1         : 5.00
+   2. Quiz 2         : 7.50
+   3. Quiz 3         : 10.00
+   4. Quiz 4         : 10.00
+   Final Percentage Score: 44.12%
+
+
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
 Goodbye! See you soon!
