@@ -44,13 +44,18 @@ public class GradeStorage extends Storage {
 
     private Grade getGradeFromFileLine(String fileLine, ArrayList<Grade> grades)
             throws InvalidDataFileLineException {
+        String componentName;
+        String matricNumber;
+        double score;
         String[] stringParts = fileLine.split(READ_DELIMITER);
-        if (stringParts.length != 3) {
+
+        try {
+            componentName = stringParts[0].strip();
+            matricNumber = stringParts[1].strip();
+            score = Double.parseDouble(stringParts[2].strip());
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidDataFileLineException(fileLine);
         }
-        String componentName = stringParts[0].strip();
-        String matricNumber = stringParts[1].strip();
-        double score = Double.parseDouble(stringParts[2].strip());
 
         Component selectedComp = null;
         for (Component comp : componentList) {
@@ -71,8 +76,10 @@ public class GradeStorage extends Storage {
         if (selectedComp == null || selectedStudent == null) {
             throw new InvalidDataFileLineException(fileLine);
         }
+
+        boolean isValidScore = (score >= 0 && score <= selectedComp.getMaxScore());
         Grade newGrade = new Grade(selectedComp, selectedStudent, score);
-        if (grades.contains(newGrade)) {
+        if (!isValidScore || grades.contains(newGrade)) {
             throw new InvalidDataFileLineException(fileLine);
         }
         return newGrade;
