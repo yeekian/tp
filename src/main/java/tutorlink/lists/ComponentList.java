@@ -9,115 +9,127 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * Represents a list of components with functionalities to add, delete, find, and retrieve components.
+ * Represents a list of components. Provides methods for adding, deleting, and searching for components,
+ * as well as calculating the total weight of all components in the list.
  */
 public class ComponentList {
-
-    /**
-     * Error message for when a component is not found in the list.
-     */
     private static final String ERROR_COMPONENT_NOT_FOUND = "Error! Component %s does not exist in the list!";
-
-    /**
-     * Error message for when a duplicate component is added to the list.
-     */
     private static final String ERROR_DUPLICATE_COMPONENT = "Error! Component already exists in the list!";
 
-    /**
-     * The list of components.
-     */
     private ArrayList<Component> componentArrayList;
 
     /**
-     * Constructs an empty ComponentList.
+     * Creates an empty {@code ComponentList}.
      */
     public ComponentList() {
         this.componentArrayList = new ArrayList<>();
     }
 
     /**
-     * Constructs a ComponentList with the specified list of components.
+     * Creates a {@code ComponentList} initialized with the given list of components.
      *
-     * @param componentArrayList the list of components to initialize the ComponentList with
+     * @param componentArrayList The initial list of components.
      */
     public ComponentList(ArrayList<Component> componentArrayList) {
         this.componentArrayList = componentArrayList;
     }
 
     /**
-     * Finds components in the list that contain the specified name.
+     * Searches for components in the list by name.
      *
-     * @param name the name to search for
-     * @return a ComponentList containing the components that match the search criteria
-     * @throws ComponentNotFoundException if no components are found with the specified name
+     * @param name The name or partial name of the component to search for.
+     * @return A {@code ComponentList} containing all components that match the search criteria.
+     * @throws ComponentNotFoundException If no matching components are found.
      */
     public ComponentList findComponent(String name) throws ComponentNotFoundException {
-        // method implementation
+        ComponentList filteredList = new ComponentList();
+        filteredList.componentArrayList = componentArrayList
+                .stream()
+                .filter(comp -> comp.getName().toUpperCase().contains(name.toUpperCase()))
+                .collect(Collectors.toCollection(ArrayList::new));
+        if (filteredList.componentArrayList.isEmpty()) {
+            throw new ComponentNotFoundException(String.format(ERROR_COMPONENT_NOT_FOUND, name));
+        }
+        return filteredList;
     }
 
     /**
-     * Adds a component to the list.
+     * Adds a component to the list if it does not already exist.
      *
-     * @param component the component to add
-     * @throws DuplicateComponentException if the component already exists in the list
+     * @param component The component to add.
+     * @throws DuplicateComponentException If a component with the same properties already exists in the list.
      */
     public void addComponent(Component component) throws DuplicateComponentException {
-        // method implementation
+        for (Component comp : componentArrayList) {
+            if (comp.equals(component)) {
+                throw new DuplicateComponentException(ERROR_DUPLICATE_COMPONENT);
+            }
+        }
+        componentArrayList.add(component);
     }
 
     /**
      * Deletes a component from the list.
      *
-     * @param component the component to delete
-     * @throws ComponentNotFoundException if the component does not exist in the list
+     * @param component The component to delete.
+     * @throws ComponentNotFoundException If the component is not found in the list.
      */
     public void deleteComponent(Component component) throws ComponentNotFoundException {
-        // method implementation
+        for (Component comp : componentArrayList) {
+            if (comp.equals(component)) {
+                componentArrayList.remove(comp);
+                return;
+            }
+        }
+        throw new ComponentNotFoundException(String.format(ERROR_COMPONENT_NOT_FOUND, component));
     }
 
     /**
-     * Gets the total weighting of all components in the list.
+     * Calculates the total weight of all components in the list.
      *
-     * @return the total weighting of all components
+     * @return The total weight as an integer.
      */
     public int getTotalWeighting() {
-        // method implementation
+        return componentArrayList.stream().mapToInt(Component::getWeight).sum();
     }
 
     /**
-     * Returns a string representation of the ComponentList.
+     * Returns a formatted string representation of the components in the list.
      *
-     * @return a string representation of the ComponentList
+     * @return A numbered list of components as a string.
      */
     @Override
     public String toString() {
-        // method implementation
+        return "\t" +
+                IntStream.range(0, componentArrayList.size())
+                        .mapToObj(i -> (i + 1) + ": " + componentArrayList.get(i))
+                        .collect(Collectors.joining("\n\t"));
     }
 
     /**
-     * Finds all components in the list.
+     * Retrieves all components in the list as a new {@code ArrayList}.
      *
-     * @return a list of all components
+     * @return A new list containing all components in this list.
      */
     public ArrayList<Component> findAllComponents() {
-        // method implementation
+        return new ArrayList<>(componentArrayList);
     }
 
     /**
-     * Gets the list of components.
+     * Returns the underlying list of components.
      *
-     * @return the list of components
+     * @return The list of components as an {@code ArrayList}.
      */
     public ArrayList<Component> getComponentArrayList() {
-        // method implementation
+        return componentArrayList;
     }
 
     /**
-     * Gets the number of components in the list.
+     * Returns the number of components in the list.
      *
-     * @return the number of components in the list
+     * @return The size of the component list.
      */
     public int size() {
-        // method implementation
+        return componentArrayList.size();
     }
 }
