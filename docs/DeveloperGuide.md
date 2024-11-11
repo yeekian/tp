@@ -56,9 +56,11 @@ All commands follow the sequence as described in the diagram below:
 
 ![ArchitectureSequenceGrouped.png](diagrams/ArchitectureSequenceGrouped.png)
 
-Where <code>ref</code> frame is a placeholder for each command's specific operations.
+Where <code>ref</code> frame is a placeholder for each command's specific operations:
+- [setup](#setup)
+- [specific command execution](#adddelete-studentcomponent-feature)
 
-#### Setup:
+### Setup:
 
 During the setup phase of `TutorLink`, the following operations are performed:
 1. `StudentStorage`, `ComponentStorage` and `GradeStorage` objects are instantiated
@@ -69,6 +71,34 @@ During the setup phase of `TutorLink`, the following operations are performed:
 ![Setup.png](diagrams/Setup.png)
 
 The specific implementation of noteworthy operations are presented below: 
+
+### Storage Load feature
+
+#### Implementation Details
+
+The `StudentStorage`, `GradeStorage` and `ComponentStorage` classes implement the feature to load data from the
+data `.txt` files into their respective List objects at the start of the program.
+
+The load list methods for the Storage classes have largely similar logic flows. To avoid repetition,
+only the implementation for `GradeStorage` is shown.
+
+The following section and sequence diagram elaborate on the implementation of the `loadGradeList` method in `GradeStorage`,
+as referenced in [Setup](#setup):
+
+![GradeStorage.png](diagrams/GradeStorage.png)
+
+1. TutorLink constructs a new `GradeStorage`.
+2. `GradeStorage` creates a new `ArrayList` of `String`s for discarded entries.
+3. TutorLink calls `loadGradeList`.
+4. `GradeStorage` creates a new `ArrayList` of `Grade`s.
+5. While there are next lines in the data file:
+    - FileScanner returns the current file line as a String and moves to the next file line.
+    - `GradeStorage` calls its `getGradeFromFileLine` method with the file line.
+    - If the file line references a valid `Component` and a valid `Student`, a `Grade` is returned and added to the `ArrayList`.
+    - If not (e.g. file line was corrupted), the file line is added to `discardedEntries`,
+      and the loop continues to the next iteration.
+6. The `ArrayList` of `Grade`s is returned to TutorLink.
+7. TutorLink calls `getDiscardedEntries`, and the discarded entries are displayed by UI.
 
 ### Add/Delete Student/Component Feature
 
@@ -157,34 +187,6 @@ The sequence diagram of the AddGradeCommand is shown below.
 The sequence diagram of the DeleteGradeCommand is shown below.
 
 ![DeleteGradeCommand.png](diagrams/DeleteGradeCommand.png)
-
-### Storage Load feature
-
-#### Implementation Details
-
-The `StudentStorage`, `GradeStorage` and `ComponentStorage` classes implement the feature to load data from the 
-data `.txt` files into their respective List objects at the start of the program.
-
-The load list methods for the Storage classes have largely similar logic flows. To avoid repetition, 
-only the implementation for `GradeStorage` is shown.
-
-The following section and sequence diagram elaborate on the implementation of the `loadGradeList` method in `GradeStorage`,
-as referenced in [Setup](#setup):
-
-![GradeStorage.png](diagrams/GradeStorage.png)
-
-1. TutorLink constructs a new `GradeStorage`.
-2. `GradeStorage` creates a new `ArrayList` of `String`s for discarded entries.
-3. TutorLink calls `loadGradeList`.
-4. `GradeStorage` creates a new `ArrayList` of `Grade`s.
-5. While there are next lines in the data file:
-   - FileScanner returns the current file line as a String and moves to the next file line.
-   - `GradeStorage` calls its `getGradeFromFileLine` method with the file line.
-   - If the file line references a valid `Component` and a valid `Student`, a `Grade` is returned and added to the `ArrayList`.
-   - If not (e.g. file line was corrupted), the file line is added to `discardedEntries`,
-   and the loop continues to the next iteration.
-6. The `ArrayList` of `Grade`s is returned to TutorLink.
-7. TutorLink calls `getDiscardedEntries`, and the discarded entries are displayed by UI.
 
 ## Appendix A: Product Scope
 
