@@ -145,7 +145,9 @@ Records a grade for a specific student in a particular assignment or exam compon
 
 - **Example**:
   - `add_grade i/A1234567X c/Quiz 1 s/45` adds the grade of Quiz 1 for the student with the matric number of A1234567X with a score of 45.
-
+  - `add_grade i/A1234567X c/Quiz 2 s/30.5` adds the grade of Quiz 2 for the student with the matric number of A1234567X with a score of 30.5.
+### Note: 
+- Scores of grades are stored to double precision but during display the value is rounded off to 2 decimal places.
 ---
 
 ### Deleting a Grade of a Component for a Student: `delete_grade`
