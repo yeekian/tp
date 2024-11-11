@@ -14,6 +14,16 @@
 Your command terminal should look similar to the one below.
 
 ![tutorlink_startup.png](tutorlink_startup.png)
+
+## Important Notes on Commands:
+When inputting commands into `TutorLink`, kindly take note of the following:
+- Commands with duplicate parameters will be rejected. *i.e* `add_student n/John Doe n/John Doe i/A1234567X`
+- Parameters must be separated by at least one space character, otherwise the entire continuous string following a prefix
+will be considered a single parameter. *i.e* `add_student i/A1234567X n/John Doei/A1234567X` will be intepreted as adding
+a student with the name of `John Doei/A1234567X` and matric number `A1234567X`.
+- Parameters can be supplied in any order. *i.e* `add_student n/John i/A1234567X` is the same as `add_student i/A1234567X n/John`
+- **IMPORTANT**: Descriptions should **NOT** contain any separator tokens: `|` as this character is used for storage). 
+Including these may yield unpredictable results with the `Storage` component. 
 ## Features 
 
 <div style="page-break-after: always;"></div>
