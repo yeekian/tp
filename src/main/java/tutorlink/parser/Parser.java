@@ -14,8 +14,11 @@ import tutorlink.command.ListStudentCommand;
 import tutorlink.command.AddGradeCommand;
 import tutorlink.command.AddComponentCommand;
 import tutorlink.command.UpdateComponentCommand;
+import tutorlink.exceptions.IllegalValueException;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import java.util.regex.Matcher;
@@ -23,7 +26,7 @@ import java.util.regex.Pattern;
 
 public class Parser {
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
-
+    private static final String ERROR_PARSER_MULTIPLE_PREFIX = "Duplicate prefix detected: ";
     private String extractCommandWord(String input) {
         String[] words = input.trim().split("\\s+");
         return words[0]; //return the first word
@@ -84,7 +87,7 @@ public class Parser {
      * @param line the user input containing command arguments
      * @return a HashMap where keys are the prefixes (e.g., "n/", "i/") and the values are the corresponding arguments
      */
-    public HashMap<String, String> getArguments(String[] argumentPrefixes, String line) {
+    public HashMap<String, String> getArguments(String[] argumentPrefixes, String line) throws IllegalValueException {
         HashMap<String, String> arguments = new HashMap<>();
 
         if (argumentPrefixes == null) {
@@ -103,11 +106,16 @@ public class Parser {
         String regex = regexBuilder.toString();
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(line);
-
+        // Set to track prefixes we've already encountered
+        Set<String> seenPrefixes = new HashSet<>();
         // Iterate through all found tags and arguments
         while (matcher.find()) {
             String tag = matcher.group(1); // Group 1 is the tag (e.g., n/, i/, etc.)
             String argument = matcher.group(2).trim(); // Group 2 is the argument after the tag
+            if (seenPrefixes.contains(tag)) {
+                throw new IllegalValueException(ERROR_PARSER_MULTIPLE_PREFIX + tag);
+            }
+            seenPrefixes.add(tag);
             arguments.put(tag, argument); // Store the tag and argument
         }
 
