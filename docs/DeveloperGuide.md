@@ -20,9 +20,9 @@
 
 ## Acknowledgements
 
-This project was inspired by the authors' experiences using the Canvas learning management system. 
+This project was inspired by our experiences using the Canvas learning management system. While Canvas serves large educational environments well, we envisioned a simpler, offline tool tailored for small classes that prioritizes essential features like grade tracking, student management, and assessment organization. Thus, TutorLink was born.
 
-While Canvas serves large educational environments well, they envisioned a simpler, offline tool tailored for small classes that prioritizes essential features like grade tracking, student management, and assessment organization. Thus, TutorLink was born.
+The design and feature set of TutorLink were developed from scratch, drawing inspiration from the need for a lightweight, offline solution for managing class assignments and reducing administrative overhead in small class environments. No code or external sources were directly referenced or reused in the development of TutorLink.
 ## Design
 
 ### Architecture
