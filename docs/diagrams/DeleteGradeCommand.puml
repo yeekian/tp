@@ -39,6 +39,7 @@ deactivate R
 deactivate C
 
 end
-
+destroy R
+destroy C
 
 @enduml
