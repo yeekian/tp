@@ -11,6 +11,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The StudentStorage class extends the Storage class and provides methods to load and save a list of students
+ * from and to a file.
+ */
 public class StudentStorage extends Storage {
     public StudentStorage(String filePath) {
         super(filePath);
