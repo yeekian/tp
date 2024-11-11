@@ -1,11 +1,29 @@
 # Developer Guide
 
+## Table of Contents
+- [Acknowledgements](#acknowledgements)
+- [Design](#design)
+    - [Architecture](#architecture)
+- [Implementation](#implementation)
+    - [Add/Delete Student/Component Feature](#adddelete-studentcomponent-feature)
+    - [Find Student Feature](#find-student-feature)
+    - [Add/Delete Grade Feature](#adddelete-grade-feature)
+    - [Storage Load Feature](#storage-load-feature)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+
+
+---
+
 ## Acknowledgements
 
 This project was inspired by the authors' experiences using the Canvas learning management system. 
 
 While Canvas serves large educational environments well, they envisioned a simpler, offline tool tailored for small classes that prioritizes essential features like grade tracking, student management, and assessment organization. Thus, TutorLink was born.
-## Design & implementation
+## Design
 
 ### Architecture
 
