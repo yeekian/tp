@@ -41,6 +41,7 @@ TutorLink keeps a running tally of grades (GPA, overall score) of each
 - **Enhancements to existing features:**
   - Updated `runtest` scripts to accept initial data files, to facilitate I/O redirection tests on handling of 
   data file entries: [#206](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/206)
+  - Added tests for data file error handling: [#221](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/221)
   - Created string of list of commands for use in the help command: 
   [#209](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/209)
 
