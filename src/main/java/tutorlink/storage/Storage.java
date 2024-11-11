@@ -15,6 +15,13 @@ public class Storage {
     protected final Path path;
     protected ArrayList<String> discardedEntries;
 
+    /**
+     * Initializes a Storage object with the specified file path.
+     * Creates the necessary directories and file if they do not exist.
+     *
+     * @param filePath The path to the storage file.
+     * @throws StorageOperationException If an error occurs while creating the file or directories.
+     */
     public Storage(String filePath) throws StorageOperationException {
         path = Paths.get(filePath);
         discardedEntries = new ArrayList<>();

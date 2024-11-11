@@ -11,6 +11,13 @@ public class Student {
         this.percentageScore = 0.0;
     }
 
+    /**
+     * Constructs a new Student with the specified matriculation number, name, and GPA.
+     *
+     * @param matricNumber The matriculation number of the student.
+     * @param name The name of the student.
+     * @param gpa The GPA of the student.
+     */
     public Student(String matricNumber, String name, double gpa) {
         this.name = name;
         this.matricNumber = matricNumber.toUpperCase();
