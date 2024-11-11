@@ -57,47 +57,47 @@ public class Parser {
         String commandWord = extractCommandWord(line);
 
         switch (commandWord.toLowerCase()) {
-           case AddStudentCommand.COMMAND_WORD:
-               return new AddStudentCommand();
+        case AddStudentCommand.COMMAND_WORD:
+            return new AddStudentCommand();
 
-           case DeleteStudentCommand.COMMAND_WORD:
-               return new DeleteStudentCommand();
+        case DeleteStudentCommand.COMMAND_WORD:
+            return new DeleteStudentCommand();
 
-           case FindStudentCommand.COMMAND_WORD:
-               return new FindStudentCommand();
+        case FindStudentCommand.COMMAND_WORD:
+            return new FindStudentCommand();
 
-           case ListStudentCommand.COMMAND_WORD:
-               return new ListStudentCommand();
+        case ListStudentCommand.COMMAND_WORD:
+            return new ListStudentCommand();
 
-           case AddGradeCommand.COMMAND_WORD:
-                return new AddGradeCommand();
+        case AddGradeCommand.COMMAND_WORD:
+            return new AddGradeCommand();
 
-           case DeleteGradeCommand.COMMAND_WORD:
-               return new DeleteGradeCommand();
+        case DeleteGradeCommand.COMMAND_WORD:
+            return new DeleteGradeCommand();
 
-           case AddComponentCommand.COMMAND_WORD:
-               return new AddComponentCommand();
+        case AddComponentCommand.COMMAND_WORD:
+            return new AddComponentCommand();
 
-           case DeleteComponentCommand.COMMAND_WORD:
-               return new DeleteComponentCommand();
+        case DeleteComponentCommand.COMMAND_WORD:
+            return new DeleteComponentCommand();
 
-           case ListComponentCommand.COMMAND_WORD:
-               return new ListComponentCommand();
+        case ListComponentCommand.COMMAND_WORD:
+            return new ListComponentCommand();
 
-           case ListGradeCommand.COMMAND_WORD:
-               return new ListGradeCommand();
+        case ListGradeCommand.COMMAND_WORD:
+            return new ListGradeCommand();
 
-           case UpdateComponentCommand.COMMAND_WORD:
-               return new UpdateComponentCommand();
+        case UpdateComponentCommand.COMMAND_WORD:
+            return new UpdateComponentCommand();
 
-           case ExitCommand.COMMAND_WORD:
-               return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-           case HelpCommand.COMMAND_WORD:
-               return new HelpCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-           default:
-               return new InvalidCommand();
+        default:
+            return new InvalidCommand();
         }
     }
 
