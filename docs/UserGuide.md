@@ -4,6 +4,27 @@
 
 **TutorLink** is a streamlined, offline application developed for professors at NUS who manage single-staffed classes. It is designed to simplify the management of class assignments, and other administrative tasks, allowing professors to focus on teaching and curriculum development. By automating repetitive tasks and providing quick access to essential information, TutorLink saves valuable time and reduces the burden of administrative work.
 
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Important Notes on Commands](#important-notes-on-commands)
+- [Features](#Features)
+  - [Viewing help: `help`](#Viewing-help-help)
+  - [Adding a Student: `add_student`](#adding-a-student-add_student)
+  - [Deleting a Student: `delete_student`](#deleting-a-student-delete_student)
+  - [Listing All Students: `list_student`](#listing-all-students-list_student)
+  - [Finding a Student: `find_student`](#finding-a-student-find_student)
+  - [Adding a Component: `add_component`](#adding-a-component-add_component)
+  - [Deleting a Component: `delete_component`](#deleting-a-component-delete_component)
+  - [Listing Components: `list_component`](#listing-components-list_component)
+  - [Adding a Grade of a Component for a Student: `add_grade`](#adding-a-grade-of-a-component-for-a-student-add_grade)
+  - [Deleting a Grade of a Component for a Student: `delete_grade`](#deleting-a-grade-of-a-component-for-a-student-delete_grade)
+  - [Listing Grades: `list_grade`](#listing-grades-list_grade)
+  - [Exiting the Program: `bye`](#exiting-the-program-bye)
+  - [Saving the Data](#saving-the-data)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+
 ## Quick Start
 
 1. Ensure you have Java 17 or above installed in your Computer.
