@@ -17,7 +17,7 @@ Student Ethan Chua (A0276007H) added successfully!
 Student John Doe (A9999999Z) added successfully!
 -------------------------------------------------------------
 -------------------------   Error   -------------------------
-Error! Student with Matric Number, A1111111B, already exists in the list!
+Error! Matric Number should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
 -------------------------------------------------------------
 -------------------------   Result   -------------------------
 	1: John Smith (matric no: A1111111B, percentage score: 80.00)
