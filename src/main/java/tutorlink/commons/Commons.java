@@ -52,7 +52,6 @@ public class Commons {
 
     //Help
     public static final String HELP_MESSAGE = """
-            -------------------   List of Commands   --------------------
             help: Displays list of commands
               Example: help
                         
@@ -91,5 +90,5 @@ public class Commons {
                         
             bye: Exits the program
               Example: bye
-            -------------------------------------------------------------""";
+            """;
 }
