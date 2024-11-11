@@ -64,7 +64,7 @@ public class DeleteStudentCommandTest {
         try {
             result = deleteCommand.execute(appState, arguments);
         } catch (IllegalValueException e) {
-            assertEquals(e.getMessage(), Commons.ERROR_NULL);
+            assertEquals(e.getMessage(), String.format(Commons.ERROR_NULL, deleteCommand.getArgumentPrefixes()[0]));
         } catch (Exception e) {
             fail("Expected: IllegalValueException, Actual: " + e.getMessage());
         }
