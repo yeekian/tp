@@ -14,7 +14,9 @@ import tutorlink.command.ListStudentCommand;
 import tutorlink.command.AddGradeCommand;
 import tutorlink.command.AddComponentCommand;
 import tutorlink.command.UpdateComponentCommand;
+import tutorlink.command.HelpCommand;
 import tutorlink.exceptions.IllegalValueException;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -55,44 +57,47 @@ public class Parser {
         String commandWord = extractCommandWord(line);
 
         switch (commandWord.toLowerCase()) {
-        case AddStudentCommand.COMMAND_WORD:
-            return new AddStudentCommand();
+            case AddStudentCommand.COMMAND_WORD:
+                return new AddStudentCommand();
 
-        case DeleteStudentCommand.COMMAND_WORD:
-            return new DeleteStudentCommand();
+            case DeleteStudentCommand.COMMAND_WORD:
+                return new DeleteStudentCommand();
 
-        case FindStudentCommand.COMMAND_WORD:
-            return new FindStudentCommand();
+            case FindStudentCommand.COMMAND_WORD:
+                return new FindStudentCommand();
 
-        case ListStudentCommand.COMMAND_WORD:
-            return new ListStudentCommand();
+            case ListStudentCommand.COMMAND_WORD:
+                return new ListStudentCommand();
 
-        case AddGradeCommand.COMMAND_WORD:
-            return new AddGradeCommand();
+            case AddGradeCommand.COMMAND_WORD:
+                return new AddGradeCommand();
 
-        case DeleteGradeCommand.COMMAND_WORD:
-            return new DeleteGradeCommand();
+            case DeleteGradeCommand.COMMAND_WORD:
+                return new DeleteGradeCommand();
 
-        case AddComponentCommand.COMMAND_WORD:
-            return new AddComponentCommand();
+            case AddComponentCommand.COMMAND_WORD:
+                return new AddComponentCommand();
 
-        case DeleteComponentCommand.COMMAND_WORD:
-            return new DeleteComponentCommand();
+            case DeleteComponentCommand.COMMAND_WORD:
+                return new DeleteComponentCommand();
 
-        case ListComponentCommand.COMMAND_WORD:
-            return new ListComponentCommand();
+            case ListComponentCommand.COMMAND_WORD:
+                return new ListComponentCommand();
 
-        case ListGradeCommand.COMMAND_WORD:
-            return new ListGradeCommand();
+            case ListGradeCommand.COMMAND_WORD:
+                return new ListGradeCommand();
 
-        case UpdateComponentCommand.COMMAND_WORD:
-            return new UpdateComponentCommand();
+            case UpdateComponentCommand.COMMAND_WORD:
+                return new UpdateComponentCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        default:
-            return new InvalidCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            default:
+                return new InvalidCommand();
         }
     }
 
@@ -102,7 +107,7 @@ public class Parser {
      * and are extracted into a map where each prefix is a key and the corresponding argument is the value.
      *
      * @param argumentPrefixes An array of valid argument prefixes (e.g., "n/", "i/").
-     * @param line The user input containing command arguments.
+     * @param line             The user input containing command arguments.
      * @return A {@code HashMap} where keys are prefixes (e.g., "n/", "i/") and values are the corresponding arguments.
      */
     public HashMap<String, String> getArguments(String[] argumentPrefixes, String line) throws IllegalValueException {
