@@ -129,14 +129,11 @@ public class AddComponentCommand extends Command {
             if (maxScore < 0.0) {
                 throw new IllegalValueException(Commons.ERROR_INVALID_MAX_SCORE);
             }
-<<<<<<< HEAD
 
             if (maxScore > MAX_SCORE) {
                 throw new IllegalValueException(Commons.ERROR_INVALID_MAX_SCORE);
             }
-
-=======
->>>>>>> master
+            
             return maxScore;
         } catch (NumberFormatException e) {
             throw new IllegalValueException(Commons.ERROR_INVALID_MAX_SCORE);
