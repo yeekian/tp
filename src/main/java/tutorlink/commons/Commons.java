@@ -8,8 +8,8 @@ public class Commons {
 
     //Input Validation
     public static final String MATRIC_NUMBER_REGEX = "A\\d{7}[A-Z]";
-    public static final String ERROR_ILLEGAL_MATRIC_NUMBER = "Error! Ensure matric " +
-            "number is of the form A\\d{7}[A-Z] (case insensitive)";
+    public static final String ERROR_ILLEGAL_MATRIC_NUMBER = "Error! Matric Number should start with \"A\", " +
+            "followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)";
     //Student
     public static final String ADD_STUDENT_SUCCESS = "Student %s (%s) added successfully!";
     public static final String ERROR_DUPLICATE_STUDENT =
