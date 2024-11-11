@@ -23,7 +23,7 @@ public class Commons {
     public static final String DELETE_GRADE_SUCCESS = "Grade: Component %s for student %s successfully deleted";
     public static final String ADD_GRADE_SUCCESS = "Score of %s added successfully to %s for %s!";
     public static final String ERROR_INVALID_SCORE =
-            "Error! Score must be double that is more than or equal to 0, and not exceed the max score!";
+            "Error! Score must be a numerical value and be between 0 and the max score of the component!";
 
     //@@author TrungBui32
     //Component
@@ -39,7 +39,7 @@ public class Commons {
     public static final String ERROR_INVALID_MAX_SCORE =
             "Error! Max Score must be double that is more than or equal to 0!";
     //@@author RCPilot1604
-    public static final String ERROR_INVALID_TOTAL_WEIGHTING = "Error! Total weighting must add up to 100%%.\n" +
+    public static final String ERROR_INVALID_TOTAL_WEIGHTING = "Error! Total weighting must not exceed 100%%.\n" +
             "Current weighting (after addition): %s%%";
 
     //Invalid
