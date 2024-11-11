@@ -24,6 +24,9 @@ a student with the name of `John Doei/A1234567X` and matric number `A1234567X`.
 - Parameters can be supplied in any order. *i.e* `add_student n/John i/A1234567X` is the same as `add_student i/A1234567X n/John`
 - **IMPORTANT**: Descriptions should **NOT** contain any separator tokens: `|` as this character is used for storage). 
 Including these may yield unpredictable results with the `Storage` component. 
+- Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
+will be converted to uppercase for storage.
+- Similarly, all other will be converted to lowercase for storage.
 ## Features 
 
 <div style="page-break-after: always;"></div>
@@ -189,10 +192,6 @@ respectively, located in the `[JAR file location]/data/` directory.
 
 <div style="page-break-after: always;"></div>
 
-## Notes:
-- Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
-will be converted to uppercase for storage. 
-- (coming soon) All other arguments are case insensitive and will be converted to lowercase for storage. 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
