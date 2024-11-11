@@ -4,6 +4,27 @@
 
 **TutorLink** is a streamlined, offline application developed for professors at NUS who manage single-staffed classes. It is designed to simplify the management of class assignments, and other administrative tasks, allowing professors to focus on teaching and curriculum development. By automating repetitive tasks and providing quick access to essential information, TutorLink saves valuable time and reduces the burden of administrative work.
 
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Important Notes on Commands](#important-notes-on-commands)
+- [Features](#Features)
+  - [Viewing help: `help`](#Viewing-help-help)
+  - [Adding a Student: `add_student`](#adding-a-student-add_student)
+  - [Deleting a Student: `delete_student`](#deleting-a-student-delete_student)
+  - [Listing All Students: `list_student`](#listing-all-students-list_student)
+  - [Finding a Student: `find_student`](#finding-a-student-find_student)
+  - [Adding a Component: `add_component`](#adding-a-component-add_component)
+  - [Deleting a Component: `delete_component`](#deleting-a-component-delete_component)
+  - [Listing Components: `list_component`](#listing-components-list_component)
+  - [Adding a Grade of a Component for a Student: `add_grade`](#adding-a-grade-of-a-component-for-a-student-add_grade)
+  - [Deleting a Grade of a Component for a Student: `delete_grade`](#deleting-a-grade-of-a-component-for-a-student-delete_grade)
+  - [Listing Grades: `list_grade`](#listing-grades-list_grade)
+  - [Exiting the Program: `bye`](#exiting-the-program-bye)
+  - [Saving the Data](#saving-the-data)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+
 ## Quick Start
 
 1. Ensure you have Java 17 or above installed in your Computer.
@@ -26,12 +47,21 @@ Rouge spaces in between the prefix *i.e* `i/ MATRIC_NUMBER` will invalidate the 
 - Parameters can be supplied in any order. *i.e* `add_student n/John i/A1234567X` is the same as `add_student i/A1234567X n/John`
 - **IMPORTANT**: Descriptions should **NOT** contain any separator tokens: `|` as this character is used for storage). 
 Including these may yield unpredictable results with the `Storage` component. 
-- Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
-will be converted to uppercase for storage.
+- Matric Number (`i/` argument) is case-sensitive. Therefore, only `A1234567X` is the accepted and not `a1234567x`. Matric numbers 
+will be remain in uppercase for storage.
 - Similarly, all other fields will be converted to lowercase for storage.
-## Features 
+
+## Features
 
 <div style="page-break-after: always;"></div>
+
+### Viewing help: `help`
+
+Shows a message explaining different features of the app.
+
+- **Format**: `help`
+
+---
 
 ### Adding a Student: `add_student`
 
@@ -40,7 +70,7 @@ Adds a student to your class.
 - **Format**: `add_student i/MATRIC_NUMBER n/STUDENT_NAME`
 - **Parameters**:
     - `STUDENT_NAME`: The full name of the student.
-    - `MATRIC_NUMBER`: A unique identifier for the student.
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
 
 - **Example**:
     - `add_student i/A1234567X n/John Doe ` adds a new student named John Doe with the matric number of A1234567X to the class.
@@ -52,7 +82,7 @@ Removes a student from the class. Note that a student can only be deleted using 
 
 - **Format**: `delete_student i/MATRIC_NUMBER`
 - **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student to be deleted.
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
 
 - **Example**:
     - `delete_student i/A1234567X` deletes a student with the matric number of A1234567X.
@@ -79,14 +109,14 @@ Adds a student to your class.
 - **Format**: `find_student i/MATRIC_NUMBER n/STUDENT_NAME`
 - **Parameters**:
   - `STUDENT_NAME`: The full name of the student.
-  - `MATRIC_NUMBER`: A unique identifier for the student.
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
 
 - **Example**:
   - `find_student i/A1234567X n/John Doe ` find the student named John Doe with the matric number of A1234567X among the list of students and prints out the student information.
 #### Note: 
 `find_student` accepts the following combination of parameters:
-- `find_student i/matric_number`: Query by matric number
-- `find_student n/name`: Query by name
+- `find_student i/MATRIC_NUMBER`: Query by matric number
+- `find_student n/STUDENT_NAME`: Query by name
 
 If both `matric number` and `name` are supplied together: *i.e* `find_student i/matric_number n/name`, **`name` is ignored**
 
@@ -97,7 +127,7 @@ Adds a new grading component to the class (e.g., "Homework," "Midterm," "Final E
 
 - **Format**: `add_component c/COMPONENT w/WEIGHT m/MAX_SCORE`
 - **Parameters**:
-    - `COMPONENT`: The name of the grading component. Note that component name is insensitive, *i.e* `Test` is the same as `test`. 
+    - `COMPONENT`: The name of the grading component to add. Note that when adding, the component name is case-sensitive, *i.e* `Quiz` is different from `quiz`. 
   Moreover, whitespace after the component string is trimmed.
     - `WEIGHT`: The weight of the component as a percentage, input as an integer from 0 - 100 (inclusive).
     - `MAX_SCORE`: The max_score of the component. **Must be a `double` between 0 and 10,000 (inclusive).**
@@ -114,8 +144,8 @@ Removes an existing grading component from the class.
 
 - **Format**: `delete_component c/COMPONENT`
 - **Parameters**:
-    - `COMPONENT`: The name of the grading component to delete.
-
+  - `COMPONENT`: The name of the grading component to delete. Note that component name is case-insensitive, *i.e* `Test` is the same as `test`.
+    Moreover, whitespace after the component string is trimmed.
 - **Example**:
     - `delete_component c/Quiz 1` deletes Quiz 1 component from the list of components that form the final grade.
 
@@ -139,8 +169,9 @@ Displays all grading components and their respective weights for a class.
 Records a grade for a specific student in a particular assignment or exam component.
 - **Format**: `add_grade i/MATRIC_NUMBER c/COMPONENT  s/SCORE`
 - **Parameters**:
-  - `MATRIC_NUMBER`: The unique identifier of the student.
-  - `COMPONENT`: The assignment or exam component.
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
+  - `COMPONENT`: The name of the grading component. Note that component name is case-insensitive, *i.e* `Test` is the same as `test`.
+    Moreover, whitespace after the component string is trimmed.
   - `SCORE`: The score to be recorded. Note that score cannot exceed the max score of the component.
 
 - **Example**:
@@ -156,9 +187,9 @@ Removes a previously recorded grade for a specific student and component.
 
 - **Format**: `delete_grade i/MATRIC_NUMBER c/COMPONENT`
 - **Parameters**:
-  - `MATRIC_NUMBER`: The unique identifier of the student.
-  - `COMPONENT`: The assignment or exam component.
-
+  - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
+  - `COMPONENT`: The name of the grading component. Note that component name is case-insensitive, *i.e* `Test` is the same as `test`.
+    Moreover, whitespace after the component string is trimmed.
 - **Example**:
   - `delete_grade i/A1234567X c/Quiz 1` deletes the grade of Quiz 1 for the student with the matric number of A1234567X.
 
@@ -174,7 +205,7 @@ Views all recorded grades for a specific student or all students, and final perc
   - Lists all recorded grades and the final percentage for the specified student. 
   - **Format**: `list_grade i/MATRIC_NUMBER`
   - **Parameters**:
-    - `MATRIC_NUMBER`: The unique identifier of the student.
+    - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
   - **Example**:
     - `list_grade i/A1234567X`
 
