@@ -49,4 +49,46 @@ public class Commons {
 
     //Exit
     public static final String EXIT = "Goodbye! See you soon!";
+
+    //Help
+    public static final String HELP_MESSAGE = """
+            help: Displays list of commands
+              Example: help
+                        
+            add_student: Adds a student to the class roster
+              Example: add_student i/A1234567X n/John Doe
+                        
+            delete_student: Deletes a student from the class roster
+              Example: delete_student i/A1234567X
+                        
+            list_student: Lists all students in the class
+              Example: list_student
+                        
+            find_student: Finds a student in the class roster by name or matric number
+              Example: find_student i/A1234567X n/John Doe
+                        
+            add_component: Adds a new grading component to the class
+              Example: add_component c/Quiz 1 w/30 m/50
+                        
+            delete_component: Deletes a grading component from the class
+              Example: delete_component c/Quiz 1
+                        
+            update_component: Updates a component with a new maxscore or weight
+              Example: update_component c/Quiz 1 w/40 m/60
+                        
+            list_component: Lists all grading components
+              Example: list_component
+                        
+            add_grade: Adds a grade for a student for a specific component
+              Example: add_grade i/A1234567X c/Quiz 1 s/45
+                        
+            delete_grade: Deletes a student's grade for a specific component
+              Example: delete_grade i/A1234567X c/Quiz 1
+                        
+            list_grade: Lists all grades for a student
+              Example: list_grade i/A1234567X
+                        
+            bye: Exits the program
+              Example: bye
+            """;
 }

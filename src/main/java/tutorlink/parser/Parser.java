@@ -14,7 +14,9 @@ import tutorlink.command.ListStudentCommand;
 import tutorlink.command.AddGradeCommand;
 import tutorlink.command.AddComponentCommand;
 import tutorlink.command.UpdateComponentCommand;
+import tutorlink.command.HelpCommand;
 import tutorlink.exceptions.IllegalValueException;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -91,6 +93,9 @@ public class Parser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
         default:
             return new InvalidCommand();
         }
@@ -102,7 +107,7 @@ public class Parser {
      * and are extracted into a map where each prefix is a key and the corresponding argument is the value.
      *
      * @param argumentPrefixes An array of valid argument prefixes (e.g., "n/", "i/").
-     * @param line The user input containing command arguments.
+     * @param line             The user input containing command arguments.
      * @return A {@code HashMap} where keys are prefixes (e.g., "n/", "i/") and values are the corresponding arguments.
      */
     public HashMap<String, String> getArguments(String[] argumentPrefixes, String line) throws IllegalValueException {
