@@ -20,13 +20,13 @@ public class GradeStorage extends Storage {
         this.studentList = studentList;
     }
 
-    public ArrayList<Grade> loadGradeList()
-            throws IOException {
+    public ArrayList<Grade> loadGradeList() throws IOException {
         ArrayList<Grade> grades = new ArrayList<>();
         Scanner fileScanner = new Scanner(path);
         while (fileScanner.hasNext()) {
             try {
-                grades.add(getGradeFromFileLine(fileScanner.nextLine()));
+                Grade newGrade = getGradeFromFileLine(fileScanner.nextLine(), grades);
+                grades.add(newGrade);
             } catch (InvalidDataFileLineException e) {
                 discardedEntries.add(e.getMessage());
             }
@@ -42,14 +42,20 @@ public class GradeStorage extends Storage {
         fileWriter.close();
     }
 
-    private Grade getGradeFromFileLine(String fileLine) throws InvalidDataFileLineException {
+    private Grade getGradeFromFileLine(String fileLine, ArrayList<Grade> grades)
+            throws InvalidDataFileLineException {
+        String componentName;
+        String matricNumber;
+        double score;
         String[] stringParts = fileLine.split(READ_DELIMITER);
-        if (stringParts.length != 3) {
+
+        try {
+            componentName = stringParts[0].strip();
+            matricNumber = stringParts[1].strip();
+            score = Double.parseDouble(stringParts[2].strip());
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidDataFileLineException(fileLine);
         }
-        String componentName = stringParts[0];
-        String matricNumber = stringParts[1];
-        double score = Double.parseDouble(stringParts[2]);
 
         Component selectedComp = null;
         for (Component comp : componentList) {
@@ -67,11 +73,16 @@ public class GradeStorage extends Storage {
             }
         }
 
-        if (selectedComp != null && selectedStudent != null) {
-            return new Grade(selectedComp, selectedStudent, score);
-        } else {
+        if (selectedComp == null || selectedStudent == null) {
             throw new InvalidDataFileLineException(fileLine);
         }
+
+        boolean isValidScore = (score >= 0 && score <= selectedComp.getMaxScore());
+        Grade newGrade = new Grade(selectedComp, selectedStudent, score);
+        if (!isValidScore || grades.contains(newGrade)) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
+        return newGrade;
     }
 
     private String getFileInputForGrade(Grade grade) {
