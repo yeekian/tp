@@ -23,7 +23,7 @@ public class Commons {
     public static final String DELETE_GRADE_SUCCESS = "Grade: Component %s for student %s successfully deleted";
     public static final String ADD_GRADE_SUCCESS = "Score of %s added successfully to %s for %s!";
     public static final String ERROR_INVALID_SCORE =
-            "Error! Score must be a double and be between 0 and the max score of the component!";
+            "Error! Score must be a numerical value and be between 0 and the max score of the component!";
 
     //@@author TrungBui32
     //Component
