@@ -7,20 +7,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner in = new Scanner(System.in);
 
-    private final String LOGO = "___________      __               .____    .__        __\n"
+    private static final String LOGO = "___________      __               .____    .__        __\n"
             + "\\__    ___/_ ___/  |_  ___________|    |   |__| ____ |  | __\n"
             + "  |    | |  |  \\   __\\/  _ \\_  __ \\    |   |  |/    \\|  |/ /\n"
             + "  |    | |  |  /|  | (  <_> )  | \\/    |___|  |   |  \\    <\n"
             + "  |____| |____/ |__|  \\____/|__|  |_______ \\__|___|  /__|_ \\\n"
             + "                                          \\/       \\/     \\/\n";
-    private final String HALF_BREAK_LINE =
+    private static final String HALF_BREAK_LINE =
             "-------------------------";
-    private final String FULL_BREAK_LINE =
+    private static final String FULL_BREAK_LINE =
             "-------------------------------------------------------------";
 
-    private final String HELP_MESSAGE = """
+    private static final String HELP_MESSAGE = """
             -------------------   List of Commands   --------------------
             help: Displays list of commands
               Example: help
@@ -61,6 +60,8 @@ public class Ui {
             bye: Exits the program
               Example: bye
             -------------------------------------------------------------""";
+
+    private Scanner in = new Scanner(System.in);
 
     public Ui() {
     }

@@ -18,6 +18,7 @@ public class AddComponentCommand extends Command {
 
     public static final String[] ARGUMENT_PREFIXES = {"c/", "w/", "m/"};
     public static final String COMMAND_WORD = "add_component";
+    private static final double MAX_SCORE = 10000.0;
 
     /**
      * Executes the add component command, creating a new component with the specified name,
@@ -128,6 +129,11 @@ public class AddComponentCommand extends Command {
             if (maxScore < 0.0) {
                 throw new IllegalValueException(Commons.ERROR_INVALID_MAX_SCORE);
             }
+
+            if (maxScore > MAX_SCORE) {
+                throw new IllegalValueException(Commons.ERROR_INVALID_MAX_SCORE);
+            }
+            
             return maxScore;
         } catch (NumberFormatException e) {
             throw new IllegalValueException(Commons.ERROR_INVALID_MAX_SCORE);

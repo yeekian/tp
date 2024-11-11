@@ -1,11 +1,15 @@
 package tutorlink.lists;
 
+import tutorlink.commons.Commons;
 import tutorlink.exceptions.DuplicateMatricNumberException;
+import tutorlink.exceptions.IllegalValueException;
 import tutorlink.exceptions.StudentNotFoundException;
 import tutorlink.exceptions.TutorLinkException;
 import tutorlink.student.Student;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -65,6 +69,13 @@ public class StudentList {
 
     public StudentList findStudentByMatricNumber(String matricNumber) throws TutorLinkException {
         StudentList filteredList = new StudentList();
+
+        Pattern pattern = Pattern.compile(Commons.MATRIC_NUMBER_REGEX);
+        Matcher matcher = pattern.matcher(matricNumber);
+        if (!matcher.find()) {
+            throw new IllegalValueException(Commons.ERROR_ILLEGAL_MATRIC_NUMBER);
+        }
+
         filteredList.studentArrayList = studentArrayList
                 .stream()
                 .filter(student -> student.getMatricNumber().equals(matricNumber.toUpperCase()))
