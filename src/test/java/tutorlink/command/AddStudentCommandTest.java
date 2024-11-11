@@ -50,5 +50,19 @@ public class AddStudentCommandTest {
             fail("Expected IllegalArgumentException, but got: " + e.getClass().getSimpleName());
         }
     }
+
+    @Test
+    void execute_bothNullInputs_exceptionThrown() {
+        try {
+            CommandResult result = command.execute(appState, arguments);
+            fail("Expected an exception to be thrown due to empty input");
+        } catch (IllegalValueException e) {
+            // Assert that the exception message matches the expected outcome
+            assertEquals("Error! Null parameters i/, n/ passed!", e.getMessage());
+        } catch (Exception e) {
+            // If any other type of exception is thrown, fail the test
+            fail("Expected IllegalArgumentException, but got: " + e.getClass().getSimpleName());
+        }
+    }
 }
 //@@author
