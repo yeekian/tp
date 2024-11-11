@@ -15,10 +15,12 @@ public class ComponentStorage extends Storage {
 
     public ArrayList<Component> loadComponentList() throws IOException {
         ArrayList<Component> components = new ArrayList<>();
+        int totalWeight = 0;
         Scanner fileScanner = new Scanner(path);
         while (fileScanner.hasNext()) {
             try {
-                Component newComponent = getComponentFromFileLine(fileScanner.nextLine(), components);
+                Component newComponent = getComponentFromFileLine(fileScanner.nextLine(), components, totalWeight);
+                totalWeight += newComponent.getWeight();
                 components.add(newComponent);
             } catch (InvalidDataFileLineException e) {
                 discardedEntries.add(e.getMessage());
@@ -35,21 +37,28 @@ public class ComponentStorage extends Storage {
         fileWriter.close();
     }
 
-    private Component getComponentFromFileLine(String fileLine, ArrayList<Component> components)
+    private Component getComponentFromFileLine(
+            String fileLine, ArrayList<Component> components, int totalWeight)
             throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
+        String name;
+        double maxScore;
+        int weight;
         try {
-            String name = stringParts[0].strip();
-            double maxScore = Double.parseDouble(stringParts[1].strip());
-            int weight = Integer.parseInt(stringParts[2].strip());
-            Component newComponent = new Component(name, maxScore, weight);
-            if (components.contains(newComponent)) {
-                throw new InvalidDataFileLineException(fileLine);
-            }
-            return newComponent;
+            name = stringParts[0].strip();
+            maxScore = Double.parseDouble(stringParts[1].strip());
+            weight = Integer.parseInt(stringParts[2].strip());
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidDataFileLineException(fileLine);
         }
+
+        boolean isValidMaxScore = (maxScore >= 0);
+        boolean isValidWeight = (weight >= 0 && (weight + totalWeight) <= 100);
+        Component newComponent = new Component(name, maxScore, weight);
+        if (!isValidMaxScore || !isValidWeight || components.contains(newComponent)) {
+            throw new InvalidDataFileLineException(fileLine);
+        }
+        return newComponent;
     }
 
     private String getFileInputForComponent(Component component) {
