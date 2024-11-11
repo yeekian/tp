@@ -29,9 +29,18 @@ Including these may yield unpredictable results with the `Storage` component.
 - Matric Number (`i/` argument) is case-sensitive. Therefore, only `A1234567X` is the accepted and not `a1234567x`. Matric numbers 
 will be remain in uppercase for storage.
 - Similarly, all other fields will be converted to lowercase for storage.
-## Features 
+
+## Features
 
 <div style="page-break-after: always;"></div>
+
+### Viewing help: `help`
+
+Shows a message explaining different features of the app.
+
+- **Format**: `help`
+
+---
 
 ### Adding a Student: `add_student`
 
