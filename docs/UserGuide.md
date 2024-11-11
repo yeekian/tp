@@ -7,13 +7,26 @@
 ## Quick Start
 
 1. Ensure you have Java 17 or above installed in your Computer.
-2. Download the latest .jar file  of `TutorLink` from [here](http://link.to/duke).
+2. Download the latest .jar file  of `TutorLink` from [here](https://github.com/AY2425S1-CS2113-W13-4/tp/releases/tag/v2.1).
 3. Copy the file to the folder you want to use as the home folder for your TutorLink.
 4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar TutorLink.jar command to run the application.
 
 Your command terminal should look similar to the one below.
 
 ![tutorlink_startup.png](tutorlink_startup.png)
+
+## Important Notes on Commands:
+When inputting commands into `TutorLink`, kindly take note of the following:
+- Commands with duplicate parameters will be rejected. *i.e* `add_student n/John Doe n/John Doe i/A1234567X`
+- Parameters must be separated by at least one space character, otherwise the entire continuous string following a prefix
+will be considered a single parameter. *i.e* `add_student i/A1234567X n/John Doei/A1234567X` will be intepreted as adding
+a student with the name of `John Doei/A1234567X` and matric number `A1234567X`.
+- Parameters can be supplied in any order. *i.e* `add_student n/John i/A1234567X` is the same as `add_student i/A1234567X n/John`
+- **IMPORTANT**: Descriptions should **NOT** contain any separator tokens: `|` as this character is used for storage). 
+Including these may yield unpredictable results with the `Storage` component. 
+- Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
+will be converted to uppercase for storage.
+- Similarly, all other will be converted to lowercase for storage.
 ## Features 
 
 <div style="page-break-after: always;"></div>
@@ -121,7 +134,7 @@ Records a grade for a specific student in a particular assignment or exam compon
   - `SCORE`: The score to be recorded. Note that score cannot exceed the max score of the component.
 
 - **Example**:
-  - `add_grade i/A1234567X c/Quiz 1 s/85` adds the grade of Quiz 1 for the student with the matric number of A1234567X with a score of 85.
+  - `add_grade i/A1234567X c/Quiz 1 s/45` adds the grade of Quiz 1 for the student with the matric number of A1234567X with a score of 45.
 
 ---
 
@@ -179,10 +192,6 @@ respectively, located in the `[JAR file location]/data/` directory.
 
 <div style="page-break-after: always;"></div>
 
-## Notes:
-- Matric Number (`i/` argument) is case insensitive. Therefore, `A1234567X` is the same as `a1234567x`. Matric numbers 
-will be converted to uppercase for storage. 
-- (coming soon) All other arguments are case insensitive and will be converted to lowercase for storage. 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -204,14 +213,16 @@ unless you are confident you can do so correctly.
 
 | **Command**        | **Description**                                              | **Example**                           |
 |--------------------|--------------------------------------------------------------|---------------------------------------|
+| `help`             | Displays list of commands                                    | `help`                                |
 | `add_student`      | Adds a student to the class roster                           | `add_student i/A1234567X n/John Doe`  |
 | `delete_student`   | Deletes a student from the class roster                      | `delete_student i/A1234567X`          |
 | `list_student`     | Lists all students in the class                              | `list_student`                        |
 | `find_student`     | Finds a student in the class roster by name or matric number | `find_student i/A1234567X n/John Doe` |
 | `add_component`    | Adds a new grading component to the class                    | `add_component c/Quiz 1 w/30 m/50`    |
 | `delete_component` | Deletes a grading component from the class                   | `delete_component c/Quiz 1`           |
+| `update_component` | Updates a component with a new maxscore or weight            | `update_component c/Quiz 1 w/40 m/60` |
 | `list_component`   | Lists all grading components                                 | `list_component`                      |
-| `add_grade`        | Adds a grade for a student for a specific component          | `add_grade i/A1234567X c/Quiz 1 s/85` |
+| `add_grade`        | Adds a grade for a student for a specific component          | `add_grade i/A1234567X c/Quiz 1 s/45` |
 | `delete_grade`     | Deletes a student's grade for a specific component           | `delete_grade i/A1234567X c/Quiz 1`   |
 | `list_grade`       | Lists all grades for a student                               | `list_grade i/A1234567X`              |
 | `bye`              | Exits the program                                            | `bye`                                 |
