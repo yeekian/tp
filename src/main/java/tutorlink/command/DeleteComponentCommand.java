@@ -1,9 +1,6 @@
 package tutorlink.command;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
 import tutorlink.exceptions.ComponentNotFoundException;
