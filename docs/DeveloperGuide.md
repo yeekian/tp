@@ -76,7 +76,7 @@ The following sequence diagrams depict the exact steps involved in the `AddStude
 
 - `DeleteStudentCommand.execute(AppState appState, HashMap<String, String> arguments)`: Removes a student via the following
   steps:
-    1. Retrieves and validates the matriculation number from arguments, throwing `IllegaValueException` exception
+    1. Retrieves and validates the matriculation number from arguments, throwing `IllegalValueException` exception
        if matriculation number is null.
     2. Searches for and deletes the student from `AppState`. Throws `StudentNotFoundException` if no student matching the matriculation number
        is found.
