@@ -29,4 +29,7 @@ Command ..> AppState
 TutorLink -down-> Storage
 Parser.>CommandResult
 
+file "Data Files" as DataFiles #lightgreen
+DataFiles <.right. Storage
+
 @enduml

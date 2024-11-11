@@ -21,7 +21,6 @@ public class DeleteStudentCommand extends Command {
         if (matricNumber == null) {
             throw new IllegalValueException(Commons.ERROR_NULL);
         }
-        matricNumber = matricNumber.toUpperCase();
         Pattern pattern = Pattern.compile(Commons.MATRIC_NUMBER_REGEX);
         Matcher matcher = pattern.matcher(matricNumber);
         if (!matcher.find()) {
