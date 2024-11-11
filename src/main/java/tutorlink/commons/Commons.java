@@ -39,7 +39,7 @@ public class Commons {
     public static final String ERROR_INVALID_MAX_SCORE =
             "Error! Max Score must be double that is more than or equal to 0!";
     //@@author RCPilot1604
-    public static final String ERROR_INVALID_TOTAL_WEIGHTING = "Error! Total weighting must add up to 100%%.\n" +
+    public static final String ERROR_INVALID_TOTAL_WEIGHTING = "Error! Total weighting must not exceed 100%%.\n" +
             "Current weighting (after addition): %s%%";
 
     //Invalid
