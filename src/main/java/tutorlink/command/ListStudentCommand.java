@@ -14,7 +14,6 @@ public class ListStudentCommand extends Command {
     public static final String COMMAND_WORD = "list_student";
     private static final String MESSAGE_NO_STUDENTS = "No students have been recorded yet.";
 
-
     /**
      * Executes the command to list all students, retrieving the student list from the application state.
      *
