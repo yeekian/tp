@@ -228,5 +228,13 @@ public class AddComponentCommandTest {
         command.execute(appState, arguments);
         assertEquals(student.getPercentageScore(), 50);
     }
+
+    @Test
+    void execute_maxScoreLargerThanMax_exception() {
+        arguments.put("c/", "Quiz 1");
+        arguments.put("w/", "100");
+        arguments.put("m/", "20000");
+        assertThrows(IllegalValueException.class, () -> command.execute(appState, arguments));
+    }
 }
 //@@author
