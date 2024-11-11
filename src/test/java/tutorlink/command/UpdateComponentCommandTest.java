@@ -19,16 +19,17 @@ public class UpdateComponentCommandTest {
     private UpdateComponentCommand command;
     private AppState appState;
     private Component targetDummy;
+    private HashMap<String, String> args;
 
     @BeforeEach
     void setUp() {
         command = new UpdateComponentCommand();
         createMockAppState();
+        args = new HashMap<>();
     }
 
     @Test
     void normal_both_arguments() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "30");
         args.put("w/", "30");
@@ -40,7 +41,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void normal_only_weight() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "30");
 
@@ -51,7 +51,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void normal_only_mark() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "30");
 
@@ -62,7 +61,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void normal_updated_score() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "30");
 
@@ -79,8 +77,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void error_no_args() {
-        HashMap<String, String> args = new HashMap<>();
-
         assertThrows(TutorLinkException.class, () -> command.execute(appState, args));
         assertEquals(targetDummy.getMaxScore(), 40);
         assertEquals(targetDummy.getWeight(), 40);
@@ -88,7 +84,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void error_exceed_weight() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "70");
 
@@ -99,7 +94,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void error_negative_weight() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "-30");
 
@@ -110,7 +104,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void error_weight_over100() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "101");
 
@@ -121,7 +114,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void error_nan_weight() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("w/", "abc");
 
@@ -132,7 +124,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void error_mark_negative() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "-1");
 
@@ -144,7 +135,6 @@ public class UpdateComponentCommandTest {
 
     @Test
     void error_nan_mark() {
-        HashMap<String, String> args = new HashMap<>();
         args.put("c/", "finals");
         args.put("m/", "abc");
 
@@ -153,6 +143,27 @@ public class UpdateComponentCommandTest {
         assertEquals(targetDummy.getWeight(), 40);
     }
 
+    @Test
+    void update_gpa_accordingly () {
+        appState = new AppState();
+        appState.students.addStudent("A1234567X", "John Doe");
+        Student student = appState.students.getStudentArrayList().get(0);
+        Component component = new Component("midterm", 50, 10);
+        appState.components.addComponent(component);
+        appState.grades.addGrade(new Grade(component, student, 0));
+
+        Component component2 = new Component("final", 50, 10);
+        appState.components.addComponent(component2);
+        appState.grades.addGrade(new Grade(component2, student, 50));
+        appState.updateAllStudentPercentageScores();
+        assertEquals(student.getPercentageScore(), 50);
+
+        args.put("c/", "midterm");
+        args.put("w/", "30");
+
+        command.execute(appState, args);
+        assertEquals(student.getPercentageScore(), 25);
+    }
 
     private void createMockAppState() {
         appState = new AppState();

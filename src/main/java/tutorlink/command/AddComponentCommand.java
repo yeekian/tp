@@ -32,6 +32,7 @@ public class AddComponentCommand extends Command {
         }
         double maxScore = convertMaxScoreToValidDouble(maxScoreNumber);
         appState.components.addComponent(new Component(componentName, maxScore, weightage));
+        appState.updateAllStudentPercentageScores();
         return new CommandResult(String.format(Commons.ADD_COMPONENT_SUCCESS,
                 componentName, weightageNumber, maxScoreNumber));
     }
