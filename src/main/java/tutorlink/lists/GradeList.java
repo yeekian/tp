@@ -55,10 +55,9 @@ public class GradeList {
     }
 
     public void deleteGradesByComponent(String componentDescription) {
-        componentDescription = componentDescription.toUpperCase();
         ArrayList<Grade> gradesToDelete = new ArrayList<>();
         for (Grade grade : gradeArrayList) {
-            if (grade.getComponent().getName().toUpperCase().equals(componentDescription.toUpperCase())) {
+            if (grade.getComponent().getName().equalsIgnoreCase(componentDescription)) {
                 gradesToDelete.add(grade);
             }
         }
@@ -97,7 +96,7 @@ public class GradeList {
     }
     //@@author
 
-    public double calculateStudentGPA(String matricNumber, ComponentList componentList) {
+    public double calculateStudentPercentageScore(String matricNumber, ComponentList componentList) {
         ArrayList<Grade> studentGrades = gradeArrayList
                 .stream()
                 .filter(grade -> grade.getStudent().getMatricNumber().equals(matricNumber.toUpperCase()))
@@ -107,11 +106,8 @@ public class GradeList {
             return 0;
         }
 
-        double totalWeighting = componentList
-                .getComponentArrayList()
-                .stream()
-                .mapToDouble(c -> c.getWeight())
-                .sum();
+        int totalWeighting = componentList.getTotalWeighting();
+
 
         if(totalWeighting == 0) {
             return 0;
@@ -124,7 +120,7 @@ public class GradeList {
                         / grade.getComponent().getMaxScore()
                         * grade.getComponent().getWeight()
                 )
-                .sum() / totalWeighting;
+                .sum() / totalWeighting * 100;
     }
 
     public ArrayList<Grade> getGradeArrayList() {

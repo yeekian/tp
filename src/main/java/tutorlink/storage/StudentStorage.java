@@ -1,5 +1,6 @@
 package tutorlink.storage;
 
+import tutorlink.commons.Commons;
 import tutorlink.exceptions.InvalidDataFileLineException;
 import tutorlink.student.Student;
 
@@ -7,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StudentStorage extends Storage {
     public StudentStorage(String filePath) {
@@ -39,22 +42,26 @@ public class StudentStorage extends Storage {
             throws InvalidDataFileLineException {
         String[] stringParts = fileLine.split(READ_DELIMITER);
         try {
-            String matricNumber = stringParts[0];
-            String name = stringParts[1];
-            String gpaString = stringParts[2];
-            double gpa = Double.parseDouble(gpaString);
-            Student newStudent = new Student(matricNumber, name, gpa);
+            String matricNumber = stringParts[0].strip().toUpperCase();
+            String name = stringParts[1].strip();
+            Pattern pattern = Pattern.compile(Commons.MATRIC_NUMBER_REGEX);
+            Matcher matcher = pattern.matcher(matricNumber);
+            if (!matcher.find()) {
+                throw new InvalidDataFileLineException(fileLine);
+            }
+
+            Student newStudent = new Student(matricNumber, name);
             if (students.contains(newStudent)) {
                 throw new InvalidDataFileLineException(fileLine);
             }
             return newStudent;
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidDataFileLineException(fileLine);
         }
     }
 
     private String getFileInputForStudent(Student student) {
-        return student.getMatricNumber() + WRITE_DELIMITER + student.getName() + WRITE_DELIMITER + student.getGpa();
+        return student.getMatricNumber() + WRITE_DELIMITER + student.getName();
     }
 
 }

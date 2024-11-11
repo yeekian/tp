@@ -27,4 +27,12 @@ public class AppState {
         grades = new GradeList(gradeArrayList);
         components = new ComponentList(componentArrayList);
     }
+
+    public void updateAllStudentPercentageScores() {
+        for (Student student : students.getStudentArrayList()) {
+            student.setPercentageScore(
+                    grades.calculateStudentPercentageScore(student.getMatricNumber(), components)
+            );
+        }
+    }
 }

@@ -65,12 +65,18 @@ public class ListGradeCommand extends Command {
                 .sorted(Comparator.comparing(g -> g.getComponent().getName()))
                 .collect(Collectors.toList())) {
             output.append(
-                    String.format("%d: %-15s: %.2f\n", gradeIndex++, grade.getComponent().getName(), grade.getScore()));
+                    String.format("%d: %-15s: %.2f / %.2f\n",
+                            gradeIndex++,
+                            grade.getComponent().getName(),
+                            grade.getScore(),
+                            grade.getComponent().getMaxScore()
+                    ));
         }
 
         // Calculate and display the GPA (final grade)
-        double gpa = appState.grades.calculateStudentGPA(student.getMatricNumber(), appState.components);
-        output.append(String.format("\nFinal GPA: %.2f\n", gpa));
+        double percentageScore = appState.grades.calculateStudentPercentageScore(student.getMatricNumber(),
+                appState.components);
+        output.append(String.format("\nFinal score: %.2f%%\n", percentageScore));
 
         return new CommandResult(output.toString());
     }
@@ -102,8 +108,9 @@ public class ListGradeCommand extends Command {
             }
 
             // Calculate and display the GPA for the student
-            double gpa = appState.grades.calculateStudentGPA(student.getMatricNumber(), appState.components);
-            output.append(String.format("   Final GPA: %.2f\n\n", gpa));
+            double percentageScore = appState.grades.calculateStudentPercentageScore(student.getMatricNumber(),
+                    appState.components);
+            output.append(String.format("   Final Percentage Score: %.2f%%\n\n", percentageScore));
         }
 
         return new CommandResult(output.toString());

@@ -107,6 +107,8 @@ public class TutorLink {
         ui.displayDiscardedEntries(discardedGrades, "Discarded grade data:");
 
         appState = new AppState(initialStudentList, initialGradeList, initialComponentList);
+        appState.updateAllStudentPercentageScores();
+
     }
 
     private static void saveAllLists() throws IOException {
