@@ -7,14 +7,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 /**
  * Handles the loading and saving of {@code Component} objects from and to a file.
  * The file contains data on each component with its name, maximum score, and weight.
  */
 public class ComponentStorage extends Storage {
+
+    /**
+     * Constructs a {@code ComponentStorage} with the specified file path.
+     *
+     * @param filePath The file path for storing the component data.
+     */
     public ComponentStorage(String filePath) {
         super(filePath);
     }
+
     /**
      * Loads the list of components from the file specified in the file path.
      * Each line in the file represents a component's data: name, maximum score, and weight.
@@ -37,6 +45,7 @@ public class ComponentStorage extends Storage {
         }
         return components;
     }
+
     /**
      * Saves the list of components to the file specified in the file path.
      * Each component is written to a new line in the file in the format:
@@ -52,6 +61,7 @@ public class ComponentStorage extends Storage {
         }
         fileWriter.close();
     }
+
     /**
      * Parses a line from the file and creates a {@code Component} object.
      *
@@ -85,6 +95,7 @@ public class ComponentStorage extends Storage {
         }
         return newComponent;
     }
+
     /**
      * Formats a {@code Component} object into a string suitable for saving to a file.
      *
