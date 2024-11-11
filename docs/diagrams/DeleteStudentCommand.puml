@@ -30,4 +30,6 @@ deactivate R
 [<-- C : CommandResult
 deactivate C
 end
+destroy R
+destroy C
 @enduml
