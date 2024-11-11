@@ -19,6 +19,8 @@ C -> H : get("m/")
 activate H
 C <-- H : maxScoreNumber
 deactivate H
+destroy H
+
 
 opt componentName or weightageNumber or maxScoreNumber is null
 [<-- C : throw IllegalValueException

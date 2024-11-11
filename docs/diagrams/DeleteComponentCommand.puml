@@ -13,6 +13,7 @@ C -> H : get("n/")
 activate H
 C <-- H : componentName
 deactivate H
+destroy H
 
 opt componentName is null
     [<-- C : throw IllegalValueException
