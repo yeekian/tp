@@ -1,11 +1,29 @@
 # Developer Guide
 
+## Table of Contents
+- [Acknowledgements](#acknowledgements)
+- [Design](#design)
+    - [Architecture](#architecture)
+- [Implementation](#implementation)
+    - [Add/Delete Student/Component Feature](#adddelete-studentcomponent-feature)
+    - [Find Student Feature](#find-student-feature)
+    - [Add/Delete Grade Feature](#adddelete-grade-feature)
+    - [Storage Load Feature](#storage-load-feature)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+
+
+---
+
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+This project was inspired by our experiences using the Canvas learning management system. While Canvas serves large educational environments well, we envisioned a simpler, offline tool tailored for small classes that prioritizes essential features like grade tracking, student management, and assessment organization. Thus, TutorLink was born.
 
-## Design & implementation
+The design and feature set of TutorLink were developed from scratch, drawing inspiration from the need for a lightweight, offline solution for managing class assignments and reducing administrative overhead in small class environments. No code or external sources were directly referenced or reused in the development of TutorLink.
+## Design
 
 ### Architecture
 
@@ -76,7 +94,7 @@ The following sequence diagrams depict the exact steps involved in the `AddStude
 
 - `DeleteStudentCommand.execute(AppState appState, HashMap<String, String> arguments)`: Removes a student via the following
   steps:
-    1. Retrieves and validates the matriculation number from arguments, throwing `IllegaValueException` exception
+    1. Retrieves and validates the matriculation number from arguments, throwing `IllegalValueException` exception
        if matriculation number is null.
     2. Searches for and deletes the student from `AppState`. Throws `StudentNotFoundException` if no student matching the matriculation number
        is found.
