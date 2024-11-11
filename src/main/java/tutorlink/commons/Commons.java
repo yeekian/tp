@@ -2,7 +2,7 @@ package tutorlink.commons;
 
 public class Commons {
 
-    public static final String ERROR_NULL = "Error! Null parameter passed!";
+    public static final String ERROR_NULL = "Error! Null parameters %s passed!";
 
     //@@author RCPilot1604
 

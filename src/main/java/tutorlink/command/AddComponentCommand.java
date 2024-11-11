@@ -1,6 +1,8 @@
 package tutorlink.command;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
@@ -56,7 +58,18 @@ public class AddComponentCommand extends Command {
     private void validateArguments(String componentName, String weightageNumber, String maxScoreNumber)
             throws IllegalValueException {
         if (componentName == null || weightageNumber == null || maxScoreNumber == null) {
-            throw new IllegalValueException(Commons.ERROR_NULL);
+            List<String> nullParameters = new ArrayList<>();
+            if (componentName == null) {
+                nullParameters.add(ARGUMENT_PREFIXES[0]);
+            }
+            if (weightageNumber == null) {
+                nullParameters.add(ARGUMENT_PREFIXES[1]);
+            }
+            if (maxScoreNumber == null) {
+                nullParameters.add(ARGUMENT_PREFIXES[2]);
+            }
+            throw new IllegalValueException(String.format(Commons.ERROR_NULL,
+                    String.join(", ", nullParameters)));
         }
     }
 

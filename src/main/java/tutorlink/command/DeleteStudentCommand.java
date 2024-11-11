@@ -19,7 +19,7 @@ public class DeleteStudentCommand extends Command {
     public CommandResult execute(AppState appState, HashMap<String, String> hashmap) throws TutorLinkException {
         String matricNumber = hashmap.get(ARGUMENT_PREFIXES[0]);
         if (matricNumber == null) {
-            throw new IllegalValueException(Commons.ERROR_NULL);
+            throw new IllegalValueException(String.format(Commons.ERROR_NULL, ARGUMENT_PREFIXES[0]));
         }
         matricNumber = matricNumber.toUpperCase();
         Pattern pattern = Pattern.compile(Commons.MATRIC_NUMBER_REGEX);
