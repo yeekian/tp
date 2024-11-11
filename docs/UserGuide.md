@@ -127,7 +127,7 @@ Adds a new grading component to the class (e.g., "Homework," "Midterm," "Final E
 
 - **Format**: `add_component c/COMPONENT w/WEIGHT m/MAX_SCORE`
 - **Parameters**:
-    - `COMPONENT`: The name of the grading component. Note that component name is insensitive, *i.e* `Test` is the same as `test`. 
+    - `COMPONENT`: The name of the grading component to add. Note that when adding, the component name is case-sensitive, *i.e* `Quiz` is different from `quiz`. 
   Moreover, whitespace after the component string is trimmed.
     - `WEIGHT`: The weight of the component as a percentage, input as an integer from 0 - 100 (inclusive).
     - `MAX_SCORE`: The max_score of the component. **Must be a `double` between 0 and 10,000 (inclusive).**
@@ -144,8 +144,8 @@ Removes an existing grading component from the class.
 
 - **Format**: `delete_component c/COMPONENT`
 - **Parameters**:
-    - `COMPONENT`: The name of the grading component to delete.
-
+  - `COMPONENT`: The name of the grading component to delete. Note that component name is case-insensitive, *i.e* `Test` is the same as `test`.
+    Moreover, whitespace after the component string is trimmed.
 - **Example**:
     - `delete_component c/Quiz 1` deletes Quiz 1 component from the list of components that form the final grade.
 
@@ -170,7 +170,8 @@ Records a grade for a specific student in a particular assignment or exam compon
 - **Format**: `add_grade i/MATRIC_NUMBER c/COMPONENT  s/SCORE`
 - **Parameters**:
   - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
-  - `COMPONENT`: The assignment or exam component.
+  - `COMPONENT`: The name of the grading component. Note that component name is case-insensitive, *i.e* `Test` is the same as `test`.
+    Moreover, whitespace after the component string is trimmed.
   - `SCORE`: The score to be recorded. Note that score cannot exceed the max score of the component.
 
 - **Example**:
@@ -185,8 +186,8 @@ Removes a previously recorded grade for a specific student and component.
 - **Format**: `delete_grade i/MATRIC_NUMBER c/COMPONENT`
 - **Parameters**:
   - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
-  - `COMPONENT`: The assignment or exam component.
-
+  - `COMPONENT`: The name of the grading component. Note that component name is case-insensitive, *i.e* `Test` is the same as `test`.
+    Moreover, whitespace after the component string is trimmed.
 - **Example**:
   - `delete_grade i/A1234567X c/Quiz 1` deletes the grade of Quiz 1 for the student with the matric number of A1234567X.
 
