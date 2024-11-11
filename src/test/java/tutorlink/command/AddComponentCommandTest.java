@@ -51,7 +51,7 @@ public class AddComponentCommandTest {
         IllegalValueException exception = assertThrows(IllegalValueException.class, () -> {
             command.execute(appState, arguments);
         });
-        assertEquals("Error! Null parameter passed!", exception.getMessage());
+        assertEquals("Error! Null parameters c/, w/, m/ passed!", exception.getMessage());
         assertEquals(initialWeighting, appState.components.getTotalWeighting());
     }
 
@@ -63,7 +63,7 @@ public class AddComponentCommandTest {
         IllegalValueException exception = assertThrows(IllegalValueException.class, () -> {
             command.execute(appState, arguments);
         });
-        assertEquals("Error! Null parameter passed!", exception.getMessage());
+        assertEquals("Error! Null parameters w/ passed!", exception.getMessage());
         assertEquals(initialWeighting, appState.components.getTotalWeighting());
     }
 
