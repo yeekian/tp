@@ -34,7 +34,7 @@
 1. Ensure you have Java 17 or above installed in your Computer.
 2. Download the latest .jar file  of `TutorLink` from [here](https://github.com/AY2425S1-CS2113-W13-4/tp/releases/tag/v2.1).
 3. Copy the file to the folder you want to use as the home folder for your TutorLink.
-4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar TutorLink.jar command to run the application.
+4. Open a command terminal, cd into the folder you put the jar file in, and use the `java -jar [CS2113-W13-4][TutorLink].jar` command to run the application.
 
 Your command terminal should look similar to the one below.
 
