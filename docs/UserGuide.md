@@ -8,6 +8,7 @@
 
 - [Quick Start](#quick-start)
 - [Important Notes on Commands](#important-notes-on-commands)
+- [Important Notes for Grade Calculation](#important-notes-for-grade-calculation)
 - [Features](#features)
   - [Viewing help: `help`](#viewing-help-help)
   - [Adding a Student: `add_student`](#adding-a-student-add_student)
@@ -57,7 +58,7 @@ will be remain in uppercase for storage.
 <div style="page-break-before:always">&nbsp;</div>
 <p></p>
 
-## Important Note for Grade Calculation:
+## Important Notes for Grade Calculation:
 1. Total Weight (sum) of `Components` **cannot** exceed `100%`. An error will be displayed should you attempt to add a component 
 that causes the overall weight to exceed `100%`. *For illustration, consider the following scenario:*
 
