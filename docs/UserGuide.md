@@ -55,9 +55,6 @@ Including these may yield unpredictable results with the `Storage` component.
 will be remain in uppercase for storage.
 - In general, unless otherwise specified, parameters are case-insensitive. *I.e*, `test` will match against `TEST` and `Test`.
 
-<div style="page-break-before:always">&nbsp;</div>
-<p></p>
-
 ## Important Notes for Grade Calculation:
 1. Total Weight (sum) of `Components` **cannot** exceed `100%`. An error will be displayed should you attempt to add a component 
 that causes the overall weight to exceed `100%`. *For illustration, consider the following scenario:*
@@ -121,8 +118,8 @@ Adds a student to your class.
     - `STUDENT_NAME`: The full name of the student.
   - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
 
-- **Example**:
-    - `add_student i/A1234567X n/John Doe ` adds a new student named John Doe with the matric number of A1234567X to the class.
+- **Example**: `add_student i/A1234567X n/John Doe ` adds a new student named John Doe with the matric number of A1234567X to the class.
+  
 ---
 
 ### Deleting a Student: `delete_student`
@@ -135,8 +132,11 @@ Removes a student from the class. Note that a student can only be deleted using 
 
 - **Example**:
     - `delete_student i/A1234567X` deletes a student with the matric number of A1234567X.
-
+      
 ---
+
+<div style="page-break-before:always">&nbsp;</div>
+<p></p>
 
 ### Listing All Students: `list_student`
 
@@ -146,11 +146,8 @@ Displays a list of all students in the class.
 
 - **Example**:
     - `list_student`
-
+      
 ---
-
-<div style="page-break-before:always">&nbsp;</div>
-<p></p>
 
 ### Finding a Student: `find_student`
 
@@ -169,7 +166,9 @@ Searches for a student and returns a list of matching results, complete with inf
 - **Example**:
   - `find_student i/A1234567X` find the student with the matric number of `A1234567X` among the list of students and prints out the student information.
   - `find_student n/John Doe` find the student with the name `John Doe` among the list of students and prints out the student information.
+    
 ---
+
 ### Adding a Component: `add_component`
 
 Adds a new grading component to the class (e.g., "Homework," "Midterm," "Final Exam").
@@ -224,7 +223,8 @@ Updates an existing component in the class
   the updated max score, the score in the `Grade` object is set to be the newly updated component max score. This is done to 
   prevent the case where a grade has a score that is greater than the max score of the corresponding component. 
   - Although a loss of grade data is inevitable in this case, this is unavoidable as from a practical standpoint, changing 
-  the max score of an assignment/exam/quiz **after** it has already been graded is bound to run into this exact problem. 
+  the max score of an assignment/exam/quiz **after** it has already been graded is bound to run into this exact problem.
+
 ---
 
 ### Listing Components: `list_component`
