@@ -17,7 +17,7 @@ public class DeleteComponentCommand extends Command{
     public CommandResult execute(AppState appState, HashMap<String, String> hashmap) throws TutorLinkException {
         String componentName = hashmap.get(ARGUMENT_PREFIXES[0]);
         if(componentName == null) {
-            throw new IllegalValueException(Commons.ERROR_NULL);
+            throw new IllegalValueException(String.format(Commons.ERROR_NULL,ARGUMENT_PREFIXES[0]));
         }
         ComponentList componentsToDelete = appState.components.findComponent(componentName);
         if(componentsToDelete.size() == 0) {

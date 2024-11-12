@@ -13,6 +13,7 @@ import java.util.Scanner;
  * The file contains data on each component with its name, maximum score, and weight.
  */
 public class ComponentStorage extends Storage {
+    private static final double MAX_SCORE = 10000.0;
 
     /**
      * Constructs a {@code ComponentStorage} with the specified file path.
@@ -87,7 +88,7 @@ public class ComponentStorage extends Storage {
             throw new InvalidDataFileLineException(fileLine);
         }
 
-        boolean isValidMaxScore = (maxScore >= 0);
+        boolean isValidMaxScore = (maxScore >= 0 && maxScore <= MAX_SCORE);
         boolean isValidWeight = (weight >= 0 && (weight + totalWeight) <= 100);
         Component newComponent = new Component(name, maxScore, weight);
         if (!isValidMaxScore || !isValidWeight || components.contains(newComponent)) {

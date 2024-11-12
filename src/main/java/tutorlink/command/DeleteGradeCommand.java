@@ -1,6 +1,8 @@
 package tutorlink.command;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,7 +61,15 @@ public class DeleteGradeCommand extends Command {
      */
     private void validateArguments(String matricNumber, String componentDescription) throws IllegalValueException {
         if (matricNumber == null || componentDescription == null) {
-            throw new IllegalValueException(Commons.ERROR_NULL);
+            List<String> nullParameters = new ArrayList<>();
+            if (matricNumber == null) {
+                nullParameters.add(ARGUMENT_PREFIXES[0]);
+            }
+            if (componentDescription == null) {
+                nullParameters.add(ARGUMENT_PREFIXES[1]);
+            }
+            throw new IllegalValueException(String.format(Commons.ERROR_NULL,
+                    String.join(", ", nullParameters)));
         }
     }
 
