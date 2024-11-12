@@ -39,12 +39,12 @@ public class UpdateComponentCommand extends Command {
 
         // Validate the presence of required arguments
         if (name == null || (cWeight == null && cMark == null)) {
-            StringBuilder sb = new StringBuilder("Error!");
-            if (name != null) {
-                sb.append(" n/ is required!");
+            StringBuilder sb = new StringBuilder("Error! ");
+            if (name == null) {
+                sb.append("c/ is required! ");
             }
-            if (cWeight != null && cMark != null) {
-                sb.append(" either w/ or m/ or both are required!");
+            if (cWeight == null && cMark == null) {
+                sb.append("Either w/ or m/ or both are required!");
             }
             throw new IllegalValueException(sb.toString());
         }
