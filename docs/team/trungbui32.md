@@ -26,6 +26,12 @@ can be further filtered down for analysis.
           stored in AppState
         - Takes no arguments/parameters (returns null for argument prefixes) and displays components directly from the
           application's state
+    - `HelpCommand` command:
+        - The HelpCommand class is used to display a list of available commands and
+          their usage when the "help" command is triggered.
+        - This command does not require any arguments and returns a CommandResult with the help message defined in
+          Commons.HELP_MESSAGE
+
 - **Component**:
     - `Component`:
         - Represents an assessment component in the system with three attributes: name (identifier), maxScore (maximum
