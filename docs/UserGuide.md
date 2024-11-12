@@ -245,7 +245,7 @@ Records a grade for a specific student in a particular assignment or exam compon
   - `MATRIC_NUMBER`: The unique identifier of the student. It should start with "A", followed by 7 digits, and end with an uppercase letter (e.g., A1234567X)
   - `COMPONENT`: The name of the grading component. Note that component name is case-insensitive, *i.e* `Test` is the same as `test`.
     Moreover, whitespace after the component string is trimmed.
-  - `SCORE`: The score to be recorded. Note that score cannot exceed the max score of the component.
+  - `SCORE`: The score to be recorded. Must be a numerical value that will be interpreted as a `double`. Note that score cannot exceed the max score of the component.
 
 - **Example**:
   - `add_grade i/A1234567X c/Quiz 1 s/45` adds the grade of Quiz 1 for the student with the matric number of A1234567X with a score of 45.
