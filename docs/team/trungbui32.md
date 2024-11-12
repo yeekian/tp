@@ -73,7 +73,7 @@ can be further filtered down for analysis.
           AddComponentCommand [#105](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/105)
         - Non-Functional Requirements
 - **Features implemented:**
-    - Implemented ListGradeCommand [#91](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/91) and
-      ListComponentCommand [#83](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/83)
+    - Implemented ListGradeCommand [#91](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/91),
+      ListComponentCommand [#83](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/83), and HelpCommand [#216](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/216)
     - Implemented Component [#49](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/49) and
       Grade [#55](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/55)
