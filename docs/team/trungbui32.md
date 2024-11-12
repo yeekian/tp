@@ -26,6 +26,12 @@ can be further filtered down for analysis.
           stored in AppState
         - Takes no arguments/parameters (returns null for argument prefixes) and displays components directly from the
           application's state
+    - `HelpCommand` command:
+        - The HelpCommand class is used to display a list of available commands and
+          their usage when the "help" command is triggered.
+        - This command does not require any arguments and returns a CommandResult with the help message defined in
+          Commons.HELP_MESSAGE
+
 - **Component**:
     - `Component`:
         - Represents an assessment component in the system with three attributes: name (identifier), maxScore (maximum
@@ -67,7 +73,7 @@ can be further filtered down for analysis.
           AddComponentCommand [#105](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/105)
         - Non-Functional Requirements
 - **Features implemented:**
-    - Implemented ListGradeCommand [#91](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/91) and
-      ListComponentCommand [#83](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/83)
+    - Implemented ListGradeCommand [#91](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/91),
+      ListComponentCommand [#83](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/83), and HelpCommand [#216](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/216)
     - Implemented Component [#49](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/49) and
       Grade [#55](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/55)
