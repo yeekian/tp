@@ -53,6 +53,7 @@ no longer part of the course.
     - Managed `V1.0`. Set up project structure for team [#16](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/16),
 [#17](https:Or//github.com/AY2425S1-CS2113-W13-4/tp/pull/17)
     - Setup GitHub Organization and Repo for team
+    - Conducted bug triaging for `PE-D`
 - Enhancement to existing features: 
     - Modified `delete_student` and `delete_component` commands to delete all matching grades: [#81](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/81)
     - Implemented major restructuring/refactoring to codebase: [#25](https://github.com/AY2425S1-CS2113-W13-4/tp/pull/25),
