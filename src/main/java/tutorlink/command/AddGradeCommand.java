@@ -1,5 +1,7 @@
 package tutorlink.command;
 
+import java.util.ArrayList;
+import java.util.List;
 import tutorlink.appstate.AppState;
 import tutorlink.commons.Commons;
 import tutorlink.component.Component;
@@ -72,7 +74,18 @@ public class AddGradeCommand extends Command {
     private void validateArguments(String matricNumber, String componentDescription, String scoreNumber)
             throws IllegalValueException {
         if (matricNumber == null || componentDescription == null || scoreNumber == null) {
-            throw new IllegalValueException(Commons.ERROR_NULL);
+            List<String> nullParameters = new ArrayList<>();
+            if (matricNumber == null) {
+                nullParameters.add(ARGUMENT_PREFIXES[0]);
+            }
+            if (componentDescription == null) {
+                nullParameters.add(ARGUMENT_PREFIXES[1]);
+            }
+            if (scoreNumber == null) {
+                nullParameters.add(ARGUMENT_PREFIXES[2]);
+            }
+            throw new IllegalValueException(String.format(Commons.ERROR_NULL,
+                    String.join(", ", nullParameters)));
         }
     }
 
