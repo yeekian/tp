@@ -18,6 +18,7 @@ public class GradeStorage extends Storage {
     private final ArrayList<Component> componentList;
     private final ArrayList<Student> studentList;
 
+    //@@author RCPilot1604
     /**
      * Constructs a {@code GradeStorage} object with the specified file path, component list, and student list.
      *
@@ -25,18 +26,21 @@ public class GradeStorage extends Storage {
      * @param componentList The list of components for validation.
      * @param studentList   The list of students for validation.
      */
+    //@@author jinzihan2002
     public GradeStorage(String filePath, ArrayList<Component> componentList, ArrayList<Student> studentList) {
         super(filePath);
         this.componentList = componentList;
         this.studentList = studentList;
     }
 
+    //@@author RCPilot1604
     /**
      * Loads the grade list from the file.
      *
      * @return An {@code ArrayList} of {@code Grade} objects loaded from the file.
      * @throws IOException If an I/O error occurs while reading the file.
      */
+    //@@author jinzihan2002
     public ArrayList<Grade> loadGradeList() throws IOException {
         ArrayList<Grade> grades = new ArrayList<>();
         Scanner fileScanner = new Scanner(path);
@@ -51,12 +55,14 @@ public class GradeStorage extends Storage {
         return grades;
     }
 
+    //@@author RCPilot1604
     /**
      * Saves the provided list of grades to the file.
      *
      * @param grades The {@code ArrayList} of grades to be saved.
      * @throws IOException If an I/O error occurs while writing to the file.
      */
+    //@@author jinzihan2002
     public void saveGradeList(ArrayList<Grade> grades) throws IOException {
         FileWriter fileWriter = new FileWriter(path.toFile());
         for (Grade grade : grades) {
@@ -65,6 +71,7 @@ public class GradeStorage extends Storage {
         fileWriter.close();
     }
 
+    //@@author RCPilot1604
     /**
      * Parses a line from the grade file and returns a {@code Grade} object if the data is valid.
      *
@@ -73,6 +80,7 @@ public class GradeStorage extends Storage {
      * @return A {@code Grade} object created from the parsed data.
      * @throws InvalidDataFileLineException If the line data is invalid or contains duplicates.
      */
+    //@@author jinzihan2002
     private Grade getGradeFromFileLine(String fileLine, ArrayList<Grade> grades)
             throws InvalidDataFileLineException {
         String componentName;
@@ -116,12 +124,14 @@ public class GradeStorage extends Storage {
         return newGrade;
     }
 
+    //@@author RCPilot1604
     /**
      * Formats a {@code Grade} object for storage in a file.
      *
      * @param grade The grade to format.
      * @return A string representing the grade in file format.
      */
+    //@@author jinzihan2002
     private String getFileInputForGrade(Grade grade) {
         String componentName = grade.getComponent().getName();
         String matricNumber = grade.getStudent().getMatricNumber();
